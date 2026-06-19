@@ -10,7 +10,7 @@ args = ["--release"]
 main = "src/backend/main.mo"
 
 [toolchain]
-moc = "0.16.3"
+moc = "1.8.1"
 lintoko = "0.10.0"
 
 [lint]
