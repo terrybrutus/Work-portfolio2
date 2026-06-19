@@ -17,7 +17,7 @@ var __privateWrapper = (obj, member, setter, getter) => ({
     return __privateGet(obj, member, getter);
   }
 });
-var _disableTimeVerification, _agent, _dbName, _storeName, _dbPromise, _IndexedDBExpirableStore_instances, getDb_fn, openDb_fn, openRequest_fn, prune_fn, _entries, _InMemoryExpirableStore_instances, prune_fn2, _rawKey, _derKey, _a, _currentInterval, _randomizationFactor, _multiplier, _maxInterval, _startTime, _maxElapsedTime, _maxIterations, _date, _count, _rootKeyPromise, _shouldFetchRootKey, _timeDiffMsecs, _hasSyncedTime, _syncTimePromise, _shouldSyncTime, _identity, _fetch, _fetchOptions, _callOptions, _credentials, _retryTimes, _backoffStrategy, _maxIngressExpiryInMinutes, _subnetNodeKeyExpirableStore, _HttpAgent_instances, maxIngressExpiryInMs_get, _queryPipeline, _updatePipeline, _subnetKeysFetching, _verifyQuerySignatures, handleV4SyncResponse_fn, handleV2Rejection_fn, requestAndRetryQuery_fn, requestAndRetry_fn, _verifyQueryResponse, readStateInner_fn, setTimeDiffMsecs_fn, asyncGuard_fn, rootKeyGuard_fn, syncTimeGuard_fn, doFetchSubnetKeys_fn, _focused, _cleanup, _setup, _b, _provider, _providerCalled, _c, _online, _cleanup2, _setup2, _d, _gcTimeout, _e, _initialState, _revertState, _cache, _client, _retryer, _defaultOptions, _abortSignalConsumed, _Query_instances, isInitialPausedFetch_fn, dispatch_fn, _f, _client2, _currentQuery, _currentQueryInitialState, _currentResult, _currentResultState, _currentResultOptions, _currentThenable, _selectError, _selectFn, _selectResult, _lastQueryWithDefinedData, _staleTimeoutId, _refetchIntervalId, _currentRefetchInterval, _trackedProps, _QueryObserver_instances, executeFetch_fn, updateStaleTimeout_fn, computeRefetchInterval_fn, updateRefetchInterval_fn, updateTimers_fn, clearStaleTimeout_fn, clearRefetchInterval_fn, updateQuery_fn, notify_fn, _g, _client3, _observers, _mutationCache, _retryer2, _Mutation_instances, dispatch_fn2, _h, _mutations, _scopes, _mutationId, _i, _client4, _currentResult2, _currentMutation, _mutateOptions, _MutationObserver_instances, updateResult_fn, notify_fn2, _j, _queries, _k, _queryCache, _mutationCache2, _defaultOptions2, _queryDefaults, _mutationDefaults, _mountCount, _unsubscribeFocus, _unsubscribeOnline, _l, _rawKey2, _derKey2, _publicKey, _privateKey, _inner, _delegation, _inner2, _attributes, _signer, _options, _channel, _establishingChannel, _scheduledChannelClosure, _pendingRequestCount, _Signer_instances, rpc_fn, applyTransforms_fn, _options2, _status, _HeartbeatClient_instances, establish_fn, maintain_fn, receiveStatusResponse_fn, sendStatusRequest_fn, _options3, _closeListeners, _options4, _closed, _pendingQueue, _instance, _callbacks, _idleTimeout, _timeoutID, _resetTimer, _options5, _identity2, _chain, _storage, _signer2, _options6, _initPromise, _AuthClient_instances, resolveNonce_fn, init_fn, hydrate_fn, registerDefaultIdleCallback_fn;
+var _disableTimeVerification, _agent, _dbName, _storeName, _dbPromise, _IndexedDBExpirableStore_instances, getDb_fn, openDb_fn, openRequest_fn, prune_fn, _entries, _InMemoryExpirableStore_instances, prune_fn2, _rawKey, _derKey, _a, _currentInterval, _randomizationFactor, _multiplier, _maxInterval, _startTime, _maxElapsedTime, _maxIterations, _date, _count, _rootKeyPromise, _shouldFetchRootKey, _timeDiffMsecs, _hasSyncedTime, _syncTimePromise, _shouldSyncTime, _identity, _fetch, _fetchOptions, _callOptions, _credentials, _retryTimes, _backoffStrategy, _maxIngressExpiryInMinutes, _subnetNodeKeyExpirableStore, _HttpAgent_instances, maxIngressExpiryInMs_get, _queryPipeline, _updatePipeline, _subnetKeysFetching, _verifyQuerySignatures, handleV4SyncResponse_fn, handleV2Rejection_fn, requestAndRetryQuery_fn, requestAndRetry_fn, _verifyQueryResponse, readStateInner_fn, setTimeDiffMsecs_fn, asyncGuard_fn, rootKeyGuard_fn, syncTimeGuard_fn, doFetchSubnetKeys_fn, _focused, _cleanup, _setup, _b, _provider, _providerCalled, _c, _online, _cleanup2, _setup2, _d, _gcTimeout, _e, _initialState, _revertState, _cache, _client, _retryer, _defaultOptions, _abortSignalConsumed, _Query_instances, isInitialPausedFetch_fn, dispatch_fn, _f, _client2, _observers, _mutationCache, _retryer2, _Mutation_instances, dispatch_fn2, _g, _mutations, _scopes, _mutationId, _h, _queries, _i, _queryCache, _mutationCache2, _defaultOptions2, _queryDefaults, _mutationDefaults, _mountCount, _unsubscribeFocus, _unsubscribeOnline, _j, _rawKey2, _derKey2, _publicKey, _privateKey, _inner, _delegation, _inner2, _attributes, _signer, _options, _channel, _establishingChannel, _scheduledChannelClosure, _pendingRequestCount, _Signer_instances, rpc_fn, applyTransforms_fn, _options2, _status, _HeartbeatClient_instances, establish_fn, maintain_fn, receiveStatusResponse_fn, sendStatusRequest_fn, _options3, _closeListeners, _options4, _closed, _pendingQueue, _instance, _callbacks, _idleTimeout, _timeoutID, _resetTimer, _options5, _identity2, _chain, _storage, _signer2, _options6, _initPromise, _AuthClient_instances, resolveNonce_fn, init_fn, hydrate_fn, registerDefaultIdleCallback_fn;
 function _mergeNamespaces(n, m2) {
   for (var i = 0; i < m2.length; i++) {
     const e = m2[i];
@@ -74,8 +74,8 @@ function _mergeNamespaces(n, m2) {
     fetch(link.href, fetchOpts);
   }
 })();
-function getDefaultExportFromCjs(x3) {
-  return x3 && x3.__esModule && Object.prototype.hasOwnProperty.call(x3, "default") ? x3["default"] : x3;
+function getDefaultExportFromCjs(x2) {
+  return x2 && x2.__esModule && Object.prototype.hasOwnProperty.call(x2, "default") ? x2["default"] : x2;
 }
 var jsxRuntime = { exports: {} };
 var reactJsxRuntime_production = {};
@@ -114,42 +114,6 @@ reactJsxRuntime_production.jsxs = jsxProd;
   jsxRuntime.exports = reactJsxRuntime_production;
 }
 var jsxRuntimeExports = jsxRuntime.exports;
-class ExternalBlob {
-  constructor(directURL, blob) {
-    __publicField(this, "_blob");
-    __publicField(this, "directURL");
-    __publicField(this, "onProgress");
-    if (blob) {
-      this._blob = blob;
-    }
-    this.directURL = directURL;
-  }
-  static fromURL(url) {
-    return new ExternalBlob(url, null);
-  }
-  static fromBytes(blob) {
-    const url = URL.createObjectURL(new Blob([new Uint8Array(blob)], {
-      type: "application/octet-stream"
-    }));
-    return new ExternalBlob(url, blob);
-  }
-  async getBytes() {
-    if (this._blob) {
-      return this._blob;
-    }
-    const response = await fetch(this.directURL);
-    const blob = await response.blob();
-    this._blob = new Uint8Array(await blob.arrayBuffer());
-    return this._blob;
-  }
-  getDirectURL() {
-    return this.directURL;
-  }
-  withUploadProgress(onProgress) {
-    this.onProgress = onProgress;
-    return this;
-  }
-}
 var ReplicaRejectCode;
 (function(ReplicaRejectCode2) {
   ReplicaRejectCode2[ReplicaRejectCode2["SysFatal"] = 1] = "SysFatal";
@@ -789,7 +753,7 @@ function split(lst, le = false) {
   }
   return [Ah, Al];
 }
-const shrSH = (h2, _l2, s) => h2 >>> s;
+const shrSH = (h2, _l, s) => h2 >>> s;
 const shrSL = (h2, l2, s) => h2 << 32 - s | l2 >>> s;
 const rotrSH = (h2, l2, s) => h2 >>> s | l2 << 32 - s;
 const rotrSL = (h2, l2, s) => h2 << 32 - s | l2 >>> s;
@@ -1859,7 +1823,7 @@ class UnexpectedV4StatusErrorCode extends ErrorCode {
     Object.setPrototypeOf(this, UnexpectedV4StatusErrorCode.prototype);
   }
   toErrorMessage() {
-    const replacer = (_k2, v2) => v2 instanceof Uint8Array ? `hex(${v2.length}):${bytesToHex(v2)}` : v2;
+    const replacer = (_k, v2) => v2 instanceof Uint8Array ? `hex(${v2.length}):${bytesToHex(v2)}` : v2;
     return `Unexpected request status in v4 sync response: "${this.status}"
   Request ID (hex): ${bytesToHex(this.requestId)}
   Response: ${JSON.stringify(this.response, replacer, 2)}`;
@@ -2315,7 +2279,7 @@ const magicNumber = "DIDL";
 const magicNumberBytes = new TextEncoder().encode(magicNumber);
 const toReadableString_max = 400;
 function zipWith(xs, ys, f2) {
-  return xs.map((x3, i) => f2(x3, ys[i]));
+  return xs.map((x2, i) => f2(x2, ys[i]));
 }
 class TypeTable {
   constructor() {
@@ -2474,8 +2438,8 @@ class Type {
   display() {
     return this.name;
   }
-  valueToString(x3) {
-    return toReadableString(x3);
+  valueToString(x2) {
+    return toReadableString(x2);
   }
   /* Implement `T` in the IDL spec, only needed for non-primitive types */
   buildTypeTable(typeTable) {
@@ -2519,8 +2483,8 @@ class EmptyClass extends PrimitiveType {
   accept(v2, d2) {
     return v2.visitEmpty(this, d2);
   }
-  covariant(x3) {
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)}`);
+  covariant(x2) {
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
   encodeValue() {
     throw new Error("Empty cannot appear as a function argument");
@@ -2551,8 +2515,8 @@ class UnknownClass extends Type {
   accept(v2, d2) {
     throw v2.visitType(this, d2);
   }
-  covariant(x3) {
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)}`);
+  covariant(x2) {
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
   encodeValue() {
     throw new Error("Unknown cannot appear as a function argument");
@@ -2599,14 +2563,14 @@ class BoolClass extends PrimitiveType {
   accept(v2, d2) {
     return v2.visitBool(this, d2);
   }
-  covariant(x3) {
-    if (typeof x3 === "boolean") {
+  covariant(x2) {
+    if (typeof x2 === "boolean") {
       return true;
     }
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x3) {
-    return new Uint8Array([x3 ? 1 : 0]);
+  encodeValue(x2) {
+    return new Uint8Array([x2 ? 1 : 0]);
   }
   encodeType() {
     return slebEncode(IDLTypeIds.Bool);
@@ -2636,11 +2600,11 @@ class NullClass extends PrimitiveType {
   accept(v2, d2) {
     return v2.visitNull(this, d2);
   }
-  covariant(x3) {
-    if (x3 === null) {
+  covariant(x2) {
+    if (x2 === null) {
       return true;
     }
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
   encodeValue() {
     return new Uint8Array(0);
@@ -2695,14 +2659,14 @@ class TextClass extends PrimitiveType {
   accept(v2, d2) {
     return v2.visitText(this, d2);
   }
-  covariant(x3) {
-    if (typeof x3 === "string") {
+  covariant(x2) {
+    if (typeof x2 === "string") {
       return true;
     }
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x3) {
-    const buf = new TextEncoder().encode(x3);
+  encodeValue(x2) {
+    const buf = new TextEncoder().encode(x2);
     const len = lebEncode(buf.byteLength);
     return concat(len, buf);
   }
@@ -2719,8 +2683,8 @@ class TextClass extends PrimitiveType {
   get name() {
     return "text";
   }
-  valueToString(x3) {
-    return `"${x3}"`;
+  valueToString(x2) {
+    return `"${x2}"`;
   }
 }
 class IntClass extends PrimitiveType {
@@ -2733,14 +2697,14 @@ class IntClass extends PrimitiveType {
   accept(v2, d2) {
     return v2.visitInt(this, d2);
   }
-  covariant(x3) {
-    if (typeof x3 === "bigint" || Number.isInteger(x3)) {
+  covariant(x2) {
+    if (typeof x2 === "bigint" || Number.isInteger(x2)) {
       return true;
     }
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x3) {
-    return slebEncode(x3);
+  encodeValue(x2) {
+    return slebEncode(x2);
   }
   encodeType() {
     return slebEncode(IDLTypeIds.Int);
@@ -2752,8 +2716,8 @@ class IntClass extends PrimitiveType {
   get name() {
     return "int";
   }
-  valueToString(x3) {
-    return x3.toString();
+  valueToString(x2) {
+    return x2.toString();
   }
 }
 class NatClass extends PrimitiveType {
@@ -2766,14 +2730,14 @@ class NatClass extends PrimitiveType {
   accept(v2, d2) {
     return v2.visitNat(this, d2);
   }
-  covariant(x3) {
-    if (typeof x3 === "bigint" && x3 >= BigInt(0) || Number.isInteger(x3) && x3 >= 0) {
+  covariant(x2) {
+    if (typeof x2 === "bigint" && x2 >= BigInt(0) || Number.isInteger(x2) && x2 >= 0) {
       return true;
     }
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x3) {
-    return lebEncode(x3);
+  encodeValue(x2) {
+    return lebEncode(x2);
   }
   encodeType() {
     return slebEncode(IDLTypeIds.Nat);
@@ -2785,8 +2749,8 @@ class NatClass extends PrimitiveType {
   get name() {
     return "nat";
   }
-  valueToString(x3) {
-    return x3.toString();
+  valueToString(x2) {
+    return x2.toString();
   }
 }
 class FloatClass extends PrimitiveType {
@@ -2806,19 +2770,19 @@ class FloatClass extends PrimitiveType {
   accept(v2, d2) {
     return v2.visitFloat(this, d2);
   }
-  covariant(x3) {
-    if (typeof x3 === "number" || x3 instanceof Number) {
+  covariant(x2) {
+    if (typeof x2 === "number" || x2 instanceof Number) {
       return true;
     }
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x3) {
+  encodeValue(x2) {
     const buf = new ArrayBuffer(this._bits / 8);
     const view = new DataView(buf);
     if (this._bits === 32) {
-      view.setFloat32(0, x3, true);
+      view.setFloat32(0, x2, true);
     } else {
-      view.setFloat64(0, x3, true);
+      view.setFloat64(0, x2, true);
     }
     return new Uint8Array(buf);
   }
@@ -2838,8 +2802,8 @@ class FloatClass extends PrimitiveType {
   get name() {
     return `float${this._bits}`;
   }
-  valueToString(x3) {
-    return x3.toString();
+  valueToString(x2) {
+    return x2.toString();
   }
 }
 class FixedIntClass extends PrimitiveType {
@@ -2856,23 +2820,23 @@ class FixedIntClass extends PrimitiveType {
   accept(v2, d2) {
     return v2.visitFixedInt(this, d2);
   }
-  covariant(x3) {
+  covariant(x2) {
     const min = iexp2(this._bits - 1) * BigInt(-1);
     const max = iexp2(this._bits - 1) - BigInt(1);
-    if (typeof x3 === "bigint") {
-      if (x3 >= min && x3 <= max) {
+    if (typeof x2 === "bigint") {
+      if (x2 >= min && x2 <= max) {
         return true;
       }
-    } else if (Number.isInteger(x3)) {
-      const v2 = BigInt(x3);
+    } else if (Number.isInteger(x2)) {
+      const v2 = BigInt(x2);
       if (v2 >= min && v2 <= max) {
         return true;
       }
     }
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x3) {
-    return writeIntLE(x3, this._bits / 8);
+  encodeValue(x2) {
+    return writeIntLE(x2, this._bits / 8);
   }
   encodeType() {
     const offset = Math.log2(this._bits) - 3;
@@ -2889,8 +2853,8 @@ class FixedIntClass extends PrimitiveType {
   get name() {
     return `int${this._bits}`;
   }
-  valueToString(x3) {
-    return x3.toString();
+  valueToString(x2) {
+    return x2.toString();
   }
 }
 class FixedNatClass extends PrimitiveType {
@@ -2907,22 +2871,22 @@ class FixedNatClass extends PrimitiveType {
   accept(v2, d2) {
     return v2.visitFixedNat(this, d2);
   }
-  covariant(x3) {
+  covariant(x2) {
     const max = iexp2(this._bits);
-    if (typeof x3 === "bigint" && x3 >= BigInt(0)) {
-      if (x3 < max) {
+    if (typeof x2 === "bigint" && x2 >= BigInt(0)) {
+      if (x2 < max) {
         return true;
       }
-    } else if (Number.isInteger(x3) && x3 >= 0) {
-      const v2 = BigInt(x3);
+    } else if (Number.isInteger(x2) && x2 >= 0) {
+      const v2 = BigInt(x2);
       if (v2 < max) {
         return true;
       }
     }
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x3) {
-    return writeUIntLE(x3, this._bits / 8);
+  encodeValue(x2) {
+    return writeUIntLE(x2, this._bits / 8);
   }
   encodeType() {
     const offset = Math.log2(this._bits) - 3;
@@ -2939,8 +2903,8 @@ class FixedNatClass extends PrimitiveType {
   get name() {
     return `nat${this._bits}`;
   }
-  valueToString(x3) {
-    return x3.toString();
+  valueToString(x2) {
+    return x2.toString();
   }
 }
 class VecClass extends ConstructType {
@@ -2961,65 +2925,65 @@ class VecClass extends ConstructType {
   accept(v2, d2) {
     return v2.visitVec(this, this._type, d2);
   }
-  covariant(x3) {
+  covariant(x2) {
     const bits = this._type instanceof FixedNatClass ? this._type._bits : this._type instanceof FixedIntClass ? this._type._bits : 0;
-    if (ArrayBuffer.isView(x3) && bits == x3.BYTES_PER_ELEMENT * 8 || Array.isArray(x3) && x3.every((v2, idx) => {
+    if (ArrayBuffer.isView(x2) && bits == x2.BYTES_PER_ELEMENT * 8 || Array.isArray(x2) && x2.every((v2, idx) => {
       try {
         return this._type.covariant(v2);
       } catch (e) {
-        throw new Error(`Invalid ${this.display()} argument: 
+        throw new Error(`Invalid ${this.display()} argument:
 
 index ${idx} -> ${e.message}`, { cause: e });
       }
     })) {
       return true;
     }
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x3) {
-    const len = lebEncode(x3.length);
+  encodeValue(x2) {
+    const len = lebEncode(x2.length);
     if (this._blobOptimization) {
-      return concat(len, new Uint8Array(x3));
+      return concat(len, new Uint8Array(x2));
     }
-    if (ArrayBuffer.isView(x3)) {
-      if (x3 instanceof Int16Array || x3 instanceof Uint16Array) {
-        const buffer = new DataView(new ArrayBuffer(x3.length * 2));
-        for (let i = 0; i < x3.length; i++) {
-          if (x3 instanceof Int16Array) {
-            buffer.setInt16(i * 2, x3[i], true);
+    if (ArrayBuffer.isView(x2)) {
+      if (x2 instanceof Int16Array || x2 instanceof Uint16Array) {
+        const buffer = new DataView(new ArrayBuffer(x2.length * 2));
+        for (let i = 0; i < x2.length; i++) {
+          if (x2 instanceof Int16Array) {
+            buffer.setInt16(i * 2, x2[i], true);
           } else {
-            buffer.setUint16(i * 2, x3[i], true);
+            buffer.setUint16(i * 2, x2[i], true);
           }
         }
         return concat(len, new Uint8Array(buffer.buffer));
       }
-      if (x3 instanceof Int32Array || x3 instanceof Uint32Array) {
-        const buffer = new DataView(new ArrayBuffer(x3.length * 4));
-        for (let i = 0; i < x3.length; i++) {
-          if (x3 instanceof Int32Array) {
-            buffer.setInt32(i * 4, x3[i], true);
+      if (x2 instanceof Int32Array || x2 instanceof Uint32Array) {
+        const buffer = new DataView(new ArrayBuffer(x2.length * 4));
+        for (let i = 0; i < x2.length; i++) {
+          if (x2 instanceof Int32Array) {
+            buffer.setInt32(i * 4, x2[i], true);
           } else {
-            buffer.setUint32(i * 4, x3[i], true);
+            buffer.setUint32(i * 4, x2[i], true);
           }
         }
         return concat(len, new Uint8Array(buffer.buffer));
       }
-      if (x3 instanceof BigInt64Array || x3 instanceof BigUint64Array) {
-        const buffer = new DataView(new ArrayBuffer(x3.length * 8));
-        for (let i = 0; i < x3.length; i++) {
-          if (x3 instanceof BigInt64Array) {
-            buffer.setBigInt64(i * 8, x3[i], true);
+      if (x2 instanceof BigInt64Array || x2 instanceof BigUint64Array) {
+        const buffer = new DataView(new ArrayBuffer(x2.length * 8));
+        for (let i = 0; i < x2.length; i++) {
+          if (x2 instanceof BigInt64Array) {
+            buffer.setBigInt64(i * 8, x2[i], true);
           } else {
-            buffer.setBigUint64(i * 8, x3[i], true);
+            buffer.setBigUint64(i * 8, x2[i], true);
           }
         }
         return concat(len, new Uint8Array(buffer.buffer));
       }
-      return concat(len, new Uint8Array(x3.buffer, x3.byteOffset, x3.byteLength));
+      return concat(len, new Uint8Array(x2.buffer, x2.byteOffset, x2.byteLength));
     }
-    const buf = new PipeArrayBuffer(new Uint8Array(len.byteLength + x3.length), 0);
+    const buf = new PipeArrayBuffer(new Uint8Array(len.byteLength + x2.length), 0);
     buf.write(len);
-    for (const d2 of x3) {
+    for (const d2 of x2) {
       const encoded = this._type.encodeValue(d2);
       buf.write(new Uint8Array(encoded));
     }
@@ -3099,8 +3063,8 @@ index ${idx} -> ${e.message}`, { cause: e });
   display() {
     return `vec ${this._type.display()}`;
   }
-  valueToString(x3) {
-    const elements = x3.map((e) => this._type.valueToString(e));
+  valueToString(x2) {
+    const elements = x2.map((e) => this._type.valueToString(e));
     return `vec {${elements.join("; ")}}`;
   }
 }
@@ -3118,23 +3082,23 @@ class OptClass extends ConstructType {
   accept(v2, d2) {
     return v2.visitOpt(this, this._type, d2);
   }
-  covariant(x3) {
+  covariant(x2) {
     try {
-      if (Array.isArray(x3) && (x3.length === 0 || x3.length === 1 && this._type.covariant(x3[0]))) {
+      if (Array.isArray(x2) && (x2.length === 0 || x2.length === 1 && this._type.covariant(x2[0]))) {
         return true;
       }
     } catch (e) {
-      throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)} 
+      throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}
 
 -> ${e.message}`, { cause: e });
     }
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x3) {
-    if (x3.length === 0) {
+  encodeValue(x2) {
+    if (x2.length === 0) {
       return new Uint8Array([0]);
     }
-    return concat(new Uint8Array([1]), this._type.encodeValue(x3[0]));
+    return concat(new Uint8Array([1]), this._type.encodeValue(x2[0]));
   }
   _buildTypeTableImpl(typeTable) {
     this._type.buildTypeTable(typeTable);
@@ -3200,11 +3164,11 @@ class OptClass extends ConstructType {
   display() {
     return `opt ${this._type.display()}`;
   }
-  valueToString(x3) {
-    if (x3.length === 0) {
+  valueToString(x2) {
+    if (x2.length === 0) {
       return "null";
     }
-    return `opt ${this._type.valueToString(x3[0])}`;
+    return `opt ${this._type.valueToString(x2[0])}`;
   }
 }
 class RecordClass extends ConstructType {
@@ -3232,15 +3196,15 @@ class RecordClass extends ConstructType {
     }
     return res;
   }
-  covariant(x3) {
-    if (typeof x3 === "object" && this._fields.every(([k2, t]) => {
-      if (!x3.hasOwnProperty(k2)) {
+  covariant(x2) {
+    if (typeof x2 === "object" && this._fields.every(([k2, t]) => {
+      if (!x2.hasOwnProperty(k2)) {
         throw new Error(`Record is missing key "${k2}".`);
       }
       try {
-        return t.covariant(x3[k2]);
+        return t.covariant(x2[k2]);
       } catch (e) {
-        throw new Error(`Invalid ${this.display()} argument: 
+        throw new Error(`Invalid ${this.display()} argument:
 
 field ${k2} -> ${e.message}`, {
           cause: e
@@ -3249,10 +3213,10 @@ field ${k2} -> ${e.message}`, {
     })) {
       return true;
     }
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x3) {
-    const values = this._fields.map(([key]) => x3[key]);
+  encodeValue(x2) {
+    const values = this._fields.map(([key]) => x2[key]);
     const bufs = zipWith(this._fields, values, ([, c2], d2) => c2.encodeValue(d2));
     return concat(...bufs);
   }
@@ -3268,7 +3232,7 @@ field ${k2} -> ${e.message}`, {
     if (!(record instanceof RecordClass)) {
       throw new CandidDecodeError(`Expected type '${this.display()}', but received non-record type '${record.display()}'`);
     }
-    const x3 = {};
+    const x2 = {};
     let expectedRecordIdx = 0;
     let actualRecordIdx = 0;
     while (actualRecordIdx < record._fields.length) {
@@ -3282,12 +3246,12 @@ field ${k2} -> ${e.message}`, {
       const expectedId = idlLabelToId(this._fields[expectedRecordIdx][0]);
       const actualId = idlLabelToId(hash);
       if (expectedId === actualId) {
-        x3[expectKey] = expectType.decodeValue(b2, type);
+        x2[expectKey] = expectType.decodeValue(b2, type);
         expectedRecordIdx++;
         actualRecordIdx++;
       } else if (actualId > expectedId) {
         if (expectType instanceof OptClass || expectType instanceof ReservedClass) {
-          x3[expectKey] = [];
+          x2[expectKey] = [];
           expectedRecordIdx++;
         } else {
           const expectedFields = this._fields.map(([name]) => name).join(", ");
@@ -3301,14 +3265,14 @@ field ${k2} -> ${e.message}`, {
     }
     for (const [expectKey, expectType] of this._fields.slice(expectedRecordIdx)) {
       if (expectType instanceof OptClass || expectType instanceof ReservedClass) {
-        x3[expectKey] = [];
+        x2[expectKey] = [];
       } else {
         const expectedFields = this._fields.map(([name]) => name).join(", ");
         const receivedFields = record._fields.map(([name]) => name).join(", ");
         throw new CandidDecodeError(`Cannot find required field '${expectKey}' in record, expected fields: [${expectedFields}], received fields: [${receivedFields}]`);
       }
     }
-    return x3;
+    return x2;
   }
   get fieldsAsObject() {
     const fields = {};
@@ -3325,8 +3289,8 @@ field ${k2} -> ${e.message}`, {
     const fields = this._fields.map(([key, value]) => `${key}:${value.display()}`);
     return `record {${fields.join("; ")}}`;
   }
-  valueToString(x3) {
-    const values = this._fields.map(([key]) => x3[key]);
+  valueToString(x2) {
+    const values = this._fields.map(([key]) => x2[key]);
     const fields = zipWith(this._fields, values, ([k2, c2], d2) => `${k2}=${c2.valueToString(d2)}`);
     return `record {${fields.join("; ")}}`;
   }
@@ -3339,20 +3303,20 @@ class TupleClass extends RecordClass {
     return instance.typeName === IdlTypeName.TupleClass;
   }
   constructor(_components) {
-    const x3 = {};
-    _components.forEach((e, i) => x3[`_${i}_`] = e);
-    super(x3);
+    const x2 = {};
+    _components.forEach((e, i) => x2[`_${i}_`] = e);
+    super(x2);
     this._components = _components;
   }
   accept(v2, d2) {
     return v2.visitTuple(this, this._components, d2);
   }
-  covariant(x3) {
-    if (Array.isArray(x3) && x3.length >= this._fields.length && this._components.every((t, i) => {
+  covariant(x2) {
+    if (Array.isArray(x2) && x2.length >= this._fields.length && this._components.every((t, i) => {
       try {
-        return t.covariant(x3[i]);
+        return t.covariant(x2[i]);
       } catch (e) {
-        throw new Error(`Invalid ${this.display()} argument: 
+        throw new Error(`Invalid ${this.display()} argument:
 
 index ${i} -> ${e.message}`, {
           cause: e
@@ -3361,10 +3325,10 @@ index ${i} -> ${e.message}`, {
     })) {
       return true;
     }
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x3) {
-    const bufs = zipWith(this._components, x3, (c2, d2) => c2.encodeValue(d2));
+  encodeValue(x2) {
+    const bufs = zipWith(this._components, x2, (c2, d2) => c2.encodeValue(d2));
     return concat(...bufs);
   }
   decodeValue(b2, t) {
@@ -3408,12 +3372,12 @@ class VariantClass extends ConstructType {
   accept(v2, d2) {
     return v2.visitVariant(this, this._fields, d2);
   }
-  covariant(x3) {
-    if (typeof x3 === "object" && Object.entries(x3).length === 1 && this._fields.every(([k2, v2]) => {
+  covariant(x2) {
+    if (typeof x2 === "object" && Object.entries(x2).length === 1 && this._fields.every(([k2, v2]) => {
       try {
-        return !x3.hasOwnProperty(k2) || v2.covariant(x3[k2]);
+        return !x2.hasOwnProperty(k2) || v2.covariant(x2[k2]);
       } catch (e) {
-        throw new Error(`Invalid ${this.display()} argument: 
+        throw new Error(`Invalid ${this.display()} argument:
 
 variant ${k2} -> ${e.message}`, {
           cause: e
@@ -3422,18 +3386,18 @@ variant ${k2} -> ${e.message}`, {
     })) {
       return true;
     }
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x3) {
+  encodeValue(x2) {
     for (let i = 0; i < this._fields.length; i++) {
       const [name, type] = this._fields[i];
-      if (x3.hasOwnProperty(name)) {
+      if (x2.hasOwnProperty(name)) {
         const idx = lebEncode(i);
-        const buf = type.encodeValue(x3[name]);
+        const buf = type.encodeValue(x2[name]);
         return concat(idx, buf);
       }
     }
-    throw Error(`Variant has no data: ${x3}`);
+    throw Error(`Variant has no data: ${x2}`);
   }
   _buildTypeTableImpl(typeTable) {
     this._fields.forEach(([, type]) => {
@@ -3471,17 +3435,17 @@ variant ${k2} -> ${e.message}`, {
     const fields = this._fields.map(([key, type]) => key + (type.name === "null" ? "" : `:${type.display()}`));
     return `variant {${fields.join("; ")}}`;
   }
-  valueToString(x3) {
+  valueToString(x2) {
     for (const [name, type] of this._fields) {
-      if (x3.hasOwnProperty(name)) {
-        const value = type.valueToString(x3[name]);
+      if (x2.hasOwnProperty(name)) {
+        const value = type.valueToString(x2[name]);
         if (value === "null") {
           return `variant {${name}}`;
         }
         return `variant {${name}=${value}}`;
       }
     }
-    throw new Error(`Variant has no data: ${x3}`);
+    throw new Error(`Variant has no data: ${x2}`);
   }
   get alternativesAsObject() {
     const alternatives = {};
@@ -3514,17 +3478,17 @@ const _RecClass = class _RecClass extends ConstructType {
   getType() {
     return this._type;
   }
-  covariant(x3) {
-    if (this._type ? this._type.covariant(x3) : false) {
+  covariant(x2) {
+    if (this._type ? this._type.covariant(x2) : false) {
       return true;
     }
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x3) {
+  encodeValue(x2) {
     if (!this._type) {
       throw Error("Recursive type uninitialized.");
     }
-    return this._type.encodeValue(x3);
+    return this._type.encodeValue(x2);
   }
   _buildTypeTableImpl(typeTable) {
     if (!this._type) {
@@ -3549,18 +3513,18 @@ const _RecClass = class _RecClass extends ConstructType {
     }
     return `μ${this.name}.${this._type.name}`;
   }
-  valueToString(x3) {
+  valueToString(x2) {
     if (!this._type) {
       throw Error("Recursive type uninitialized.");
     }
-    return this._type.valueToString(x3);
+    return this._type.valueToString(x2);
   }
 };
 _RecClass._counter = 0;
 let RecClass = _RecClass;
 function decodePrincipalId(b2) {
-  const x3 = safeReadUint8(b2);
-  if (x3 !== 1) {
+  const x2 = safeReadUint8(b2);
+  if (x2 !== 1) {
     throw new Error("Cannot decode principal");
   }
   const len = Number(lebDecode(b2));
@@ -3576,14 +3540,14 @@ class PrincipalClass extends PrimitiveType {
   accept(v2, d2) {
     return v2.visitPrincipal(this, d2);
   }
-  covariant(x3) {
-    if (x3 && x3._isPrincipal) {
+  covariant(x2) {
+    if (x2 && x2._isPrincipal) {
       return true;
     }
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x3) {
-    const buf = x3.toUint8Array();
+  encodeValue(x2) {
+    const buf = x2.toUint8Array();
     const len = lebEncode(buf.byteLength);
     return concat(new Uint8Array([1]), len, buf);
   }
@@ -3597,8 +3561,8 @@ class PrincipalClass extends PrimitiveType {
   get name() {
     return "principal";
   }
-  valueToString(x3) {
-    return `${this.name} "${x3.toText()}"`;
+  valueToString(x2) {
+    return `${this.name} "${x2.toText()}"`;
   }
 }
 class FuncClass extends ConstructType {
@@ -3623,11 +3587,11 @@ class FuncClass extends ConstructType {
   accept(v2, d2) {
     return v2.visitFunc(this, d2);
   }
-  covariant(x3) {
-    if (Array.isArray(x3) && x3.length === 2 && x3[0] && x3[0]._isPrincipal && typeof x3[1] === "string") {
+  covariant(x2) {
+    if (Array.isArray(x2) && x2.length === 2 && x2[0] && x2[0]._isPrincipal && typeof x2[1] === "string") {
       return true;
     }
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
   encodeValue([principal, methodName]) {
     const buf = principal.toUint8Array();
@@ -3654,8 +3618,8 @@ class FuncClass extends ConstructType {
     if (!subtype(tt2, this)) {
       throw new Error(`Cannot decode function reference at type ${this.display()} from wire type ${tt2.display()}`);
     }
-    const x3 = safeReadUint8(b2);
-    if (x3 !== 1) {
+    const x2 = safeReadUint8(b2);
+    if (x2 !== 1) {
       throw new Error("Cannot decode function reference");
     }
     const canister = decodePrincipalId(b2);
@@ -3715,14 +3679,14 @@ class ServiceClass extends ConstructType {
   accept(v2, d2) {
     return v2.visitService(this, d2);
   }
-  covariant(x3) {
-    if (x3 && x3._isPrincipal) {
+  covariant(x2) {
+    if (x2 && x2._isPrincipal) {
       return true;
     }
-    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x3)}`);
+    throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}`);
   }
-  encodeValue(x3) {
-    const buf = x3.toUint8Array();
+  encodeValue(x2) {
+    const buf = x2.toUint8Array();
     const len = lebEncode(buf.length);
     return concat(new Uint8Array([1]), len, buf);
   }
@@ -3748,8 +3712,8 @@ class ServiceClass extends ConstructType {
     const fields = this._fields.map(([key, value]) => `${key}:${value.name}`);
     return `service {${fields.join("; ")}}`;
   }
-  valueToString(x3) {
-    return `service "${x3.toText()}"`;
+  valueToString(x2) {
+    return `service "${x2.toText()}"`;
   }
   fieldsAsObject() {
     const fields = {};
@@ -3759,8 +3723,8 @@ class ServiceClass extends ConstructType {
     return fields;
   }
 }
-function toReadableString(x3) {
-  const str = JSON.stringify(x3, (_key, value) => typeof value === "bigint" ? `BigInt(${value})` : value);
+function toReadableString(x2) {
+  const str = JSON.stringify(x2, (_key, value) => typeof value === "bigint" ? `BigInt(${value})` : value);
   return str && str.length > toReadableString_max ? `${str.substring(0, toReadableString_max - 3)}...` : str;
 }
 function encode$1(argTypes, args) {
@@ -3772,16 +3736,16 @@ function encode$1(argTypes, args) {
   const table = typeTable.encode();
   const len = lebEncode(args.length);
   const typs = concat(...argTypes.map((t) => t.encodeType(typeTable)));
-  const vals = concat(...zipWith(argTypes, args, (t, x3) => {
+  const vals = concat(...zipWith(argTypes, args, (t, x2) => {
     try {
-      t.covariant(x3);
+      t.covariant(x2);
     } catch (e) {
       const err = new Error(`${e.message}
 
 `);
       throw err;
     }
-    return t.encodeValue(x3);
+    return t.encodeValue(x2);
   }));
   return concat(magicNumberBytes, table, len, typs, vals);
 }
@@ -4380,7 +4344,7 @@ function hashOfMap(map) {
   const sorted = traversed.sort(([k1], [k2]) => {
     return compare(k1, k2);
   });
-  const concatenated = concatBytes(...sorted.map((x3) => concatBytes(...x3)));
+  const concatenated = concatBytes(...sorted.map((x2) => concatBytes(...x2)));
   const result = sha256(concatenated);
   return result;
 }
@@ -4453,7 +4417,7 @@ function J(t) {
 function Q(t) {
   return t & 31;
 }
-let S = new Uint8Array(), U$1, d = 0;
+let S = new Uint8Array(), U, d = 0;
 function ut(t, e) {
   S = t, d = 0;
   const n = B();
@@ -4465,7 +4429,7 @@ function B(t) {
     case c.UnsignedInteger:
       return h(n);
     case c.NegativeInteger:
-      return M$1(n);
+      return M(n);
     case c.ByteString:
       return $(n);
     case c.TextString:
@@ -4541,22 +4505,22 @@ function j(t, e) {
 function h(t) {
   if (t <= f.Value)
     return t;
-  switch (U$1 = new DataView(S.buffer, S.byteOffset + d), t) {
+  switch (U = new DataView(S.buffer, S.byteOffset + d), t) {
     case f.OneByte:
-      return d++, U$1.getUint8(0);
+      return d++, U.getUint8(0);
     case f.TwoBytes:
-      return d += 2, U$1.getUint16(0, l);
+      return d += 2, U.getUint16(0, l);
     case f.FourBytes:
-      return d += 4, U$1.getUint32(0, l);
+      return d += 4, U.getUint32(0, l);
     case f.EightBytes:
-      return d += 8, U$1.getBigUint64(0, l);
+      return d += 8, U.getBigUint64(0, l);
     case f.Indefinite:
       return 1 / 0;
     default:
       throw new w(`Unsupported integer info: ${t.toString(2)}`);
   }
 }
-function M$1(t) {
+function M(t) {
   const e = h(t);
   return typeof e == "number" ? -1 - e : -1n - e;
 }
@@ -4577,11 +4541,11 @@ function v(t, e) {
     return B();
   throw new w(`Unsupported tag: ${n}.`);
 }
-let x$1 = class x extends Error {
+class x extends Error {
   constructor(e) {
     super(e), this.name = "SerializationError";
   }
-};
+}
 const C = 2 * 1024, V = 100, tt = new TextEncoder();
 function y(t) {
   return t << 5;
@@ -4608,7 +4572,7 @@ function _(t, e) {
     return;
   }
   if (typeof t == "string") {
-    z$1(t);
+    z(t);
     return;
   }
   if (t instanceof Uint8Array) {
@@ -4627,7 +4591,7 @@ function _(t, e) {
     nt(t, e);
     return;
   }
-  throw new x$1(`Unsupported type: ${typeof t}`);
+  throw new x(`Unsupported type: ${typeof t}`);
 }
 function et(t, e) {
   E(c.Array, t.length), t.forEach((n, s) => {
@@ -4636,7 +4600,7 @@ function et(t, e) {
 }
 function nt(t, e) {
   O = Object.entries(t), E(c.Map, O.length), O.forEach(([n, s]) => {
-    z$1(n), _((e == null ? void 0 : e(s, n)) ?? s, e);
+    z(n), _((e == null ? void 0 : e(s, n)) ?? s, e);
   });
 }
 function E(t, e) {
@@ -4675,7 +4639,7 @@ function E(t, e) {
     ), g.setBigUint64(r$1, BigInt(e), l), r$1 += 8;
     return;
   }
-  throw new x$1(`Value too large to encode: ${e}`);
+  throw new x(`Value too large to encode: ${e}`);
 }
 function rt(t) {
   E(c.Simple, ct(t));
@@ -4689,19 +4653,19 @@ function ct(t) {
     return u.Null;
   if (t === void 0)
     return u.Undefined;
-  throw new x$1(`Unrecognized simple value: ${t.toString()}`);
+  throw new x(`Unrecognized simple value: ${t.toString()}`);
 }
 function T(t, e) {
   E(t, e.length), r$1 > a.length - e.length && k(r$1 + e.length), a.set(e, r$1), r$1 += e.length;
 }
-function X$1(t, e) {
+function X(t, e) {
   E(t, e);
 }
 function it(t) {
-  X$1(c.UnsignedInteger, t);
+  X(c.UnsignedInteger, t);
 }
 function st(t) {
-  X$1(
+  X(
     c.NegativeInteger,
     typeof t == "bigint" ? -1n - t : -1 - t
   );
@@ -4709,7 +4673,7 @@ function st(t) {
 function ot(t) {
   t >= 0 ? it(t) : st(t);
 }
-function z$1(t) {
+function z(t) {
   T(c.TextString, tt.encode(t));
 }
 function m(t) {
@@ -5010,8 +4974,8 @@ function mod(a2, b2) {
   const result = a2 % b2;
   return result >= _0n$6 ? result : b2 + result;
 }
-function pow2(x3, power, modulo) {
-  let res = x3;
+function pow2(x2, power, modulo) {
+  let res = x2;
   while (power-- > _0n$6) {
     res *= res;
     res %= modulo;
@@ -5025,17 +4989,17 @@ function invert(number, modulo) {
     throw new Error("invert: expected positive modulus, got " + modulo);
   let a2 = mod(number, modulo);
   let b2 = modulo;
-  let x3 = _0n$6, u2 = _1n$7;
+  let x2 = _0n$6, u2 = _1n$7;
   while (a2 !== _0n$6) {
     const q2 = b2 / a2;
     const r2 = b2 % a2;
-    const m2 = x3 - u2 * q2;
-    b2 = a2, a2 = r2, x3 = u2, u2 = m2;
+    const m2 = x2 - u2 * q2;
+    b2 = a2, a2 = r2, x2 = u2, u2 = m2;
   }
   const gcd = b2;
   if (gcd !== _1n$7)
     throw new Error("invert: does not exist");
-  return mod(x3, modulo);
+  return mod(x2, modulo);
 }
 function assertIsSquare(Fp3, root2, n) {
   if (!Fp3.eql(Fp3.sqr(root2), n))
@@ -5680,7 +5644,7 @@ function expand_message_xof(msg, DST, lenInBytes, k2, H2) {
     throw new Error("expand_message_xof: invalid lenInBytes");
   return H2.create({ dkLen: lenInBytes }).update(msg).update(i2osp(lenInBytes, 2)).update(DST).update(i2osp(DST.length, 1)).digest();
 }
-function hash_to_field(msg, count2, options) {
+function hash_to_field(msg, count, options) {
   _validateObject(options, {
     p: "bigint",
     m: "number",
@@ -5691,10 +5655,10 @@ function hash_to_field(msg, count2, options) {
   if (!isHash(options.hash))
     throw new Error("expected valid hash");
   abytes(msg);
-  anum(count2);
+  anum(count);
   const log2p = p2.toString(2).length;
   const L2 = Math.ceil((log2p + k2) / 8);
-  const len_in_bytes = count2 * m2 * L2;
+  const len_in_bytes = count * m2 * L2;
   let prb;
   if (expand === "xmd") {
     prb = expand_message_xmd(msg, DST, len_in_bytes, hash);
@@ -5705,8 +5669,8 @@ function hash_to_field(msg, count2, options) {
   } else {
     throw new Error('expand must be "xmd" or "xof"');
   }
-  const u2 = new Array(count2);
-  for (let i = 0; i < count2; i++) {
+  const u2 = new Array(count);
+  for (let i = 0; i < count; i++) {
     const e = new Array(m2);
     for (let j2 = 0; j2 < m2; j2++) {
       const elm_offset = L2 * (j2 + i * m2);
@@ -5719,12 +5683,12 @@ function hash_to_field(msg, count2, options) {
 }
 function isogenyMap(field, map) {
   const coeff = map.map((i) => Array.from(i).reverse());
-  return (x3, y2) => {
-    const [xn, xd, yn, yd] = coeff.map((val) => val.reduce((acc, i) => field.add(field.mul(acc, x3), i)));
+  return (x2, y2) => {
+    const [xn, xd, yn, yd] = coeff.map((val) => val.reduce((acc, i) => field.add(field.mul(acc, x2), i)));
     const [xd_inv, yd_inv] = FpInvertBatch(field, [xd, yd], true);
-    x3 = field.mul(xn, xd_inv);
+    x2 = field.mul(xn, xd_inv);
     y2 = field.mul(y2, field.mul(yn, yd_inv));
-    return { x: x3, y: y2 };
+    return { x: x2, y: y2 };
   };
 }
 const _DST_scalar = utf8ToBytes("HashToScalar-");
@@ -5839,8 +5803,8 @@ function weierstrassN(params, extraOpts = {}) {
       throw new Error("compression is not supported: Field does not have .isOdd()");
   }
   function pointToBytes(_c2, point, isCompressed) {
-    const { x: x3, y: y2 } = point.toAffine();
-    const bx = Fp3.toBytes(x3);
+    const { x: x2, y: y2 } = point.toAffine();
+    const bx = Fp3.toBytes(x2);
     _abool2(isCompressed, "isCompressed");
     if (isCompressed) {
       assertCompressionIsSupported();
@@ -5857,10 +5821,10 @@ function weierstrassN(params, extraOpts = {}) {
     const head = bytes[0];
     const tail = bytes.subarray(1);
     if (length === comp && (head === 2 || head === 3)) {
-      const x3 = Fp3.fromBytes(tail);
-      if (!Fp3.isValid(x3))
+      const x2 = Fp3.fromBytes(tail);
+      if (!Fp3.isValid(x2))
         throw new Error("bad point: is not on curve, wrong x");
-      const y2 = weierstrassEquation(x3);
+      const y2 = weierstrassEquation(x2);
       let y3;
       try {
         y3 = Fp3.sqrt(y2);
@@ -5873,28 +5837,28 @@ function weierstrassN(params, extraOpts = {}) {
       const isHeadOdd = (head & 1) === 1;
       if (isHeadOdd !== isYOdd)
         y3 = Fp3.neg(y3);
-      return { x: x3, y: y3 };
+      return { x: x2, y: y3 };
     } else if (length === uncomp && head === 4) {
       const L2 = Fp3.BYTES;
-      const x3 = Fp3.fromBytes(tail.subarray(0, L2));
+      const x2 = Fp3.fromBytes(tail.subarray(0, L2));
       const y2 = Fp3.fromBytes(tail.subarray(L2, L2 * 2));
-      if (!isValidXY(x3, y2))
+      if (!isValidXY(x2, y2))
         throw new Error("bad point: is not on curve");
-      return { x: x3, y: y2 };
+      return { x: x2, y: y2 };
     } else {
       throw new Error(`bad point: got length ${length}, expected compressed=${comp} or uncompressed=${uncomp}`);
     }
   }
   const encodePoint = extraOpts.toBytes || pointToBytes;
   const decodePoint = extraOpts.fromBytes || pointFromBytes;
-  function weierstrassEquation(x3) {
-    const x22 = Fp3.sqr(x3);
-    const x32 = Fp3.mul(x22, x3);
-    return Fp3.add(Fp3.add(x32, Fp3.mul(x3, CURVE.a)), CURVE.b);
+  function weierstrassEquation(x2) {
+    const x22 = Fp3.sqr(x2);
+    const x3 = Fp3.mul(x22, x2);
+    return Fp3.add(Fp3.add(x3, Fp3.mul(x2, CURVE.a)), CURVE.b);
   }
-  function isValidXY(x3, y2) {
+  function isValidXY(x2, y2) {
     const left = Fp3.sqr(y2);
-    const right = weierstrassEquation(x3);
+    const right = weierstrassEquation(x2);
     return Fp3.eql(left, right);
   }
   if (!isValidXY(CURVE.Gx, CURVE.Gy))
@@ -5924,14 +5888,14 @@ function weierstrassN(params, extraOpts = {}) {
     const is0 = p2.is0();
     if (iz == null)
       iz = is0 ? Fp3.ONE : Fp3.inv(Z2);
-    const x3 = Fp3.mul(X2, iz);
+    const x2 = Fp3.mul(X2, iz);
     const y2 = Fp3.mul(Y2, iz);
     const zz = Fp3.mul(Z2, iz);
     if (is0)
       return { x: Fp3.ZERO, y: Fp3.ZERO };
     if (!Fp3.eql(zz, Fp3.ONE))
       throw new Error("invZ was invalid");
-    return { x: x3, y: y2 };
+    return { x: x2, y: y2 };
   });
   const assertValidMemo = memoized((p2) => {
     if (p2.is0()) {
@@ -5939,10 +5903,10 @@ function weierstrassN(params, extraOpts = {}) {
         return;
       throw new Error("bad point: ZERO");
     }
-    const { x: x3, y: y2 } = p2.toAffine();
-    if (!Fp3.isValid(x3) || !Fp3.isValid(y2))
+    const { x: x2, y: y2 } = p2.toAffine();
+    if (!Fp3.isValid(x2) || !Fp3.isValid(y2))
       throw new Error("bad point: x or y not field elements");
-    if (!isValidXY(x3, y2))
+    if (!isValidXY(x2, y2))
       throw new Error("bad point: equation left != right");
     if (!p2.isTorsionFree())
       throw new Error("bad point: not in prime-order subgroup");
@@ -5967,14 +5931,14 @@ function weierstrassN(params, extraOpts = {}) {
     }
     /** Does NOT validate if the point is valid. Use `.assertValidity()`. */
     static fromAffine(p2) {
-      const { x: x3, y: y2 } = p2 || {};
-      if (!p2 || !Fp3.isValid(x3) || !Fp3.isValid(y2))
+      const { x: x2, y: y2 } = p2 || {};
+      if (!p2 || !Fp3.isValid(x2) || !Fp3.isValid(y2))
         throw new Error("invalid affine point");
       if (p2 instanceof Point)
         throw new Error("projective point not allowed");
-      if (Fp3.is0(x3) && Fp3.is0(y2))
+      if (Fp3.is0(x2) && Fp3.is0(y2))
         return Point.ZERO;
-      return new Point(x3, y2, Fp3.ONE);
+      return new Point(x2, y2, Fp3.ONE);
     }
     static fromBytes(bytes) {
       const P2 = Point.fromAffine(decodePoint(_abytes2(bytes, void 0, "point")));
@@ -6333,7 +6297,7 @@ function mapToCurveSimpleSWU(Fp3, opts) {
   if (!Fp3.isOdd)
     throw new Error("Field does not have .isOdd()");
   return (u2) => {
-    let tv1, tv2, tv3, tv4, tv5, tv6, x3, y2;
+    let tv1, tv2, tv3, tv4, tv5, tv6, x2, y2;
     tv1 = Fp3.sqr(u2);
     tv1 = Fp3.mul(tv1, Z2);
     tv2 = Fp3.sqr(tv1);
@@ -6350,17 +6314,17 @@ function mapToCurveSimpleSWU(Fp3, opts) {
     tv6 = Fp3.mul(tv6, tv4);
     tv5 = Fp3.mul(tv6, B2);
     tv2 = Fp3.add(tv2, tv5);
-    x3 = Fp3.mul(tv1, tv3);
+    x2 = Fp3.mul(tv1, tv3);
     const { isValid, value } = sqrtRatio(tv2, tv6);
     y2 = Fp3.mul(tv1, u2);
     y2 = Fp3.mul(y2, value);
-    x3 = Fp3.cmov(x3, tv3, isValid);
+    x2 = Fp3.cmov(x2, tv3, isValid);
     y2 = Fp3.cmov(y2, value, isValid);
     const e1 = Fp3.isOdd(u2) === Fp3.isOdd(y2);
     y2 = Fp3.cmov(Fp3.neg(y2), y2, e1);
     const tv4_inv = FpInvertBatch(Fp3, [tv4], true)[0];
-    x3 = Fp3.mul(x3, tv4_inv);
-    return { x: x3, y: y2 };
+    x2 = Fp3.mul(x2, tv4_inv);
+    return { x: x2, y: y2 };
   };
 }
 function getWLengths(Fp3, Fn) {
@@ -6407,10 +6371,10 @@ function _weierstrass_legacy_opts_to_new(c2) {
   return { CURVE, curveOpts };
 }
 function _legacyHelperEquat(Fp3, a2, b2) {
-  function weierstrassEquation(x3) {
-    const x22 = Fp3.sqr(x3);
-    const x32 = Fp3.mul(x22, x3);
-    return Fp3.add(Fp3.add(x32, Fp3.mul(x3, a2)), b2);
+  function weierstrassEquation(x2) {
+    const x22 = Fp3.sqr(x2);
+    const x3 = Fp3.mul(x22, x2);
+    return Fp3.add(Fp3.add(x3, Fp3.mul(x2, a2)), b2);
   }
   return weierstrassEquation;
 }
@@ -6493,8 +6457,8 @@ function createBlsPairing(fields, G1, G2, params) {
   const ATE_NAF = NAfDecomposition(ateLoopSize);
   const calcPairingPrecomputes = memoized((point) => {
     const p2 = point;
-    const { x: x3, y: y2 } = p2.toAffine();
-    const Qx = x3, Qy = y2, negQy = Fp22.neg(y2);
+    const { x: x2, y: y2 } = p2.toAffine();
+    const Qx = x2, Qy = y2, negQy = Fp22.neg(y2);
     let Rx = Qx, Ry = Qy, Rz = Fp22.ONE;
     const ell = [];
     for (const bit of ATE_NAF) {
@@ -6793,8 +6757,8 @@ function calcFrobeniusCoefficients(Fp3, nonResidue, modulus, degree, num = 1, di
 function psiFrobenius(Fp3, Fp22, base) {
   const PSI_X = Fp22.pow(base, (Fp3.ORDER - _1n$3) / _3n$1);
   const PSI_Y = Fp22.pow(base, (Fp3.ORDER - _1n$3) / _2n$3);
-  function psi(x3, y2) {
-    const x22 = Fp22.mul(Fp22.frobeniusMap(x3, 1), PSI_X);
+  function psi(x2, y2) {
+    const x22 = Fp22.mul(Fp22.frobeniusMap(x2, 1), PSI_X);
     const y22 = Fp22.mul(Fp22.frobeniusMap(y2, 1), PSI_Y);
     return [x22, y22];
   }
@@ -6802,8 +6766,8 @@ function psiFrobenius(Fp3, Fp22, base) {
   const PSI2_Y = Fp22.pow(base, (Fp3.ORDER ** _2n$3 - _1n$3) / _2n$3);
   if (!Fp22.eql(PSI2_Y, Fp22.neg(Fp22.ONE)))
     throw new Error("psiFrobenius: PSI2_Y!==-1");
-  function psi2(x3, y2) {
-    return [Fp22.mul(x3, PSI2_X), Fp22.neg(y2)];
+  function psi2(x2, y2) {
+    return [Fp22.mul(x2, PSI2_X), Fp22.neg(y2)];
   }
   const mapAffine = (fn) => (c2, P2) => {
     const affine = P2.toAffine();
@@ -6945,16 +6909,16 @@ class _Field2 {
     if (!Fp22.eql(Fp22.sqr(candidateSqrt), num))
       throw new Error("Cannot find square root");
     const x1 = candidateSqrt;
-    const x22 = Fp22.neg(x1);
+    const x2 = Fp22.neg(x1);
     const { re: re1, im: im1 } = Fp22.reim(x1);
-    const { re: re2, im: im2 } = Fp22.reim(x22);
+    const { re: re2, im: im2 } = Fp22.reim(x2);
     if (im1 > im2 || im1 === im2 && re1 > re2)
       return x1;
-    return x22;
+    return x2;
   }
   // Same as sgn0_m_eq_2 in RFC 9380
-  isOdd(x3) {
-    const { re: x0, im: x1 } = this.reim(x3);
+  isOdd(x2) {
+    const { re: x0, im: x1 } = this.reim(x2);
     const sign_0 = x0 % _2n$3;
     const zero_0 = x0 === _0n$2;
     const sign_1 = x1 % _2n$3;
@@ -7481,15 +7445,15 @@ const { Fp: Fp$1, Fp2, Fp6, Fp12 } = tower12({
     return { c0: Fp$1.sub(t0, t1), c1: Fp$1.add(t0, t1) };
   },
   Fp12finalExponentiate: (num) => {
-    const x3 = BLS_X;
+    const x2 = BLS_X;
     const t0 = Fp12.div(Fp12.frobeniusMap(num, 6), num);
     const t1 = Fp12.mul(Fp12.frobeniusMap(t0, 2), t0);
-    const t2 = Fp12.conjugate(Fp12._cyclotomicExp(t1, x3));
+    const t2 = Fp12.conjugate(Fp12._cyclotomicExp(t1, x2));
     const t3 = Fp12.mul(Fp12.conjugate(Fp12._cyclotomicSquare(t1)), t2);
-    const t4 = Fp12.conjugate(Fp12._cyclotomicExp(t3, x3));
-    const t5 = Fp12.conjugate(Fp12._cyclotomicExp(t4, x3));
-    const t6 = Fp12.mul(Fp12.conjugate(Fp12._cyclotomicExp(t5, x3)), Fp12._cyclotomicSquare(t2));
-    const t7 = Fp12.conjugate(Fp12._cyclotomicExp(t6, x3));
+    const t4 = Fp12.conjugate(Fp12._cyclotomicExp(t3, x2));
+    const t5 = Fp12.conjugate(Fp12._cyclotomicExp(t4, x2));
+    const t6 = Fp12.mul(Fp12.conjugate(Fp12._cyclotomicExp(t5, x2)), Fp12._cyclotomicSquare(t2));
+    const t7 = Fp12.conjugate(Fp12._cyclotomicExp(t6, x2));
     const t2_t5_pow_q2 = Fp12.frobeniusMap(Fp12.mul(t2, t5), 2);
     const t4_t1_pow_q3 = Fp12.frobeniusMap(Fp12.mul(t4, t1), 3);
     const t6_t1c_pow_q1 = Fp12.frobeniusMap(Fp12.mul(t6, Fp12.conjugate(t1)), 1);
@@ -7546,56 +7510,56 @@ function setMask(bytes, mask) {
 function pointG1ToBytes(_c2, point, isComp) {
   const { BYTES: L2, ORDER: P2 } = Fp$1;
   const is0 = point.is0();
-  const { x: x3, y: y2 } = point.toAffine();
+  const { x: x2, y: y2 } = point.toAffine();
   if (isComp) {
     if (is0)
       return COMPZERO.slice();
     const sort = Boolean(y2 * _2n$2 / P2);
-    return setMask(numberToBytesBE(x3, L2), { compressed: true, sort });
+    return setMask(numberToBytesBE(x2, L2), { compressed: true, sort });
   } else {
     if (is0) {
       return concatBytes(Uint8Array.of(64), new Uint8Array(2 * L2 - 1));
     } else {
-      return concatBytes(numberToBytesBE(x3, L2), numberToBytesBE(y2, L2));
+      return concatBytes(numberToBytesBE(x2, L2), numberToBytesBE(y2, L2));
     }
   }
 }
 function signatureG1ToBytes(point) {
   point.assertValidity();
   const { BYTES: L2, ORDER: P2 } = Fp$1;
-  const { x: x3, y: y2 } = point.toAffine();
+  const { x: x2, y: y2 } = point.toAffine();
   if (point.is0())
     return COMPZERO.slice();
   const sort = Boolean(y2 * _2n$2 / P2);
-  return setMask(numberToBytesBE(x3, L2), { compressed: true, sort });
+  return setMask(numberToBytesBE(x2, L2), { compressed: true, sort });
 }
 function pointG1FromBytes(bytes) {
   const { compressed, infinity, sort, value } = parseMask(bytes);
   const { BYTES: L2, ORDER: P2 } = Fp$1;
   if (value.length === 48 && compressed) {
     const compressedValue = bytesToNumberBE(value);
-    const x3 = Fp$1.create(compressedValue & bitMask(Fp$1.BITS));
+    const x2 = Fp$1.create(compressedValue & bitMask(Fp$1.BITS));
     if (infinity) {
-      if (x3 !== _0n$1)
+      if (x2 !== _0n$1)
         throw new Error("invalid G1 point: non-empty, at infinity, with compression");
       return { x: _0n$1, y: _0n$1 };
     }
-    const right = Fp$1.add(Fp$1.pow(x3, _3n), Fp$1.create(bls12_381_CURVE_G1.b));
+    const right = Fp$1.add(Fp$1.pow(x2, _3n), Fp$1.create(bls12_381_CURVE_G1.b));
     let y2 = Fp$1.sqrt(right);
     if (!y2)
       throw new Error("invalid G1 point: compressed point");
     if (y2 * _2n$2 / P2 !== BigInt(sort))
       y2 = Fp$1.neg(y2);
-    return { x: Fp$1.create(x3), y: Fp$1.create(y2) };
+    return { x: Fp$1.create(x2), y: Fp$1.create(y2) };
   } else if (value.length === 96 && !compressed) {
-    const x3 = bytesToNumberBE(value.subarray(0, L2));
+    const x2 = bytesToNumberBE(value.subarray(0, L2));
     const y2 = bytesToNumberBE(value.subarray(L2));
     if (infinity) {
-      if (x3 !== _0n$1 || y2 !== _0n$1)
+      if (x2 !== _0n$1 || y2 !== _0n$1)
         throw new Error("G1: non-empty point at infinity");
       return bls12_381.G1.Point.ZERO.toAffine();
     }
-    return { x: Fp$1.create(x3), y: Fp$1.create(y2) };
+    return { x: Fp$1.create(x2), y: Fp$1.create(y2) };
   } else {
     throw new Error("invalid G1 point: expected 48/96 bytes");
   }
@@ -7607,31 +7571,31 @@ function signatureG1FromBytes(hex) {
   const compressedValue = bytesToNumberBE(value);
   if (infinity)
     return Point.ZERO;
-  const x3 = Fp$1.create(compressedValue & bitMask(Fp$1.BITS));
-  const right = Fp$1.add(Fp$1.pow(x3, _3n), Fp$1.create(bls12_381_CURVE_G1.b));
+  const x2 = Fp$1.create(compressedValue & bitMask(Fp$1.BITS));
+  const right = Fp$1.add(Fp$1.pow(x2, _3n), Fp$1.create(bls12_381_CURVE_G1.b));
   let y2 = Fp$1.sqrt(right);
   if (!y2)
     throw new Error("invalid G1 point: compressed");
   const aflag = BigInt(sort);
   if (y2 * _2n$2 / P2 !== aflag)
     y2 = Fp$1.neg(y2);
-  const point = Point.fromAffine({ x: x3, y: y2 });
+  const point = Point.fromAffine({ x: x2, y: y2 });
   point.assertValidity();
   return point;
 }
 function pointG2ToBytes(_c2, point, isComp) {
   const { BYTES: L2, ORDER: P2 } = Fp$1;
   const is0 = point.is0();
-  const { x: x3, y: y2 } = point.toAffine();
+  const { x: x2, y: y2 } = point.toAffine();
   if (isComp) {
     if (is0)
       return concatBytes(COMPZERO, numberToBytesBE(_0n$1, L2));
     const flag = Boolean(y2.c1 === _0n$1 ? y2.c0 * _2n$2 / P2 : y2.c1 * _2n$2 / P2);
-    return concatBytes(setMask(numberToBytesBE(x3.c1, L2), { compressed: true, sort: flag }), numberToBytesBE(x3.c0, L2));
+    return concatBytes(setMask(numberToBytesBE(x2.c1, L2), { compressed: true, sort: flag }), numberToBytesBE(x2.c0, L2));
   } else {
     if (is0)
       return concatBytes(Uint8Array.of(64), new Uint8Array(4 * L2 - 1));
-    const { re: x0, im: x1 } = Fp2.reim(x3);
+    const { re: x0, im: x1 } = Fp2.reim(x2);
     const { re: y0, im: y1 } = Fp2.reim(y2);
     return concatBytes(numberToBytesBE(x1, L2), numberToBytesBE(x0, L2), numberToBytesBE(y1, L2), numberToBytesBE(y0, L2));
   }
@@ -7641,8 +7605,8 @@ function signatureG2ToBytes(point) {
   const { BYTES: L2 } = Fp$1;
   if (point.is0())
     return concatBytes(COMPZERO, numberToBytesBE(_0n$1, L2));
-  const { x: x3, y: y2 } = point.toAffine();
-  const { re: x0, im: x1 } = Fp2.reim(x3);
+  const { x: x2, y: y2 } = point.toAffine();
+  const { re: x0, im: x1 } = Fp2.reim(x2);
   const { re: y0, im: y1 } = Fp2.reim(y2);
   const tmp = y1 > _0n$1 ? y1 * _2n$2 : y0 * _2n$2;
   const sort = Boolean(tmp / Fp$1.ORDER & _1n$2);
@@ -7667,12 +7631,12 @@ function pointG2FromBytes(bytes) {
     }
     const x_1 = slc(value, 0, L2);
     const x_0 = slc(value, L2, 2 * L2);
-    const x3 = Fp2.create({ c0: Fp$1.create(x_0), c1: Fp$1.create(x_1) });
-    const right = Fp2.add(Fp2.pow(x3, _3n), bls12_381_CURVE_G2.b);
+    const x2 = Fp2.create({ c0: Fp$1.create(x_0), c1: Fp$1.create(x_1) });
+    const right = Fp2.add(Fp2.pow(x2, _3n), bls12_381_CURVE_G2.b);
     let y2 = Fp2.sqrt(right);
     const Y_bit = y2.c1 === _0n$1 ? y2.c0 * _2n$2 / P2 : y2.c1 * _2n$2 / P2 ? _1n$2 : _0n$1;
     y2 = sort && Y_bit > 0 ? y2 : Fp2.neg(y2);
-    return { x: x3, y: y2 };
+    return { x: x2, y: y2 };
   } else if (value.length === 192 && !compressed) {
     if (infinity) {
       if (value.reduce((p2, c2) => p2 !== 0 ? c2 + 1 : c2, 0) > 0) {
@@ -7701,8 +7665,8 @@ function signatureG2FromBytes(hex) {
   if (infinity)
     return Point.ZERO;
   const x1 = Fp$1.create(z1 & bitMask(Fp$1.BITS));
-  const x22 = Fp$1.create(z2);
-  const x3 = Fp2.create({ c0: x22, c1: x1 });
+  const x2 = Fp$1.create(z2);
+  const x3 = Fp2.create({ c0: x2, c1: x1 });
   const y2 = Fp2.add(Fp2.pow(x3, _3n), bls12_381_CURVE_G2.b);
   let y3 = Fp2.sqrt(y2);
   if (!y3)
@@ -7794,14 +7758,14 @@ const bls12_381 = bls({
     // https://eprint.iacr.org/2017/419.pdf
     // prettier-ignore
     clearCofactor: (c2, P2) => {
-      const x3 = BLS_X;
-      let t1 = P2.multiplyUnsafe(x3).negate();
+      const x2 = BLS_X;
+      let t1 = P2.multiplyUnsafe(x2).negate();
       let t2 = G2psi(c2, P2);
       let t3 = P2.double();
       t3 = G2psi2(c2, t3);
       t3 = t3.subtract(t2);
       t2 = t1.add(t2);
-      t2 = t2.multiplyUnsafe(x3).negate();
+      t2 = t2.multiplyUnsafe(x2).negate();
       t3 = t3.add(t2);
       t3 = t3.subtract(t1);
       const Q2 = t3.subtract(P2);
@@ -7993,12 +7957,12 @@ const G2_SWU = mapToCurveSimpleSWU(Fp2, {
   // Z: -(2 + I)
 });
 function mapToG1(scalars) {
-  const { x: x3, y: y2 } = G1_SWU(Fp$1.create(scalars[0]));
-  return isogenyMapG1(x3, y2);
+  const { x: x2, y: y2 } = G1_SWU(Fp$1.create(scalars[0]));
+  return isogenyMapG1(x2, y2);
 }
 function mapToG2(scalars) {
-  const { x: x3, y: y2 } = G2_SWU(Fp2.fromBigTuple(scalars));
-  return isogenyMapG2(x3, y2);
+  const { x: x2, y: y2 } = G2_SWU(Fp2.fromBigTuple(scalars));
+  return isogenyMapG2(x2, y2);
 }
 function blsVerify(pk, sig, msg) {
   const primaryKey = typeof pk === "string" ? pk : bytesToHex(pk);
@@ -8810,8 +8774,8 @@ function readCertifiedReject(certificate, path, requestId) {
 }
 /*! noble-curves - MIT License (c) 2022 Paul Miller (paulmillr.com) */
 const _0n = BigInt(0), _1n$1 = BigInt(1), _2n$1 = BigInt(2), _8n$1 = BigInt(8);
-function isEdValidXY(Fp3, CURVE, x3, y2) {
-  const x22 = Fp3.sqr(x3);
+function isEdValidXY(Fp3, CURVE, x2, y2) {
+  const x22 = Fp3.sqr(x2);
   const y22 = Fp3.sqr(y2);
   const left = Fp3.add(Fp3.mul(CURVE.a, x22), y22);
   const right = Fp3.add(Fp3.ONE, Fp3.mul(CURVE.d, Fp3.mul(x22, y22)));
@@ -8848,14 +8812,14 @@ function edwards(params, extraOpts = {}) {
     const is0 = p2.is0();
     if (iz == null)
       iz = is0 ? _8n$1 : Fp3.inv(Z2);
-    const x3 = modP(X2 * iz);
+    const x2 = modP(X2 * iz);
     const y2 = modP(Y2 * iz);
     const zz = Fp3.mul(Z2, iz);
     if (is0)
       return { x: _0n, y: _1n$1 };
     if (zz !== _1n$1)
       throw new Error("invZ was invalid");
-    return { x: x3, y: y2 };
+    return { x: x2, y: y2 };
   });
   const assertValidMemo = memoized((p2) => {
     const { a: a2, d: d2 } = CURVE;
@@ -8891,10 +8855,10 @@ function edwards(params, extraOpts = {}) {
     static fromAffine(p2) {
       if (p2 instanceof Point)
         throw new Error("extended point not allowed");
-      const { x: x3, y: y2 } = p2 || {};
-      acoord("x", x3);
+      const { x: x2, y: y2 } = p2 || {};
+      acoord("x", x2);
       acoord("y", y2);
-      return new Point(x3, y2, _1n$1, modP(x3 * y2));
+      return new Point(x2, y2, _1n$1, modP(x2 * y2));
     }
     // Uses algo from RFC8032 5.1.3.
     static fromBytes(bytes, zip215 = false) {
@@ -8911,16 +8875,16 @@ function edwards(params, extraOpts = {}) {
       const y22 = modP(y2 * y2);
       const u2 = modP(y22 - _1n$1);
       const v2 = modP(d2 * y22 - a2);
-      let { isValid, value: x3 } = uvRatio2(u2, v2);
+      let { isValid, value: x2 } = uvRatio2(u2, v2);
       if (!isValid)
         throw new Error("bad point: invalid y coordinate");
-      const isXOdd = (x3 & _1n$1) === _1n$1;
+      const isXOdd = (x2 & _1n$1) === _1n$1;
       const isLastByteOdd = (lastByte & 128) !== 0;
-      if (!zip215 && x3 === _0n && isLastByteOdd)
+      if (!zip215 && x2 === _0n && isLastByteOdd)
         throw new Error("bad point: x=0 and x_0=1");
       if (isLastByteOdd !== isXOdd)
-        x3 = modP(-x3);
-      return Point.fromAffine({ x: x3, y: y2 });
+        x2 = modP(-x2);
+      return Point.fromAffine({ x: x2, y: y2 });
     }
     static fromHex(bytes, zip215 = false) {
       return Point.fromBytes(ensureBytes("point", bytes), zip215);
@@ -9048,9 +9012,9 @@ function edwards(params, extraOpts = {}) {
       return this.multiplyUnsafe(cofactor);
     }
     toBytes() {
-      const { x: x3, y: y2 } = this.toAffine();
+      const { x: x2, y: y2 } = this.toAffine();
       const bytes = Fp3.toBytes(y2);
-      bytes[bytes.length - 1] |= x3 & _1n$1 ? 128 : 0;
+      bytes[bytes.length - 1] |= x2 & _1n$1 ? 128 : 0;
       return bytes;
     }
     toHex() {
@@ -9302,13 +9266,13 @@ const ed25519_CURVE = /* @__PURE__ */ (() => ({
   Gx: BigInt("0x216936d3cd6e53fec0a4e231fdd6dc5c692cc7609525a7b2c9562d608f25d51a"),
   Gy: BigInt("0x6666666666666666666666666666666666666666666666666666666666666658")
 }))();
-function ed25519_pow_2_252_3(x3) {
+function ed25519_pow_2_252_3(x2) {
   const _10n = BigInt(10), _20n = BigInt(20), _40n = BigInt(40), _80n = BigInt(80);
   const P2 = ed25519_CURVE_p;
-  const x22 = x3 * x3 % P2;
-  const b2 = x22 * x3 % P2;
+  const x22 = x2 * x2 % P2;
+  const b2 = x22 * x2 % P2;
   const b4 = pow2(b2, _2n, P2) * b2 % P2;
-  const b5 = pow2(b4, _1n, P2) * x3 % P2;
+  const b5 = pow2(b4, _1n, P2) * x2 % P2;
   const b10 = pow2(b5, _5n, P2) * b5 % P2;
   const b20 = pow2(b10, _10n, P2) * b10 % P2;
   const b40 = pow2(b20, _20n, P2) * b20 % P2;
@@ -9316,7 +9280,7 @@ function ed25519_pow_2_252_3(x3) {
   const b160 = pow2(b80, _80n, P2) * b80 % P2;
   const b240 = pow2(b160, _80n, P2) * b80 % P2;
   const b250 = pow2(b240, _10n, P2) * b10 % P2;
-  const pow_p_5_8 = pow2(b250, _2n, P2) * x3 % P2;
+  const pow_p_5_8 = pow2(b250, _2n, P2) * x2 % P2;
   return { pow_p_5_8, b2 };
 }
 function adjustScalarBytes(bytes) {
@@ -9331,20 +9295,20 @@ function uvRatio(u2, v2) {
   const v3 = mod(v2 * v2 * v2, P2);
   const v7 = mod(v3 * v3 * v2, P2);
   const pow = ed25519_pow_2_252_3(u2 * v7).pow_p_5_8;
-  let x3 = mod(u2 * v3 * pow, P2);
-  const vx2 = mod(v2 * x3 * x3, P2);
-  const root1 = x3;
-  const root2 = mod(x3 * ED25519_SQRT_M1, P2);
+  let x2 = mod(u2 * v3 * pow, P2);
+  const vx2 = mod(v2 * x2 * x2, P2);
+  const root1 = x2;
+  const root2 = mod(x2 * ED25519_SQRT_M1, P2);
   const useRoot1 = vx2 === u2;
   const useRoot2 = vx2 === mod(-u2, P2);
   const noRoot = vx2 === mod(-u2 * ED25519_SQRT_M1, P2);
   if (useRoot1)
-    x3 = root1;
+    x2 = root1;
   if (useRoot2 || noRoot)
-    x3 = root2;
-  if (isNegativeLE(x3, P2))
-    x3 = mod(-x3, P2);
-  return { isValid: useRoot1 || useRoot2, value: x3 };
+    x2 = root2;
+  if (isNegativeLE(x2, P2))
+    x2 = mod(-x2, P2);
+  return { isValid: useRoot1 || useRoot2, value: x2 };
 }
 const Fp = /* @__PURE__ */ (() => Field(ed25519_CURVE.p, { isLE: true }))();
 const ed25519Defaults = /* @__PURE__ */ (() => ({
@@ -10204,10 +10168,10 @@ const _HttpAgent = class _HttpAgent {
   }
   addTransform(type, fn, priority = fn.priority || 0) {
     if (type === "update") {
-      const i = __privateGet(this, _updatePipeline).findIndex((x3) => (x3.priority || 0) < priority);
+      const i = __privateGet(this, _updatePipeline).findIndex((x2) => (x2.priority || 0) < priority);
       __privateGet(this, _updatePipeline).splice(i >= 0 ? i : __privateGet(this, _updatePipeline).length, 0, Object.assign(fn, { priority }));
     } else if (type === "query") {
-      const i = __privateGet(this, _queryPipeline).findIndex((x3) => (x3.priority || 0) < priority);
+      const i = __privateGet(this, _queryPipeline).findIndex((x2) => (x2.priority || 0) < priority);
       __privateGet(this, _queryPipeline).splice(i >= 0 ? i : __privateGet(this, _queryPipeline).length, 0, Object.assign(fn, { priority }));
     }
   }
@@ -11297,386 +11261,9 @@ function _createActorMethod(actor, methodName, func, blsVerify2) {
   handler.withOptions = (options) => (...args) => caller(options, ...args);
   return handler;
 }
-const MAXIMUM_CONCURRENT_UPLOADS = 10;
-const MAX_RETRIES = 3;
-const BASE_DELAY_MS = 1e3;
-const MAX_DELAY_MS = 3e4;
-const GATEWAY_VERSION = "v1";
-const HASH_ALGORITHM = "SHA-256";
-const SHA256_PREFIX = "sha256:";
-const DOMAIN_SEPARATOR_FOR_CHUNKS = new TextEncoder().encode("icfs-chunk/");
-const DOMAIN_SEPARATOR_FOR_METADATA = new TextEncoder().encode("icfs-metadata/");
-const DOMAIN_SEPARATOR_FOR_NODES = new TextEncoder().encode("ynode/");
-async function withRetry(operation) {
-  let lastError;
-  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
-    try {
-      return await operation();
-    } catch (error) {
-      lastError = error instanceof Error ? error : new Error(String(error));
-      const shouldRetry = isRetriableError(error);
-      if (attempt === MAX_RETRIES || !shouldRetry) {
-        if (!shouldRetry && attempt < MAX_RETRIES) {
-          console.warn(`Non-retriable error encountered: ${lastError.message}. Not retrying.`);
-        }
-        throw error;
-      }
-      const delay = Math.min(BASE_DELAY_MS * 2 ** attempt + Math.random() * 1e3, MAX_DELAY_MS);
-      console.warn(`Request failed (attempt ${attempt + 1}/${MAX_RETRIES + 1}): ${lastError.message}. Retrying in ${Math.round(delay)}ms...`);
-      await new Promise((resolve) => setTimeout(resolve, delay));
-    }
-  }
-  throw lastError || new Error("Unknown error occurred during retry attempts");
-}
-function isRetriableError(error) {
-  var _a2, _b2;
-  const errorMessage = ((_a2 = error == null ? void 0 : error.message) == null ? void 0 : _a2.toLowerCase()) || "";
-  if ((_b2 = error == null ? void 0 : error.response) == null ? void 0 : _b2.status) {
-    const status = error.response.status;
-    if (status === 408 || status === 429)
-      return true;
-    if (status >= 400 && status < 500)
-      return false;
-    if (status >= 500)
-      return true;
-  }
-  if (errorMessage.includes("ssl") || errorMessage.includes("tls") || errorMessage.includes("network error") || errorMessage.includes("connection") || errorMessage.includes("timeout") || errorMessage.includes("fetch")) {
-    return true;
-  }
-  if (errorMessage.includes("validation") || errorMessage.includes("invalid") || errorMessage.includes("malformed") || errorMessage.includes("unauthorized") || errorMessage.includes("forbidden") || errorMessage.includes("not found")) {
-    return false;
-  }
-  return true;
-}
-function validateHashFormat(hash, context) {
-  if (!hash) {
-    throw new Error(`${context}: Hash cannot be empty`);
-  }
-  if (!hash.startsWith(SHA256_PREFIX)) {
-    throw new Error(`${context}: Invalid hash format. Expected format: ${SHA256_PREFIX}<64-char-hex>, got: ${hash}`);
-  }
-  const hexPart = hash.substring(SHA256_PREFIX.length);
-  if (hexPart.length !== 64) {
-    throw new Error(`${context}: Invalid hash format. Expected 64 hex characters after ${SHA256_PREFIX}, got ${hexPart.length} characters: ${hash}`);
-  }
-  if (!/^[0-9a-f]{64}$/i.test(hexPart)) {
-    throw new Error(`${context}: Invalid hash format. Hash must contain only hex characters (0-9, a-f), got: ${hash}`);
-  }
-}
-class YHash {
-  constructor(bytes) {
-    __publicField(this, "bytes");
-    if (bytes.length !== 32) {
-      throw new Error(`YHash must be exactly 32 bytes, got ${bytes.length}`);
-    }
-    this.bytes = new Uint8Array(bytes);
-  }
-  static async fromNodes(left, right) {
-    const leftBytes = left instanceof YHash ? left.bytes : new TextEncoder().encode("UNBALANCED");
-    const rightBytes = right instanceof YHash ? right.bytes : new TextEncoder().encode("UNBALANCED");
-    const combined = new Uint8Array(DOMAIN_SEPARATOR_FOR_NODES.length + leftBytes.length + rightBytes.length);
-    const arrays = [DOMAIN_SEPARATOR_FOR_NODES, leftBytes, rightBytes];
-    let offset = 0;
-    for (const data of arrays) {
-      combined.set(data, offset);
-      offset += data.length;
-    }
-    const hashBuffer = await crypto.subtle.digest(HASH_ALGORITHM, combined);
-    return new YHash(new Uint8Array(hashBuffer));
-  }
-  static async fromChunk(data) {
-    return YHash.fromBytes(DOMAIN_SEPARATOR_FOR_CHUNKS, data);
-  }
-  static async fromHeaders(headers) {
-    const headerLines = [];
-    for (const [key, value] of Object.entries(headers)) {
-      headerLines.push(`${key.trim()}: ${value.trim()}
-`);
-    }
-    headerLines.sort();
-    const hash = await YHash.fromBytes(DOMAIN_SEPARATOR_FOR_METADATA, new TextEncoder().encode(headerLines.join("")));
-    return hash;
-  }
-  static async fromBytes(domainSeparator, data) {
-    const combined = new Uint8Array(domainSeparator.length + data.length);
-    combined.set(domainSeparator);
-    combined.set(data, domainSeparator.length);
-    const hashBuffer = await crypto.subtle.digest(HASH_ALGORITHM, combined);
-    return new YHash(new Uint8Array(hashBuffer));
-  }
-  static fromHex(hexString) {
-    const bytes = new Uint8Array(hexString.match(/.{1,2}/g).map((byte) => Number.parseInt(byte, 16)));
-    return new YHash(bytes);
-  }
-  toShaString() {
-    return `${SHA256_PREFIX}${this.toHex()}`;
-  }
-  toString() {
-    throw new Error("toString is not supported for YHash");
-  }
-  toHex() {
-    return Array.from(this.bytes).map((b2) => b2.toString(16).padStart(2, "0")).join("");
-  }
-}
-function nodeToJSON(node) {
-  return {
-    hash: node.hash.toShaString(),
-    left: node.left ? nodeToJSON(node.left) : null,
-    right: node.right ? nodeToJSON(node.right) : null
-  };
-}
-class BlobHashTree {
-  constructor(chunk_hashes, tree, headers = null) {
-    __publicField(this, "tree_type");
-    __publicField(this, "chunk_hashes");
-    __publicField(this, "tree");
-    __publicField(this, "headers");
-    this.tree_type = "DSBMTWH";
-    this.chunk_hashes = chunk_hashes;
-    this.tree = tree;
-    if (headers == null) {
-      this.headers = [];
-    } else if (Array.isArray(headers)) {
-      this.headers = headers;
-    } else {
-      this.headers = Object.entries(headers).map(([key, value]) => `${key.trim()}: ${value.trim()}`);
-    }
-    this.headers.sort();
-  }
-  static async build(chunkHashes, headers = {}) {
-    if (chunkHashes.length === 0) {
-      const hex = "8b8e620f084e48da0be2287fd12c5aaa4dbe14b468fd2e360f48d741fe7628a0";
-      const bytes = new TextEncoder().encode(hex);
-      chunkHashes.push(new YHash(bytes));
-    }
-    let level = chunkHashes.map((hash) => ({
-      hash,
-      left: null,
-      right: null
-    }));
-    while (level.length > 1) {
-      const nextLevel = [];
-      for (let i = 0; i < level.length; i += 2) {
-        const left = level[i];
-        const right = level[i + 1] || null;
-        const parentHash = await YHash.fromNodes(left.hash, right ? right.hash : null);
-        nextLevel.push({
-          hash: parentHash,
-          left,
-          right
-        });
-      }
-      level = nextLevel;
-    }
-    const chunksRoot = level[0];
-    if (headers && Object.keys(headers).length > 0) {
-      const metadataRootHash = await YHash.fromHeaders(headers);
-      const metadataRoot = {
-        hash: metadataRootHash,
-        left: null,
-        right: null
-      };
-      const combinedRootHash = await YHash.fromNodes(chunksRoot.hash, metadataRoot.hash);
-      const combinedRoot = {
-        hash: combinedRootHash,
-        left: chunksRoot,
-        right: metadataRoot
-      };
-      return new BlobHashTree(chunkHashes, combinedRoot, headers);
-    }
-    return new BlobHashTree(chunkHashes, chunksRoot, headers);
-  }
-  toJSON() {
-    return {
-      tree_type: this.tree_type,
-      chunk_hashes: this.chunk_hashes.map((h2) => h2.toShaString()),
-      tree: nodeToJSON(this.tree),
-      headers: this.headers
-    };
-  }
-}
-class StorageGatewayClient {
-  constructor(storageGatewayUrl) {
-    __publicField(this, "storageGatewayUrl");
-    this.storageGatewayUrl = storageGatewayUrl;
-  }
-  getStorageGatewayUrl() {
-    return this.storageGatewayUrl;
-  }
-  async uploadChunk(params) {
-    const blobHashString = params.blobRootHash.toShaString();
-    const chunkHashString = params.chunkHash.toShaString();
-    validateHashFormat(blobHashString, `uploadChunk[${params.chunkIndex}] blob_hash`);
-    validateHashFormat(chunkHashString, `uploadChunk[${params.chunkIndex}] chunk_hash`);
-    return await withRetry(async () => {
-      const queryParams = new URLSearchParams({
-        owner_id: params.owner,
-        blob_hash: blobHashString,
-        chunk_hash: chunkHashString,
-        chunk_index: params.chunkIndex.toString(),
-        bucket_name: params.bucketName,
-        project_id: params.projectId
-      });
-      const url = `${this.storageGatewayUrl}/${GATEWAY_VERSION}/chunk/?${queryParams.toString()}`;
-      const response = await fetch(url, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/octet-stream",
-          "X-Caffeine-Project-ID": params.projectId
-        },
-        body: params.chunkData
-      });
-      if (!response.ok) {
-        const errorText = await response.text();
-        const error = new Error(`Failed to upload chunk ${params.chunkIndex}: ${response.status} ${response.statusText} - ${errorText}`);
-        error.response = { status: response.status };
-        throw error;
-      }
-      const result = await response.json();
-      return {
-        isComplete: result.status === "blob_complete"
-      };
-    });
-  }
-  async uploadBlobTree(blobHashTree, bucketName, numBlobBytes, owner, projectId, certificateBytes) {
-    const treeJSON = blobHashTree.toJSON();
-    validateHashFormat(treeJSON.tree.hash, "uploadBlobTree root hash");
-    treeJSON.chunk_hashes.forEach((hash, index2) => {
-      validateHashFormat(hash, `uploadBlobTree chunk_hash[${index2}]`);
-    });
-    return await withRetry(async () => {
-      const url = `${this.storageGatewayUrl}/${GATEWAY_VERSION}/blob-tree/`;
-      const requestBody = {
-        blob_tree: treeJSON,
-        bucket_name: bucketName,
-        num_blob_bytes: numBlobBytes,
-        owner,
-        project_id: projectId,
-        headers: blobHashTree.headers,
-        auth: {
-          OwnerEgressSignature: Array.from(certificateBytes)
-        }
-      };
-      const response = await fetch(url, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Caffeine-Project-ID": projectId
-        },
-        body: JSON.stringify(requestBody)
-      });
-      if (!response.ok) {
-        const errorText = await response.text();
-        const error = new Error(`Failed to upload blob tree: ${response.status} ${response.statusText} - ${errorText}`);
-        error.response = { status: response.status };
-        throw error;
-      }
-    });
-  }
-}
-class StorageClient {
-  constructor(bucket, storageGatewayUrl, backendCanisterId, projectId, agent) {
-    __publicField(this, "bucket");
-    __publicField(this, "backendCanisterId");
-    __publicField(this, "projectId");
-    __publicField(this, "agent");
-    __publicField(this, "storageGatewayClient");
-    this.bucket = bucket;
-    this.backendCanisterId = backendCanisterId;
-    this.projectId = projectId;
-    this.agent = agent;
-    this.storageGatewayClient = new StorageGatewayClient(storageGatewayUrl);
-  }
-  async getCertificate(hash) {
-    const args = encode$1([Text], [hash]);
-    const result = await this.agent.call(this.backendCanisterId, {
-      methodName: "_immutableObjectStorageCreateCertificate",
-      arg: args,
-      effectiveCanisterId: this.backendCanisterId
-    });
-    const respone = result.response.body;
-    if (isV4ResponseBody(respone)) {
-      console.log("Certificate:", respone.certificate);
-      return respone.certificate;
-    }
-    throw new Error("Expected v4 response body");
-  }
-  async putFile(blobBytes, onProgress) {
-    const httpHeaders = {
-      "Content-Type": "application/json"
-    };
-    const file = new Blob([new Uint8Array(blobBytes)], {
-      type: "application/octet-stream"
-    });
-    const fileHeaders = {
-      "Content-Type": "application/octet-stream",
-      "Content-Length": file.size.toString()
-    };
-    const { chunks, chunkHashes, blobHashTree } = await this.processFileForUpload(file, fileHeaders);
-    const blobRootHash = blobHashTree.tree.hash;
-    const hashString2 = blobRootHash.toShaString();
-    const certificateBytes = await this.getCertificate(hashString2);
-    await this.storageGatewayClient.uploadBlobTree(blobHashTree, this.bucket, file.size, this.backendCanisterId, this.projectId, certificateBytes);
-    await this.parallelUpload(chunks, chunkHashes, blobRootHash, httpHeaders, onProgress);
-    return { hash: hashString2 };
-  }
-  async getDirectURL(hash) {
-    if (!hash) {
-      throw new Error("Hash must not be empty");
-    }
-    validateHashFormat(hash, `getDirectURL for path '${hash}'`);
-    return `${this.storageGatewayClient.getStorageGatewayUrl()}/${GATEWAY_VERSION}/blob/?blob_hash=${encodeURIComponent(hash)}&owner_id=${encodeURIComponent(this.backendCanisterId)}&project_id=${encodeURIComponent(this.projectId)}`;
-  }
-  async processFileForUpload(file, headers) {
-    const chunks = this.createFileChunks(file);
-    const chunkHashes = [];
-    for (let i = 0; i < chunks.length; i++) {
-      const chunkData = new Uint8Array(await chunks[i].arrayBuffer());
-      const hash = await YHash.fromChunk(chunkData);
-      chunkHashes.push(hash);
-    }
-    const blobHashTree = await BlobHashTree.build(chunkHashes, headers);
-    return { chunks, chunkHashes, blobHashTree };
-  }
-  async parallelUpload(chunks, chunkHashes, blobRootHash, httpHeaders, onProgress) {
-    let completedChunks = 0;
-    const uploadSingleChunk = async (index2) => {
-      const chunkData = new Uint8Array(await chunks[index2].arrayBuffer());
-      const chunkHash = chunkHashes[index2];
-      await this.storageGatewayClient.uploadChunk({
-        blobRootHash,
-        chunkHash,
-        chunkIndex: index2,
-        chunkData,
-        bucketName: this.bucket,
-        owner: this.backendCanisterId,
-        projectId: this.projectId,
-        httpHeaders
-      });
-      const currentCompleted = ++completedChunks;
-      if (onProgress != null) {
-        const percentage = chunks.length === 0 ? 100 : Math.round(currentCompleted / chunks.length * 100);
-        onProgress(percentage);
-      }
-    };
-    await Promise.all(Array.from({ length: MAXIMUM_CONCURRENT_UPLOADS }, async (_2, workerId) => {
-      for (let i = workerId; i < chunks.length; i += MAXIMUM_CONCURRENT_UPLOADS) {
-        await uploadSingleChunk(i);
-      }
-    }));
-  }
-  createFileChunks(file, chunkSize = 1024 * 1024) {
-    const chunks = [];
-    const totalChunks = Math.ceil(file.size / chunkSize);
-    for (let index2 = 0; index2 < totalChunks; index2++) {
-      const start = index2 * chunkSize;
-      const end = Math.min(start + chunkSize, file.size);
-      const chunk = file.slice(start, end);
-      chunks.push(chunk);
-    }
-    return chunks;
-  }
-}
+new TextEncoder().encode("icfs-chunk/");
+new TextEncoder().encode("icfs-metadata/");
+new TextEncoder().encode("ynode/");
 var define_process_env_default$1 = {};
 const DEFAULT_STORAGE_GATEWAY_URL = "https://blob.caffeine.ai";
 const DEFAULT_BUCKET_NAME = "default-bucket";
@@ -11722,59 +11309,6 @@ async function loadConfig() {
     };
     return fallbackConfig;
   }
-}
-function extractAgentErrorMessage(error) {
-  const errorString = String(error);
-  const match = errorString.match(/with message:\s*'([^']+)'/s);
-  return match ? match[1] : errorString;
-}
-function processError(e) {
-  if (e && typeof e === "object" && "message" in e) {
-    throw new Error(extractAgentErrorMessage(`${e.message}`));
-  }
-  throw e;
-}
-async function maybeLoadMockBackend() {
-  {
-    return null;
-  }
-}
-async function createActorWithConfig(createActor2, options) {
-  var _a2;
-  const mock = await maybeLoadMockBackend();
-  if (mock) {
-    return mock;
-  }
-  const config = await loadConfig();
-  const resolvedOptions = options ?? {};
-  const agent = new HttpAgent({
-    ...resolvedOptions.agentOptions,
-    host: config.backend_host
-  });
-  if ((_a2 = config.backend_host) == null ? void 0 : _a2.includes("localhost")) {
-    await agent.fetchRootKey().catch((err) => {
-      console.warn("Unable to fetch root key. Check to ensure that your local replica is running");
-      console.error(err);
-    });
-  }
-  const actorOptions = {
-    ...resolvedOptions,
-    agent,
-    processError
-  };
-  const storageClient = new StorageClient(config.bucket_name, config.storage_gateway_url, config.backend_canister_id, config.project_id, agent);
-  const MOTOKO_DEDUPLICATION_SENTINEL = "!caf!";
-  const uploadFile = async (file) => {
-    const { hash } = await storageClient.putFile(await file.getBytes(), file.onProgress);
-    return new TextEncoder().encode(MOTOKO_DEDUPLICATION_SENTINEL + hash);
-  };
-  const downloadFile = async (bytes) => {
-    const hashWithPrefix = new TextDecoder().decode(new Uint8Array(bytes));
-    const hash = hashWithPrefix.substring(MOTOKO_DEDUPLICATION_SENTINEL.length);
-    const url = await storageClient.getDirectURL(hash);
-    return ExternalBlob.fromURL(url);
-  };
-  return createActor2(config.backend_canister_id, uploadFile, downloadFile, actorOptions);
 }
 var Subscribable = class {
   constructor() {
@@ -12044,17 +11578,6 @@ function replaceEqualDeep(a2, b2, depth = 0) {
   }
   return aSize === bSize && equalItems === aSize ? a2 : copy;
 }
-function shallowEqualObjects(a2, b2) {
-  if (!b2 || Object.keys(a2).length !== Object.keys(b2).length) {
-    return false;
-  }
-  for (const key in a2) {
-    if (a2[key] !== b2[key]) {
-      return false;
-    }
-  }
-  return true;
-}
 function isPlainArray(value) {
   return Array.isArray(value) && value.length === Object.keys(value).length;
 }
@@ -12111,12 +11634,6 @@ function ensureQueryFn(options, fetchOptions) {
     return () => Promise.reject(new Error(`Missing queryFn: '${options.queryHash}'`));
   }
   return options.queryFn;
-}
-function shouldThrowError(throwOnError, params) {
-  if (typeof throwOnError === "function") {
-    return throwOnError(...params);
-  }
-  return !!throwOnError;
 }
 function addConsumeAwareSignal(object, getSignal, onCancelled) {
   let consumed = false;
@@ -12589,13 +12106,13 @@ var Query = (_f = class extends Removable {
   }
   onFocus() {
     var _a2;
-    const observer = this.observers.find((x3) => x3.shouldFetchOnWindowFocus());
+    const observer = this.observers.find((x2) => x2.shouldFetchOnWindowFocus());
     observer == null ? void 0 : observer.refetch({ cancelRefetch: false });
     (_a2 = __privateGet(this, _retryer)) == null ? void 0 : _a2.continue();
   }
   onOnline() {
     var _a2;
-    const observer = this.observers.find((x3) => x3.shouldFetchOnReconnect());
+    const observer = this.observers.find((x2) => x2.shouldFetchOnReconnect());
     observer == null ? void 0 : observer.refetch({ cancelRefetch: false });
     (_a2 = __privateGet(this, _retryer)) == null ? void 0 : _a2.continue();
   }
@@ -12608,7 +12125,7 @@ var Query = (_f = class extends Removable {
   }
   removeObserver(observer) {
     if (this.observers.includes(observer)) {
-      this.observers = this.observers.filter((x3) => x3 !== observer);
+      this.observers = this.observers.filter((x2) => x2 !== observer);
       if (!this.observers.length) {
         if (__privateGet(this, _retryer)) {
           if (__privateGet(this, _abortSignalConsumed) || __privateMethod(this, _Query_instances, isInitialPausedFetch_fn).call(this)) {
@@ -12631,7 +12148,7 @@ var Query = (_f = class extends Removable {
     }
   }
   async fetch(options, fetchOptions) {
-    var _a2, _b2, _c2, _d2, _e2, _f2, _g2, _h2, _i2, _j2, _k2, _l2;
+    var _a2, _b2, _c2, _d2, _e2, _f2, _g2, _h2, _i2, _j2, _k, _l;
     if (this.state.fetchStatus !== "idle" && // If the promise in the retryer is already rejected, we have to definitely
     // re-start the fetch; there is a chance that the query is still in a
     // pending state when that happens
@@ -12647,7 +12164,7 @@ var Query = (_f = class extends Removable {
       this.setOptions(options);
     }
     if (!this.options.queryFn) {
-      const observer = this.observers.find((x3) => x3.options.queryFn);
+      const observer = this.observers.find((x2) => x2.options.queryFn);
       if (observer) {
         this.setOptions(observer.options);
       }
@@ -12763,8 +12280,8 @@ var Query = (_f = class extends Removable {
         error,
         this
       );
-      (_l2 = (_k2 = __privateGet(this, _cache).config).onSettled) == null ? void 0 : _l2.call(
-        _k2,
+      (_l = (_k = __privateGet(this, _cache).config).onSettled) == null ? void 0 : _l.call(
+        _k,
         this.state.data,
         error,
         this
@@ -12888,450 +12405,6 @@ function getDefaultState$1(options) {
     fetchStatus: "idle"
   };
 }
-var QueryObserver = (_g = class extends Subscribable {
-  constructor(client2, options) {
-    super();
-    __privateAdd(this, _QueryObserver_instances);
-    __privateAdd(this, _client2);
-    __privateAdd(this, _currentQuery);
-    __privateAdd(this, _currentQueryInitialState);
-    __privateAdd(this, _currentResult);
-    __privateAdd(this, _currentResultState);
-    __privateAdd(this, _currentResultOptions);
-    __privateAdd(this, _currentThenable);
-    __privateAdd(this, _selectError);
-    __privateAdd(this, _selectFn);
-    __privateAdd(this, _selectResult);
-    // This property keeps track of the last query with defined data.
-    // It will be used to pass the previous data and query to the placeholder function between renders.
-    __privateAdd(this, _lastQueryWithDefinedData);
-    __privateAdd(this, _staleTimeoutId);
-    __privateAdd(this, _refetchIntervalId);
-    __privateAdd(this, _currentRefetchInterval);
-    __privateAdd(this, _trackedProps, /* @__PURE__ */ new Set());
-    this.options = options;
-    __privateSet(this, _client2, client2);
-    __privateSet(this, _selectError, null);
-    __privateSet(this, _currentThenable, pendingThenable());
-    this.bindMethods();
-    this.setOptions(options);
-  }
-  bindMethods() {
-    this.refetch = this.refetch.bind(this);
-  }
-  onSubscribe() {
-    if (this.listeners.size === 1) {
-      __privateGet(this, _currentQuery).addObserver(this);
-      if (shouldFetchOnMount(__privateGet(this, _currentQuery), this.options)) {
-        __privateMethod(this, _QueryObserver_instances, executeFetch_fn).call(this);
-      } else {
-        this.updateResult();
-      }
-      __privateMethod(this, _QueryObserver_instances, updateTimers_fn).call(this);
-    }
-  }
-  onUnsubscribe() {
-    if (!this.hasListeners()) {
-      this.destroy();
-    }
-  }
-  shouldFetchOnReconnect() {
-    return shouldFetchOn(
-      __privateGet(this, _currentQuery),
-      this.options,
-      this.options.refetchOnReconnect
-    );
-  }
-  shouldFetchOnWindowFocus() {
-    return shouldFetchOn(
-      __privateGet(this, _currentQuery),
-      this.options,
-      this.options.refetchOnWindowFocus
-    );
-  }
-  destroy() {
-    this.listeners = /* @__PURE__ */ new Set();
-    __privateMethod(this, _QueryObserver_instances, clearStaleTimeout_fn).call(this);
-    __privateMethod(this, _QueryObserver_instances, clearRefetchInterval_fn).call(this);
-    __privateGet(this, _currentQuery).removeObserver(this);
-  }
-  setOptions(options) {
-    const prevOptions = this.options;
-    const prevQuery = __privateGet(this, _currentQuery);
-    this.options = __privateGet(this, _client2).defaultQueryOptions(options);
-    if (this.options.enabled !== void 0 && typeof this.options.enabled !== "boolean" && typeof this.options.enabled !== "function" && typeof resolveEnabled(this.options.enabled, __privateGet(this, _currentQuery)) !== "boolean") {
-      throw new Error(
-        "Expected enabled to be a boolean or a callback that returns a boolean"
-      );
-    }
-    __privateMethod(this, _QueryObserver_instances, updateQuery_fn).call(this);
-    __privateGet(this, _currentQuery).setOptions(this.options);
-    if (prevOptions._defaulted && !shallowEqualObjects(this.options, prevOptions)) {
-      __privateGet(this, _client2).getQueryCache().notify({
-        type: "observerOptionsUpdated",
-        query: __privateGet(this, _currentQuery),
-        observer: this
-      });
-    }
-    const mounted = this.hasListeners();
-    if (mounted && shouldFetchOptionally(
-      __privateGet(this, _currentQuery),
-      prevQuery,
-      this.options,
-      prevOptions
-    )) {
-      __privateMethod(this, _QueryObserver_instances, executeFetch_fn).call(this);
-    }
-    this.updateResult();
-    if (mounted && (__privateGet(this, _currentQuery) !== prevQuery || resolveEnabled(this.options.enabled, __privateGet(this, _currentQuery)) !== resolveEnabled(prevOptions.enabled, __privateGet(this, _currentQuery)) || resolveStaleTime(this.options.staleTime, __privateGet(this, _currentQuery)) !== resolveStaleTime(prevOptions.staleTime, __privateGet(this, _currentQuery)))) {
-      __privateMethod(this, _QueryObserver_instances, updateStaleTimeout_fn).call(this);
-    }
-    const nextRefetchInterval = __privateMethod(this, _QueryObserver_instances, computeRefetchInterval_fn).call(this);
-    if (mounted && (__privateGet(this, _currentQuery) !== prevQuery || resolveEnabled(this.options.enabled, __privateGet(this, _currentQuery)) !== resolveEnabled(prevOptions.enabled, __privateGet(this, _currentQuery)) || nextRefetchInterval !== __privateGet(this, _currentRefetchInterval))) {
-      __privateMethod(this, _QueryObserver_instances, updateRefetchInterval_fn).call(this, nextRefetchInterval);
-    }
-  }
-  getOptimisticResult(options) {
-    const query = __privateGet(this, _client2).getQueryCache().build(__privateGet(this, _client2), options);
-    const result = this.createResult(query, options);
-    if (shouldAssignObserverCurrentProperties(this, result)) {
-      __privateSet(this, _currentResult, result);
-      __privateSet(this, _currentResultOptions, this.options);
-      __privateSet(this, _currentResultState, __privateGet(this, _currentQuery).state);
-    }
-    return result;
-  }
-  getCurrentResult() {
-    return __privateGet(this, _currentResult);
-  }
-  trackResult(result, onPropTracked) {
-    return new Proxy(result, {
-      get: (target, key) => {
-        this.trackProp(key);
-        onPropTracked == null ? void 0 : onPropTracked(key);
-        if (key === "promise") {
-          this.trackProp("data");
-          if (!this.options.experimental_prefetchInRender && __privateGet(this, _currentThenable).status === "pending") {
-            __privateGet(this, _currentThenable).reject(
-              new Error(
-                "experimental_prefetchInRender feature flag is not enabled"
-              )
-            );
-          }
-        }
-        return Reflect.get(target, key);
-      }
-    });
-  }
-  trackProp(key) {
-    __privateGet(this, _trackedProps).add(key);
-  }
-  getCurrentQuery() {
-    return __privateGet(this, _currentQuery);
-  }
-  refetch({ ...options } = {}) {
-    return this.fetch({
-      ...options
-    });
-  }
-  fetchOptimistic(options) {
-    const defaultedOptions = __privateGet(this, _client2).defaultQueryOptions(options);
-    const query = __privateGet(this, _client2).getQueryCache().build(__privateGet(this, _client2), defaultedOptions);
-    return query.fetch().then(() => this.createResult(query, defaultedOptions));
-  }
-  fetch(fetchOptions) {
-    return __privateMethod(this, _QueryObserver_instances, executeFetch_fn).call(this, {
-      ...fetchOptions,
-      cancelRefetch: fetchOptions.cancelRefetch ?? true
-    }).then(() => {
-      this.updateResult();
-      return __privateGet(this, _currentResult);
-    });
-  }
-  createResult(query, options) {
-    var _a2;
-    const prevQuery = __privateGet(this, _currentQuery);
-    const prevOptions = this.options;
-    const prevResult = __privateGet(this, _currentResult);
-    const prevResultState = __privateGet(this, _currentResultState);
-    const prevResultOptions = __privateGet(this, _currentResultOptions);
-    const queryChange = query !== prevQuery;
-    const queryInitialState = queryChange ? query.state : __privateGet(this, _currentQueryInitialState);
-    const { state } = query;
-    let newState = { ...state };
-    let isPlaceholderData = false;
-    let data;
-    if (options._optimisticResults) {
-      const mounted = this.hasListeners();
-      const fetchOnMount = !mounted && shouldFetchOnMount(query, options);
-      const fetchOptionally = mounted && shouldFetchOptionally(query, prevQuery, options, prevOptions);
-      if (fetchOnMount || fetchOptionally) {
-        newState = {
-          ...newState,
-          ...fetchState(state.data, query.options)
-        };
-      }
-      if (options._optimisticResults === "isRestoring") {
-        newState.fetchStatus = "idle";
-      }
-    }
-    let { error, errorUpdatedAt, status } = newState;
-    data = newState.data;
-    let skipSelect = false;
-    if (options.placeholderData !== void 0 && data === void 0 && status === "pending") {
-      let placeholderData;
-      if ((prevResult == null ? void 0 : prevResult.isPlaceholderData) && options.placeholderData === (prevResultOptions == null ? void 0 : prevResultOptions.placeholderData)) {
-        placeholderData = prevResult.data;
-        skipSelect = true;
-      } else {
-        placeholderData = typeof options.placeholderData === "function" ? options.placeholderData(
-          (_a2 = __privateGet(this, _lastQueryWithDefinedData)) == null ? void 0 : _a2.state.data,
-          __privateGet(this, _lastQueryWithDefinedData)
-        ) : options.placeholderData;
-      }
-      if (placeholderData !== void 0) {
-        status = "success";
-        data = replaceData(
-          prevResult == null ? void 0 : prevResult.data,
-          placeholderData,
-          options
-        );
-        isPlaceholderData = true;
-      }
-    }
-    if (options.select && data !== void 0 && !skipSelect) {
-      if (prevResult && data === (prevResultState == null ? void 0 : prevResultState.data) && options.select === __privateGet(this, _selectFn)) {
-        data = __privateGet(this, _selectResult);
-      } else {
-        try {
-          __privateSet(this, _selectFn, options.select);
-          data = options.select(data);
-          data = replaceData(prevResult == null ? void 0 : prevResult.data, data, options);
-          __privateSet(this, _selectResult, data);
-          __privateSet(this, _selectError, null);
-        } catch (selectError) {
-          __privateSet(this, _selectError, selectError);
-        }
-      }
-    }
-    if (__privateGet(this, _selectError)) {
-      error = __privateGet(this, _selectError);
-      data = __privateGet(this, _selectResult);
-      errorUpdatedAt = Date.now();
-      status = "error";
-    }
-    const isFetching = newState.fetchStatus === "fetching";
-    const isPending = status === "pending";
-    const isError = status === "error";
-    const isLoading = isPending && isFetching;
-    const hasData = data !== void 0;
-    const result = {
-      status,
-      fetchStatus: newState.fetchStatus,
-      isPending,
-      isSuccess: status === "success",
-      isError,
-      isInitialLoading: isLoading,
-      isLoading,
-      data,
-      dataUpdatedAt: newState.dataUpdatedAt,
-      error,
-      errorUpdatedAt,
-      failureCount: newState.fetchFailureCount,
-      failureReason: newState.fetchFailureReason,
-      errorUpdateCount: newState.errorUpdateCount,
-      isFetched: query.isFetched(),
-      isFetchedAfterMount: newState.dataUpdateCount > queryInitialState.dataUpdateCount || newState.errorUpdateCount > queryInitialState.errorUpdateCount,
-      isFetching,
-      isRefetching: isFetching && !isPending,
-      isLoadingError: isError && !hasData,
-      isPaused: newState.fetchStatus === "paused",
-      isPlaceholderData,
-      isRefetchError: isError && hasData,
-      isStale: isStale(query, options),
-      refetch: this.refetch,
-      promise: __privateGet(this, _currentThenable),
-      isEnabled: resolveEnabled(options.enabled, query) !== false
-    };
-    const nextResult = result;
-    if (this.options.experimental_prefetchInRender) {
-      const hasResultData = nextResult.data !== void 0;
-      const isErrorWithoutData = nextResult.status === "error" && !hasResultData;
-      const finalizeThenableIfPossible = (thenable) => {
-        if (isErrorWithoutData) {
-          thenable.reject(nextResult.error);
-        } else if (hasResultData) {
-          thenable.resolve(nextResult.data);
-        }
-      };
-      const recreateThenable = () => {
-        const pending = __privateSet(this, _currentThenable, nextResult.promise = pendingThenable());
-        finalizeThenableIfPossible(pending);
-      };
-      const prevThenable = __privateGet(this, _currentThenable);
-      switch (prevThenable.status) {
-        case "pending":
-          if (query.queryHash === prevQuery.queryHash) {
-            finalizeThenableIfPossible(prevThenable);
-          }
-          break;
-        case "fulfilled":
-          if (isErrorWithoutData || nextResult.data !== prevThenable.value) {
-            recreateThenable();
-          }
-          break;
-        case "rejected":
-          if (!isErrorWithoutData || nextResult.error !== prevThenable.reason) {
-            recreateThenable();
-          }
-          break;
-      }
-    }
-    return nextResult;
-  }
-  updateResult() {
-    const prevResult = __privateGet(this, _currentResult);
-    const nextResult = this.createResult(__privateGet(this, _currentQuery), this.options);
-    __privateSet(this, _currentResultState, __privateGet(this, _currentQuery).state);
-    __privateSet(this, _currentResultOptions, this.options);
-    if (__privateGet(this, _currentResultState).data !== void 0) {
-      __privateSet(this, _lastQueryWithDefinedData, __privateGet(this, _currentQuery));
-    }
-    if (shallowEqualObjects(nextResult, prevResult)) {
-      return;
-    }
-    __privateSet(this, _currentResult, nextResult);
-    const shouldNotifyListeners = () => {
-      if (!prevResult) {
-        return true;
-      }
-      const { notifyOnChangeProps } = this.options;
-      const notifyOnChangePropsValue = typeof notifyOnChangeProps === "function" ? notifyOnChangeProps() : notifyOnChangeProps;
-      if (notifyOnChangePropsValue === "all" || !notifyOnChangePropsValue && !__privateGet(this, _trackedProps).size) {
-        return true;
-      }
-      const includedProps = new Set(
-        notifyOnChangePropsValue ?? __privateGet(this, _trackedProps)
-      );
-      if (this.options.throwOnError) {
-        includedProps.add("error");
-      }
-      return Object.keys(__privateGet(this, _currentResult)).some((key) => {
-        const typedKey = key;
-        const changed = __privateGet(this, _currentResult)[typedKey] !== prevResult[typedKey];
-        return changed && includedProps.has(typedKey);
-      });
-    };
-    __privateMethod(this, _QueryObserver_instances, notify_fn).call(this, { listeners: shouldNotifyListeners() });
-  }
-  onQueryUpdate() {
-    this.updateResult();
-    if (this.hasListeners()) {
-      __privateMethod(this, _QueryObserver_instances, updateTimers_fn).call(this);
-    }
-  }
-}, _client2 = new WeakMap(), _currentQuery = new WeakMap(), _currentQueryInitialState = new WeakMap(), _currentResult = new WeakMap(), _currentResultState = new WeakMap(), _currentResultOptions = new WeakMap(), _currentThenable = new WeakMap(), _selectError = new WeakMap(), _selectFn = new WeakMap(), _selectResult = new WeakMap(), _lastQueryWithDefinedData = new WeakMap(), _staleTimeoutId = new WeakMap(), _refetchIntervalId = new WeakMap(), _currentRefetchInterval = new WeakMap(), _trackedProps = new WeakMap(), _QueryObserver_instances = new WeakSet(), executeFetch_fn = function(fetchOptions) {
-  __privateMethod(this, _QueryObserver_instances, updateQuery_fn).call(this);
-  let promise = __privateGet(this, _currentQuery).fetch(
-    this.options,
-    fetchOptions
-  );
-  if (!(fetchOptions == null ? void 0 : fetchOptions.throwOnError)) {
-    promise = promise.catch(noop$6);
-  }
-  return promise;
-}, updateStaleTimeout_fn = function() {
-  __privateMethod(this, _QueryObserver_instances, clearStaleTimeout_fn).call(this);
-  const staleTime = resolveStaleTime(
-    this.options.staleTime,
-    __privateGet(this, _currentQuery)
-  );
-  if (environmentManager.isServer() || __privateGet(this, _currentResult).isStale || !isValidTimeout(staleTime)) {
-    return;
-  }
-  const time = timeUntilStale(__privateGet(this, _currentResult).dataUpdatedAt, staleTime);
-  const timeout2 = time + 1;
-  __privateSet(this, _staleTimeoutId, timeoutManager.setTimeout(() => {
-    if (!__privateGet(this, _currentResult).isStale) {
-      this.updateResult();
-    }
-  }, timeout2));
-}, computeRefetchInterval_fn = function() {
-  return (typeof this.options.refetchInterval === "function" ? this.options.refetchInterval(__privateGet(this, _currentQuery)) : this.options.refetchInterval) ?? false;
-}, updateRefetchInterval_fn = function(nextInterval) {
-  __privateMethod(this, _QueryObserver_instances, clearRefetchInterval_fn).call(this);
-  __privateSet(this, _currentRefetchInterval, nextInterval);
-  if (environmentManager.isServer() || resolveEnabled(this.options.enabled, __privateGet(this, _currentQuery)) === false || !isValidTimeout(__privateGet(this, _currentRefetchInterval)) || __privateGet(this, _currentRefetchInterval) === 0) {
-    return;
-  }
-  __privateSet(this, _refetchIntervalId, timeoutManager.setInterval(() => {
-    if (this.options.refetchIntervalInBackground || focusManager.isFocused()) {
-      __privateMethod(this, _QueryObserver_instances, executeFetch_fn).call(this);
-    }
-  }, __privateGet(this, _currentRefetchInterval)));
-}, updateTimers_fn = function() {
-  __privateMethod(this, _QueryObserver_instances, updateStaleTimeout_fn).call(this);
-  __privateMethod(this, _QueryObserver_instances, updateRefetchInterval_fn).call(this, __privateMethod(this, _QueryObserver_instances, computeRefetchInterval_fn).call(this));
-}, clearStaleTimeout_fn = function() {
-  if (__privateGet(this, _staleTimeoutId)) {
-    timeoutManager.clearTimeout(__privateGet(this, _staleTimeoutId));
-    __privateSet(this, _staleTimeoutId, void 0);
-  }
-}, clearRefetchInterval_fn = function() {
-  if (__privateGet(this, _refetchIntervalId)) {
-    timeoutManager.clearInterval(__privateGet(this, _refetchIntervalId));
-    __privateSet(this, _refetchIntervalId, void 0);
-  }
-}, updateQuery_fn = function() {
-  const query = __privateGet(this, _client2).getQueryCache().build(__privateGet(this, _client2), this.options);
-  if (query === __privateGet(this, _currentQuery)) {
-    return;
-  }
-  const prevQuery = __privateGet(this, _currentQuery);
-  __privateSet(this, _currentQuery, query);
-  __privateSet(this, _currentQueryInitialState, query.state);
-  if (this.hasListeners()) {
-    prevQuery == null ? void 0 : prevQuery.removeObserver(this);
-    query.addObserver(this);
-  }
-}, notify_fn = function(notifyOptions) {
-  notifyManager.batch(() => {
-    if (notifyOptions.listeners) {
-      this.listeners.forEach((listener) => {
-        listener(__privateGet(this, _currentResult));
-      });
-    }
-    __privateGet(this, _client2).getQueryCache().notify({
-      query: __privateGet(this, _currentQuery),
-      type: "observerResultsUpdated"
-    });
-  });
-}, _g);
-function shouldLoadOnMount(query, options) {
-  return resolveEnabled(options.enabled, query) !== false && query.state.data === void 0 && !(query.state.status === "error" && options.retryOnMount === false);
-}
-function shouldFetchOnMount(query, options) {
-  return shouldLoadOnMount(query, options) || query.state.data !== void 0 && shouldFetchOn(query, options, options.refetchOnMount);
-}
-function shouldFetchOn(query, options, field) {
-  if (resolveEnabled(options.enabled, query) !== false && resolveStaleTime(options.staleTime, query) !== "static") {
-    const value = typeof field === "function" ? field(query) : field;
-    return value === "always" || value !== false && isStale(query, options);
-  }
-  return false;
-}
-function shouldFetchOptionally(query, prevQuery, options, prevOptions) {
-  return (query !== prevQuery || resolveEnabled(prevOptions.enabled, query) === false) && (!options.suspense || query.state.status !== "error") && isStale(query, options);
-}
-function isStale(query, options) {
-  return resolveEnabled(options.enabled, query) !== false && query.isStaleByTime(resolveStaleTime(options.staleTime, query));
-}
-function shouldAssignObserverCurrentProperties(observer, optimisticResult) {
-  if (!shallowEqualObjects(observer.getCurrentResult(), optimisticResult)) {
-    return true;
-  }
-  return false;
-}
 function infiniteQueryBehavior(pages) {
   return {
     onFetch: (context, query) => {
@@ -13435,15 +12508,15 @@ function getPreviousPageParam(options, { pages, pageParams }) {
   var _a2;
   return pages.length > 0 ? (_a2 = options.getPreviousPageParam) == null ? void 0 : _a2.call(options, pages[0], pages, pageParams[0], pageParams) : void 0;
 }
-var Mutation = (_h = class extends Removable {
+var Mutation = (_g = class extends Removable {
   constructor(config) {
     super();
     __privateAdd(this, _Mutation_instances);
-    __privateAdd(this, _client3);
+    __privateAdd(this, _client2);
     __privateAdd(this, _observers);
     __privateAdd(this, _mutationCache);
     __privateAdd(this, _retryer2);
-    __privateSet(this, _client3, config.client);
+    __privateSet(this, _client2, config.client);
     this.mutationId = config.mutationId;
     __privateSet(this, _mutationCache, config.mutationCache);
     __privateSet(this, _observers, []);
@@ -13470,7 +12543,7 @@ var Mutation = (_h = class extends Removable {
     }
   }
   removeObserver(observer) {
-    __privateSet(this, _observers, __privateGet(this, _observers).filter((x3) => x3 !== observer));
+    __privateSet(this, _observers, __privateGet(this, _observers).filter((x2) => x2 !== observer));
     this.scheduleGc();
     __privateGet(this, _mutationCache).notify({
       type: "observerRemoved",
@@ -13493,12 +12566,12 @@ var Mutation = (_h = class extends Removable {
     this.execute(this.state.variables);
   }
   async execute(variables) {
-    var _a2, _b2, _c2, _d2, _e2, _f2, _g2, _h2, _i2, _j2, _k2, _l2, _m, _n, _o, _p, _q, _r;
+    var _a2, _b2, _c2, _d2, _e2, _f2, _g2, _h2, _i2, _j2, _k, _l, _m, _n, _o, _p, _q, _r;
     const onContinue = () => {
       __privateMethod(this, _Mutation_instances, dispatch_fn2).call(this, { type: "continue" });
     };
     const mutationFnContext = {
-      client: __privateGet(this, _client3),
+      client: __privateGet(this, _client2),
       meta: this.options.meta,
       mutationKey: this.options.mutationKey
     };
@@ -13586,8 +12659,8 @@ var Mutation = (_h = class extends Removable {
       return data;
     } catch (error) {
       try {
-        await ((_l2 = (_k2 = __privateGet(this, _mutationCache).config).onError) == null ? void 0 : _l2.call(
-          _k2,
+        await ((_l = (_k = __privateGet(this, _mutationCache).config).onError) == null ? void 0 : _l.call(
+          _k,
           error,
           variables,
           this.state.context,
@@ -13639,7 +12712,7 @@ var Mutation = (_h = class extends Removable {
       __privateGet(this, _mutationCache).runNext(this);
     }
   }
-}, _client3 = new WeakMap(), _observers = new WeakMap(), _mutationCache = new WeakMap(), _retryer2 = new WeakMap(), _Mutation_instances = new WeakSet(), dispatch_fn2 = function(action) {
+}, _client2 = new WeakMap(), _observers = new WeakMap(), _mutationCache = new WeakMap(), _retryer2 = new WeakMap(), _Mutation_instances = new WeakSet(), dispatch_fn2 = function(action) {
   const reducer = (state) => {
     switch (action.type) {
       case "failed":
@@ -13704,7 +12777,7 @@ var Mutation = (_h = class extends Removable {
       action
     });
   });
-}, _h);
+}, _g);
 function getDefaultState() {
   return {
     context: void 0,
@@ -13718,7 +12791,7 @@ function getDefaultState() {
     submittedAt: 0
   };
 }
-var MutationCache = (_i = class extends Subscribable {
+var MutationCache = (_h = class extends Subscribable {
   constructor(config = {}) {
     super();
     __privateAdd(this, _mutations);
@@ -13823,159 +12896,19 @@ var MutationCache = (_i = class extends Subscribable {
     });
   }
   resumePausedMutations() {
-    const pausedMutations = this.getAll().filter((x3) => x3.state.isPaused);
+    const pausedMutations = this.getAll().filter((x2) => x2.state.isPaused);
     return notifyManager.batch(
       () => Promise.all(
         pausedMutations.map((mutation) => mutation.continue().catch(noop$6))
       )
     );
   }
-}, _mutations = new WeakMap(), _scopes = new WeakMap(), _mutationId = new WeakMap(), _i);
+}, _mutations = new WeakMap(), _scopes = new WeakMap(), _mutationId = new WeakMap(), _h);
 function scopeFor(mutation) {
   var _a2;
   return (_a2 = mutation.options.scope) == null ? void 0 : _a2.id;
 }
-var MutationObserver$1 = (_j = class extends Subscribable {
-  constructor(client2, options) {
-    super();
-    __privateAdd(this, _MutationObserver_instances);
-    __privateAdd(this, _client4);
-    __privateAdd(this, _currentResult2);
-    __privateAdd(this, _currentMutation);
-    __privateAdd(this, _mutateOptions);
-    __privateSet(this, _client4, client2);
-    this.setOptions(options);
-    this.bindMethods();
-    __privateMethod(this, _MutationObserver_instances, updateResult_fn).call(this);
-  }
-  bindMethods() {
-    this.mutate = this.mutate.bind(this);
-    this.reset = this.reset.bind(this);
-  }
-  setOptions(options) {
-    var _a2;
-    const prevOptions = this.options;
-    this.options = __privateGet(this, _client4).defaultMutationOptions(options);
-    if (!shallowEqualObjects(this.options, prevOptions)) {
-      __privateGet(this, _client4).getMutationCache().notify({
-        type: "observerOptionsUpdated",
-        mutation: __privateGet(this, _currentMutation),
-        observer: this
-      });
-    }
-    if ((prevOptions == null ? void 0 : prevOptions.mutationKey) && this.options.mutationKey && hashKey(prevOptions.mutationKey) !== hashKey(this.options.mutationKey)) {
-      this.reset();
-    } else if (((_a2 = __privateGet(this, _currentMutation)) == null ? void 0 : _a2.state.status) === "pending") {
-      __privateGet(this, _currentMutation).setOptions(this.options);
-    }
-  }
-  onUnsubscribe() {
-    var _a2;
-    if (!this.hasListeners()) {
-      (_a2 = __privateGet(this, _currentMutation)) == null ? void 0 : _a2.removeObserver(this);
-    }
-  }
-  onMutationUpdate(action) {
-    __privateMethod(this, _MutationObserver_instances, updateResult_fn).call(this);
-    __privateMethod(this, _MutationObserver_instances, notify_fn2).call(this, action);
-  }
-  getCurrentResult() {
-    return __privateGet(this, _currentResult2);
-  }
-  reset() {
-    var _a2;
-    (_a2 = __privateGet(this, _currentMutation)) == null ? void 0 : _a2.removeObserver(this);
-    __privateSet(this, _currentMutation, void 0);
-    __privateMethod(this, _MutationObserver_instances, updateResult_fn).call(this);
-    __privateMethod(this, _MutationObserver_instances, notify_fn2).call(this);
-  }
-  mutate(variables, options) {
-    var _a2;
-    __privateSet(this, _mutateOptions, options);
-    (_a2 = __privateGet(this, _currentMutation)) == null ? void 0 : _a2.removeObserver(this);
-    __privateSet(this, _currentMutation, __privateGet(this, _client4).getMutationCache().build(__privateGet(this, _client4), this.options));
-    __privateGet(this, _currentMutation).addObserver(this);
-    return __privateGet(this, _currentMutation).execute(variables);
-  }
-}, _client4 = new WeakMap(), _currentResult2 = new WeakMap(), _currentMutation = new WeakMap(), _mutateOptions = new WeakMap(), _MutationObserver_instances = new WeakSet(), updateResult_fn = function() {
-  var _a2;
-  const state = ((_a2 = __privateGet(this, _currentMutation)) == null ? void 0 : _a2.state) ?? getDefaultState();
-  __privateSet(this, _currentResult2, {
-    ...state,
-    isPending: state.status === "pending",
-    isSuccess: state.status === "success",
-    isError: state.status === "error",
-    isIdle: state.status === "idle",
-    mutate: this.mutate,
-    reset: this.reset
-  });
-}, notify_fn2 = function(action) {
-  notifyManager.batch(() => {
-    var _a2, _b2, _c2, _d2, _e2, _f2, _g2, _h2;
-    if (__privateGet(this, _mutateOptions) && this.hasListeners()) {
-      const variables = __privateGet(this, _currentResult2).variables;
-      const onMutateResult = __privateGet(this, _currentResult2).context;
-      const context = {
-        client: __privateGet(this, _client4),
-        meta: this.options.meta,
-        mutationKey: this.options.mutationKey
-      };
-      if ((action == null ? void 0 : action.type) === "success") {
-        try {
-          (_b2 = (_a2 = __privateGet(this, _mutateOptions)).onSuccess) == null ? void 0 : _b2.call(
-            _a2,
-            action.data,
-            variables,
-            onMutateResult,
-            context
-          );
-        } catch (e) {
-          void Promise.reject(e);
-        }
-        try {
-          (_d2 = (_c2 = __privateGet(this, _mutateOptions)).onSettled) == null ? void 0 : _d2.call(
-            _c2,
-            action.data,
-            null,
-            variables,
-            onMutateResult,
-            context
-          );
-        } catch (e) {
-          void Promise.reject(e);
-        }
-      } else if ((action == null ? void 0 : action.type) === "error") {
-        try {
-          (_f2 = (_e2 = __privateGet(this, _mutateOptions)).onError) == null ? void 0 : _f2.call(
-            _e2,
-            action.error,
-            variables,
-            onMutateResult,
-            context
-          );
-        } catch (e) {
-          void Promise.reject(e);
-        }
-        try {
-          (_h2 = (_g2 = __privateGet(this, _mutateOptions)).onSettled) == null ? void 0 : _h2.call(
-            _g2,
-            void 0,
-            action.error,
-            variables,
-            onMutateResult,
-            context
-          );
-        } catch (e) {
-          void Promise.reject(e);
-        }
-      }
-    }
-    this.listeners.forEach((listener) => {
-      listener(__privateGet(this, _currentResult2));
-    });
-  });
-}, _j);
-var QueryCache = (_k = class extends Subscribable {
+var QueryCache = (_i = class extends Subscribable {
   constructor(config = {}) {
     super();
     __privateAdd(this, _queries);
@@ -14062,8 +12995,8 @@ var QueryCache = (_k = class extends Subscribable {
       });
     });
   }
-}, _queries = new WeakMap(), _k);
-var QueryClient = (_l = class {
+}, _queries = new WeakMap(), _i);
+var QueryClient = (_j = class {
   constructor(config = {}) {
     __privateAdd(this, _queryCache);
     __privateAdd(this, _mutationCache2);
@@ -14350,7 +13283,7 @@ var QueryClient = (_l = class {
     __privateGet(this, _queryCache).clear();
     __privateGet(this, _mutationCache2).clear();
   }
-}, _queryCache = new WeakMap(), _mutationCache2 = new WeakMap(), _defaultOptions2 = new WeakMap(), _queryDefaults = new WeakMap(), _mutationDefaults = new WeakMap(), _mountCount = new WeakMap(), _unsubscribeFocus = new WeakMap(), _unsubscribeOnline = new WeakMap(), _l);
+}, _queryCache = new WeakMap(), _mutationCache2 = new WeakMap(), _defaultOptions2 = new WeakMap(), _queryDefaults = new WeakMap(), _mutationDefaults = new WeakMap(), _mountCount = new WeakMap(), _unsubscribeFocus = new WeakMap(), _unsubscribeOnline = new WeakMap(), _j);
 var react = { exports: {} };
 var react_production = {};
 /**
@@ -14544,9 +13477,9 @@ function mapIntoArray(children, array, escapedPrefix, nameSoFar, callback) {
 }
 function mapChildren(children, func, context) {
   if (null == children) return children;
-  var result = [], count2 = 0;
+  var result = [], count = 0;
   mapIntoArray(children, result, "", "", function(child) {
-    return func.call(context, child, count2++);
+    return func.call(context, child, count++);
   });
   return result;
 }
@@ -14798,13 +13731,6 @@ const React$2 = /* @__PURE__ */ _mergeNamespaces({
 var QueryClientContext = reactExports.createContext(
   void 0
 );
-var useQueryClient = (queryClient2) => {
-  const client2 = reactExports.useContext(QueryClientContext);
-  if (!client2) {
-    throw new Error("No QueryClient set, use QueryClientProvider to set one");
-  }
-  return client2;
-};
 var QueryClientProvider = ({
   client: client2,
   children
@@ -14817,169 +13743,6 @@ var QueryClientProvider = ({
   }, [client2]);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientContext.Provider, { value: client2, children });
 };
-var IsRestoringContext = reactExports.createContext(false);
-var useIsRestoring = () => reactExports.useContext(IsRestoringContext);
-IsRestoringContext.Provider;
-function createValue() {
-  let isReset = false;
-  return {
-    clearReset: () => {
-      isReset = false;
-    },
-    reset: () => {
-      isReset = true;
-    },
-    isReset: () => {
-      return isReset;
-    }
-  };
-}
-var QueryErrorResetBoundaryContext = reactExports.createContext(createValue());
-var useQueryErrorResetBoundary = () => reactExports.useContext(QueryErrorResetBoundaryContext);
-var ensurePreventErrorBoundaryRetry = (options, errorResetBoundary, query) => {
-  const throwOnError = (query == null ? void 0 : query.state.error) && typeof options.throwOnError === "function" ? shouldThrowError(options.throwOnError, [query.state.error, query]) : options.throwOnError;
-  if (options.suspense || options.experimental_prefetchInRender || throwOnError) {
-    if (!errorResetBoundary.isReset()) {
-      options.retryOnMount = false;
-    }
-  }
-};
-var useClearResetErrorBoundary = (errorResetBoundary) => {
-  reactExports.useEffect(() => {
-    errorResetBoundary.clearReset();
-  }, [errorResetBoundary]);
-};
-var getHasError = ({
-  result,
-  errorResetBoundary,
-  throwOnError,
-  query,
-  suspense
-}) => {
-  return result.isError && !errorResetBoundary.isReset() && !result.isFetching && query && (suspense && result.data === void 0 || shouldThrowError(throwOnError, [result.error, query]));
-};
-var ensureSuspenseTimers = (defaultedOptions) => {
-  if (defaultedOptions.suspense) {
-    const MIN_SUSPENSE_TIME_MS = 1e3;
-    const clamp = (value) => value === "static" ? value : Math.max(value ?? MIN_SUSPENSE_TIME_MS, MIN_SUSPENSE_TIME_MS);
-    const originalStaleTime = defaultedOptions.staleTime;
-    defaultedOptions.staleTime = typeof originalStaleTime === "function" ? (...args) => clamp(originalStaleTime(...args)) : clamp(originalStaleTime);
-    if (typeof defaultedOptions.gcTime === "number") {
-      defaultedOptions.gcTime = Math.max(
-        defaultedOptions.gcTime,
-        MIN_SUSPENSE_TIME_MS
-      );
-    }
-  }
-};
-var willFetch = (result, isRestoring) => result.isLoading && result.isFetching && !isRestoring;
-var shouldSuspend = (defaultedOptions, result) => (defaultedOptions == null ? void 0 : defaultedOptions.suspense) && result.isPending;
-var fetchOptimistic = (defaultedOptions, observer, errorResetBoundary) => observer.fetchOptimistic(defaultedOptions).catch(() => {
-  errorResetBoundary.clearReset();
-});
-function useBaseQuery(options, Observer, queryClient2) {
-  var _a2, _b2, _c2, _d2;
-  const isRestoring = useIsRestoring();
-  const errorResetBoundary = useQueryErrorResetBoundary();
-  const client2 = useQueryClient();
-  const defaultedOptions = client2.defaultQueryOptions(options);
-  (_b2 = (_a2 = client2.getDefaultOptions().queries) == null ? void 0 : _a2._experimental_beforeQuery) == null ? void 0 : _b2.call(
-    _a2,
-    defaultedOptions
-  );
-  const query = client2.getQueryCache().get(defaultedOptions.queryHash);
-  defaultedOptions._optimisticResults = isRestoring ? "isRestoring" : "optimistic";
-  ensureSuspenseTimers(defaultedOptions);
-  ensurePreventErrorBoundaryRetry(defaultedOptions, errorResetBoundary, query);
-  useClearResetErrorBoundary(errorResetBoundary);
-  const isNewCacheEntry = !client2.getQueryCache().get(defaultedOptions.queryHash);
-  const [observer] = reactExports.useState(
-    () => new Observer(
-      client2,
-      defaultedOptions
-    )
-  );
-  const result = observer.getOptimisticResult(defaultedOptions);
-  const shouldSubscribe = !isRestoring && options.subscribed !== false;
-  reactExports.useSyncExternalStore(
-    reactExports.useCallback(
-      (onStoreChange) => {
-        const unsubscribe = shouldSubscribe ? observer.subscribe(notifyManager.batchCalls(onStoreChange)) : noop$6;
-        observer.updateResult();
-        return unsubscribe;
-      },
-      [observer, shouldSubscribe]
-    ),
-    () => observer.getCurrentResult(),
-    () => observer.getCurrentResult()
-  );
-  reactExports.useEffect(() => {
-    observer.setOptions(defaultedOptions);
-  }, [defaultedOptions, observer]);
-  if (shouldSuspend(defaultedOptions, result)) {
-    throw fetchOptimistic(defaultedOptions, observer, errorResetBoundary);
-  }
-  if (getHasError({
-    result,
-    errorResetBoundary,
-    throwOnError: defaultedOptions.throwOnError,
-    query,
-    suspense: defaultedOptions.suspense
-  })) {
-    throw result.error;
-  }
-  (_d2 = (_c2 = client2.getDefaultOptions().queries) == null ? void 0 : _c2._experimental_afterQuery) == null ? void 0 : _d2.call(
-    _c2,
-    defaultedOptions,
-    result
-  );
-  if (defaultedOptions.experimental_prefetchInRender && !environmentManager.isServer() && willFetch(result, isRestoring)) {
-    const promise = isNewCacheEntry ? (
-      // Fetch immediately on render in order to ensure `.promise` is resolved even if the component is unmounted
-      fetchOptimistic(defaultedOptions, observer, errorResetBoundary)
-    ) : (
-      // subscribe to the "cache promise" so that we can finalize the currentThenable once data comes in
-      query == null ? void 0 : query.promise
-    );
-    promise == null ? void 0 : promise.catch(noop$6).finally(() => {
-      observer.updateResult();
-    });
-  }
-  return !defaultedOptions.notifyOnChangeProps ? observer.trackResult(result) : result;
-}
-function useQuery(options, queryClient2) {
-  return useBaseQuery(options, QueryObserver);
-}
-function useMutation(options, queryClient2) {
-  const client2 = useQueryClient();
-  const [observer] = reactExports.useState(
-    () => new MutationObserver$1(
-      client2,
-      options
-    )
-  );
-  reactExports.useEffect(() => {
-    observer.setOptions(options);
-  }, [observer, options]);
-  const result = reactExports.useSyncExternalStore(
-    reactExports.useCallback(
-      (onStoreChange) => observer.subscribe(notifyManager.batchCalls(onStoreChange)),
-      [observer]
-    ),
-    () => observer.getCurrentResult(),
-    () => observer.getCurrentResult()
-  );
-  const mutate = reactExports.useCallback(
-    (variables, mutateOptions) => {
-      observer.mutate(variables, mutateOptions).catch(noop$6);
-    },
-    [observer]
-  );
-  if (result.error && shouldThrowError(observer.options.throwOnError, [result.error])) {
-    throw result.error;
-  }
-  return { ...result, mutate, mutateAsync: result.mutate };
-}
 function isObject(value) {
   return value !== null && typeof value === "object";
 }
@@ -15156,11 +13919,11 @@ const _Ed25519KeyIdentity = class _Ed25519KeyIdentity extends SignIdentity {
    * @returns - true if the signature is valid, false otherwise
    */
   static verify(sig, msg, pk) {
-    const [signature, message, publicKey] = [sig, msg, pk].map((x3) => {
-      if (typeof x3 === "string") {
-        x3 = hexToBytes(x3);
+    const [signature, message, publicKey] = [sig, msg, pk].map((x2) => {
+      if (typeof x2 === "string") {
+        x2 = hexToBytes(x2);
       }
-      return uint8FromBufLike$1(x3);
+      return uint8FromBufLike$1(x2);
     });
     return ed25519.verify(signature, message, publicKey);
   }
@@ -17138,16 +15901,6 @@ async function createIIAttributesActor(identity) {
     canisterId: config.backend_canister_id
   });
 }
-function assertProviderPresent(context) {
-  if (!context) {
-    throw new Error("InternetIdentityProvider is not present. Wrap your component tree with it.");
-  }
-}
-const useInternetIdentity = () => {
-  const context = reactExports.useContext(InternetIdentityReactContext);
-  assertProviderPresent(context);
-  return context;
-};
 function InternetIdentityProvider({ children, createOptions, withAttributes = {} }) {
   const [authClient, setAuthClient] = reactExports.useState(void 0);
   const [identity, setIdentity] = reactExports.useState(void 0);
@@ -17294,45 +16047,6 @@ function InternetIdentityProvider({ children, createOptions, withAttributes = {}
     value,
     children
   });
-}
-const ACTOR_QUERY_KEY = "actor";
-function useActor(createActor2) {
-  const { identity, isAuthenticated } = useInternetIdentity();
-  const queryClient2 = useQueryClient();
-  const actorQuery = useQuery({
-    queryKey: [ACTOR_QUERY_KEY, identity == null ? void 0 : identity.getPrincipal().toString()],
-    queryFn: async () => {
-      if (!isAuthenticated) {
-        return await createActorWithConfig(createActor2);
-      }
-      const actor = await createActorWithConfig(createActor2, {
-        agentOptions: { identity }
-      });
-      return actor;
-    },
-    // Only refetch when identity changes
-    staleTime: Number.POSITIVE_INFINITY,
-    // This will cause the actor to be recreated when the identity changes
-    enabled: true
-  });
-  reactExports.useEffect(() => {
-    if (actorQuery.data) {
-      queryClient2.invalidateQueries({
-        predicate: (query) => {
-          return !query.queryKey.includes(ACTOR_QUERY_KEY);
-        }
-      });
-      queryClient2.refetchQueries({
-        predicate: (query) => {
-          return !query.queryKey.includes(ACTOR_QUERY_KEY);
-        }
-      });
-    }
-  }, [actorQuery.data, queryClient2]);
-  return {
-    actor: actorQuery.data || null,
-    isFetching: actorQuery.isFetching
-  };
 }
 var client = { exports: {} };
 var reactDomClient_production = {};
@@ -17767,7 +16481,6 @@ function checkDCE$1() {
   reactDom.exports = reactDom_production;
 }
 var reactDomExports = reactDom.exports;
-const ReactDOM$2 = /* @__PURE__ */ getDefaultExportFromCjs(reactDomExports);
 /**
  * @license React
  * react-dom-client.production.js
@@ -17940,7 +16653,7 @@ function getComponentNameFromType(type) {
         type = type._init;
         try {
           return getComponentNameFromType(type(innerType));
-        } catch (x3) {
+        } catch (x2) {
         }
     }
   return null;
@@ -18015,9 +16728,9 @@ function setIsStrictModeForDevtools(newIsStrictMode) {
     }
 }
 var clz32 = Math.clz32 ? Math.clz32 : clz32Fallback, log = Math.log, LN2 = Math.LN2;
-function clz32Fallback(x3) {
-  x3 >>>= 0;
-  return 0 === x3 ? 32 : 31 - (log(x3) / LN2 | 0) | 0;
+function clz32Fallback(x2) {
+  x2 >>>= 0;
+  return 0 === x2 ? 32 : 31 - (log(x2) / LN2 | 0) | 0;
 }
 var nextTransitionLane = 256, nextRetryLane = 4194304;
 function getHighestPriorityLanes(lanes) {
@@ -18367,10 +17080,10 @@ function describeBuiltInComponentFrame(name) {
   if (void 0 === prefix)
     try {
       throw Error();
-    } catch (x3) {
-      var match = x3.stack.trim().match(/\n( *(at )?)/);
+    } catch (x2) {
+      var match = x2.stack.trim().match(/\n( *(at )?)/);
       prefix = match && match[1] || "";
-      suffix = -1 < x3.stack.indexOf("\n    at") ? " (<anonymous>)" : -1 < x3.stack.indexOf("@") ? "@unknown:0:0" : "";
+      suffix = -1 < x2.stack.indexOf("\n    at") ? " (<anonymous>)" : -1 < x2.stack.indexOf("@") ? "@unknown:0:0" : "";
     }
   return "\n" + prefix + name + suffix;
 }
@@ -18396,8 +17109,8 @@ function describeNativeComponentFrame(fn, construct) {
             if ("object" === typeof Reflect && Reflect.construct) {
               try {
                 Reflect.construct(Fake, []);
-              } catch (x3) {
-                var control = x3;
+              } catch (x2) {
+                var control = x2;
               }
               Reflect.construct(fn, [], Fake);
             } else {
@@ -18497,8 +17210,8 @@ function getStackByFiberInDevAndProd(workInProgress2) {
       info += describeFiber(workInProgress2), workInProgress2 = workInProgress2.return;
     while (workInProgress2);
     return info;
-  } catch (x3) {
-    return "\nError generating stack: " + x3.message + "\n" + x3.stack;
+  } catch (x2) {
+    return "\nError generating stack: " + x2.message + "\n" + x2.stack;
   }
 }
 function getToStringValue(value) {
@@ -18905,14 +17618,14 @@ function getListener(inst, registrationName) {
 var canUseDOM = !("undefined" === typeof window || "undefined" === typeof window.document || "undefined" === typeof window.document.createElement), passiveBrowserEventsSupported = false;
 if (canUseDOM)
   try {
-    var options$1 = {};
-    Object.defineProperty(options$1, "passive", {
+    var options = {};
+    Object.defineProperty(options, "passive", {
       get: function() {
         passiveBrowserEventsSupported = true;
       }
     });
-    window.addEventListener("test", options$1, options$1);
-    window.removeEventListener("test", options$1, options$1);
+    window.addEventListener("test", options, options);
+    window.removeEventListener("test", options, options);
   } catch (e) {
     passiveBrowserEventsSupported = false;
   }
@@ -19275,8 +17988,8 @@ function getTargetInstForInputOrChangeEvent(domEventName, targetInst) {
   if ("input" === domEventName || "change" === domEventName)
     return getInstIfValueChanged(targetInst);
 }
-function is(x3, y2) {
-  return x3 === y2 && (0 !== x3 || 1 / x3 === 1 / y2) || x3 !== x3 && y2 !== y2;
+function is(x2, y2) {
+  return x2 === y2 && (0 !== x2 || 1 / x2 === 1 / y2) || x2 !== x2 && y2 !== y2;
 }
 var objectIs = "function" === typeof Object.is ? Object.is : is;
 function shallowEqual(objA, objB) {
@@ -19450,9 +18163,9 @@ function markUpdateLaneFromFiberToRoot(sourceFiber, update, lane) {
   sourceFiber.lanes |= lane;
   var alternate = sourceFiber.alternate;
   null !== alternate && (alternate.lanes |= lane);
-  for (var isHidden2 = false, parent = sourceFiber.return; null !== parent; )
-    parent.childLanes |= lane, alternate = parent.alternate, null !== alternate && (alternate.childLanes |= lane), 22 === parent.tag && (sourceFiber = parent.stateNode, null === sourceFiber || sourceFiber._visibility & 1 || (isHidden2 = true)), sourceFiber = parent, parent = parent.return;
-  return 3 === sourceFiber.tag ? (parent = sourceFiber.stateNode, isHidden2 && null !== update && (isHidden2 = 31 - clz32(lane), sourceFiber = parent.hiddenUpdates, alternate = sourceFiber[isHidden2], null === alternate ? sourceFiber[isHidden2] = [update] : alternate.push(update), update.lane = lane | 536870912), parent) : null;
+  for (var isHidden = false, parent = sourceFiber.return; null !== parent; )
+    parent.childLanes |= lane, alternate = parent.alternate, null !== alternate && (alternate.childLanes |= lane), 22 === parent.tag && (sourceFiber = parent.stateNode, null === sourceFiber || sourceFiber._visibility & 1 || (isHidden = true)), sourceFiber = parent, parent = parent.return;
+  return 3 === sourceFiber.tag ? (parent = sourceFiber.stateNode, isHidden && null !== update && (isHidden = 31 - clz32(lane), sourceFiber = parent.hiddenUpdates, alternate = sourceFiber[isHidden], null === alternate ? sourceFiber[isHidden] = [update] : alternate.push(update), update.lane = lane | 536870912), parent) : null;
 }
 function getRootForUpdatedFiber(sourceFiber) {
   if (50 < nestedUpdateCount)
@@ -20798,9 +19511,9 @@ function updateActionStateImpl(stateHook, currentStateHook, action) {
   if ("object" === typeof currentStateHook && null !== currentStateHook && "function" === typeof currentStateHook.then)
     try {
       var state = useThenable(currentStateHook);
-    } catch (x3) {
-      if (x3 === SuspenseException) throw SuspenseActionException;
-      throw x3;
+    } catch (x2) {
+      if (x2 === SuspenseException) throw SuspenseActionException;
+      throw x2;
     }
   else state = currentStateHook;
   currentStateHook = updateWorkInProgressHook();
@@ -21888,9 +20601,9 @@ function createChildReconciler(shouldTrackSideEffects) {
       );
       thenableState = null;
       return firstChildFiber;
-    } catch (x3) {
-      if (x3 === SuspenseException || x3 === SuspenseActionException) throw x3;
-      var fiber = createFiberImplClass(29, x3, null, returnFiber.mode);
+    } catch (x2) {
+      if (x2 === SuspenseException || x2 === SuspenseActionException) throw x2;
+      var fiber = createFiberImplClass(29, x2, null, returnFiber.mode);
       fiber.lanes = lanes;
       fiber.return = returnFiber;
       return fiber;
@@ -28842,494 +27555,6 @@ function checkDCE() {
 }
 var clientExports = client.exports;
 const ReactDOM = /* @__PURE__ */ getDefaultExportFromCjs(clientExports);
-const Modality = Variant({
-  "ilt": Null,
-  "eLearning": Null,
-  "hybrid": Null,
-  "jobAid": Null
-});
-const Project = Record({
-  "id": Nat,
-  "title": Text,
-  "thumbnailUrl": Opt(Text),
-  "challenge": Text,
-  "createdAt": Nat,
-  "tags": Vec(Text),
-  "description": Text,
-  "results": Text,
-  "modality": Modality,
-  "approach": Text,
-  "deliverables": Vec(Text)
-});
-const EducationEntry = Record({
-  "id": Nat,
-  "field": Text,
-  "endDate": Opt(Text),
-  "institution": Text,
-  "degree": Text,
-  "startDate": Text
-});
-const ExperienceEntry = Record({
-  "id": Nat,
-  "title": Text,
-  "endDate": Opt(Text),
-  "description": Text,
-  "company": Text,
-  "achievements": Vec(Text),
-  "location": Text,
-  "startDate": Text
-});
-const Certification = Record({
-  "id": Nat,
-  "url": Opt(Text),
-  "dateEarned": Text,
-  "name": Text,
-  "issuer": Text
-});
-const Skill = Record({
-  "id": Nat,
-  "name": Text,
-  "category": Text
-});
-const Resume = Record({
-  "linkedIn": Opt(Text),
-  "title": Text,
-  "name": Text,
-  "education": Vec(EducationEntry),
-  "email": Text,
-  "website": Opt(Text),
-  "experience": Vec(ExperienceEntry),
-  "summary": Text,
-  "phone": Opt(Text),
-  "certifications": Vec(Certification),
-  "skills": Vec(Skill),
-  "location": Text
-});
-Service({
-  "__projects": Func(
-    [Opt(Nat), Opt(Nat)],
-    [Vec(Project)],
-    ["query"]
-  ),
-  "__resume": Func([], [Reserved], ["query"]),
-  "addProject": Func([Project], [], []),
-  "getProject": Func([Nat], [Opt(Project)], ["query"]),
-  "getResume": Func([], [Opt(Resume)], ["query"]),
-  "listProjects": Func([], [Vec(Project)], ["query"]),
-  "seedPortfolio": Func([], [], []),
-  "seedResume": Func([], [], [])
-});
-const idlFactory = ({ IDL: IDL2 }) => {
-  const Modality2 = IDL2.Variant({
-    "ilt": IDL2.Null,
-    "eLearning": IDL2.Null,
-    "hybrid": IDL2.Null,
-    "jobAid": IDL2.Null
-  });
-  const Project2 = IDL2.Record({
-    "id": IDL2.Nat,
-    "title": IDL2.Text,
-    "thumbnailUrl": IDL2.Opt(IDL2.Text),
-    "challenge": IDL2.Text,
-    "createdAt": IDL2.Nat,
-    "tags": IDL2.Vec(IDL2.Text),
-    "description": IDL2.Text,
-    "results": IDL2.Text,
-    "modality": Modality2,
-    "approach": IDL2.Text,
-    "deliverables": IDL2.Vec(IDL2.Text)
-  });
-  const EducationEntry2 = IDL2.Record({
-    "id": IDL2.Nat,
-    "field": IDL2.Text,
-    "endDate": IDL2.Opt(IDL2.Text),
-    "institution": IDL2.Text,
-    "degree": IDL2.Text,
-    "startDate": IDL2.Text
-  });
-  const ExperienceEntry2 = IDL2.Record({
-    "id": IDL2.Nat,
-    "title": IDL2.Text,
-    "endDate": IDL2.Opt(IDL2.Text),
-    "description": IDL2.Text,
-    "company": IDL2.Text,
-    "achievements": IDL2.Vec(IDL2.Text),
-    "location": IDL2.Text,
-    "startDate": IDL2.Text
-  });
-  const Certification2 = IDL2.Record({
-    "id": IDL2.Nat,
-    "url": IDL2.Opt(IDL2.Text),
-    "dateEarned": IDL2.Text,
-    "name": IDL2.Text,
-    "issuer": IDL2.Text
-  });
-  const Skill2 = IDL2.Record({
-    "id": IDL2.Nat,
-    "name": IDL2.Text,
-    "category": IDL2.Text
-  });
-  const Resume2 = IDL2.Record({
-    "linkedIn": IDL2.Opt(IDL2.Text),
-    "title": IDL2.Text,
-    "name": IDL2.Text,
-    "education": IDL2.Vec(EducationEntry2),
-    "email": IDL2.Text,
-    "website": IDL2.Opt(IDL2.Text),
-    "experience": IDL2.Vec(ExperienceEntry2),
-    "summary": IDL2.Text,
-    "phone": IDL2.Opt(IDL2.Text),
-    "certifications": IDL2.Vec(Certification2),
-    "skills": IDL2.Vec(Skill2),
-    "location": IDL2.Text
-  });
-  return IDL2.Service({
-    "__projects": IDL2.Func(
-      [IDL2.Opt(IDL2.Nat), IDL2.Opt(IDL2.Nat)],
-      [IDL2.Vec(Project2)],
-      ["query"]
-    ),
-    "__resume": IDL2.Func([], [IDL2.Reserved], ["query"]),
-    "addProject": IDL2.Func([Project2], [], []),
-    "getProject": IDL2.Func([IDL2.Nat], [IDL2.Opt(Project2)], ["query"]),
-    "getResume": IDL2.Func([], [IDL2.Opt(Resume2)], ["query"]),
-    "listProjects": IDL2.Func([], [IDL2.Vec(Project2)], ["query"]),
-    "seedPortfolio": IDL2.Func([], [], []),
-    "seedResume": IDL2.Func([], [], [])
-  });
-};
-function candid_some(value) {
-  return [
-    value
-  ];
-}
-function candid_none() {
-  return [];
-}
-function record_opt_to_undefined(arg) {
-  return arg == null ? void 0 : arg;
-}
-class Backend {
-  constructor(actor, _uploadFile, _downloadFile, processError2) {
-    this.actor = actor;
-    this._uploadFile = _uploadFile;
-    this._downloadFile = _downloadFile;
-    this.processError = processError2;
-  }
-  async __projects(arg0, arg1) {
-    if (this.processError) {
-      try {
-        const result = await this.actor.__projects(to_candid_opt_n1(this._uploadFile, this._downloadFile, arg0), to_candid_opt_n1(this._uploadFile, this._downloadFile, arg1));
-        return from_candid_vec_n2(this._uploadFile, this._downloadFile, result);
-      } catch (e) {
-        this.processError(e);
-        throw new Error("unreachable");
-      }
-    } else {
-      const result = await this.actor.__projects(to_candid_opt_n1(this._uploadFile, this._downloadFile, arg0), to_candid_opt_n1(this._uploadFile, this._downloadFile, arg1));
-      return from_candid_vec_n2(this._uploadFile, this._downloadFile, result);
-    }
-  }
-  async __resume() {
-    if (this.processError) {
-      try {
-        const result = await this.actor.__resume();
-        return result;
-      } catch (e) {
-        this.processError(e);
-        throw new Error("unreachable");
-      }
-    } else {
-      const result = await this.actor.__resume();
-      return result;
-    }
-  }
-  async addProject(arg0) {
-    if (this.processError) {
-      try {
-        const result = await this.actor.addProject(to_candid_Project_n8(this._uploadFile, this._downloadFile, arg0));
-        return result;
-      } catch (e) {
-        this.processError(e);
-        throw new Error("unreachable");
-      }
-    } else {
-      const result = await this.actor.addProject(to_candid_Project_n8(this._uploadFile, this._downloadFile, arg0));
-      return result;
-    }
-  }
-  async getProject(arg0) {
-    if (this.processError) {
-      try {
-        const result = await this.actor.getProject(arg0);
-        return from_candid_opt_n12(this._uploadFile, this._downloadFile, result);
-      } catch (e) {
-        this.processError(e);
-        throw new Error("unreachable");
-      }
-    } else {
-      const result = await this.actor.getProject(arg0);
-      return from_candid_opt_n12(this._uploadFile, this._downloadFile, result);
-    }
-  }
-  async getResume() {
-    if (this.processError) {
-      try {
-        const result = await this.actor.getResume();
-        return from_candid_opt_n13(this._uploadFile, this._downloadFile, result);
-      } catch (e) {
-        this.processError(e);
-        throw new Error("unreachable");
-      }
-    } else {
-      const result = await this.actor.getResume();
-      return from_candid_opt_n13(this._uploadFile, this._downloadFile, result);
-    }
-  }
-  async listProjects() {
-    if (this.processError) {
-      try {
-        const result = await this.actor.listProjects();
-        return from_candid_vec_n2(this._uploadFile, this._downloadFile, result);
-      } catch (e) {
-        this.processError(e);
-        throw new Error("unreachable");
-      }
-    } else {
-      const result = await this.actor.listProjects();
-      return from_candid_vec_n2(this._uploadFile, this._downloadFile, result);
-    }
-  }
-  async seedPortfolio() {
-    if (this.processError) {
-      try {
-        const result = await this.actor.seedPortfolio();
-        return result;
-      } catch (e) {
-        this.processError(e);
-        throw new Error("unreachable");
-      }
-    } else {
-      const result = await this.actor.seedPortfolio();
-      return result;
-    }
-  }
-  async seedResume() {
-    if (this.processError) {
-      try {
-        const result = await this.actor.seedResume();
-        return result;
-      } catch (e) {
-        this.processError(e);
-        throw new Error("unreachable");
-      }
-    } else {
-      const result = await this.actor.seedResume();
-      return result;
-    }
-  }
-}
-function from_candid_Certification_n23(_uploadFile, _downloadFile, value) {
-  return from_candid_record_n24(_uploadFile, _downloadFile, value);
-}
-function from_candid_EducationEntry_n17(_uploadFile, _downloadFile, value) {
-  return from_candid_record_n18(_uploadFile, _downloadFile, value);
-}
-function from_candid_ExperienceEntry_n20(_uploadFile, _downloadFile, value) {
-  return from_candid_record_n21(_uploadFile, _downloadFile, value);
-}
-function from_candid_Modality_n6(_uploadFile, _downloadFile, value) {
-  return from_candid_variant_n7(_uploadFile, _downloadFile, value);
-}
-function from_candid_Project_n3(_uploadFile, _downloadFile, value) {
-  return from_candid_record_n4(_uploadFile, _downloadFile, value);
-}
-function from_candid_Resume_n14(_uploadFile, _downloadFile, value) {
-  return from_candid_record_n15(_uploadFile, _downloadFile, value);
-}
-function from_candid_opt_n12(_uploadFile, _downloadFile, value) {
-  return value.length === 0 ? null : from_candid_Project_n3(_uploadFile, _downloadFile, value[0]);
-}
-function from_candid_opt_n13(_uploadFile, _downloadFile, value) {
-  return value.length === 0 ? null : from_candid_Resume_n14(_uploadFile, _downloadFile, value[0]);
-}
-function from_candid_opt_n5(_uploadFile, _downloadFile, value) {
-  return value.length === 0 ? null : value[0];
-}
-function from_candid_record_n15(_uploadFile, _downloadFile, value) {
-  return {
-    linkedIn: record_opt_to_undefined(from_candid_opt_n5(_uploadFile, _downloadFile, value.linkedIn)),
-    title: value.title,
-    name: value.name,
-    education: from_candid_vec_n16(_uploadFile, _downloadFile, value.education),
-    email: value.email,
-    website: record_opt_to_undefined(from_candid_opt_n5(_uploadFile, _downloadFile, value.website)),
-    experience: from_candid_vec_n19(_uploadFile, _downloadFile, value.experience),
-    summary: value.summary,
-    phone: record_opt_to_undefined(from_candid_opt_n5(_uploadFile, _downloadFile, value.phone)),
-    certifications: from_candid_vec_n22(_uploadFile, _downloadFile, value.certifications),
-    skills: value.skills,
-    location: value.location
-  };
-}
-function from_candid_record_n18(_uploadFile, _downloadFile, value) {
-  return {
-    id: value.id,
-    field: value.field,
-    endDate: record_opt_to_undefined(from_candid_opt_n5(_uploadFile, _downloadFile, value.endDate)),
-    institution: value.institution,
-    degree: value.degree,
-    startDate: value.startDate
-  };
-}
-function from_candid_record_n21(_uploadFile, _downloadFile, value) {
-  return {
-    id: value.id,
-    title: value.title,
-    endDate: record_opt_to_undefined(from_candid_opt_n5(_uploadFile, _downloadFile, value.endDate)),
-    description: value.description,
-    company: value.company,
-    achievements: value.achievements,
-    location: value.location,
-    startDate: value.startDate
-  };
-}
-function from_candid_record_n24(_uploadFile, _downloadFile, value) {
-  return {
-    id: value.id,
-    url: record_opt_to_undefined(from_candid_opt_n5(_uploadFile, _downloadFile, value.url)),
-    dateEarned: value.dateEarned,
-    name: value.name,
-    issuer: value.issuer
-  };
-}
-function from_candid_record_n4(_uploadFile, _downloadFile, value) {
-  return {
-    id: value.id,
-    title: value.title,
-    thumbnailUrl: record_opt_to_undefined(from_candid_opt_n5(_uploadFile, _downloadFile, value.thumbnailUrl)),
-    challenge: value.challenge,
-    createdAt: value.createdAt,
-    tags: value.tags,
-    description: value.description,
-    results: value.results,
-    modality: from_candid_Modality_n6(_uploadFile, _downloadFile, value.modality),
-    approach: value.approach,
-    deliverables: value.deliverables
-  };
-}
-function from_candid_variant_n7(_uploadFile, _downloadFile, value) {
-  return "ilt" in value ? "ilt" : "eLearning" in value ? "eLearning" : "hybrid" in value ? "hybrid" : "jobAid" in value ? "jobAid" : value;
-}
-function from_candid_vec_n16(_uploadFile, _downloadFile, value) {
-  return value.map((x3) => from_candid_EducationEntry_n17(_uploadFile, _downloadFile, x3));
-}
-function from_candid_vec_n19(_uploadFile, _downloadFile, value) {
-  return value.map((x3) => from_candid_ExperienceEntry_n20(_uploadFile, _downloadFile, x3));
-}
-function from_candid_vec_n2(_uploadFile, _downloadFile, value) {
-  return value.map((x3) => from_candid_Project_n3(_uploadFile, _downloadFile, x3));
-}
-function from_candid_vec_n22(_uploadFile, _downloadFile, value) {
-  return value.map((x3) => from_candid_Certification_n23(_uploadFile, _downloadFile, x3));
-}
-function to_candid_Modality_n10(_uploadFile, _downloadFile, value) {
-  return to_candid_variant_n11(_uploadFile, _downloadFile, value);
-}
-function to_candid_Project_n8(_uploadFile, _downloadFile, value) {
-  return to_candid_record_n9(_uploadFile, _downloadFile, value);
-}
-function to_candid_opt_n1(_uploadFile, _downloadFile, value) {
-  return value === null ? candid_none() : candid_some(value);
-}
-function to_candid_record_n9(_uploadFile, _downloadFile, value) {
-  return {
-    id: value.id,
-    title: value.title,
-    thumbnailUrl: value.thumbnailUrl ? candid_some(value.thumbnailUrl) : candid_none(),
-    challenge: value.challenge,
-    createdAt: value.createdAt,
-    tags: value.tags,
-    description: value.description,
-    results: value.results,
-    modality: to_candid_Modality_n10(_uploadFile, _downloadFile, value.modality),
-    approach: value.approach,
-    deliverables: value.deliverables
-  };
-}
-function to_candid_variant_n11(_uploadFile, _downloadFile, value) {
-  return value == "ilt" ? {
-    ilt: null
-  } : value == "eLearning" ? {
-    eLearning: null
-  } : value == "hybrid" ? {
-    hybrid: null
-  } : value == "jobAid" ? {
-    jobAid: null
-  } : value;
-}
-function createActor(canisterId, _uploadFile, _downloadFile, options = {}) {
-  const agent = options.agent || HttpAgent.createSync({
-    ...options.agentOptions
-  });
-  if (options.agent && options.agentOptions) {
-    console.warn("Detected both agent and agentOptions passed to createActor. Ignoring agentOptions and proceeding with the provided agent.");
-  }
-  const actor = Actor.createActor(idlFactory, {
-    agent,
-    canisterId,
-    ...options.actorOptions
-  });
-  return new Backend(actor, _uploadFile, _downloadFile, options.processError);
-}
-function useListProjects() {
-  const { actor, isFetching } = useActor(createActor);
-  return useQuery({
-    queryKey: ["portfolio", "projects"],
-    queryFn: async () => {
-      if (!actor) return [];
-      return actor.listProjects();
-    },
-    enabled: !!actor && !isFetching
-  });
-}
-function useResume() {
-  const { actor, isFetching } = useActor(createActor);
-  return useQuery({
-    queryKey: ["resume"],
-    queryFn: async () => {
-      if (!actor) return null;
-      return actor.getResume();
-    },
-    enabled: !!actor && !isFetching
-  });
-}
-function useSeedPortfolio() {
-  const { actor } = useActor(createActor);
-  const queryClient2 = useQueryClient();
-  return useMutation({
-    mutationFn: async () => {
-      if (!actor) throw new Error("Actor not available");
-      return actor.seedPortfolio();
-    },
-    onSuccess: () => {
-      queryClient2.invalidateQueries({ queryKey: ["portfolio"] });
-    }
-  });
-}
-function useSeedResume() {
-  const { actor } = useActor(createActor);
-  const queryClient2 = useQueryClient();
-  return useMutation({
-    mutationFn: async () => {
-      if (!actor) throw new Error("Actor not available");
-      return actor.seedResume();
-    },
-    onSuccess: () => {
-      queryClient2.invalidateQueries({ queryKey: ["resume"] });
-    }
-  });
-}
 function setRef(ref, value) {
   if (typeof ref === "function") {
     return ref(value);
@@ -29361,9 +27586,6 @@ function composeRefs(...refs) {
     }
   };
 }
-function useComposedRefs(...refs) {
-  return reactExports.useCallback(composeRefs(...refs), refs);
-}
 var REACT_LAZY_TYPE = Symbol.for("react.lazy");
 var use = React$2[" use ".trim().toString()];
 function isPromiseLike(value) {
@@ -29373,15 +27595,15 @@ function isLazyComponent(element) {
   return element != null && typeof element === "object" && "$$typeof" in element && element.$$typeof === REACT_LAZY_TYPE && "_payload" in element && isPromiseLike(element._payload);
 }
 // @__NO_SIDE_EFFECTS__
-function createSlot$1(ownerName) {
-  const SlotClone = /* @__PURE__ */ createSlotClone$1(ownerName);
+function createSlot(ownerName) {
+  const SlotClone = /* @__PURE__ */ createSlotClone(ownerName);
   const Slot2 = reactExports.forwardRef((props, forwardedRef) => {
     let { children, ...slotProps } = props;
     if (isLazyComponent(children) && typeof use === "function") {
       children = use(children._payload);
     }
     const childrenArray = reactExports.Children.toArray(children);
-    const slottable = childrenArray.find(isSlottable$1);
+    const slottable = childrenArray.find(isSlottable);
     if (slottable) {
       const newElement = slottable.props.children;
       const newChildren = childrenArray.map((child) => {
@@ -29399,17 +27621,17 @@ function createSlot$1(ownerName) {
   Slot2.displayName = `${ownerName}.Slot`;
   return Slot2;
 }
-var Slot$1 = /* @__PURE__ */ createSlot$1("Slot");
+var Slot = /* @__PURE__ */ createSlot("Slot");
 // @__NO_SIDE_EFFECTS__
-function createSlotClone$1(ownerName) {
+function createSlotClone(ownerName) {
   const SlotClone = reactExports.forwardRef((props, forwardedRef) => {
     let { children, ...slotProps } = props;
     if (isLazyComponent(children) && typeof use === "function") {
       children = use(children._payload);
     }
     if (reactExports.isValidElement(children)) {
-      const childrenRef = getElementRef$2(children);
-      const props2 = mergeProps$1(slotProps, children.props);
+      const childrenRef = getElementRef(children);
+      const props2 = mergeProps(slotProps, children.props);
       if (children.type !== reactExports.Fragment) {
         props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
       }
@@ -29420,11 +27642,11 @@ function createSlotClone$1(ownerName) {
   SlotClone.displayName = `${ownerName}.SlotClone`;
   return SlotClone;
 }
-var SLOTTABLE_IDENTIFIER$1 = Symbol("radix.slottable");
-function isSlottable$1(child) {
-  return reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER$1;
+var SLOTTABLE_IDENTIFIER = Symbol("radix.slottable");
+function isSlottable(child) {
+  return reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER;
 }
-function mergeProps$1(slotProps, childProps) {
+function mergeProps(slotProps, childProps) {
   const overrideProps = { ...childProps };
   for (const propName in childProps) {
     const slotPropValue = slotProps[propName];
@@ -29448,7 +27670,7 @@ function mergeProps$1(slotProps, childProps) {
   }
   return { ...slotProps, ...overrideProps };
 }
-function getElementRef$2(element) {
+function getElementRef(element) {
   var _a2, _b2;
   let getter = (_a2 = Object.getOwnPropertyDescriptor(element.props, "ref")) == null ? void 0 : _a2.get;
   let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
@@ -31977,6 +30199,38 @@ const twMerge = /* @__PURE__ */ createTailwindMerge(getDefaultConfig);
 function cn(...inputs) {
   return twMerge(clsx(inputs));
 }
+const badgeVariants = cva(
+  "inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
+  {
+    variants: {
+      variant: {
+        default: "border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90",
+        secondary: "border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90",
+        destructive: "border-transparent bg-destructive text-destructive-foreground [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+        outline: "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground"
+      }
+    },
+    defaultVariants: {
+      variant: "default"
+    }
+  }
+);
+function Badge({
+  className,
+  variant,
+  asChild = false,
+  ...props
+}) {
+  const Comp = asChild ? Slot : "span";
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    Comp,
+    {
+      "data-slot": "badge",
+      className: cn(badgeVariants({ variant }), className),
+      ...props
+    }
+  );
+}
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
   {
@@ -32009,7 +30263,7 @@ function Button({
   asChild = false,
   ...props
 }) {
-  const Comp = asChild ? Slot$1 : "button";
+  const Comp = asChild ? Slot : "button";
   return /* @__PURE__ */ jsxRuntimeExports.jsx(
     Comp,
     {
@@ -32065,6 +30319,238 @@ function CardContent({ className, ...props }) {
     }
   );
 }
+function Textarea({ className, ...props }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "textarea",
+    {
+      "data-slot": "textarea",
+      className: cn(
+        "border-input placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 flex field-sizing-content min-h-16 w-full rounded-md border bg-transparent px-3 py-2 text-base shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+        className
+      ),
+      ...props
+    }
+  );
+}
+const profile = {
+  name: "Terry Brutus",
+  title: "Principal Technical Enablement / AI Learning Architect",
+  email: "terrbrutus@gmail.com",
+  linkedIn: "https://www.linkedin.com/in/terrybrutus",
+  github: "https://github.com/terrybrutus",
+  headline: "I build enablement systems, AI-assisted workflows, and learning products that make complex work easier to execute at scale.",
+  shortSummary: "Technical enablement leader with a learning architecture background, AI workflow depth, and a track record across federal, SaaS, municipal, sales, healthcare, and fintech environments."
+};
+const proofPoints = [
+  {
+    label: "Defense workforce supported",
+    value: "158,000",
+    lanes: ["Enablement", "Compliance"]
+  },
+  {
+    label: "Army LMS platform scale",
+    value: "1.2M+ users",
+    lanes: ["Learning Experience", "Compliance"]
+  },
+  {
+    label: "Asset pipeline improvement",
+    value: "1.5 hrs to 9.5 min",
+    lanes: ["AI Operations", "Enablement"]
+  },
+  {
+    label: "Audit cost reduction",
+    value: "90%",
+    lanes: ["AI Operations", "Compliance"]
+  },
+  {
+    label: "Market lots standardized",
+    value: "76,000",
+    lanes: ["Sales Enablement", "Enablement"]
+  },
+  {
+    label: "Municipal coverage",
+    value: "1,750+ employees",
+    lanes: ["Compliance", "Learning Experience"]
+  },
+  {
+    label: "Product iteration depth",
+    value: "77+ releases",
+    lanes: ["Technical Product", "AI Operations"]
+  },
+  {
+    label: "Workflow feature set",
+    value: "50+ features",
+    lanes: ["Technical Product", "Enablement"]
+  }
+];
+const projects = [
+  {
+    id: "ai-talent-content-pipeline",
+    title: "AI Talent Content Pipeline",
+    role: "AI Enablement Architect",
+    summary: "NotebookLM RAG, scripting, and human-in-the-loop QA process for a 100+ asset talent content pipeline.",
+    problem: "High-volume learning assets needed faster analysis, cleaner metadata, and repeatable compliance alignment without adding manual review load.",
+    actions: [
+      "Built an AI-assisted content analysis workflow using NotebookLM, Python, VBA, and Claude Code.",
+      "Converted repeatable review logic into documented production standards.",
+      "Aligned skill and knowledge assets to operational and regulatory requirements."
+    ],
+    outcomes: [
+      "Reduced per-deliverable processing time from 1.5 hours to 9.5 minutes.",
+      "Adopted as the client standard for future talent content production.",
+      "Supported a six-figure contract extension and expanded engagement scope."
+    ],
+    metrics: proofPoints.filter(
+      (p2) => ["Asset pipeline improvement", "Audit cost reduction"].includes(p2.label)
+    ),
+    tools: ["NotebookLM", "RAG", "Python", "VBA", "Claude Code", "PowerShell"],
+    lanes: ["AI Operations", "Enablement", "Compliance"]
+  },
+  {
+    id: "living-portfolio-studio",
+    title: "Living Portfolio Studio",
+    role: "Product Architect / AI Builder",
+    summary: "Tailorable portfolio system that adapts proof points, projects, language, and visual emphasis to a company or job description.",
+    problem: "Static resumes and portfolios undersell cross-functional work and cannot speak differently to enablement, AI, product, and LXD audiences.",
+    actions: [
+      "Designed the source-bank model for projects, metrics, lanes, company language, and expiring tailored links.",
+      "Built the interface around company/JD input instead of a static landing page.",
+      "Kept LinkedIn and resume lean while moving detailed evidence into tailored portfolio views."
+    ],
+    outcomes: [
+      "Creates focused views for recruiters, hiring managers, and niche role requirements.",
+      "Positions AI-assisted build skill as observable product work, not just a resume claim."
+    ],
+    metrics: proofPoints.filter(
+      (p2) => ["Product iteration depth", "Workflow feature set"].includes(p2.label)
+    ),
+    tools: ["Caffeine AI", "React", "Motoko", "GitHub", "Claude Code", "Codex"],
+    lanes: ["Technical Product", "AI Operations", "Enablement"],
+    repo: "https://github.com/terrybrutus/Work-portfolio2"
+  },
+  {
+    id: "workflow-management-platform",
+    title: "Multi-Project Workflow Management Platform",
+    role: "Enablement Systems Designer",
+    summary: "Custom 6-stage workflow platform for cross-functional content readiness, production visibility, and delivery governance.",
+    problem: "Manual tracking and handoff friction slowed readiness across a multi-project talent content operation.",
+    actions: [
+      "Designed a production workflow with status visibility, iterative releases, and stakeholder handoff logic.",
+      "Used GitHub-connected deployment to ship directly into production workflows.",
+      "Built for scale across a 100+ user operating model."
+    ],
+    outcomes: [
+      "Eliminated manual tracking friction.",
+      "Created a production-grade operating layer across 50+ features and 77+ releases."
+    ],
+    metrics: proofPoints.filter(
+      (p2) => ["Product iteration depth", "Workflow feature set"].includes(p2.label)
+    ),
+    tools: [
+      "Caffeine AI",
+      "GitHub",
+      "JSON",
+      "AI prototyping",
+      "Agile delivery"
+    ],
+    lanes: ["Technical Product", "Enablement", "AI Operations"]
+  },
+  {
+    id: "enterprise-onboarding-journey",
+    title: "Enterprise Onboarding Journey",
+    role: "Lead Talent Enablement Architect",
+    summary: "Distributed onboarding architecture for a Fortune 500 luxury homebuilder with a large selling-community footprint.",
+    problem: "A distributed sales ecosystem needed standardized enablement delivery across communities, roles, and employee lifecycle touchpoints.",
+    actions: [
+      "Mapped onboarding touchpoints across the full employee lifecycle.",
+      "Designed scalable enablement architecture for distributed selling communities.",
+      "Aligned learning touchpoints to field execution and business operating rhythm."
+    ],
+    outcomes: [
+      "Standardized enablement delivery across 76,000 market lots.",
+      "Created a clearer learning path for 400+ selling communities."
+    ],
+    metrics: proofPoints.filter(
+      (p2) => ["Market lots standardized"].includes(p2.label)
+    ),
+    tools: [
+      "Journey mapping",
+      "Sales enablement",
+      "Lifecycle design",
+      "Stakeholder alignment"
+    ],
+    lanes: ["Sales Enablement", "Enablement", "Learning Experience"]
+  },
+  {
+    id: "compliance-enablement-ecosystem",
+    title: "Mobile-First Compliance Enablement Ecosystem",
+    role: "Learning Experience Engineer",
+    summary: "Low-code compliance enablement ecosystem for a zero-LMS municipal environment.",
+    problem: "A regulated workforce needed audit-ready training coverage without a formal LMS infrastructure.",
+    actions: [
+      "Designed a mobile-first compliance experience using low-code delivery tools.",
+      "Structured tracking and content access for a zero-LMS environment.",
+      "Balanced usability with regulatory and audit requirements."
+    ],
+    outcomes: [
+      "Achieved 100% audit-ready regulatory coverage.",
+      "Supported 1,750+ municipal employees."
+    ],
+    metrics: proofPoints.filter(
+      (p2) => ["Municipal coverage"].includes(p2.label)
+    ),
+    tools: [
+      "Low-code tools",
+      "Compliance design",
+      "Mobile-first UX",
+      "Audit readiness"
+    ],
+    lanes: ["Compliance", "Learning Experience", "Enablement"]
+  },
+  {
+    id: "career-city",
+    title: "Career City",
+    role: "Learning Product Designer",
+    summary: "Interactive career-development concept that turns career growth into a more visual, explorable learning experience.",
+    problem: "Career development often feels abstract and hard to navigate, especially when users need to compare paths, choices, and next steps.",
+    actions: [
+      "Designed a visual product concept around career exploration and progression.",
+      "Used AI-assisted build workflows to move from idea to working app direction.",
+      "Framed learning strategy as an interactive product rather than a static course."
+    ],
+    outcomes: [
+      "Shows product thinking, learning strategy, and AI-enabled build capability in one portfolio item.",
+      "Creates a foundation for future learning experience apps."
+    ],
+    metrics: [],
+    tools: ["Caffeine AI", "Gameful learning", "React", "Learning strategy"],
+    lanes: ["Learning Experience", "Technical Product", "AI Operations"],
+    repo: "https://github.com/terrybrutus/career-city"
+  }
+];
+const resumeHighlights = [
+  "Senior Talent Development Lead & AI Enablement Architect at CTEC, supporting a 158,000-person defense acquisition workforce.",
+  "Lead Talent Enablement & Experience Architect through Legacy Learning Consulting across enterprise, municipal, sales, healthcare, and SaaS contexts.",
+  "Instructional Systems Designer at Pinnacle Solutions/Akima, with technical simulation and Army LMS deployment experience at 1.2M+ user scale."
+];
+const skills = [
+  "Talent journey architecture",
+  "Technical enablement",
+  "AI workflow automation",
+  "Skills-based framework design",
+  "Manager enablement",
+  "Section 508/WCAG",
+  "NotebookLM RAG",
+  "Python",
+  "VBA",
+  "JSON",
+  "Caffeine AI",
+  "Claude Code",
+  "Codex",
+  "Articulate/Rise 360",
+  "SQL",
+  "Agile/Scrum"
+];
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32170,84 +30656,11 @@ const createLucideIcon = (iconName, iconNode) => {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$b = [
-  ["path", { d: "M12 5v14", key: "s699le" }],
-  ["path", { d: "m19 12-7 7-7-7", key: "1idqje" }]
-];
-const ArrowDown = createLucideIcon("arrow-down", __iconNode$b);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$a = [
-  ["path", { d: "M5 12h14", key: "1ays0h" }],
-  ["path", { d: "m12 5 7 7-7 7", key: "xquz4c" }]
-];
-const ArrowRight = createLucideIcon("arrow-right", __iconNode$a);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$9 = [
-  [
-    "path",
-    {
-      d: "m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526",
-      key: "1yiouv"
-    }
-  ],
-  ["circle", { cx: "12", cy: "8", r: "6", key: "1vp47v" }]
-];
-const Award = createLucideIcon("award", __iconNode$9);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$8 = [
-  ["path", { d: "M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16", key: "jecpp" }],
-  ["rect", { width: "20", height: "14", x: "2", y: "6", rx: "2", key: "i6l2r4" }]
-];
-const Briefcase = createLucideIcon("briefcase", __iconNode$8);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$7 = [
-  [
-    "path",
-    {
-      d: "m6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2",
-      key: "usdka0"
-    }
-  ]
-];
-const FolderOpen = createLucideIcon("folder-open", __iconNode$7);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
 const __iconNode$6 = [
-  [
-    "path",
-    {
-      d: "M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z",
-      key: "j76jl0"
-    }
-  ],
-  ["path", { d: "M22 10v6", key: "1lu8f3" }],
-  ["path", { d: "M6 12.5V16a6 3 0 0 0 12 0v-3.5", key: "1r8lef" }]
+  ["path", { d: "M7 7h10v10", key: "1tivn9" }],
+  ["path", { d: "M7 17 17 7", key: "1vkiza" }]
 ];
-const GraduationCap = createLucideIcon("graduation-cap", __iconNode$6);
+const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$6);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32255,10 +30668,12 @@ const GraduationCap = createLucideIcon("graduation-cap", __iconNode$6);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$5 = [
-  ["path", { d: "m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7", key: "132q7q" }],
-  ["rect", { x: "2", y: "4", width: "20", height: "16", rx: "2", key: "izxlao" }]
+  ["path", { d: "M12 12h.01", key: "1mp3jc" }],
+  ["path", { d: "M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2", key: "1ksdt3" }],
+  ["path", { d: "M22 13a18.15 18.15 0 0 1-20 0", key: "12hx5q" }],
+  ["rect", { width: "20", height: "14", x: "2", y: "6", rx: "2", key: "i6l2r4" }]
 ];
-const Mail = createLucideIcon("mail", __iconNode$5);
+const BriefcaseBusiness = createLucideIcon("briefcase-business", __iconNode$5);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32266,11 +30681,10 @@ const Mail = createLucideIcon("mail", __iconNode$5);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$4 = [
-  ["path", { d: "M4 12h16", key: "1lakjw" }],
-  ["path", { d: "M4 18h16", key: "19g7jn" }],
-  ["path", { d: "M4 6h16", key: "1o0s65" }]
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["polyline", { points: "12 6 12 12 16 14", key: "68esgv" }]
 ];
-const Menu = createLucideIcon("menu", __iconNode$4);
+const Clock = createLucideIcon("clock", __iconNode$4);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32278,9 +30692,16 @@ const Menu = createLucideIcon("menu", __iconNode$4);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$3 = [
-  ["path", { d: "M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z", key: "a7tn18" }]
+  [
+    "path",
+    {
+      d: "M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4",
+      key: "tonef"
+    }
+  ],
+  ["path", { d: "M9 18c-4.51 2-5-2-7-2", key: "9comsn" }]
 ];
-const Moon = createLucideIcon("moon", __iconNode$3);
+const Github = createLucideIcon("github", __iconNode$3);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32288,17 +30709,11 @@ const Moon = createLucideIcon("moon", __iconNode$3);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$2 = [
-  ["circle", { cx: "12", cy: "12", r: "4", key: "4exip2" }],
-  ["path", { d: "M12 2v2", key: "tus03m" }],
-  ["path", { d: "M12 20v2", key: "1lh1kg" }],
-  ["path", { d: "m4.93 4.93 1.41 1.41", key: "149t6j" }],
-  ["path", { d: "m17.66 17.66 1.41 1.41", key: "ptbguv" }],
-  ["path", { d: "M2 12h2", key: "1t8f8n" }],
-  ["path", { d: "M20 12h2", key: "1q8mjw" }],
-  ["path", { d: "m6.34 17.66-1.41 1.41", key: "1m8zz5" }],
-  ["path", { d: "m19.07 4.93-1.41 1.41", key: "1shlcs" }]
+  ["path", { d: "M9 17H7A5 5 0 0 1 7 7h2", key: "8i5ue5" }],
+  ["path", { d: "M15 7h2a5 5 0 1 1 0 10h-2", key: "1b9ql8" }],
+  ["line", { x1: "8", x2: "16", y1: "12", y2: "12", key: "1jonct" }]
 ];
-const Sun = createLucideIcon("sun", __iconNode$2);
+const Link2 = createLucideIcon("link-2", __iconNode$2);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32306,10 +30721,11 @@ const Sun = createLucideIcon("sun", __iconNode$2);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1 = [
-  ["path", { d: "M18 6 6 18", key: "1bl5f8" }],
-  ["path", { d: "m6 6 12 12", key: "d8bk6v" }]
+  ["circle", { cx: "12", cy: "16", r: "1", key: "1au0dj" }],
+  ["rect", { x: "3", y: "10", width: "18", height: "12", rx: "2", key: "6s8ecr" }],
+  ["path", { d: "M7 10V7a5 5 0 0 1 10 0v3", key: "1pqi11" }]
 ];
-const X = createLucideIcon("x", __iconNode$1);
+const LockKeyhole = createLucideIcon("lock-keyhole", __iconNode$1);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32320,2630 +30736,264 @@ const __iconNode = [
   [
     "path",
     {
-      d: "M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z",
-      key: "cbrjhi"
+      d: "M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z",
+      key: "4pj2yx"
     }
-  ]
+  ],
+  ["path", { d: "M20 3v4", key: "1olli1" }],
+  ["path", { d: "M22 5h-4", key: "1gvqau" }],
+  ["path", { d: "M4 17v2", key: "vumght" }],
+  ["path", { d: "M5 18H3", key: "zchphs" }]
 ];
-const Wrench = createLucideIcon("wrench", __iconNode);
-function ContactSection() {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { id: "contact", className: "bg-muted/30 py-20", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto max-w-3xl px-4 text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "border-border bg-card shadow-subtle", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { className: "pb-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { className: "font-display text-3xl font-bold tracking-tight text-foreground", children: "Let's Build Something Great Together" }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-6", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mx-auto max-w-xl text-lg leading-relaxed text-muted-foreground", children: "I partner with operations leaders and senior stakeholders to design learning experiences that drive measurable team performance. If you are looking for a consultative, business-first learning designer, I would love to hear from you." }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center gap-4 sm:flex-row sm:justify-center", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Button,
-          {
-            asChild: true,
-            variant: "default",
-            size: "lg",
-            className: "gap-2",
-            "data-ocid": "contact.email_button",
-            children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "mailto:hello@example.com", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Mail, { className: "h-4 w-4" }),
-              "Get in Touch"
-            ] })
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Button,
-          {
-            asChild: true,
-            variant: "outline",
-            size: "lg",
-            className: "gap-2",
-            "data-ocid": "contact.portfolio_link",
-            children: /* @__PURE__ */ jsxRuntimeExports.jsxs("a", { href: "#portfolio", children: [
-              "View Portfolio",
-              /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "h-4 w-4" })
-            ] })
-          }
-        )
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: "Prefer a quick call? Drop me a line and we will find a time that works." })
-    ] })
-  ] }) }) });
-}
-function HeroSection() {
-  const scrollToPortfolio = () => {
-    const el = document.getElementById("portfolio");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    "section",
-    {
-      id: "hero",
-      className: "relative flex min-h-[90vh] flex-col items-center justify-center bg-background px-4 text-center",
-      children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-3xl space-y-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display text-4xl font-bold tracking-tight text-foreground sm:text-5xl md:text-6xl", children: "Terry Brutus" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-xl font-medium text-primary sm:text-2xl", children: "Senior Learning Experience Designer" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg", children: "Instructional design expert with 5+ years of corporate experience crafting learning solutions that drive measurable business results. I specialize in needs analysis, multi-modal content design, and facilitating high-impact training for adult learners in fast-moving operational environments." }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col items-center justify-center gap-3 pt-4 sm:flex-row", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            Button,
-            {
-              variant: "default",
-              size: "lg",
-              onClick: scrollToPortfolio,
-              "data-ocid": "hero.view_portfolio_button",
-              children: [
-                "View My Work",
-                /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowDown, { className: "ml-2 h-4 w-4" })
-              ]
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            Button,
-            {
-              variant: "outline",
-              size: "lg",
-              asChild: true,
-              "data-ocid": "hero.download_resume_button",
-              children: /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: "#resume", children: "View Resume" })
-            }
-          )
-        ] })
-      ] })
-    }
-  );
-}
-function composeEventHandlers(originalEventHandler, ourEventHandler, { checkForDefaultPrevented = true } = {}) {
-  return function handleEvent(event) {
-    originalEventHandler == null ? void 0 : originalEventHandler(event);
-    if (checkForDefaultPrevented === false || !event.defaultPrevented) {
-      return ourEventHandler == null ? void 0 : ourEventHandler(event);
-    }
-  };
-}
-function createContext2(rootComponentName, defaultContext) {
-  const Context = reactExports.createContext(defaultContext);
-  const Provider = (props) => {
-    const { children, ...context } = props;
-    const value = reactExports.useMemo(() => context, Object.values(context));
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Context.Provider, { value, children });
-  };
-  Provider.displayName = rootComponentName + "Provider";
-  function useContext2(consumerName) {
-    const context = reactExports.useContext(Context);
-    if (context) return context;
-    if (defaultContext !== void 0) return defaultContext;
-    throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
-  }
-  return [Provider, useContext2];
-}
-function createContextScope(scopeName, createContextScopeDeps = []) {
-  let defaultContexts = [];
-  function createContext3(rootComponentName, defaultContext) {
-    const BaseContext = reactExports.createContext(defaultContext);
-    const index2 = defaultContexts.length;
-    defaultContexts = [...defaultContexts, defaultContext];
-    const Provider = (props) => {
-      var _a2;
-      const { scope, children, ...context } = props;
-      const Context = ((_a2 = scope == null ? void 0 : scope[scopeName]) == null ? void 0 : _a2[index2]) || BaseContext;
-      const value = reactExports.useMemo(() => context, Object.values(context));
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(Context.Provider, { value, children });
-    };
-    Provider.displayName = rootComponentName + "Provider";
-    function useContext2(consumerName, scope) {
-      var _a2;
-      const Context = ((_a2 = scope == null ? void 0 : scope[scopeName]) == null ? void 0 : _a2[index2]) || BaseContext;
-      const context = reactExports.useContext(Context);
-      if (context) return context;
-      if (defaultContext !== void 0) return defaultContext;
-      throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
-    }
-    return [Provider, useContext2];
-  }
-  const createScope = () => {
-    const scopeContexts = defaultContexts.map((defaultContext) => {
-      return reactExports.createContext(defaultContext);
-    });
-    return function useScope(scope) {
-      const contexts = (scope == null ? void 0 : scope[scopeName]) || scopeContexts;
-      return reactExports.useMemo(
-        () => ({ [`__scope${scopeName}`]: { ...scope, [scopeName]: contexts } }),
-        [scope, contexts]
-      );
-    };
-  };
-  createScope.scopeName = scopeName;
-  return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
-}
-function composeContextScopes(...scopes) {
-  const baseScope = scopes[0];
-  if (scopes.length === 1) return baseScope;
-  const createScope = () => {
-    const scopeHooks = scopes.map((createScope2) => ({
-      useScope: createScope2(),
-      scopeName: createScope2.scopeName
-    }));
-    return function useComposedScopes(overrideScopes) {
-      const nextScopes = scopeHooks.reduce((nextScopes2, { useScope, scopeName }) => {
-        const scopeProps = useScope(overrideScopes);
-        const currentScope = scopeProps[`__scope${scopeName}`];
-        return { ...nextScopes2, ...currentScope };
-      }, {});
-      return reactExports.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
-    };
-  };
-  createScope.scopeName = baseScope.scopeName;
-  return createScope;
-}
-var useLayoutEffect2 = (globalThis == null ? void 0 : globalThis.document) ? reactExports.useLayoutEffect : () => {
+const Sparkles = createLucideIcon("sparkles", __iconNode);
+const laneKeywords = {
+  Enablement: ["enablement", "onboarding", "talent", "workforce", "manager"],
+  "AI Operations": ["ai", "automation", "rag", "agent", "workflow", "python"],
+  "Learning Experience": [
+    "learning",
+    "instructional",
+    "lxd",
+    "training",
+    "curriculum"
+  ],
+  "Technical Product": ["product", "platform", "app", "technical", "systems"],
+  "Sales Enablement": ["sales", "customer", "revenue", "gtm", "meddpicc"],
+  Compliance: ["compliance", "508", "wcag", "audit", "regulated", "governance"]
 };
-var useReactId = React$2[" useId ".trim().toString()] || (() => void 0);
-var count$1 = 0;
-function useId(deterministicId) {
-  const [id, setId] = reactExports.useState(useReactId());
-  useLayoutEffect2(() => {
-    setId((reactId) => reactId ?? String(count$1++));
-  }, [deterministicId]);
-  return deterministicId || (id ? `radix-${id}` : "");
-}
-var useInsertionEffect = React$2[" useInsertionEffect ".trim().toString()] || useLayoutEffect2;
-function useControllableState({
-  prop,
-  defaultProp,
-  onChange = () => {
-  },
-  caller
-}) {
-  const [uncontrolledProp, setUncontrolledProp, onChangeRef] = useUncontrolledState({
-    defaultProp,
-    onChange
-  });
-  const isControlled = prop !== void 0;
-  const value = isControlled ? prop : uncontrolledProp;
-  {
-    const isControlledRef = reactExports.useRef(prop !== void 0);
-    reactExports.useEffect(() => {
-      const wasControlled = isControlledRef.current;
-      if (wasControlled !== isControlled) {
-        const from = wasControlled ? "controlled" : "uncontrolled";
-        const to = isControlled ? "controlled" : "uncontrolled";
-        console.warn(
-          `${caller} is changing from ${from} to ${to}. Components should not switch from controlled to uncontrolled (or vice versa). Decide between using a controlled or uncontrolled value for the lifetime of the component.`
-        );
-      }
-      isControlledRef.current = isControlled;
-    }, [isControlled, caller]);
+const sampleJd = "Principal Enablement role owning AI-assisted workflows, technical onboarding, sales readiness, stakeholder alignment, learning operations, compliance, and measurable business outcomes.";
+function detectLanes(text) {
+  const normalized = text.toLowerCase();
+  const scored = Object.entries(laneKeywords).map(([lane, words]) => ({
+    lane,
+    score: words.filter((word) => normalized.includes(word)).length
+  })).filter((item) => item.score > 0).sort((a2, b2) => b2.score - a2.score);
+  if (scored.length === 0) {
+    return ["Enablement", "AI Operations", "Learning Experience"];
   }
-  const setValue = reactExports.useCallback(
-    (nextValue) => {
-      var _a2;
-      if (isControlled) {
-        const value2 = isFunction(nextValue) ? nextValue(prop) : nextValue;
-        if (value2 !== prop) {
-          (_a2 = onChangeRef.current) == null ? void 0 : _a2.call(onChangeRef, value2);
-        }
-      } else {
-        setUncontrolledProp(nextValue);
-      }
-    },
-    [isControlled, prop, setUncontrolledProp, onChangeRef]
+  return scored.slice(0, 3).map((item) => item.lane);
+}
+function scoreProject(projectLanes, selectedLanes) {
+  return projectLanes.reduce(
+    (score, lane) => score + (selectedLanes.includes(lane) ? 1 : 0),
+    0
   );
-  return [value, setValue];
 }
-function useUncontrolledState({
-  defaultProp,
-  onChange
-}) {
-  const [value, setValue] = reactExports.useState(defaultProp);
-  const prevValueRef = reactExports.useRef(value);
-  const onChangeRef = reactExports.useRef(onChange);
-  useInsertionEffect(() => {
-    onChangeRef.current = onChange;
-  }, [onChange]);
-  reactExports.useEffect(() => {
-    var _a2;
-    if (prevValueRef.current !== value) {
-      (_a2 = onChangeRef.current) == null ? void 0 : _a2.call(onChangeRef, value);
-      prevValueRef.current = value;
-    }
-  }, [value, prevValueRef]);
-  return [value, setValue, onChangeRef];
+function makeToken(company) {
+  const base = company.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-");
+  return `${base || "target"}-${Math.random().toString(36).slice(2, 8)}`;
 }
-function isFunction(value) {
-  return typeof value === "function";
-}
-// @__NO_SIDE_EFFECTS__
-function createSlot(ownerName) {
-  const SlotClone = /* @__PURE__ */ createSlotClone(ownerName);
-  const Slot2 = reactExports.forwardRef((props, forwardedRef) => {
-    const { children, ...slotProps } = props;
-    const childrenArray = reactExports.Children.toArray(children);
-    const slottable = childrenArray.find(isSlottable);
-    if (slottable) {
-      const newElement = slottable.props.children;
-      const newChildren = childrenArray.map((child) => {
-        if (child === slottable) {
-          if (reactExports.Children.count(newElement) > 1) return reactExports.Children.only(null);
-          return reactExports.isValidElement(newElement) ? newElement.props.children : null;
-        } else {
-          return child;
-        }
-      });
-      return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children: reactExports.isValidElement(newElement) ? reactExports.cloneElement(newElement, void 0, newChildren) : null });
-    }
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(SlotClone, { ...slotProps, ref: forwardedRef, children });
-  });
-  Slot2.displayName = `${ownerName}.Slot`;
-  return Slot2;
-}
-// @__NO_SIDE_EFFECTS__
-function createSlotClone(ownerName) {
-  const SlotClone = reactExports.forwardRef((props, forwardedRef) => {
-    const { children, ...slotProps } = props;
-    if (reactExports.isValidElement(children)) {
-      const childrenRef = getElementRef$1(children);
-      const props2 = mergeProps(slotProps, children.props);
-      if (children.type !== reactExports.Fragment) {
-        props2.ref = forwardedRef ? composeRefs(forwardedRef, childrenRef) : childrenRef;
-      }
-      return reactExports.cloneElement(children, props2);
-    }
-    return reactExports.Children.count(children) > 1 ? reactExports.Children.only(null) : null;
-  });
-  SlotClone.displayName = `${ownerName}.SlotClone`;
-  return SlotClone;
-}
-var SLOTTABLE_IDENTIFIER = Symbol("radix.slottable");
-function isSlottable(child) {
-  return reactExports.isValidElement(child) && typeof child.type === "function" && "__radixId" in child.type && child.type.__radixId === SLOTTABLE_IDENTIFIER;
-}
-function mergeProps(slotProps, childProps) {
-  const overrideProps = { ...childProps };
-  for (const propName in childProps) {
-    const slotPropValue = slotProps[propName];
-    const childPropValue = childProps[propName];
-    const isHandler = /^on[A-Z]/.test(propName);
-    if (isHandler) {
-      if (slotPropValue && childPropValue) {
-        overrideProps[propName] = (...args) => {
-          const result = childPropValue(...args);
-          slotPropValue(...args);
-          return result;
-        };
-      } else if (slotPropValue) {
-        overrideProps[propName] = slotPropValue;
-      }
-    } else if (propName === "style") {
-      overrideProps[propName] = { ...slotPropValue, ...childPropValue };
-    } else if (propName === "className") {
-      overrideProps[propName] = [slotPropValue, childPropValue].filter(Boolean).join(" ");
-    }
-  }
-  return { ...slotProps, ...overrideProps };
-}
-function getElementRef$1(element) {
-  var _a2, _b2;
-  let getter = (_a2 = Object.getOwnPropertyDescriptor(element.props, "ref")) == null ? void 0 : _a2.get;
-  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
-  if (mayWarn) {
-    return element.ref;
-  }
-  getter = (_b2 = Object.getOwnPropertyDescriptor(element, "ref")) == null ? void 0 : _b2.get;
-  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
-  if (mayWarn) {
-    return element.props.ref;
-  }
-  return element.props.ref || element.ref;
-}
-var NODES = [
-  "a",
-  "button",
-  "div",
-  "form",
-  "h2",
-  "h3",
-  "img",
-  "input",
-  "label",
-  "li",
-  "nav",
-  "ol",
-  "p",
-  "select",
-  "span",
-  "svg",
-  "ul"
-];
-var Primitive = NODES.reduce((primitive, node) => {
-  const Slot2 = /* @__PURE__ */ createSlot(`Primitive.${node}`);
-  const Node2 = reactExports.forwardRef((props, forwardedRef) => {
-    const { asChild, ...primitiveProps } = props;
-    const Comp = asChild ? Slot2 : node;
-    if (typeof window !== "undefined") {
-      window[Symbol.for("radix-ui")] = true;
-    }
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Comp, { ...primitiveProps, ref: forwardedRef });
-  });
-  Node2.displayName = `Primitive.${node}`;
-  return { ...primitive, [node]: Node2 };
-}, {});
-function dispatchDiscreteCustomEvent(target, event) {
-  if (target) reactDomExports.flushSync(() => target.dispatchEvent(event));
-}
-function useCallbackRef$1(callback) {
-  const callbackRef = reactExports.useRef(callback);
-  reactExports.useEffect(() => {
-    callbackRef.current = callback;
-  });
-  return reactExports.useMemo(() => (...args) => {
-    var _a2;
-    return (_a2 = callbackRef.current) == null ? void 0 : _a2.call(callbackRef, ...args);
-  }, []);
-}
-function useEscapeKeydown(onEscapeKeyDownProp, ownerDocument = globalThis == null ? void 0 : globalThis.document) {
-  const onEscapeKeyDown = useCallbackRef$1(onEscapeKeyDownProp);
-  reactExports.useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") {
-        onEscapeKeyDown(event);
-      }
-    };
-    ownerDocument.addEventListener("keydown", handleKeyDown, { capture: true });
-    return () => ownerDocument.removeEventListener("keydown", handleKeyDown, { capture: true });
-  }, [onEscapeKeyDown, ownerDocument]);
-}
-var DISMISSABLE_LAYER_NAME = "DismissableLayer";
-var CONTEXT_UPDATE = "dismissableLayer.update";
-var POINTER_DOWN_OUTSIDE = "dismissableLayer.pointerDownOutside";
-var FOCUS_OUTSIDE = "dismissableLayer.focusOutside";
-var originalBodyPointerEvents;
-var DismissableLayerContext = reactExports.createContext({
-  layers: /* @__PURE__ */ new Set(),
-  layersWithOutsidePointerEventsDisabled: /* @__PURE__ */ new Set(),
-  branches: /* @__PURE__ */ new Set()
-});
-var DismissableLayer = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const {
-      disableOutsidePointerEvents = false,
-      onEscapeKeyDown,
-      onPointerDownOutside,
-      onFocusOutside,
-      onInteractOutside,
-      onDismiss,
-      ...layerProps
-    } = props;
-    const context = reactExports.useContext(DismissableLayerContext);
-    const [node, setNode] = reactExports.useState(null);
-    const ownerDocument = (node == null ? void 0 : node.ownerDocument) ?? (globalThis == null ? void 0 : globalThis.document);
-    const [, force] = reactExports.useState({});
-    const composedRefs = useComposedRefs(forwardedRef, (node2) => setNode(node2));
-    const layers = Array.from(context.layers);
-    const [highestLayerWithOutsidePointerEventsDisabled] = [...context.layersWithOutsidePointerEventsDisabled].slice(-1);
-    const highestLayerWithOutsidePointerEventsDisabledIndex = layers.indexOf(highestLayerWithOutsidePointerEventsDisabled);
-    const index2 = node ? layers.indexOf(node) : -1;
-    const isBodyPointerEventsDisabled = context.layersWithOutsidePointerEventsDisabled.size > 0;
-    const isPointerEventsEnabled = index2 >= highestLayerWithOutsidePointerEventsDisabledIndex;
-    const pointerDownOutside = usePointerDownOutside((event) => {
-      const target = event.target;
-      const isPointerDownOnBranch = [...context.branches].some((branch) => branch.contains(target));
-      if (!isPointerEventsEnabled || isPointerDownOnBranch) return;
-      onPointerDownOutside == null ? void 0 : onPointerDownOutside(event);
-      onInteractOutside == null ? void 0 : onInteractOutside(event);
-      if (!event.defaultPrevented) onDismiss == null ? void 0 : onDismiss();
-    }, ownerDocument);
-    const focusOutside = useFocusOutside((event) => {
-      const target = event.target;
-      const isFocusInBranch = [...context.branches].some((branch) => branch.contains(target));
-      if (isFocusInBranch) return;
-      onFocusOutside == null ? void 0 : onFocusOutside(event);
-      onInteractOutside == null ? void 0 : onInteractOutside(event);
-      if (!event.defaultPrevented) onDismiss == null ? void 0 : onDismiss();
-    }, ownerDocument);
-    useEscapeKeydown((event) => {
-      const isHighestLayer = index2 === context.layers.size - 1;
-      if (!isHighestLayer) return;
-      onEscapeKeyDown == null ? void 0 : onEscapeKeyDown(event);
-      if (!event.defaultPrevented && onDismiss) {
-        event.preventDefault();
-        onDismiss();
-      }
-    }, ownerDocument);
-    reactExports.useEffect(() => {
-      if (!node) return;
-      if (disableOutsidePointerEvents) {
-        if (context.layersWithOutsidePointerEventsDisabled.size === 0) {
-          originalBodyPointerEvents = ownerDocument.body.style.pointerEvents;
-          ownerDocument.body.style.pointerEvents = "none";
-        }
-        context.layersWithOutsidePointerEventsDisabled.add(node);
-      }
-      context.layers.add(node);
-      dispatchUpdate();
-      return () => {
-        if (disableOutsidePointerEvents && context.layersWithOutsidePointerEventsDisabled.size === 1) {
-          ownerDocument.body.style.pointerEvents = originalBodyPointerEvents;
-        }
-      };
-    }, [node, ownerDocument, disableOutsidePointerEvents, context]);
-    reactExports.useEffect(() => {
-      return () => {
-        if (!node) return;
-        context.layers.delete(node);
-        context.layersWithOutsidePointerEventsDisabled.delete(node);
-        dispatchUpdate();
-      };
-    }, [node, context]);
-    reactExports.useEffect(() => {
-      const handleUpdate = () => force({});
-      document.addEventListener(CONTEXT_UPDATE, handleUpdate);
-      return () => document.removeEventListener(CONTEXT_UPDATE, handleUpdate);
-    }, []);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Primitive.div,
-      {
-        ...layerProps,
-        ref: composedRefs,
-        style: {
-          pointerEvents: isBodyPointerEventsDisabled ? isPointerEventsEnabled ? "auto" : "none" : void 0,
-          ...props.style
-        },
-        onFocusCapture: composeEventHandlers(props.onFocusCapture, focusOutside.onFocusCapture),
-        onBlurCapture: composeEventHandlers(props.onBlurCapture, focusOutside.onBlurCapture),
-        onPointerDownCapture: composeEventHandlers(
-          props.onPointerDownCapture,
-          pointerDownOutside.onPointerDownCapture
-        )
-      }
+function TailoredPortfolioStudio() {
+  const [company, setCompany] = reactExports.useState("Target Company");
+  const [jd, setJd] = reactExports.useState(sampleJd);
+  const [links, setLinks] = reactExports.useState([]);
+  const selectedLanes = reactExports.useMemo(
+    () => detectLanes(`${company} ${jd}`),
+    [company, jd]
+  );
+  const tailoredProjects = reactExports.useMemo(
+    () => [...projects].sort(
+      (a2, b2) => scoreProject(b2.lanes, selectedLanes) - scoreProject(a2.lanes, selectedLanes)
+    ).slice(0, 4),
+    [selectedLanes]
+  );
+  const tailoredMetrics = proofPoints.filter(
+    (metric) => metric.lanes.some((lane) => selectedLanes.includes(lane))
+  );
+  const tailoredSkills = skills.filter((skill) => {
+    const normalized = skill.toLowerCase();
+    return selectedLanes.some(
+      (lane) => laneKeywords[lane].some((keyword) => normalized.includes(keyword))
     );
-  }
-);
-DismissableLayer.displayName = DISMISSABLE_LAYER_NAME;
-var BRANCH_NAME = "DismissableLayerBranch";
-var DismissableLayerBranch = reactExports.forwardRef((props, forwardedRef) => {
-  const context = reactExports.useContext(DismissableLayerContext);
-  const ref = reactExports.useRef(null);
-  const composedRefs = useComposedRefs(forwardedRef, ref);
-  reactExports.useEffect(() => {
-    const node = ref.current;
-    if (node) {
-      context.branches.add(node);
-      return () => {
-        context.branches.delete(node);
-      };
-    }
-  }, [context.branches]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.div, { ...props, ref: composedRefs });
-});
-DismissableLayerBranch.displayName = BRANCH_NAME;
-function usePointerDownOutside(onPointerDownOutside, ownerDocument = globalThis == null ? void 0 : globalThis.document) {
-  const handlePointerDownOutside = useCallbackRef$1(onPointerDownOutside);
-  const isPointerInsideReactTreeRef = reactExports.useRef(false);
-  const handleClickRef = reactExports.useRef(() => {
   });
-  reactExports.useEffect(() => {
-    const handlePointerDown = (event) => {
-      if (event.target && !isPointerInsideReactTreeRef.current) {
-        let handleAndDispatchPointerDownOutsideEvent2 = function() {
-          handleAndDispatchCustomEvent(
-            POINTER_DOWN_OUTSIDE,
-            handlePointerDownOutside,
-            eventDetail,
-            { discrete: true }
-          );
-        };
-        const eventDetail = { originalEvent: event };
-        if (event.pointerType === "touch") {
-          ownerDocument.removeEventListener("click", handleClickRef.current);
-          handleClickRef.current = handleAndDispatchPointerDownOutsideEvent2;
-          ownerDocument.addEventListener("click", handleClickRef.current, { once: true });
-        } else {
-          handleAndDispatchPointerDownOutsideEvent2();
-        }
-      } else {
-        ownerDocument.removeEventListener("click", handleClickRef.current);
-      }
-      isPointerInsideReactTreeRef.current = false;
-    };
-    const timerId = window.setTimeout(() => {
-      ownerDocument.addEventListener("pointerdown", handlePointerDown);
-    }, 0);
-    return () => {
-      window.clearTimeout(timerId);
-      ownerDocument.removeEventListener("pointerdown", handlePointerDown);
-      ownerDocument.removeEventListener("click", handleClickRef.current);
-    };
-  }, [ownerDocument, handlePointerDownOutside]);
-  return {
-    // ensures we check React component tree (not just DOM tree)
-    onPointerDownCapture: () => isPointerInsideReactTreeRef.current = true
-  };
-}
-function useFocusOutside(onFocusOutside, ownerDocument = globalThis == null ? void 0 : globalThis.document) {
-  const handleFocusOutside = useCallbackRef$1(onFocusOutside);
-  const isFocusInsideReactTreeRef = reactExports.useRef(false);
-  reactExports.useEffect(() => {
-    const handleFocus = (event) => {
-      if (event.target && !isFocusInsideReactTreeRef.current) {
-        const eventDetail = { originalEvent: event };
-        handleAndDispatchCustomEvent(FOCUS_OUTSIDE, handleFocusOutside, eventDetail, {
-          discrete: false
-        });
-      }
-    };
-    ownerDocument.addEventListener("focusin", handleFocus);
-    return () => ownerDocument.removeEventListener("focusin", handleFocus);
-  }, [ownerDocument, handleFocusOutside]);
-  return {
-    onFocusCapture: () => isFocusInsideReactTreeRef.current = true,
-    onBlurCapture: () => isFocusInsideReactTreeRef.current = false
-  };
-}
-function dispatchUpdate() {
-  const event = new CustomEvent(CONTEXT_UPDATE);
-  document.dispatchEvent(event);
-}
-function handleAndDispatchCustomEvent(name, handler, detail, { discrete }) {
-  const target = detail.originalEvent.target;
-  const event = new CustomEvent(name, { bubbles: false, cancelable: true, detail });
-  if (handler) target.addEventListener(name, handler, { once: true });
-  if (discrete) {
-    dispatchDiscreteCustomEvent(target, event);
-  } else {
-    target.dispatchEvent(event);
-  }
-}
-var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount";
-var AUTOFOCUS_ON_UNMOUNT = "focusScope.autoFocusOnUnmount";
-var EVENT_OPTIONS = { bubbles: false, cancelable: true };
-var FOCUS_SCOPE_NAME = "FocusScope";
-var FocusScope = reactExports.forwardRef((props, forwardedRef) => {
-  const {
-    loop = false,
-    trapped = false,
-    onMountAutoFocus: onMountAutoFocusProp,
-    onUnmountAutoFocus: onUnmountAutoFocusProp,
-    ...scopeProps
-  } = props;
-  const [container, setContainer] = reactExports.useState(null);
-  const onMountAutoFocus = useCallbackRef$1(onMountAutoFocusProp);
-  const onUnmountAutoFocus = useCallbackRef$1(onUnmountAutoFocusProp);
-  const lastFocusedElementRef = reactExports.useRef(null);
-  const composedRefs = useComposedRefs(forwardedRef, (node) => setContainer(node));
-  const focusScope = reactExports.useRef({
-    paused: false,
-    pause() {
-      this.paused = true;
-    },
-    resume() {
-      this.paused = false;
-    }
-  }).current;
-  reactExports.useEffect(() => {
-    if (trapped) {
-      let handleFocusIn2 = function(event) {
-        if (focusScope.paused || !container) return;
-        const target = event.target;
-        if (container.contains(target)) {
-          lastFocusedElementRef.current = target;
-        } else {
-          focus(lastFocusedElementRef.current, { select: true });
-        }
-      }, handleFocusOut2 = function(event) {
-        if (focusScope.paused || !container) return;
-        const relatedTarget = event.relatedTarget;
-        if (relatedTarget === null) return;
-        if (!container.contains(relatedTarget)) {
-          focus(lastFocusedElementRef.current, { select: true });
-        }
-      }, handleMutations2 = function(mutations) {
-        const focusedElement = document.activeElement;
-        if (focusedElement !== document.body) return;
-        for (const mutation of mutations) {
-          if (mutation.removedNodes.length > 0) focus(container);
-        }
-      };
-      document.addEventListener("focusin", handleFocusIn2);
-      document.addEventListener("focusout", handleFocusOut2);
-      const mutationObserver = new MutationObserver(handleMutations2);
-      if (container) mutationObserver.observe(container, { childList: true, subtree: true });
-      return () => {
-        document.removeEventListener("focusin", handleFocusIn2);
-        document.removeEventListener("focusout", handleFocusOut2);
-        mutationObserver.disconnect();
-      };
-    }
-  }, [trapped, container, focusScope.paused]);
-  reactExports.useEffect(() => {
-    if (container) {
-      focusScopesStack.add(focusScope);
-      const previouslyFocusedElement = document.activeElement;
-      const hasFocusedCandidate = container.contains(previouslyFocusedElement);
-      if (!hasFocusedCandidate) {
-        const mountEvent = new CustomEvent(AUTOFOCUS_ON_MOUNT, EVENT_OPTIONS);
-        container.addEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
-        container.dispatchEvent(mountEvent);
-        if (!mountEvent.defaultPrevented) {
-          focusFirst(removeLinks(getTabbableCandidates(container)), { select: true });
-          if (document.activeElement === previouslyFocusedElement) {
-            focus(container);
-          }
-        }
-      }
-      return () => {
-        container.removeEventListener(AUTOFOCUS_ON_MOUNT, onMountAutoFocus);
-        setTimeout(() => {
-          const unmountEvent = new CustomEvent(AUTOFOCUS_ON_UNMOUNT, EVENT_OPTIONS);
-          container.addEventListener(AUTOFOCUS_ON_UNMOUNT, onUnmountAutoFocus);
-          container.dispatchEvent(unmountEvent);
-          if (!unmountEvent.defaultPrevented) {
-            focus(previouslyFocusedElement ?? document.body, { select: true });
-          }
-          container.removeEventListener(AUTOFOCUS_ON_UNMOUNT, onUnmountAutoFocus);
-          focusScopesStack.remove(focusScope);
-        }, 0);
-      };
-    }
-  }, [container, onMountAutoFocus, onUnmountAutoFocus, focusScope]);
-  const handleKeyDown = reactExports.useCallback(
-    (event) => {
-      if (!loop && !trapped) return;
-      if (focusScope.paused) return;
-      const isTabKey = event.key === "Tab" && !event.altKey && !event.ctrlKey && !event.metaKey;
-      const focusedElement = document.activeElement;
-      if (isTabKey && focusedElement) {
-        const container2 = event.currentTarget;
-        const [first, last] = getTabbableEdges(container2);
-        const hasTabbableElementsInside = first && last;
-        if (!hasTabbableElementsInside) {
-          if (focusedElement === container2) event.preventDefault();
-        } else {
-          if (!event.shiftKey && focusedElement === last) {
-            event.preventDefault();
-            if (loop) focus(first, { select: true });
-          } else if (event.shiftKey && focusedElement === first) {
-            event.preventDefault();
-            if (loop) focus(last, { select: true });
-          }
-        }
-      }
-    },
-    [loop, trapped, focusScope.paused]
-  );
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.div, { tabIndex: -1, ...scopeProps, ref: composedRefs, onKeyDown: handleKeyDown });
-});
-FocusScope.displayName = FOCUS_SCOPE_NAME;
-function focusFirst(candidates, { select = false } = {}) {
-  const previouslyFocusedElement = document.activeElement;
-  for (const candidate of candidates) {
-    focus(candidate, { select });
-    if (document.activeElement !== previouslyFocusedElement) return;
-  }
-}
-function getTabbableEdges(container) {
-  const candidates = getTabbableCandidates(container);
-  const first = findVisible(candidates, container);
-  const last = findVisible(candidates.reverse(), container);
-  return [first, last];
-}
-function getTabbableCandidates(container) {
-  const nodes = [];
-  const walker = document.createTreeWalker(container, NodeFilter.SHOW_ELEMENT, {
-    acceptNode: (node) => {
-      const isHiddenInput = node.tagName === "INPUT" && node.type === "hidden";
-      if (node.disabled || node.hidden || isHiddenInput) return NodeFilter.FILTER_SKIP;
-      return node.tabIndex >= 0 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
-    }
-  });
-  while (walker.nextNode()) nodes.push(walker.currentNode);
-  return nodes;
-}
-function findVisible(elements, container) {
-  for (const element of elements) {
-    if (!isHidden(element, { upTo: container })) return element;
-  }
-}
-function isHidden(node, { upTo }) {
-  if (getComputedStyle(node).visibility === "hidden") return true;
-  while (node) {
-    if (upTo !== void 0 && node === upTo) return false;
-    if (getComputedStyle(node).display === "none") return true;
-    node = node.parentElement;
-  }
-  return false;
-}
-function isSelectableInput(element) {
-  return element instanceof HTMLInputElement && "select" in element;
-}
-function focus(element, { select = false } = {}) {
-  if (element && element.focus) {
-    const previouslyFocusedElement = document.activeElement;
-    element.focus({ preventScroll: true });
-    if (element !== previouslyFocusedElement && isSelectableInput(element) && select)
-      element.select();
-  }
-}
-var focusScopesStack = createFocusScopesStack();
-function createFocusScopesStack() {
-  let stack = [];
-  return {
-    add(focusScope) {
-      const activeFocusScope = stack[0];
-      if (focusScope !== activeFocusScope) {
-        activeFocusScope == null ? void 0 : activeFocusScope.pause();
-      }
-      stack = arrayRemove(stack, focusScope);
-      stack.unshift(focusScope);
-    },
-    remove(focusScope) {
-      var _a2;
-      stack = arrayRemove(stack, focusScope);
-      (_a2 = stack[0]) == null ? void 0 : _a2.resume();
-    }
-  };
-}
-function arrayRemove(array, item) {
-  const updatedArray = [...array];
-  const index2 = updatedArray.indexOf(item);
-  if (index2 !== -1) {
-    updatedArray.splice(index2, 1);
-  }
-  return updatedArray;
-}
-function removeLinks(items) {
-  return items.filter((item) => item.tagName !== "A");
-}
-var PORTAL_NAME$1 = "Portal";
-var Portal$1 = reactExports.forwardRef((props, forwardedRef) => {
-  var _a2;
-  const { container: containerProp, ...portalProps } = props;
-  const [mounted, setMounted] = reactExports.useState(false);
-  useLayoutEffect2(() => setMounted(true), []);
-  const container = containerProp || mounted && ((_a2 = globalThis == null ? void 0 : globalThis.document) == null ? void 0 : _a2.body);
-  return container ? ReactDOM$2.createPortal(/* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.div, { ...portalProps, ref: forwardedRef }), container) : null;
-});
-Portal$1.displayName = PORTAL_NAME$1;
-function useStateMachine(initialState, machine) {
-  return reactExports.useReducer((state, event) => {
-    const nextState = machine[state][event];
-    return nextState ?? state;
-  }, initialState);
-}
-var Presence = (props) => {
-  const { present, children } = props;
-  const presence = usePresence(present);
-  const child = typeof children === "function" ? children({ present: presence.isPresent }) : reactExports.Children.only(children);
-  const ref = useComposedRefs(presence.ref, getElementRef(child));
-  const forceMount = typeof children === "function";
-  return forceMount || presence.isPresent ? reactExports.cloneElement(child, { ref }) : null;
-};
-Presence.displayName = "Presence";
-function usePresence(present) {
-  const [node, setNode] = reactExports.useState();
-  const stylesRef = reactExports.useRef(null);
-  const prevPresentRef = reactExports.useRef(present);
-  const prevAnimationNameRef = reactExports.useRef("none");
-  const initialState = present ? "mounted" : "unmounted";
-  const [state, send] = useStateMachine(initialState, {
-    mounted: {
-      UNMOUNT: "unmounted",
-      ANIMATION_OUT: "unmountSuspended"
-    },
-    unmountSuspended: {
-      MOUNT: "mounted",
-      ANIMATION_END: "unmounted"
-    },
-    unmounted: {
-      MOUNT: "mounted"
-    }
-  });
-  reactExports.useEffect(() => {
-    const currentAnimationName = getAnimationName(stylesRef.current);
-    prevAnimationNameRef.current = state === "mounted" ? currentAnimationName : "none";
-  }, [state]);
-  useLayoutEffect2(() => {
-    const styles = stylesRef.current;
-    const wasPresent = prevPresentRef.current;
-    const hasPresentChanged = wasPresent !== present;
-    if (hasPresentChanged) {
-      const prevAnimationName = prevAnimationNameRef.current;
-      const currentAnimationName = getAnimationName(styles);
-      if (present) {
-        send("MOUNT");
-      } else if (currentAnimationName === "none" || (styles == null ? void 0 : styles.display) === "none") {
-        send("UNMOUNT");
-      } else {
-        const isAnimating = prevAnimationName !== currentAnimationName;
-        if (wasPresent && isAnimating) {
-          send("ANIMATION_OUT");
-        } else {
-          send("UNMOUNT");
-        }
-      }
-      prevPresentRef.current = present;
-    }
-  }, [present, send]);
-  useLayoutEffect2(() => {
-    if (node) {
-      let timeoutId;
-      const ownerWindow = node.ownerDocument.defaultView ?? window;
-      const handleAnimationEnd = (event) => {
-        const currentAnimationName = getAnimationName(stylesRef.current);
-        const isCurrentAnimation = currentAnimationName.includes(CSS.escape(event.animationName));
-        if (event.target === node && isCurrentAnimation) {
-          send("ANIMATION_END");
-          if (!prevPresentRef.current) {
-            const currentFillMode = node.style.animationFillMode;
-            node.style.animationFillMode = "forwards";
-            timeoutId = ownerWindow.setTimeout(() => {
-              if (node.style.animationFillMode === "forwards") {
-                node.style.animationFillMode = currentFillMode;
-              }
-            });
-          }
-        }
-      };
-      const handleAnimationStart = (event) => {
-        if (event.target === node) {
-          prevAnimationNameRef.current = getAnimationName(stylesRef.current);
-        }
-      };
-      node.addEventListener("animationstart", handleAnimationStart);
-      node.addEventListener("animationcancel", handleAnimationEnd);
-      node.addEventListener("animationend", handleAnimationEnd);
-      return () => {
-        ownerWindow.clearTimeout(timeoutId);
-        node.removeEventListener("animationstart", handleAnimationStart);
-        node.removeEventListener("animationcancel", handleAnimationEnd);
-        node.removeEventListener("animationend", handleAnimationEnd);
-      };
-    } else {
-      send("ANIMATION_END");
-    }
-  }, [node, send]);
-  return {
-    isPresent: ["mounted", "unmountSuspended"].includes(state),
-    ref: reactExports.useCallback((node2) => {
-      stylesRef.current = node2 ? getComputedStyle(node2) : null;
-      setNode(node2);
-    }, [])
-  };
-}
-function getAnimationName(styles) {
-  return (styles == null ? void 0 : styles.animationName) || "none";
-}
-function getElementRef(element) {
-  var _a2, _b2;
-  let getter = (_a2 = Object.getOwnPropertyDescriptor(element.props, "ref")) == null ? void 0 : _a2.get;
-  let mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
-  if (mayWarn) {
-    return element.ref;
-  }
-  getter = (_b2 = Object.getOwnPropertyDescriptor(element, "ref")) == null ? void 0 : _b2.get;
-  mayWarn = getter && "isReactWarning" in getter && getter.isReactWarning;
-  if (mayWarn) {
-    return element.props.ref;
-  }
-  return element.props.ref || element.ref;
-}
-var count = 0;
-function useFocusGuards() {
-  reactExports.useEffect(() => {
-    const edgeGuards = document.querySelectorAll("[data-radix-focus-guard]");
-    document.body.insertAdjacentElement("afterbegin", edgeGuards[0] ?? createFocusGuard());
-    document.body.insertAdjacentElement("beforeend", edgeGuards[1] ?? createFocusGuard());
-    count++;
-    return () => {
-      if (count === 1) {
-        document.querySelectorAll("[data-radix-focus-guard]").forEach((node) => node.remove());
-      }
-      count--;
-    };
-  }, []);
-}
-function createFocusGuard() {
-  const element = document.createElement("span");
-  element.setAttribute("data-radix-focus-guard", "");
-  element.tabIndex = 0;
-  element.style.outline = "none";
-  element.style.opacity = "0";
-  element.style.position = "fixed";
-  element.style.pointerEvents = "none";
-  return element;
-}
-var __assign = function() {
-  __assign = Object.assign || function __assign2(t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-      s = arguments[i];
-      for (var p2 in s) if (Object.prototype.hasOwnProperty.call(s, p2)) t[p2] = s[p2];
-    }
-    return t;
-  };
-  return __assign.apply(this, arguments);
-};
-function __rest(s, e) {
-  var t = {};
-  for (var p2 in s) if (Object.prototype.hasOwnProperty.call(s, p2) && e.indexOf(p2) < 0)
-    t[p2] = s[p2];
-  if (s != null && typeof Object.getOwnPropertySymbols === "function")
-    for (var i = 0, p2 = Object.getOwnPropertySymbols(s); i < p2.length; i++) {
-      if (e.indexOf(p2[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p2[i]))
-        t[p2[i]] = s[p2[i]];
-    }
-  return t;
-}
-function __spreadArray(to, from, pack) {
-  if (pack || arguments.length === 2) for (var i = 0, l2 = from.length, ar; i < l2; i++) {
-    if (ar || !(i in from)) {
-      if (!ar) ar = Array.prototype.slice.call(from, 0, i);
-      ar[i] = from[i];
-    }
-  }
-  return to.concat(ar || Array.prototype.slice.call(from));
-}
-typeof SuppressedError === "function" ? SuppressedError : function(error, suppressed, message) {
-  var e = new Error(message);
-  return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
-};
-var zeroRightClassName = "right-scroll-bar-position";
-var fullWidthClassName = "width-before-scroll-bar";
-var noScrollbarsClassName = "with-scroll-bars-hidden";
-var removedBarSizeVariable = "--removed-body-scroll-bar-size";
-function assignRef(ref, value) {
-  if (typeof ref === "function") {
-    ref(value);
-  } else if (ref) {
-    ref.current = value;
-  }
-  return ref;
-}
-function useCallbackRef(initialValue, callback) {
-  var ref = reactExports.useState(function() {
-    return {
-      // value
-      value: initialValue,
-      // last callback
-      callback,
-      // "memoized" public interface
-      facade: {
-        get current() {
-          return ref.value;
-        },
-        set current(value) {
-          var last = ref.value;
-          if (last !== value) {
-            ref.value = value;
-            ref.callback(value, last);
-          }
-        }
-      }
-    };
-  })[0];
-  ref.callback = callback;
-  return ref.facade;
-}
-var useIsomorphicLayoutEffect = typeof window !== "undefined" ? reactExports.useLayoutEffect : reactExports.useEffect;
-var currentValues = /* @__PURE__ */ new WeakMap();
-function useMergeRefs(refs, defaultValue) {
-  var callbackRef = useCallbackRef(null, function(newValue) {
-    return refs.forEach(function(ref) {
-      return assignRef(ref, newValue);
-    });
-  });
-  useIsomorphicLayoutEffect(function() {
-    var oldValue = currentValues.get(callbackRef);
-    if (oldValue) {
-      var prevRefs_1 = new Set(oldValue);
-      var nextRefs_1 = new Set(refs);
-      var current_1 = callbackRef.current;
-      prevRefs_1.forEach(function(ref) {
-        if (!nextRefs_1.has(ref)) {
-          assignRef(ref, null);
-        }
-      });
-      nextRefs_1.forEach(function(ref) {
-        if (!prevRefs_1.has(ref)) {
-          assignRef(ref, current_1);
-        }
-      });
-    }
-    currentValues.set(callbackRef, refs);
-  }, [refs]);
-  return callbackRef;
-}
-function ItoI(a2) {
-  return a2;
-}
-function innerCreateMedium(defaults, middleware) {
-  if (middleware === void 0) {
-    middleware = ItoI;
-  }
-  var buffer = [];
-  var assigned = false;
-  var medium = {
-    read: function() {
-      if (assigned) {
-        throw new Error("Sidecar: could not `read` from an `assigned` medium. `read` could be used only with `useMedium`.");
-      }
-      if (buffer.length) {
-        return buffer[buffer.length - 1];
-      }
-      return defaults;
-    },
-    useMedium: function(data) {
-      var item = middleware(data, assigned);
-      buffer.push(item);
-      return function() {
-        buffer = buffer.filter(function(x3) {
-          return x3 !== item;
-        });
-      };
-    },
-    assignSyncMedium: function(cb) {
-      assigned = true;
-      while (buffer.length) {
-        var cbs = buffer;
-        buffer = [];
-        cbs.forEach(cb);
-      }
-      buffer = {
-        push: function(x3) {
-          return cb(x3);
-        },
-        filter: function() {
-          return buffer;
-        }
-      };
-    },
-    assignMedium: function(cb) {
-      assigned = true;
-      var pendingQueue = [];
-      if (buffer.length) {
-        var cbs = buffer;
-        buffer = [];
-        cbs.forEach(cb);
-        pendingQueue = buffer;
-      }
-      var executeQueue = function() {
-        var cbs2 = pendingQueue;
-        pendingQueue = [];
-        cbs2.forEach(cb);
-      };
-      var cycle = function() {
-        return Promise.resolve().then(executeQueue);
-      };
-      cycle();
-      buffer = {
-        push: function(x3) {
-          pendingQueue.push(x3);
-          cycle();
-        },
-        filter: function(filter) {
-          pendingQueue = pendingQueue.filter(filter);
-          return buffer;
-        }
-      };
-    }
-  };
-  return medium;
-}
-function createSidecarMedium(options) {
-  if (options === void 0) {
-    options = {};
-  }
-  var medium = innerCreateMedium(null);
-  medium.options = __assign({ async: true, ssr: false }, options);
-  return medium;
-}
-var SideCar$1 = function(_a2) {
-  var sideCar = _a2.sideCar, rest = __rest(_a2, ["sideCar"]);
-  if (!sideCar) {
-    throw new Error("Sidecar: please provide `sideCar` property to import the right car");
-  }
-  var Target = sideCar.read();
-  if (!Target) {
-    throw new Error("Sidecar medium not found");
-  }
-  return reactExports.createElement(Target, __assign({}, rest));
-};
-SideCar$1.isSideCarExport = true;
-function exportSidecar(medium, exported) {
-  medium.useMedium(exported);
-  return SideCar$1;
-}
-var effectCar = createSidecarMedium();
-var nothing = function() {
-  return;
-};
-var RemoveScroll = reactExports.forwardRef(function(props, parentRef) {
-  var ref = reactExports.useRef(null);
-  var _a2 = reactExports.useState({
-    onScrollCapture: nothing,
-    onWheelCapture: nothing,
-    onTouchMoveCapture: nothing
-  }), callbacks = _a2[0], setCallbacks = _a2[1];
-  var forwardProps = props.forwardProps, children = props.children, className = props.className, removeScrollBar = props.removeScrollBar, enabled = props.enabled, shards = props.shards, sideCar = props.sideCar, noRelative = props.noRelative, noIsolation = props.noIsolation, inert = props.inert, allowPinchZoom = props.allowPinchZoom, _b2 = props.as, Container = _b2 === void 0 ? "div" : _b2, gapMode = props.gapMode, rest = __rest(props, ["forwardProps", "children", "className", "removeScrollBar", "enabled", "shards", "sideCar", "noRelative", "noIsolation", "inert", "allowPinchZoom", "as", "gapMode"]);
-  var SideCar2 = sideCar;
-  var containerRef = useMergeRefs([ref, parentRef]);
-  var containerProps = __assign(__assign({}, rest), callbacks);
-  return reactExports.createElement(
-    reactExports.Fragment,
-    null,
-    enabled && reactExports.createElement(SideCar2, { sideCar: effectCar, removeScrollBar, shards, noRelative, noIsolation, inert, setCallbacks, allowPinchZoom: !!allowPinchZoom, lockRef: ref, gapMode }),
-    forwardProps ? reactExports.cloneElement(reactExports.Children.only(children), __assign(__assign({}, containerProps), { ref: containerRef })) : reactExports.createElement(Container, __assign({}, containerProps, { className, ref: containerRef }), children)
-  );
-});
-RemoveScroll.defaultProps = {
-  enabled: true,
-  removeScrollBar: true,
-  inert: false
-};
-RemoveScroll.classNames = {
-  fullWidth: fullWidthClassName,
-  zeroRight: zeroRightClassName
-};
-var getNonce = function() {
-  if (typeof __webpack_nonce__ !== "undefined") {
-    return __webpack_nonce__;
-  }
-  return void 0;
-};
-function makeStyleTag() {
-  if (!document)
-    return null;
-  var tag = document.createElement("style");
-  tag.type = "text/css";
-  var nonce = getNonce();
-  if (nonce) {
-    tag.setAttribute("nonce", nonce);
-  }
-  return tag;
-}
-function injectStyles(tag, css) {
-  if (tag.styleSheet) {
-    tag.styleSheet.cssText = css;
-  } else {
-    tag.appendChild(document.createTextNode(css));
-  }
-}
-function insertStyleTag(tag) {
-  var head = document.head || document.getElementsByTagName("head")[0];
-  head.appendChild(tag);
-}
-var stylesheetSingleton = function() {
-  var counter = 0;
-  var stylesheet = null;
-  return {
-    add: function(style2) {
-      if (counter == 0) {
-        if (stylesheet = makeStyleTag()) {
-          injectStyles(stylesheet, style2);
-          insertStyleTag(stylesheet);
-        }
-      }
-      counter++;
-    },
-    remove: function() {
-      counter--;
-      if (!counter && stylesheet) {
-        stylesheet.parentNode && stylesheet.parentNode.removeChild(stylesheet);
-        stylesheet = null;
-      }
-    }
-  };
-};
-var styleHookSingleton = function() {
-  var sheet = stylesheetSingleton();
-  return function(styles, isDynamic) {
-    reactExports.useEffect(function() {
-      sheet.add(styles);
-      return function() {
-        sheet.remove();
-      };
-    }, [styles && isDynamic]);
-  };
-};
-var styleSingleton = function() {
-  var useStyle = styleHookSingleton();
-  var Sheet2 = function(_a2) {
-    var styles = _a2.styles, dynamic = _a2.dynamic;
-    useStyle(styles, dynamic);
-    return null;
-  };
-  return Sheet2;
-};
-var zeroGap = {
-  left: 0,
-  top: 0,
-  right: 0,
-  gap: 0
-};
-var parse = function(x3) {
-  return parseInt(x3 || "", 10) || 0;
-};
-var getOffset = function(gapMode) {
-  var cs = window.getComputedStyle(document.body);
-  var left = cs[gapMode === "padding" ? "paddingLeft" : "marginLeft"];
-  var top = cs[gapMode === "padding" ? "paddingTop" : "marginTop"];
-  var right = cs[gapMode === "padding" ? "paddingRight" : "marginRight"];
-  return [parse(left), parse(top), parse(right)];
-};
-var getGapWidth = function(gapMode) {
-  if (gapMode === void 0) {
-    gapMode = "margin";
-  }
-  if (typeof window === "undefined") {
-    return zeroGap;
-  }
-  var offsets = getOffset(gapMode);
-  var documentWidth = document.documentElement.clientWidth;
-  var windowWidth = window.innerWidth;
-  return {
-    left: offsets[0],
-    top: offsets[1],
-    right: offsets[2],
-    gap: Math.max(0, windowWidth - documentWidth + offsets[2] - offsets[0])
-  };
-};
-var Style = styleSingleton();
-var lockAttribute = "data-scroll-locked";
-var getStyles = function(_a2, allowRelative, gapMode, important) {
-  var left = _a2.left, top = _a2.top, right = _a2.right, gap = _a2.gap;
-  if (gapMode === void 0) {
-    gapMode = "margin";
-  }
-  return "\n  .".concat(noScrollbarsClassName, " {\n   overflow: hidden ").concat(important, ";\n   padding-right: ").concat(gap, "px ").concat(important, ";\n  }\n  body[").concat(lockAttribute, "] {\n    overflow: hidden ").concat(important, ";\n    overscroll-behavior: contain;\n    ").concat([
-    allowRelative && "position: relative ".concat(important, ";"),
-    gapMode === "margin" && "\n    padding-left: ".concat(left, "px;\n    padding-top: ").concat(top, "px;\n    padding-right: ").concat(right, "px;\n    margin-left:0;\n    margin-top:0;\n    margin-right: ").concat(gap, "px ").concat(important, ";\n    "),
-    gapMode === "padding" && "padding-right: ".concat(gap, "px ").concat(important, ";")
-  ].filter(Boolean).join(""), "\n  }\n  \n  .").concat(zeroRightClassName, " {\n    right: ").concat(gap, "px ").concat(important, ";\n  }\n  \n  .").concat(fullWidthClassName, " {\n    margin-right: ").concat(gap, "px ").concat(important, ";\n  }\n  \n  .").concat(zeroRightClassName, " .").concat(zeroRightClassName, " {\n    right: 0 ").concat(important, ";\n  }\n  \n  .").concat(fullWidthClassName, " .").concat(fullWidthClassName, " {\n    margin-right: 0 ").concat(important, ";\n  }\n  \n  body[").concat(lockAttribute, "] {\n    ").concat(removedBarSizeVariable, ": ").concat(gap, "px;\n  }\n");
-};
-var getCurrentUseCounter = function() {
-  var counter = parseInt(document.body.getAttribute(lockAttribute) || "0", 10);
-  return isFinite(counter) ? counter : 0;
-};
-var useLockAttribute = function() {
-  reactExports.useEffect(function() {
-    document.body.setAttribute(lockAttribute, (getCurrentUseCounter() + 1).toString());
-    return function() {
-      var newCounter = getCurrentUseCounter() - 1;
-      if (newCounter <= 0) {
-        document.body.removeAttribute(lockAttribute);
-      } else {
-        document.body.setAttribute(lockAttribute, newCounter.toString());
-      }
-    };
-  }, []);
-};
-var RemoveScrollBar = function(_a2) {
-  var noRelative = _a2.noRelative, noImportant = _a2.noImportant, _b2 = _a2.gapMode, gapMode = _b2 === void 0 ? "margin" : _b2;
-  useLockAttribute();
-  var gap = reactExports.useMemo(function() {
-    return getGapWidth(gapMode);
-  }, [gapMode]);
-  return reactExports.createElement(Style, { styles: getStyles(gap, !noRelative, gapMode, !noImportant ? "!important" : "") });
-};
-var passiveSupported = false;
-if (typeof window !== "undefined") {
-  try {
-    var options = Object.defineProperty({}, "passive", {
-      get: function() {
-        passiveSupported = true;
-        return true;
-      }
-    });
-    window.addEventListener("test", options, options);
-    window.removeEventListener("test", options, options);
-  } catch (err) {
-    passiveSupported = false;
-  }
-}
-var nonPassive = passiveSupported ? { passive: false } : false;
-var alwaysContainsScroll = function(node) {
-  return node.tagName === "TEXTAREA";
-};
-var elementCanBeScrolled = function(node, overflow) {
-  if (!(node instanceof Element)) {
-    return false;
-  }
-  var styles = window.getComputedStyle(node);
-  return (
-    // not-not-scrollable
-    styles[overflow] !== "hidden" && // contains scroll inside self
-    !(styles.overflowY === styles.overflowX && !alwaysContainsScroll(node) && styles[overflow] === "visible")
-  );
-};
-var elementCouldBeVScrolled = function(node) {
-  return elementCanBeScrolled(node, "overflowY");
-};
-var elementCouldBeHScrolled = function(node) {
-  return elementCanBeScrolled(node, "overflowX");
-};
-var locationCouldBeScrolled = function(axis, node) {
-  var ownerDocument = node.ownerDocument;
-  var current = node;
-  do {
-    if (typeof ShadowRoot !== "undefined" && current instanceof ShadowRoot) {
-      current = current.host;
-    }
-    var isScrollable = elementCouldBeScrolled(axis, current);
-    if (isScrollable) {
-      var _a2 = getScrollVariables(axis, current), scrollHeight = _a2[1], clientHeight = _a2[2];
-      if (scrollHeight > clientHeight) {
-        return true;
-      }
-    }
-    current = current.parentNode;
-  } while (current && current !== ownerDocument.body);
-  return false;
-};
-var getVScrollVariables = function(_a2) {
-  var scrollTop = _a2.scrollTop, scrollHeight = _a2.scrollHeight, clientHeight = _a2.clientHeight;
-  return [
-    scrollTop,
-    scrollHeight,
-    clientHeight
-  ];
-};
-var getHScrollVariables = function(_a2) {
-  var scrollLeft = _a2.scrollLeft, scrollWidth = _a2.scrollWidth, clientWidth = _a2.clientWidth;
-  return [
-    scrollLeft,
-    scrollWidth,
-    clientWidth
-  ];
-};
-var elementCouldBeScrolled = function(axis, node) {
-  return axis === "v" ? elementCouldBeVScrolled(node) : elementCouldBeHScrolled(node);
-};
-var getScrollVariables = function(axis, node) {
-  return axis === "v" ? getVScrollVariables(node) : getHScrollVariables(node);
-};
-var getDirectionFactor = function(axis, direction) {
-  return axis === "h" && direction === "rtl" ? -1 : 1;
-};
-var handleScroll = function(axis, endTarget, event, sourceDelta, noOverscroll) {
-  var directionFactor = getDirectionFactor(axis, window.getComputedStyle(endTarget).direction);
-  var delta = directionFactor * sourceDelta;
-  var target = event.target;
-  var targetInLock = endTarget.contains(target);
-  var shouldCancelScroll = false;
-  var isDeltaPositive = delta > 0;
-  var availableScroll = 0;
-  var availableScrollTop = 0;
-  do {
-    if (!target) {
-      break;
-    }
-    var _a2 = getScrollVariables(axis, target), position = _a2[0], scroll_1 = _a2[1], capacity = _a2[2];
-    var elementScroll = scroll_1 - capacity - directionFactor * position;
-    if (position || elementScroll) {
-      if (elementCouldBeScrolled(axis, target)) {
-        availableScroll += elementScroll;
-        availableScrollTop += position;
-      }
-    }
-    var parent_1 = target.parentNode;
-    target = parent_1 && parent_1.nodeType === Node.DOCUMENT_FRAGMENT_NODE ? parent_1.host : parent_1;
-  } while (
-    // portaled content
-    !targetInLock && target !== document.body || // self content
-    targetInLock && (endTarget.contains(target) || endTarget === target)
-  );
-  if (isDeltaPositive && (Math.abs(availableScroll) < 1 || false)) {
-    shouldCancelScroll = true;
-  } else if (!isDeltaPositive && (Math.abs(availableScrollTop) < 1 || false)) {
-    shouldCancelScroll = true;
-  }
-  return shouldCancelScroll;
-};
-var getTouchXY = function(event) {
-  return "changedTouches" in event ? [event.changedTouches[0].clientX, event.changedTouches[0].clientY] : [0, 0];
-};
-var getDeltaXY = function(event) {
-  return [event.deltaX, event.deltaY];
-};
-var extractRef = function(ref) {
-  return ref && "current" in ref ? ref.current : ref;
-};
-var deltaCompare = function(x3, y2) {
-  return x3[0] === y2[0] && x3[1] === y2[1];
-};
-var generateStyle = function(id) {
-  return "\n  .block-interactivity-".concat(id, " {pointer-events: none;}\n  .allow-interactivity-").concat(id, " {pointer-events: all;}\n");
-};
-var idCounter = 0;
-var lockStack = [];
-function RemoveScrollSideCar(props) {
-  var shouldPreventQueue = reactExports.useRef([]);
-  var touchStartRef = reactExports.useRef([0, 0]);
-  var activeAxis = reactExports.useRef();
-  var id = reactExports.useState(idCounter++)[0];
-  var Style2 = reactExports.useState(styleSingleton)[0];
-  var lastProps = reactExports.useRef(props);
-  reactExports.useEffect(function() {
-    lastProps.current = props;
-  }, [props]);
-  reactExports.useEffect(function() {
-    if (props.inert) {
-      document.body.classList.add("block-interactivity-".concat(id));
-      var allow_1 = __spreadArray([props.lockRef.current], (props.shards || []).map(extractRef), true).filter(Boolean);
-      allow_1.forEach(function(el) {
-        return el.classList.add("allow-interactivity-".concat(id));
-      });
-      return function() {
-        document.body.classList.remove("block-interactivity-".concat(id));
-        allow_1.forEach(function(el) {
-          return el.classList.remove("allow-interactivity-".concat(id));
-        });
-      };
-    }
-    return;
-  }, [props.inert, props.lockRef.current, props.shards]);
-  var shouldCancelEvent = reactExports.useCallback(function(event, parent) {
-    if ("touches" in event && event.touches.length === 2 || event.type === "wheel" && event.ctrlKey) {
-      return !lastProps.current.allowPinchZoom;
-    }
-    var touch = getTouchXY(event);
-    var touchStart = touchStartRef.current;
-    var deltaX = "deltaX" in event ? event.deltaX : touchStart[0] - touch[0];
-    var deltaY = "deltaY" in event ? event.deltaY : touchStart[1] - touch[1];
-    var currentAxis;
-    var target = event.target;
-    var moveDirection = Math.abs(deltaX) > Math.abs(deltaY) ? "h" : "v";
-    if ("touches" in event && moveDirection === "h" && target.type === "range") {
-      return false;
-    }
-    var selection = window.getSelection();
-    var anchorNode = selection && selection.anchorNode;
-    var isTouchingSelection = anchorNode ? anchorNode === target || anchorNode.contains(target) : false;
-    if (isTouchingSelection) {
-      return false;
-    }
-    var canBeScrolledInMainDirection = locationCouldBeScrolled(moveDirection, target);
-    if (!canBeScrolledInMainDirection) {
-      return true;
-    }
-    if (canBeScrolledInMainDirection) {
-      currentAxis = moveDirection;
-    } else {
-      currentAxis = moveDirection === "v" ? "h" : "v";
-      canBeScrolledInMainDirection = locationCouldBeScrolled(moveDirection, target);
-    }
-    if (!canBeScrolledInMainDirection) {
-      return false;
-    }
-    if (!activeAxis.current && "changedTouches" in event && (deltaX || deltaY)) {
-      activeAxis.current = currentAxis;
-    }
-    if (!currentAxis) {
-      return true;
-    }
-    var cancelingAxis = activeAxis.current || currentAxis;
-    return handleScroll(cancelingAxis, parent, event, cancelingAxis === "h" ? deltaX : deltaY);
-  }, []);
-  var shouldPrevent = reactExports.useCallback(function(_event) {
-    var event = _event;
-    if (!lockStack.length || lockStack[lockStack.length - 1] !== Style2) {
-      return;
-    }
-    var delta = "deltaY" in event ? getDeltaXY(event) : getTouchXY(event);
-    var sourceEvent = shouldPreventQueue.current.filter(function(e) {
-      return e.name === event.type && (e.target === event.target || event.target === e.shadowParent) && deltaCompare(e.delta, delta);
-    })[0];
-    if (sourceEvent && sourceEvent.should) {
-      if (event.cancelable) {
-        event.preventDefault();
-      }
-      return;
-    }
-    if (!sourceEvent) {
-      var shardNodes = (lastProps.current.shards || []).map(extractRef).filter(Boolean).filter(function(node) {
-        return node.contains(event.target);
-      });
-      var shouldStop = shardNodes.length > 0 ? shouldCancelEvent(event, shardNodes[0]) : !lastProps.current.noIsolation;
-      if (shouldStop) {
-        if (event.cancelable) {
-          event.preventDefault();
-        }
-      }
-    }
-  }, []);
-  var shouldCancel = reactExports.useCallback(function(name, delta, target, should) {
-    var event = { name, delta, target, should, shadowParent: getOutermostShadowParent(target) };
-    shouldPreventQueue.current.push(event);
-    setTimeout(function() {
-      shouldPreventQueue.current = shouldPreventQueue.current.filter(function(e) {
-        return e !== event;
-      });
-    }, 1);
-  }, []);
-  var scrollTouchStart = reactExports.useCallback(function(event) {
-    touchStartRef.current = getTouchXY(event);
-    activeAxis.current = void 0;
-  }, []);
-  var scrollWheel = reactExports.useCallback(function(event) {
-    shouldCancel(event.type, getDeltaXY(event), event.target, shouldCancelEvent(event, props.lockRef.current));
-  }, []);
-  var scrollTouchMove = reactExports.useCallback(function(event) {
-    shouldCancel(event.type, getTouchXY(event), event.target, shouldCancelEvent(event, props.lockRef.current));
-  }, []);
-  reactExports.useEffect(function() {
-    lockStack.push(Style2);
-    props.setCallbacks({
-      onScrollCapture: scrollWheel,
-      onWheelCapture: scrollWheel,
-      onTouchMoveCapture: scrollTouchMove
-    });
-    document.addEventListener("wheel", shouldPrevent, nonPassive);
-    document.addEventListener("touchmove", shouldPrevent, nonPassive);
-    document.addEventListener("touchstart", scrollTouchStart, nonPassive);
-    return function() {
-      lockStack = lockStack.filter(function(inst) {
-        return inst !== Style2;
-      });
-      document.removeEventListener("wheel", shouldPrevent, nonPassive);
-      document.removeEventListener("touchmove", shouldPrevent, nonPassive);
-      document.removeEventListener("touchstart", scrollTouchStart, nonPassive);
-    };
-  }, []);
-  var removeScrollBar = props.removeScrollBar, inert = props.inert;
-  return reactExports.createElement(
-    reactExports.Fragment,
-    null,
-    inert ? reactExports.createElement(Style2, { styles: generateStyle(id) }) : null,
-    removeScrollBar ? reactExports.createElement(RemoveScrollBar, { noRelative: props.noRelative, gapMode: props.gapMode }) : null
-  );
-}
-function getOutermostShadowParent(node) {
-  var shadowParent = null;
-  while (node !== null) {
-    if (node instanceof ShadowRoot) {
-      shadowParent = node.host;
-      node = node.host;
-    }
-    node = node.parentNode;
-  }
-  return shadowParent;
-}
-const SideCar = exportSidecar(effectCar, RemoveScrollSideCar);
-var ReactRemoveScroll = reactExports.forwardRef(function(props, ref) {
-  return reactExports.createElement(RemoveScroll, __assign({}, props, { ref, sideCar: SideCar }));
-});
-ReactRemoveScroll.classNames = RemoveScroll.classNames;
-var getDefaultParent = function(originalTarget) {
-  if (typeof document === "undefined") {
-    return null;
-  }
-  var sampleTarget = Array.isArray(originalTarget) ? originalTarget[0] : originalTarget;
-  return sampleTarget.ownerDocument.body;
-};
-var counterMap = /* @__PURE__ */ new WeakMap();
-var uncontrolledNodes = /* @__PURE__ */ new WeakMap();
-var markerMap = {};
-var lockCount = 0;
-var unwrapHost = function(node) {
-  return node && (node.host || unwrapHost(node.parentNode));
-};
-var correctTargets = function(parent, targets) {
-  return targets.map(function(target) {
-    if (parent.contains(target)) {
-      return target;
-    }
-    var correctedTarget = unwrapHost(target);
-    if (correctedTarget && parent.contains(correctedTarget)) {
-      return correctedTarget;
-    }
-    console.error("aria-hidden", target, "in not contained inside", parent, ". Doing nothing");
-    return null;
-  }).filter(function(x3) {
-    return Boolean(x3);
-  });
-};
-var applyAttributeToOthers = function(originalTarget, parentNode, markerName, controlAttribute) {
-  var targets = correctTargets(parentNode, Array.isArray(originalTarget) ? originalTarget : [originalTarget]);
-  if (!markerMap[markerName]) {
-    markerMap[markerName] = /* @__PURE__ */ new WeakMap();
-  }
-  var markerCounter = markerMap[markerName];
-  var hiddenNodes = [];
-  var elementsToKeep = /* @__PURE__ */ new Set();
-  var elementsToStop = new Set(targets);
-  var keep = function(el) {
-    if (!el || elementsToKeep.has(el)) {
-      return;
-    }
-    elementsToKeep.add(el);
-    keep(el.parentNode);
-  };
-  targets.forEach(keep);
-  var deep = function(parent) {
-    if (!parent || elementsToStop.has(parent)) {
-      return;
-    }
-    Array.prototype.forEach.call(parent.children, function(node) {
-      if (elementsToKeep.has(node)) {
-        deep(node);
-      } else {
-        try {
-          var attr = node.getAttribute(controlAttribute);
-          var alreadyHidden = attr !== null && attr !== "false";
-          var counterValue = (counterMap.get(node) || 0) + 1;
-          var markerValue = (markerCounter.get(node) || 0) + 1;
-          counterMap.set(node, counterValue);
-          markerCounter.set(node, markerValue);
-          hiddenNodes.push(node);
-          if (counterValue === 1 && alreadyHidden) {
-            uncontrolledNodes.set(node, true);
-          }
-          if (markerValue === 1) {
-            node.setAttribute(markerName, "true");
-          }
-          if (!alreadyHidden) {
-            node.setAttribute(controlAttribute, "true");
-          }
-        } catch (e) {
-          console.error("aria-hidden: cannot operate on ", node, e);
-        }
-      }
-    });
-  };
-  deep(parentNode);
-  elementsToKeep.clear();
-  lockCount++;
-  return function() {
-    hiddenNodes.forEach(function(node) {
-      var counterValue = counterMap.get(node) - 1;
-      var markerValue = markerCounter.get(node) - 1;
-      counterMap.set(node, counterValue);
-      markerCounter.set(node, markerValue);
-      if (!counterValue) {
-        if (!uncontrolledNodes.has(node)) {
-          node.removeAttribute(controlAttribute);
-        }
-        uncontrolledNodes.delete(node);
-      }
-      if (!markerValue) {
-        node.removeAttribute(markerName);
-      }
-    });
-    lockCount--;
-    if (!lockCount) {
-      counterMap = /* @__PURE__ */ new WeakMap();
-      counterMap = /* @__PURE__ */ new WeakMap();
-      uncontrolledNodes = /* @__PURE__ */ new WeakMap();
-      markerMap = {};
-    }
-  };
-};
-var hideOthers = function(originalTarget, parentNode, markerName) {
-  if (markerName === void 0) {
-    markerName = "data-aria-hidden";
-  }
-  var targets = Array.from(Array.isArray(originalTarget) ? originalTarget : [originalTarget]);
-  var activeParentNode = getDefaultParent(originalTarget);
-  if (!activeParentNode) {
-    return function() {
-      return null;
-    };
-  }
-  targets.push.apply(targets, Array.from(activeParentNode.querySelectorAll("[aria-live], script")));
-  return applyAttributeToOthers(targets, activeParentNode, markerName, "aria-hidden");
-};
-var DIALOG_NAME = "Dialog";
-var [createDialogContext] = createContextScope(DIALOG_NAME);
-var [DialogProvider, useDialogContext] = createDialogContext(DIALOG_NAME);
-var Dialog$1 = (props) => {
-  const {
-    __scopeDialog,
-    children,
-    open: openProp,
-    defaultOpen,
-    onOpenChange,
-    modal = true
-  } = props;
-  const triggerRef = reactExports.useRef(null);
-  const contentRef = reactExports.useRef(null);
-  const [open, setOpen] = useControllableState({
-    prop: openProp,
-    defaultProp: defaultOpen ?? false,
-    onChange: onOpenChange,
-    caller: DIALOG_NAME
-  });
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    DialogProvider,
-    {
-      scope: __scopeDialog,
-      triggerRef,
-      contentRef,
-      contentId: useId(),
-      titleId: useId(),
-      descriptionId: useId(),
-      open,
-      onOpenChange: setOpen,
-      onOpenToggle: reactExports.useCallback(() => setOpen((prevOpen) => !prevOpen), [setOpen]),
-      modal,
-      children
-    }
-  );
-};
-Dialog$1.displayName = DIALOG_NAME;
-var TRIGGER_NAME = "DialogTrigger";
-var DialogTrigger$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...triggerProps } = props;
-    const context = useDialogContext(TRIGGER_NAME, __scopeDialog);
-    const composedTriggerRef = useComposedRefs(forwardedRef, context.triggerRef);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Primitive.button,
+  const createLink = () => {
+    const expires = /* @__PURE__ */ new Date();
+    expires.setDate(expires.getDate() + 21);
+    setLinks((current) => [
       {
-        type: "button",
-        "aria-haspopup": "dialog",
-        "aria-expanded": context.open,
-        "aria-controls": context.contentId,
-        "data-state": getState(context.open),
-        ...triggerProps,
-        ref: composedTriggerRef,
-        onClick: composeEventHandlers(props.onClick, context.onOpenToggle)
-      }
-    );
-  }
-);
-DialogTrigger$1.displayName = TRIGGER_NAME;
-var PORTAL_NAME = "DialogPortal";
-var [PortalProvider, usePortalContext] = createDialogContext(PORTAL_NAME, {
-  forceMount: void 0
-});
-var DialogPortal$1 = (props) => {
-  const { __scopeDialog, forceMount, children, container } = props;
-  const context = useDialogContext(PORTAL_NAME, __scopeDialog);
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(PortalProvider, { scope: __scopeDialog, forceMount, children: reactExports.Children.map(children, (child) => /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(Portal$1, { asChild: true, container, children: child }) })) });
-};
-DialogPortal$1.displayName = PORTAL_NAME;
-var OVERLAY_NAME = "DialogOverlay";
-var DialogOverlay$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const portalContext = usePortalContext(OVERLAY_NAME, props.__scopeDialog);
-    const { forceMount = portalContext.forceMount, ...overlayProps } = props;
-    const context = useDialogContext(OVERLAY_NAME, props.__scopeDialog);
-    return context.modal ? /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: /* @__PURE__ */ jsxRuntimeExports.jsx(DialogOverlayImpl, { ...overlayProps, ref: forwardedRef }) }) : null;
-  }
-);
-DialogOverlay$1.displayName = OVERLAY_NAME;
-var Slot = /* @__PURE__ */ createSlot("DialogOverlay.RemoveScroll");
-var DialogOverlayImpl = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...overlayProps } = props;
-    const context = useDialogContext(OVERLAY_NAME, __scopeDialog);
-    return (
-      // Make sure `Content` is scrollable even when it doesn't live inside `RemoveScroll`
-      // ie. when `Overlay` and `Content` are siblings
-      /* @__PURE__ */ jsxRuntimeExports.jsx(ReactRemoveScroll, { as: Slot, allowPinchZoom: true, shards: [context.contentRef], children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Primitive.div,
-        {
-          "data-state": getState(context.open),
-          ...overlayProps,
-          ref: forwardedRef,
-          style: { pointerEvents: "auto", ...overlayProps.style }
-        }
-      ) })
-    );
-  }
-);
-var CONTENT_NAME = "DialogContent";
-var DialogContent$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const portalContext = usePortalContext(CONTENT_NAME, props.__scopeDialog);
-    const { forceMount = portalContext.forceMount, ...contentProps } = props;
-    const context = useDialogContext(CONTENT_NAME, props.__scopeDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || context.open, children: context.modal ? /* @__PURE__ */ jsxRuntimeExports.jsx(DialogContentModal, { ...contentProps, ref: forwardedRef }) : /* @__PURE__ */ jsxRuntimeExports.jsx(DialogContentNonModal, { ...contentProps, ref: forwardedRef }) });
-  }
-);
-DialogContent$1.displayName = CONTENT_NAME;
-var DialogContentModal = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const context = useDialogContext(CONTENT_NAME, props.__scopeDialog);
-    const contentRef = reactExports.useRef(null);
-    const composedRefs = useComposedRefs(forwardedRef, context.contentRef, contentRef);
-    reactExports.useEffect(() => {
-      const content = contentRef.current;
-      if (content) return hideOthers(content);
-    }, []);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      DialogContentImpl,
-      {
-        ...props,
-        ref: composedRefs,
-        trapFocus: context.open,
-        disableOutsidePointerEvents: true,
-        onCloseAutoFocus: composeEventHandlers(props.onCloseAutoFocus, (event) => {
-          var _a2;
-          event.preventDefault();
-          (_a2 = context.triggerRef.current) == null ? void 0 : _a2.focus();
-        }),
-        onPointerDownOutside: composeEventHandlers(props.onPointerDownOutside, (event) => {
-          const originalEvent = event.detail.originalEvent;
-          const ctrlLeftClick = originalEvent.button === 0 && originalEvent.ctrlKey === true;
-          const isRightClick = originalEvent.button === 2 || ctrlLeftClick;
-          if (isRightClick) event.preventDefault();
-        }),
-        onFocusOutside: composeEventHandlers(
-          props.onFocusOutside,
-          (event) => event.preventDefault()
-        )
-      }
-    );
-  }
-);
-var DialogContentNonModal = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const context = useDialogContext(CONTENT_NAME, props.__scopeDialog);
-    const hasInteractedOutsideRef = reactExports.useRef(false);
-    const hasPointerDownOutsideRef = reactExports.useRef(false);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      DialogContentImpl,
-      {
-        ...props,
-        ref: forwardedRef,
-        trapFocus: false,
-        disableOutsidePointerEvents: false,
-        onCloseAutoFocus: (event) => {
-          var _a2, _b2;
-          (_a2 = props.onCloseAutoFocus) == null ? void 0 : _a2.call(props, event);
-          if (!event.defaultPrevented) {
-            if (!hasInteractedOutsideRef.current) (_b2 = context.triggerRef.current) == null ? void 0 : _b2.focus();
-            event.preventDefault();
-          }
-          hasInteractedOutsideRef.current = false;
-          hasPointerDownOutsideRef.current = false;
-        },
-        onInteractOutside: (event) => {
-          var _a2, _b2;
-          (_a2 = props.onInteractOutside) == null ? void 0 : _a2.call(props, event);
-          if (!event.defaultPrevented) {
-            hasInteractedOutsideRef.current = true;
-            if (event.detail.originalEvent.type === "pointerdown") {
-              hasPointerDownOutsideRef.current = true;
-            }
-          }
-          const target = event.target;
-          const targetIsTrigger = (_b2 = context.triggerRef.current) == null ? void 0 : _b2.contains(target);
-          if (targetIsTrigger) event.preventDefault();
-          if (event.detail.originalEvent.type === "focusin" && hasPointerDownOutsideRef.current) {
-            event.preventDefault();
-          }
-        }
-      }
-    );
-  }
-);
-var DialogContentImpl = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, trapFocus, onOpenAutoFocus, onCloseAutoFocus, ...contentProps } = props;
-    const context = useDialogContext(CONTENT_NAME, __scopeDialog);
-    const contentRef = reactExports.useRef(null);
-    const composedRefs = useComposedRefs(forwardedRef, contentRef);
-    useFocusGuards();
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        FocusScope,
-        {
-          asChild: true,
-          loop: true,
-          trapped: trapFocus,
-          onMountAutoFocus: onOpenAutoFocus,
-          onUnmountAutoFocus: onCloseAutoFocus,
-          children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-            DismissableLayer,
-            {
-              role: "dialog",
-              id: context.contentId,
-              "aria-describedby": context.descriptionId,
-              "aria-labelledby": context.titleId,
-              "data-state": getState(context.open),
-              ...contentProps,
-              ref: composedRefs,
-              onDismiss: () => context.onOpenChange(false)
-            }
-          )
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(jsxRuntimeExports.Fragment, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(TitleWarning, { titleId: context.titleId }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(DescriptionWarning, { contentRef, descriptionId: context.descriptionId })
-      ] })
-    ] });
-  }
-);
-var TITLE_NAME = "DialogTitle";
-var DialogTitle$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...titleProps } = props;
-    const context = useDialogContext(TITLE_NAME, __scopeDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.h2, { id: context.titleId, ...titleProps, ref: forwardedRef });
-  }
-);
-DialogTitle$1.displayName = TITLE_NAME;
-var DESCRIPTION_NAME = "DialogDescription";
-var DialogDescription$1 = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...descriptionProps } = props;
-    const context = useDialogContext(DESCRIPTION_NAME, __scopeDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Primitive.p, { id: context.descriptionId, ...descriptionProps, ref: forwardedRef });
-  }
-);
-DialogDescription$1.displayName = DESCRIPTION_NAME;
-var CLOSE_NAME = "DialogClose";
-var DialogClose = reactExports.forwardRef(
-  (props, forwardedRef) => {
-    const { __scopeDialog, ...closeProps } = props;
-    const context = useDialogContext(CLOSE_NAME, __scopeDialog);
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Primitive.button,
-      {
-        type: "button",
-        ...closeProps,
-        ref: forwardedRef,
-        onClick: composeEventHandlers(props.onClick, () => context.onOpenChange(false))
-      }
-    );
-  }
-);
-DialogClose.displayName = CLOSE_NAME;
-function getState(open) {
-  return open ? "open" : "closed";
-}
-var TITLE_WARNING_NAME = "DialogTitleWarning";
-var [WarningProvider, useWarningContext] = createContext2(TITLE_WARNING_NAME, {
-  contentName: CONTENT_NAME,
-  titleName: TITLE_NAME,
-  docsSlug: "dialog"
-});
-var TitleWarning = ({ titleId }) => {
-  const titleWarningContext = useWarningContext(TITLE_WARNING_NAME);
-  const MESSAGE = `\`${titleWarningContext.contentName}\` requires a \`${titleWarningContext.titleName}\` for the component to be accessible for screen reader users.
-
-If you want to hide the \`${titleWarningContext.titleName}\`, you can wrap it with our VisuallyHidden component.
-
-For more information, see https://radix-ui.com/primitives/docs/components/${titleWarningContext.docsSlug}`;
-  reactExports.useEffect(() => {
-    if (titleId) {
-      const hasTitle = document.getElementById(titleId);
-      if (!hasTitle) console.error(MESSAGE);
-    }
-  }, [MESSAGE, titleId]);
-  return null;
-};
-var DESCRIPTION_WARNING_NAME = "DialogDescriptionWarning";
-var DescriptionWarning = ({ contentRef, descriptionId }) => {
-  const descriptionWarningContext = useWarningContext(DESCRIPTION_WARNING_NAME);
-  const MESSAGE = `Warning: Missing \`Description\` or \`aria-describedby={undefined}\` for {${descriptionWarningContext.contentName}}.`;
-  reactExports.useEffect(() => {
-    var _a2;
-    const describedById = (_a2 = contentRef.current) == null ? void 0 : _a2.getAttribute("aria-describedby");
-    if (descriptionId && describedById) {
-      const hasDescription = document.getElementById(descriptionId);
-      if (!hasDescription) console.warn(MESSAGE);
-    }
-  }, [MESSAGE, contentRef, descriptionId]);
-  return null;
-};
-var Root = Dialog$1;
-var Trigger = DialogTrigger$1;
-var Portal = DialogPortal$1;
-var Overlay = DialogOverlay$1;
-var Content = DialogContent$1;
-var Title = DialogTitle$1;
-var Description = DialogDescription$1;
-var Close = DialogClose;
-function Sheet({ ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Root, { "data-slot": "sheet", ...props });
-}
-function SheetTrigger({
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Trigger, { "data-slot": "sheet-trigger", ...props });
-}
-function SheetPortal({
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Portal, { "data-slot": "sheet-portal", ...props });
-}
-function SheetOverlay({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Overlay,
-    {
-      "data-slot": "sheet-overlay",
-      className: cn(
-        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function SheetContent({
-  className,
-  children,
-  side = "right",
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(SheetPortal, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(SheetOverlay, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      Content,
-      {
-        "data-slot": "sheet-content",
-        className: cn(
-          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col gap-4 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500",
-          side === "right" && "data-[state=closed]:slide-out-to-right data-[state=open]:slide-in-from-right inset-y-0 right-0 h-full w-3/4 border-l sm:max-w-sm",
-          side === "left" && "data-[state=closed]:slide-out-to-left data-[state=open]:slide-in-from-left inset-y-0 left-0 h-full w-3/4 border-r sm:max-w-sm",
-          side === "top" && "data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top inset-x-0 top-0 h-auto border-b",
-          side === "bottom" && "data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom inset-x-0 bottom-0 h-auto border-t",
-          className
-        ),
-        ...props,
-        children: [
-          children,
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(Close, { className: "ring-offset-background focus:ring-ring data-[state=open]:bg-secondary absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(X, { className: "size-4" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "sr-only", children: "Close" })
-          ] })
-        ]
-      }
-    )
-  ] });
-}
-var M = (e, i, s, u2, m2, a2, l2, h2) => {
-  let d2 = document.documentElement, w2 = ["light", "dark"];
-  function p2(n) {
-    (Array.isArray(e) ? e : [e]).forEach((y2) => {
-      let k2 = y2 === "class", S2 = k2 && a2 ? m2.map((f2) => a2[f2] || f2) : m2;
-      k2 ? (d2.classList.remove(...S2), d2.classList.add(a2 && a2[n] ? a2[n] : n)) : d2.setAttribute(y2, n);
-    }), R2(n);
-  }
-  function R2(n) {
-    h2 && w2.includes(n) && (d2.style.colorScheme = n);
-  }
-  function c2() {
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  }
-  if (u2) p2(u2);
-  else try {
-    let n = localStorage.getItem(i) || s, y2 = l2 && n === "system" ? c2() : n;
-    p2(y2);
-  } catch (n) {
-  }
-};
-var x2 = reactExports.createContext(void 0), U = { setTheme: (e) => {
-}, themes: [] }, z = () => {
-  var e;
-  return (e = reactExports.useContext(x2)) != null ? e : U;
-};
-reactExports.memo(({ forcedTheme: e, storageKey: i, attribute: s, enableSystem: u2, enableColorScheme: m2, defaultTheme: a2, value: l2, themes: h2, nonce: d2, scriptProps: w2 }) => {
-  let p2 = JSON.stringify([s, i, a2, e, h2, l2, u2, m2]).slice(1, -1);
-  return reactExports.createElement("script", { ...w2, suppressHydrationWarning: true, nonce: typeof window == "undefined" ? d2 : "", dangerouslySetInnerHTML: { __html: `(${M.toString()})(${p2})` } });
-});
-const navLinks = [
-  { label: "Resume", href: "#resume" },
-  { label: "Portfolio", href: "#portfolio" },
-  { label: "Contact", href: "#contact" }
-];
-function Navigation() {
-  const { theme, setTheme } = z();
-  const [open, setOpen] = reactExports.useState(false);
-  const handleClick = (href) => {
-    setOpen(false);
-    const el = document.querySelector(href);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("header", { className: "sticky top-0 z-50 bg-card border-b shadow-subtle", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto max-w-7xl px-4 sm:px-6 lg:px-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-16 items-center justify-between", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "button",
-      {
-        type: "button",
-        className: "text-lg font-display font-semibold text-foreground tracking-tight",
-        onClick: () => {
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        },
-        "data-ocid": "nav.home_link",
-        children: "Terry Brutus"
-      }
-    ),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("nav", { className: "hidden md:flex items-center gap-1", children: [
-      navLinks.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Button,
-        {
-          variant: "ghost",
-          onClick: () => handleClick(link.href),
-          "data-ocid": `nav.link.${link.label.toLowerCase()}`,
-          children: link.label
-        },
-        link.href
-      )),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Button,
-        {
-          variant: "ghost",
-          size: "icon",
-          onClick: () => setTheme(theme === "dark" ? "light" : "dark"),
-          "aria-label": "Toggle theme",
-          "data-ocid": "nav.theme_toggle",
-          children: theme === "dark" ? /* @__PURE__ */ jsxRuntimeExports.jsx(Sun, { className: "h-5 w-5" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Moon, { className: "h-5 w-5" })
-        }
-      )
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2 md:hidden", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Button,
-        {
-          variant: "ghost",
-          size: "icon",
-          onClick: () => setTheme(theme === "dark" ? "light" : "dark"),
-          "aria-label": "Toggle theme",
-          "data-ocid": "nav.theme_toggle_mobile",
-          children: theme === "dark" ? /* @__PURE__ */ jsxRuntimeExports.jsx(Sun, { className: "h-5 w-5" }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Moon, { className: "h-5 w-5" })
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(Sheet, { open, onOpenChange: setOpen, children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(SheetTrigger, { asChild: true, children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Button,
-          {
-            variant: "ghost",
-            size: "icon",
-            "aria-label": "Open menu",
-            "data-ocid": "nav.open_menu_button",
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx(Menu, { className: "h-5 w-5" })
-          }
-        ) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(SheetContent, { side: "right", className: "w-64", children: /* @__PURE__ */ jsxRuntimeExports.jsx("nav", { className: "mt-8 flex flex-col gap-2", children: navLinks.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Button,
-          {
-            variant: "ghost",
-            className: "justify-start",
-            onClick: () => handleClick(link.href),
-            "data-ocid": `nav.mobile_link.${link.label.toLowerCase()}`,
-            children: link.label
-          },
-          link.href
-        )) }) })
-      ] })
-    ] })
-  ] }) }) });
-}
-function Layout({ children }) {
-  const year = (/* @__PURE__ */ new Date()).getFullYear();
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "min-h-screen flex flex-col bg-background", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(Navigation, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "flex-1", children }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("footer", { className: "bg-muted/40 border-t", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-center text-sm text-muted-foreground", children: [
-      "© ",
-      year,
-      ". Built with love using",
-      " ",
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "a",
-        {
-          href: `https://caffeine.ai?utm_source=caffeine-footer&utm_medium=referral&utm_content=${encodeURIComponent(window.location.hostname)}`,
-          className: "underline underline-offset-2 hover:text-foreground transition-colors",
-          target: "_blank",
-          rel: "noopener noreferrer",
-          "data-ocid": "footer.caffeine_link",
-          children: "caffeine.ai"
-        }
-      )
-    ] }) }) })
-  ] });
-}
-const badgeVariants = cva(
-  "inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
-  {
-    variants: {
-      variant: {
-        default: "border-transparent bg-primary text-primary-foreground [a&]:hover:bg-primary/90",
-        secondary: "border-transparent bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90",
-        destructive: "border-transparent bg-destructive text-destructive-foreground [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-        outline: "text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground"
-      }
-    },
-    defaultVariants: {
-      variant: "default"
-    }
-  }
-);
-function Badge({
-  className,
-  variant,
-  asChild = false,
-  ...props
-}) {
-  const Comp = asChild ? Slot$1 : "span";
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Comp,
-    {
-      "data-slot": "badge",
-      className: cn(badgeVariants({ variant }), className),
-      ...props
-    }
-  );
-}
-function Dialog({
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Root, { "data-slot": "dialog", ...props });
-}
-function DialogTrigger({
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Trigger, { "data-slot": "dialog-trigger", ...props });
-}
-function DialogPortal({
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(Portal, { "data-slot": "dialog-portal", ...props });
-}
-function DialogOverlay({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Overlay,
-    {
-      "data-slot": "dialog-overlay",
-      className: cn(
-        "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50",
-        className
-      ),
-      ...props
-    }
-  );
-}
-function DialogContent({
-  className,
-  children,
-  showCloseButton = true,
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogPortal, { "data-slot": "dialog-portal", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(DialogOverlay, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      Content,
-      {
-        "data-slot": "dialog-content",
-        className: cn(
-          "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg",
-          className
-        ),
-        ...props,
-        children: [
-          children,
-          showCloseButton && /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            Close,
-            {
-              "data-slot": "dialog-close",
-              className: "ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx(X, {}),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "sr-only", children: "Close" })
-              ]
-            }
-          )
-        ]
-      }
-    )
-  ] });
-}
-function DialogHeader({ className, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    "div",
-    {
-      "data-slot": "dialog-header",
-      className: cn("flex flex-col gap-2 text-center sm:text-left", className),
-      ...props
-    }
-  );
-}
-function DialogTitle({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Title,
-    {
-      "data-slot": "dialog-title",
-      className: cn("text-lg leading-none font-semibold", className),
-      ...props
-    }
-  );
-}
-function DialogDescription({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Description,
-    {
-      "data-slot": "dialog-description",
-      className: cn("text-muted-foreground text-sm", className),
-      ...props
-    }
-  );
-}
-function Skeleton({ className, ...props }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    "div",
-    {
-      "data-slot": "skeleton",
-      className: cn("bg-accent animate-pulse rounded-md", className),
-      ...props
-    }
-  );
-}
-const MODALITIES = ["All", "ILT", "eLearning", "Job Aids", "Hybrid"];
-function PortfolioSection() {
-  const { data: projects, isLoading, error } = useListProjects();
-  const [filter, setFilter] = reactExports.useState("All");
-  const [_selectedProject, _setSelectedProject] = reactExports.useState(
-    null
-  );
-  const filtered = filter === "All" ? projects : projects == null ? void 0 : projects.filter(
-    (p2) => p2.modality.toLowerCase() === filter.toLowerCase()
-  );
-  if (isLoading) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "space-y-8", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "h-8 w-48" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-6 sm:grid-cols-2 lg:grid-cols-3", children: Array.from({ length: 6 }).map((_2, i) => (
-        // biome-ignore lint/suspicious/noArrayIndexKey: skeleton placeholders are static
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "h-64 w-full" }, `skeleton-${i}`)
-      )) })
-    ] });
-  }
-  if (error) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "rounded-lg border border-destructive/50 bg-destructive/10 p-8 text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-destructive font-medium", children: "Unable to load portfolio projects." }) });
-  }
-  if (!projects || projects.length === 0) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-      "section",
-      {
-        className: "rounded-lg border border-border bg-muted/30 p-12 text-center",
-        "data-ocid": "portfolio.empty_state",
-        children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(FolderOpen, { className: "mx-auto h-10 w-10 text-muted-foreground mb-4" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground font-medium", children: "No portfolio projects yet." })
-        ]
-      }
-    );
-  }
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "portfolio", className: "space-y-8", "data-ocid": "portfolio.section", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap items-center gap-3", children: MODALITIES.map((mod2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Button,
-      {
-        variant: filter === mod2 ? "default" : "outline",
-        size: "sm",
-        onClick: () => setFilter(mod2),
-        "data-ocid": `portfolio.filter.${mod2.toLowerCase()}_button`,
-        children: mod2
+        token: makeToken(company),
+        company,
+        lanes: selectedLanes,
+        expires: expires.toLocaleDateString()
       },
-      mod2
-    )) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-6 sm:grid-cols-2 lg:grid-cols-3", children: filtered == null ? void 0 : filtered.map((project, index2) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Dialog, { children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(DialogTrigger, { asChild: true, children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        Card,
-        {
-          className: "bg-card border-border shadow-subtle transition-smooth hover:shadow-md hover:-translate-y-1 cursor-pointer",
-          "data-ocid": `portfolio.item.${index2 + 1}`,
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs(CardHeader, { className: "pb-2", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { className: "text-lg font-semibold text-foreground", children: project.title }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-1.5 pt-1", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", className: "text-xs", children: project.modality }) })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground/90 leading-relaxed", children: project.description }),
-              project.results && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 rounded-md bg-muted/50 p-3", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-medium text-muted-foreground uppercase tracking-wide", children: "Result" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground mt-1", children: project.results })
-              ] })
-            ] })
-          ]
-        }
-      ) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogContent, { className: "max-w-2xl max-h-[85vh] overflow-y-auto", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(DialogHeader, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(DialogTitle, { className: "font-display text-xl", children: project.title }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(DialogDescription, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", className: "text-xs mt-1", children: project.modality }) })
+      ...current
+    ]);
+  };
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "min-h-screen bg-background text-foreground", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "border-b border-border bg-[radial-gradient(circle_at_top_left,_rgba(229,190,105,0.16),_transparent_34%),linear-gradient(135deg,_rgba(17,24,39,0.9),_rgba(10,10,10,1))]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-7xl gap-10 px-5 py-12 md:grid-cols-[1.1fr_0.9fr] md:py-16", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-7", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "w-fit", variant: "outline", children: "Living portfolio system" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "max-w-4xl font-display text-4xl font-semibold leading-tight sm:text-5xl", children: profile.name }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xl text-primary", children: profile.title }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "max-w-3xl text-base leading-7 text-muted-foreground", children: profile.headline })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6 pt-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "text-sm font-semibold text-foreground uppercase tracking-wide mb-1", children: "Challenge" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground/90 leading-relaxed", children: project.challenge })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3 sm:grid-cols-3", children: proofPoints.slice(0, 3).map((metric) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            className: "border-l border-primary/50 pl-4",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-2xl font-semibold", children: metric.value }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: metric.label })
+            ]
+          },
+          metric.label
+        )) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "border-border/80 bg-card/90", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Sparkles, { className: "h-5 w-5 text-primary" }),
+          "Tailor the view"
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block space-y-2", htmlFor: "target-company", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium", children: "Company" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                id: "target-company",
+                className: "w-full rounded-md border border-input bg-background px-3 py-2 text-sm",
+                value: company,
+                onChange: (event) => setCompany(event.target.value)
+              }
+            )
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "text-sm font-semibold text-foreground uppercase tracking-wide mb-1", children: "Approach" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground/90 leading-relaxed", children: project.approach })
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block space-y-2", htmlFor: "target-jd", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium", children: "Job description / signal" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              Textarea,
+              {
+                id: "target-jd",
+                value: jd,
+                onChange: (event) => setJd(event.target.value),
+                className: "min-h-36"
+              }
+            )
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "text-sm font-semibold text-foreground uppercase tracking-wide mb-1", children: "Deliverables" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "list-disc list-inside space-y-1 text-sm text-foreground/90", children: project.deliverables.map((d2, i) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: d2 }, `${project.title}-del-${i}`)) })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md bg-muted/50 p-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h4", { className: "text-xs font-medium text-muted-foreground uppercase tracking-wide mb-1", children: "Results" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground", children: project.results })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: selectedLanes.map((lane) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { children: lane }, lane)) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { type: "button", onClick: createLink, className: "w-full", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Link2, { className: "mr-2 h-4 w-4" }),
+            "Create tailored link"
           ] })
         ] })
       ] })
-    ] }, project.title)) }),
-    filtered && filtered.length === 0 && /* @__PURE__ */ jsxRuntimeExports.jsx(
-      "div",
-      {
-        className: "rounded-lg border border-border bg-muted/30 p-8 text-center",
-        "data-ocid": "portfolio.filter.empty_state",
-        children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground font-medium", children: "No projects match the selected filter." })
-      }
-    )
-  ] });
-}
-function ResumeSection() {
-  const { data: resume, isLoading, error } = useResume();
-  if (isLoading) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "space-y-8", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "h-8 w-48" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-6 md:grid-cols-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "h-64 w-full" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Skeleton, { className: "h-64 w-full" })
-      ] })
-    ] });
-  }
-  if (error || !resume) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "rounded-lg border border-destructive/50 bg-destructive/10 p-8 text-center", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-destructive font-medium", children: "Unable to load resume data." }) });
-  }
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { id: "resume", className: "space-y-10", "data-ocid": "resume.section", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Briefcase, { className: "h-5 w-5 text-primary" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl font-display font-semibold text-foreground", children: "Experience" })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto grid max-w-7xl gap-6 px-5 py-8 lg:grid-cols-[0.82fr_1.18fr]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(BriefcaseBusiness, { className: "h-5 w-5 text-primary" }),
+          "Lean resume story"
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-muted-foreground", children: profile.shortSummary }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: resumeHighlights.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "p",
+            {
+              className: "rounded-md border border-border p-3 text-sm",
+              children: item
+            },
+            item
+          )) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: (tailoredSkills.length > 0 ? tailoredSkills : skills.slice(0, 10)).map((skill) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: skill }, skill)) })
+        ] })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-4 md:grid-cols-2", children: resume.experience.map((exp, index2) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        Card,
-        {
-          className: "bg-card border-border shadow-subtle",
-          "data-ocid": `resume.experience.item.${index2 + 1}`,
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs(CardHeader, { className: "pb-2", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { className: "text-lg font-semibold text-foreground", children: exp.title }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground", children: [
-                exp.company,
-                " · ",
-                exp.startDate,
-                exp.endDate ? ` – ${exp.endDate}` : ""
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-4 sm:grid-cols-2", children: tailoredMetrics.slice(0, 4).map((metric) => /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-3xl font-semibold", children: metric.value }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm text-muted-foreground", children: metric.label })
+        ] }) }, metric.label)) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-4", children: tailoredProjects.map((project) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "overflow-hidden", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-start justify-between gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { children: project.title }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm text-primary", children: project.role })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: project.lanes.map((lane) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: lane }, lane)) })
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-muted-foreground", children: project.summary }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-4 md:grid-cols-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Problem" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm", children: project.problem })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Moves" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm", children: project.actions.slice(0, 2).map((action) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: action }, action)) })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Outcome" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm", children: project.outcomes.slice(0, 2).map((outcome) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: outcome }, outcome)) })
               ] })
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "list-disc list-inside space-y-1 text-sm text-foreground/90", children: exp.achievements.map((h2, i) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: h2 }, `${exp.title}-ach-${i}`)) }) })
-          ]
-        },
-        `${exp.title}-${exp.company}`
-      )) })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(GraduationCap, { className: "h-5 w-5 text-primary" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl font-display font-semibold text-foreground", children: "Education" })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-4 md:grid-cols-2", children: resume.education.map((edu, index2) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        Card,
-        {
-          className: "bg-card border-border shadow-subtle",
-          "data-ocid": `resume.education.item.${index2 + 1}`,
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs(CardHeader, { className: "pb-2", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { className: "text-lg font-semibold text-foreground", children: edu.degree }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground", children: [
-                edu.institution,
-                " · ",
-                edu.startDate,
-                edu.endDate ? ` – ${edu.endDate}` : ""
-              ] })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-foreground/90", children: edu.field }) })
-          ]
-        },
-        `${edu.degree}-${edu.institution}`
-      )) })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Wrench, { className: "h-5 w-5 text-primary" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl font-display font-semibold text-foreground", children: "Skills" })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { className: "bg-card border-border shadow-subtle", children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "p-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: resume.skills.map((skill, index2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Badge,
-        {
-          variant: "secondary",
-          className: "text-sm",
-          "data-ocid": `resume.skill.${index2 + 1}`,
-          children: skill.name
-        },
-        skill.name
-      )) }) }) })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Award, { className: "h-5 w-5 text-primary" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "text-2xl font-display font-semibold text-foreground", children: "Certifications" })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-4 md:grid-cols-2", children: resume.certifications.map((cert, index2) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-        Card,
-        {
-          className: "bg-card border-border shadow-subtle",
-          "data-ocid": `resume.certification.item.${index2 + 1}`,
-          children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs(CardHeader, { className: "pb-2", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { className: "text-lg font-semibold text-foreground", children: cert.name }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground", children: [
-                cert.issuer,
-                " · ",
-                cert.dateEarned
-              ] })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { children: cert.url && /* @__PURE__ */ jsxRuntimeExports.jsx(
+            project.repo && /* @__PURE__ */ jsxRuntimeExports.jsxs(
               "a",
               {
-                href: cert.url,
+                href: project.repo,
                 target: "_blank",
-                rel: "noopener noreferrer",
-                className: "text-sm text-primary hover:underline",
-                "data-ocid": `resume.certification.link.${index2 + 1}`,
-                children: "View credential"
+                rel: "noreferrer",
+                className: "inline-flex items-center gap-2 text-sm text-primary",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(Github, { className: "h-4 w-4" }),
+                  "Repository",
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "h-4 w-4" })
+                ]
               }
-            ) })
-          ]
-        },
-        `${cert.name}-${cert.issuer}`
-      )) })
-    ] })
+            )
+          ] })
+        ] }, project.id)) })
+      ] })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "border-t border-border bg-muted/20", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-7xl gap-6 px-5 py-8 md:grid-cols-2", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(LockKeyhole, { className: "h-5 w-5 text-primary" }),
+          "Link controls"
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { children: links.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: "Create a tailored link to track company-specific views, expiration, and archive status." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: links.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            className: "rounded-md border border-border p-3 text-sm",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-3", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium", children: link.company }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1 text-muted-foreground", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "h-3.5 w-3.5" }),
+                  link.expires
+                ] })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-2 break-all text-muted-foreground", children: [
+                "/share/",
+                link.token
+              ] })
+            ]
+          },
+          link.token
+        )) }) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { children: "Source bank coverage" }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-3 text-sm text-muted-foreground", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Resume, LinkedIn, GitHub projects, Caffeine apps, AI workflows, enterprise enablement wins, and legacy portfolio content feed this view." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Next backend step after clean deployment: persist tailored links, archive status, source-bank records, screenshots, and company-specific visual settings in Motoko stable storage." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+            "Contact: ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `mailto:${profile.email}`, children: profile.email }),
+            " ",
+            "·",
+            " ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: profile.github, target: "_blank", rel: "noreferrer", children: "GitHub" }),
+            " ",
+            "·",
+            " ",
+            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: profile.linkedIn, target: "_blank", rel: "noreferrer", children: "LinkedIn" })
+          ] })
+        ] })
+      ] })
+    ] }) })
   ] });
 }
 function App() {
-  const resumeQuery = useResume();
-  const portfolioQuery = useListProjects();
-  const { mutate: seedResume } = useSeedResume();
-  const { mutate: seedPortfolio } = useSeedPortfolio();
-  reactExports.useEffect(() => {
-    if (resumeQuery.data === void 0 || Array.isArray(resumeQuery.data) && resumeQuery.data.length === 0) {
-      seedResume();
-    }
-    if (portfolioQuery.data === void 0 || Array.isArray(portfolioQuery.data) && portfolioQuery.data.length === 0) {
-      seedPortfolio();
-    }
-  }, [resumeQuery.data, portfolioQuery.data, seedResume, seedPortfolio]);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(Layout, { children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx(HeroSection, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(ResumeSection, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(PortfolioSection, {}),
-    /* @__PURE__ */ jsxRuntimeExports.jsx(ContactSection, {})
-  ] });
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(TailoredPortfolioStudio, {});
 }
 BigInt.prototype.toJSON = function() {
   return this.toString();
