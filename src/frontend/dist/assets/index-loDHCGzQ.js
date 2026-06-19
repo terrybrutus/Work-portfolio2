@@ -30333,12 +30333,6 @@ function Textarea({ className, ...props }) {
   );
 }
 const profile = {
-  name: "Terry Brutus",
-  title: "Principal Technical Enablement / AI Learning Architect",
-  email: "terrbrutus@gmail.com",
-  linkedIn: "https://www.linkedin.com/in/terrybrutus",
-  github: "https://github.com/terrybrutus",
-  headline: "I build enablement systems, AI-assisted workflows, and learning products that make complex work easier to execute at scale.",
   shortSummary: "Technical enablement leader with a learning architecture background, AI workflow depth, and a track record across federal, SaaS, municipal, sales, healthcare, and fintech environments."
 };
 const proofPoints = [
@@ -30681,10 +30675,16 @@ const BriefcaseBusiness = createLucideIcon("briefcase-business", __iconNode$5);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$4 = [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["polyline", { points: "12 6 12 12 16 14", key: "68esgv" }]
+  ["rect", { width: "8", height: "4", x: "8", y: "2", rx: "1", ry: "1", key: "tgr4d6" }],
+  [
+    "path",
+    {
+      d: "M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2",
+      key: "116196"
+    }
+  ]
 ];
-const Clock = createLucideIcon("clock", __iconNode$4);
+const Clipboard = createLucideIcon("clipboard", __iconNode$4);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -30761,16 +30761,28 @@ const laneKeywords = {
   Compliance: ["compliance", "508", "wcag", "audit", "regulated", "governance"]
 };
 const sampleJd = "Principal Enablement role owning AI-assisted workflows, technical onboarding, sales readiness, stakeholder alignment, learning operations, compliance, and measurable business outcomes.";
-function detectLanes(text) {
+function analyzeTarget(text) {
   const normalized = text.toLowerCase();
-  const scored = Object.entries(laneKeywords).map(([lane, words]) => ({
-    lane,
-    score: words.filter((word) => normalized.includes(word)).length
-  })).filter((item) => item.score > 0).sort((a2, b2) => b2.score - a2.score);
-  if (scored.length === 0) {
-    return ["Enablement", "AI Operations", "Learning Experience"];
+  const matches = Object.entries(laneKeywords).map(([lane, words]) => {
+    const terms = words.filter((word) => normalized.includes(word));
+    return { lane, terms, score: terms.length };
+  }).filter((item) => item.score > 0).sort((a2, b2) => b2.score - a2.score);
+  if (matches.length === 0) {
+    return {
+      lanes: ["Enablement", "AI Operations", "Learning Experience"],
+      matches: [
+        {
+          lane: "Enablement",
+          terms: ["default"],
+          score: 1
+        }
+      ]
+    };
   }
-  return scored.slice(0, 3).map((item) => item.lane);
+  return {
+    lanes: matches.slice(0, 3).map((item) => item.lane),
+    matches
+  };
 }
 function scoreProject(projectLanes, selectedLanes) {
   return projectLanes.reduce(
@@ -30778,71 +30790,184 @@ function scoreProject(projectLanes, selectedLanes) {
     0
   );
 }
-function makeToken(company) {
-  const base = company.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-");
-  return `${base || "target"}-${Math.random().toString(36).slice(2, 8)}`;
-}
-function TailoredPortfolioStudio() {
-  const [company, setCompany] = reactExports.useState("Target Company");
-  const [jd, setJd] = reactExports.useState(sampleJd);
-  const [links, setLinks] = reactExports.useState([]);
-  const selectedLanes = reactExports.useMemo(
-    () => detectLanes(`${company} ${jd}`),
-    [company, jd]
-  );
-  const tailoredProjects = reactExports.useMemo(
-    () => [...projects].sort(
-      (a2, b2) => scoreProject(b2.lanes, selectedLanes) - scoreProject(a2.lanes, selectedLanes)
-    ).slice(0, 4),
-    [selectedLanes]
-  );
-  const tailoredMetrics = proofPoints.filter(
+function getTailoredModel(company, jd, lanes) {
+  const analysis = analyzeTarget(`${company} ${jd}`);
+  const selectedLanes = lanes && lanes.length > 0 ? lanes : analysis.lanes;
+  const selectedProjects = [...projects].sort(
+    (a2, b2) => scoreProject(b2.lanes, selectedLanes) - scoreProject(a2.lanes, selectedLanes)
+  ).slice(0, 3);
+  const selectedMetrics = proofPoints.filter(
     (metric) => metric.lanes.some((lane) => selectedLanes.includes(lane))
-  );
-  const tailoredSkills = skills.filter((skill) => {
+  ).slice(0, 4);
+  const selectedSkills = skills.filter((skill) => {
     const normalized = skill.toLowerCase();
     return selectedLanes.some(
       (lane) => laneKeywords[lane].some((keyword) => normalized.includes(keyword))
     );
-  });
+  }).slice(0, 10);
+  return {
+    analysis,
+    selectedLanes,
+    selectedProjects,
+    selectedMetrics,
+    selectedSkills: selectedSkills.length > 0 ? selectedSkills : skills.slice(0, 10)
+  };
+}
+function encodeSharePayload(payload) {
+  return btoa(encodeURIComponent(JSON.stringify(payload)));
+}
+function decodeSharePayload(token) {
+  try {
+    return JSON.parse(decodeURIComponent(atob(token)));
+  } catch {
+    return null;
+  }
+}
+function getInitialSharePayload() {
+  const hash = window.location.hash;
+  if (!hash.startsWith("#/s/")) {
+    return null;
+  }
+  return decodeSharePayload(hash.replace("#/s/", ""));
+}
+function getInitialStudioMode() {
+  return window.location.hash === "#studio" || new URLSearchParams(window.location.search).get("studio") === "1";
+}
+function buildShareUrl(payload) {
+  const url = new URL(window.location.href);
+  url.search = "";
+  url.hash = `/s/${encodeSharePayload(payload)}`;
+  return url.toString();
+}
+function ReviewerPortfolio({ payload }) {
+  const company = (payload == null ? void 0 : payload.company) ?? "your team";
+  const jd = (payload == null ? void 0 : payload.jd) ?? "";
+  const model = getTailoredModel(company, jd, payload == null ? void 0 : payload.lanes);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "min-h-screen bg-background text-foreground", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "border-b border-border bg-[linear-gradient(135deg,_rgba(17,24,39,0.92),_rgba(10,10,10,1))]", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto max-w-6xl px-5 py-12 md:py-16", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-3xl space-y-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium uppercase tracking-[0.2em] text-primary", children: "Terry Brutus" }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "font-display text-4xl font-semibold leading-tight sm:text-5xl", children: [
+        "Enablement systems, AI workflows, and learning products for",
+        " ",
+        company,
+        "."
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base leading-7 text-muted-foreground", children: profile.shortSummary }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: model.selectedLanes.map((lane) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: lane }, lane)) })
+    ] }) }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto grid max-w-6xl gap-5 px-5 py-8 sm:grid-cols-2 lg:grid-cols-4", children: model.selectedMetrics.map((metric) => /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-3xl font-semibold", children: metric.value }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm text-muted-foreground", children: metric.label })
+    ] }) }, metric.label)) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto grid max-w-6xl gap-6 px-5 pb-10 lg:grid-cols-[0.78fr_1.22fr]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(BriefcaseBusiness, { className: "h-5 w-5 text-primary" }),
+          "Relevant background"
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-4", children: [
+          resumeHighlights.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-muted-foreground", children: item }, item)),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2 pt-2", children: model.selectedSkills.map((skill) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: skill }, skill)) })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-5", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-2xl font-semibold", children: "Selected work" }),
+        model.selectedProjects.map((project) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-start justify-between gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { children: project.title }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm text-primary", children: project.role })
+            ] }),
+            project.repo && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "a",
+              {
+                href: project.repo,
+                target: "_blank",
+                rel: "noreferrer",
+                className: "inline-flex items-center gap-1 text-sm text-primary",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(Github, { className: "h-4 w-4" }),
+                  "Repo",
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "h-4 w-4" })
+                ]
+              }
+            )
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-muted-foreground", children: project.summary }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-4 md:grid-cols-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Problem" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm", children: project.problem })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Moves" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm", children: project.actions.slice(0, 2).map((action) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: action }, action)) })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Outcomes" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm", children: project.outcomes.slice(0, 2).map((outcome) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: outcome }, outcome)) })
+              ] })
+            ] })
+          ] })
+        ] }, project.id))
+      ] })
+    ] })
+  ] });
+}
+function TailoredPortfolioStudio() {
+  const [company, setCompany] = reactExports.useState("Target Company");
+  const [jd, setJd] = reactExports.useState(sampleJd);
+  const [sharePayload] = reactExports.useState(getInitialSharePayload);
+  const [isStudio] = reactExports.useState(getInitialStudioMode);
+  const [links, setLinks] = reactExports.useState([]);
+  const model = reactExports.useMemo(() => getTailoredModel(company, jd), [company, jd]);
+  if (!isStudio) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(ReviewerPortfolio, { payload: sharePayload });
+  }
   const createLink = () => {
     const expires = /* @__PURE__ */ new Date();
     expires.setDate(expires.getDate() + 21);
+    const payload = {
+      company,
+      jd,
+      lanes: model.selectedLanes,
+      expires: expires.toISOString()
+    };
+    const url = buildShareUrl(payload);
     setLinks((current) => [
       {
-        token: makeToken(company),
+        url,
         company,
-        lanes: selectedLanes,
+        lanes: model.selectedLanes,
         expires: expires.toLocaleDateString()
       },
       ...current
     ]);
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "min-h-screen bg-background text-foreground", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "border-b border-border bg-[radial-gradient(circle_at_top_left,_rgba(229,190,105,0.16),_transparent_34%),linear-gradient(135deg,_rgba(17,24,39,0.9),_rgba(10,10,10,1))]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-7xl gap-10 px-5 py-12 md:grid-cols-[1.1fr_0.9fr] md:py-16", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-7", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "w-fit", variant: "outline", children: "Living portfolio system" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "border-b border-border bg-[radial-gradient(circle_at_top_left,_rgba(229,190,105,0.16),_transparent_34%),linear-gradient(135deg,_rgba(17,24,39,0.9),_rgba(10,10,10,1))]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-7xl gap-10 px-5 py-12 md:grid-cols-[1.05fr_0.95fr] md:py-16", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "w-fit", variant: "outline", children: "Owner studio" }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "max-w-4xl font-display text-4xl font-semibold leading-tight sm:text-5xl", children: profile.name }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xl text-primary", children: profile.title }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "max-w-3xl text-base leading-7 text-muted-foreground", children: profile.headline })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "max-w-4xl font-display text-4xl font-semibold leading-tight sm:text-5xl", children: "Tailor a reviewer-facing portfolio." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "max-w-3xl text-base leading-7 text-muted-foreground", children: "Paste a company or JD signal. The app scores keywords into role lanes, ranks proof points, and generates a clean hash-link view that does not expose this studio." })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3 sm:grid-cols-3", children: proofPoints.slice(0, 3).map((metric) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          "div",
-          {
-            className: "border-l border-primary/50 pl-4",
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-2xl font-semibold", children: metric.value }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: metric.label })
-            ]
-          },
-          metric.label
-        )) })
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-card/70 p-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "How the JD is interpreted" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 grid gap-3 sm:grid-cols-2", children: model.analysis.matches.slice(0, 6).map((match) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md bg-muted/40 p-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: match.lane }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-1 text-xs text-muted-foreground", children: [
+              "Matched: ",
+              match.terms.join(", ")
+            ] })
+          ] }, match.lane)) })
+        ] })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "border-border/80 bg-card/90", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(Sparkles, { className: "h-5 w-5 text-primary" }),
-          "Tailor the view"
+          "Build target view"
         ] }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-4", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block space-y-2", htmlFor: "target-company", children: [
@@ -30869,127 +30994,63 @@ function TailoredPortfolioStudio() {
               }
             )
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: selectedLanes.map((lane) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { children: lane }, lane)) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: model.selectedLanes.map((lane) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { children: lane }, lane)) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { type: "button", onClick: createLink, className: "w-full", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(Link2, { className: "mr-2 h-4 w-4" }),
-            "Create tailored link"
+            "Generate reviewer link"
           ] })
         ] })
       ] })
     ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto grid max-w-7xl gap-6 px-5 py-8 lg:grid-cols-[0.82fr_1.18fr]", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(BriefcaseBusiness, { className: "h-5 w-5 text-primary" }),
-          "Lean resume story"
-        ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-5", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-muted-foreground", children: profile.shortSummary }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: resumeHighlights.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "p",
-            {
-              className: "rounded-md border border-border p-3 text-sm",
-              children: item
-            },
-            item
-          )) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: (tailoredSkills.length > 0 ? tailoredSkills : skills.slice(0, 10)).map((skill) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: skill }, skill)) })
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-4 sm:grid-cols-2", children: tailoredMetrics.slice(0, 4).map((metric) => /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-3xl font-semibold", children: metric.value }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm text-muted-foreground", children: metric.label })
-        ] }) }, metric.label)) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-4", children: tailoredProjects.map((project) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "overflow-hidden", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-start justify-between gap-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { children: project.title }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm text-primary", children: project.role })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: project.lanes.map((lane) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: lane }, lane)) })
-          ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-muted-foreground", children: project.summary }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-4 md:grid-cols-3", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Problem" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm", children: project.problem })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Moves" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm", children: project.actions.slice(0, 2).map((action) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: action }, action)) })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Outcome" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm", children: project.outcomes.slice(0, 2).map((outcome) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: outcome }, outcome)) })
-              ] })
-            ] }),
-            project.repo && /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "a",
-              {
-                href: project.repo,
-                target: "_blank",
-                rel: "noreferrer",
-                className: "inline-flex items-center gap-2 text-sm text-primary",
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(Github, { className: "h-4 w-4" }),
-                  "Repository",
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "h-4 w-4" })
-                ]
-              }
-            )
-          ] })
-        ] }, project.id)) })
-      ] })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "border-t border-border bg-muted/20", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-7xl gap-6 px-5 py-8 md:grid-cols-2", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto grid max-w-7xl gap-6 px-5 py-8 lg:grid-cols-[0.8fr_1.2fr]", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(LockKeyhole, { className: "h-5 w-5 text-primary" }),
-          "Link controls"
+          "Generated links"
         ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { children: links.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: "Create a tailored link to track company-specific views, expiration, and archive status." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: links.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { children: links.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: "No links yet. Generated links open a clean reviewer page with only selected proof, projects, and language." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: links.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
           "div",
           {
             className: "rounded-md border border-border p-3 text-sm",
             children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-3", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium", children: link.company }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "flex items-center gap-1 text-muted-foreground", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(Clock, { className: "h-3.5 w-3.5" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-muted-foreground", children: [
+                  "Expires ",
                   link.expires
                 ] })
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-2 break-all text-muted-foreground", children: [
-                "/share/",
-                link.token
-              ] })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 break-all text-muted-foreground", children: link.url }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 flex flex-wrap gap-2", children: link.lanes.map((lane) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: lane }, lane)) })
             ]
           },
-          link.token
+          link.url
         )) }) })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { children: "Source bank coverage" }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-3 text-sm text-muted-foreground", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Resume, LinkedIn, GitHub projects, Caffeine apps, AI workflows, enterprise enablement wins, and legacy portfolio content feed this view." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Next backend step after clean deployment: persist tailored links, archive status, source-bank records, screenshots, and company-specific visual settings in Motoko stable storage." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
-            "Contact: ",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: `mailto:${profile.email}`, children: profile.email }),
-            " ",
-            "·",
-            " ",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: profile.github, target: "_blank", rel: "noreferrer", children: "GitHub" }),
-            " ",
-            "·",
-            " ",
-            /* @__PURE__ */ jsxRuntimeExports.jsx("a", { href: profile.linkedIn, target: "_blank", rel: "noreferrer", children: "LinkedIn" })
-          ] })
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Clipboard, { className: "h-5 w-5 text-primary" }),
+          "Previewed reviewer output"
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3 sm:grid-cols-2", children: model.selectedMetrics.map((metric) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "rounded-md border border-border p-3",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-2xl font-semibold", children: metric.value }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: metric.label })
+              ]
+            },
+            metric.label
+          )) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: model.selectedProjects.map((project) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md bg-muted/30 p-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: project.title }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm text-muted-foreground", children: project.summary })
+          ] }, project.id)) })
         ] })
       ] })
-    ] }) })
+    ] })
   ] });
 }
 function App() {
