@@ -1,0 +1,20 @@
+{
+  "overview": "A polished portfolio and resume site for a Senior Learning Experience Designer, showcasing instructional design projects and a tailored CV for the Mission Lane role.",
+  "features": [
+    "Professional resume/CV page with experience, skills, and education",
+    "Portfolio showcase with project cards and case study detail views",
+    "Sticky navigation with smooth scrolling",
+    "Dark mode toggle",
+    "Responsive design for mobile and desktop",
+    "Print-friendly resume layout"
+  ],
+  "category": "portfolio",
+  "tags": [
+    "portfolio",
+    "resume",
+    "instructional-design",
+    "showcase",
+    "career"
+  ],
+  "last_updated": "2026-06-18T03:19:38.963Z"
+}

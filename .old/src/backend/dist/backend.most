@@ -1,0 +1,137 @@
+// Version: 4.0.0
+type Certification__576272616 =
+  {dateEarned : Text; id : Nat; issuer : Text; name : Text; url : ?Text};
+type EducationEntry__485370370 =
+  {
+    degree : Text;
+    endDate : ?Text;
+    field : Text;
+    id : Nat;
+    institution : Text;
+    startDate : Text
+  };
+type ExperienceEntry__710590077 =
+  {
+    achievements : [Text];
+    company : Text;
+    description : Text;
+    endDate : ?Text;
+    id : Nat;
+    location : Text;
+    startDate : Text;
+    title : Text
+  };
+type List__529703492<T> =
+  {
+    var blockIndex : Nat__1040412405;
+    var blocks : [var [var ?T]];
+    var elementIndex : Nat__1040412405
+  };
+type List__560604548<T> = List__529703492<T>;
+type Modality__36462336 = {#eLearning; #hybrid; #ilt; #jobAid};
+type Nat__1040412405 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__698300847 =
+  {
+    projects :
+      List__560604548<{
+                        approach : Text;
+                        challenge : Text;
+                        createdAt : Nat;
+                        deliverables : [Text];
+                        description : Text;
+                        id : Nat;
+                        modality : {#eLearning; #hybrid; #ilt; #jobAid};
+                        results : Text;
+                        tags : [Text];
+                        thumbnailUrl : ?Text;
+                        title : Text
+                      }>;
+    resume :
+      {
+        var data :
+          ?{
+             certifications :
+               [{
+                  dateEarned : Text;
+                  id : Nat;
+                  issuer : Text;
+                  name : Text;
+                  url : ?Text
+                }];
+             education :
+               [{
+                  degree : Text;
+                  endDate : ?Text;
+                  field : Text;
+                  id : Nat;
+                  institution : Text;
+                  startDate : Text
+                }];
+             email : Text;
+             experience :
+               [{
+                  achievements : [Text];
+                  company : Text;
+                  description : Text;
+                  endDate : ?Text;
+                  id : Nat;
+                  location : Text;
+                  startDate : Text;
+                  title : Text
+                }];
+             linkedIn : ?Text;
+             location : Text;
+             name : Text;
+             phone : ?Text;
+             skills : [{category : Text; id : Nat; name : Text}];
+             summary : Text;
+             title : Text;
+             website : ?Text
+           }
+      }
+  };
+type OldActor__899322334 = {};
+type Project__19257312 =
+  {
+    approach : Text;
+    challenge : Text;
+    createdAt : Nat;
+    deliverables : [Text];
+    description : Text;
+    id : Nat;
+    modality : Modality__36462336;
+    results : Text;
+    tags : [Text];
+    thumbnailUrl : ?Text;
+    title : Text
+  };
+type Resume__444704314 =
+  {
+    certifications : [Certification__576272616];
+    education : [EducationEntry__485370370];
+    email : Text;
+    experience : [ExperienceEntry__710590077];
+    linkedIn : ?Text;
+    location : Text;
+    name : Text;
+    phone : ?Text;
+    skills : [Skill__959742763];
+    summary : Text;
+    title : Text;
+    website : ?Text
+  };
+type Skill__959742763 = {category : Text; id : Nat; name : Text};
+{
+  "20250618_000000_InitPortfolioAndResume" :
+    (_old : OldActor__899322334) -> NewActor__698300847
+}
+actor  {
+  stable projects :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?Project__19257312]];
+      var elementIndex : Nat__1040412405
+    };
+  stable resume : {var data : ?Resume__444704314}
+};

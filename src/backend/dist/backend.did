@@ -1,0 +1,80 @@
+type Skill = 
+ record {
+   category: text;
+   id: nat;
+   name: text;
+ };
+type Resume = 
+ record {
+   certifications: vec Certification;
+   education: vec EducationEntry;
+   email: text;
+   experience: vec ExperienceEntry;
+   linkedIn: opt text;
+   location: text;
+   name: text;
+   phone: opt text;
+   skills: vec Skill;
+   summary: text;
+   title: text;
+   website: opt text;
+ };
+type Project = 
+ record {
+   approach: text;
+   challenge: text;
+   createdAt: nat;
+   deliverables: vec text;
+   description: text;
+   id: nat;
+   modality: Modality;
+   results: text;
+   tags: vec text;
+   thumbnailUrl: opt text;
+   title: text;
+ };
+type Modality = 
+ variant {
+   eLearning;
+   hybrid;
+   ilt;
+   jobAid;
+ };
+type ExperienceEntry = 
+ record {
+   achievements: vec text;
+   company: text;
+   description: text;
+   endDate: opt text;
+   id: nat;
+   location: text;
+   startDate: text;
+   title: text;
+ };
+type EducationEntry = 
+ record {
+   degree: text;
+   endDate: opt text;
+   field: text;
+   id: nat;
+   institution: text;
+   startDate: text;
+ };
+type Certification = 
+ record {
+   dateEarned: text;
+   id: nat;
+   issuer: text;
+   name: text;
+   url: opt text;
+ };
+service : {
+  __projects: (io: opt nat, count: opt nat) -> (vec Project) query;
+  __resume: () -> (reserved) query;
+  addProject: (project: Project) -> ();
+  getProject: (id: nat) -> (opt Project) query;
+  getResume: () -> (opt Resume) query;
+  listProjects: () -> (vec Project) query;
+  seedPortfolio: () -> ();
+  seedResume: () -> ();
+}
