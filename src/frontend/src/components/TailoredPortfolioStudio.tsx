@@ -14,12 +14,13 @@ import {
   ArrowUpRight,
   BriefcaseBusiness,
   Clipboard,
+  ExternalLink,
   Github,
   Link2,
   LockKeyhole,
   Sparkles,
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 const laneKeywords: Record<Lane, string[]> = {
   Enablement: ["enablement", "onboarding", "talent", "workforce", "manager"],
@@ -46,6 +47,11 @@ type SharePayload = {
   jd: string;
   lanes: Lane[];
   expires: string;
+};
+
+type RouteState = {
+  isStudio: boolean;
+  sharePayload: SharePayload | null;
 };
 
 const sampleJd =
@@ -133,7 +139,7 @@ function decodeSharePayload(token: string): SharePayload | null {
   }
 }
 
-function getInitialSharePayload() {
+function getSharePayloadFromUrl() {
   const hash = window.location.hash;
   if (!hash.startsWith("#/s/")) {
     return null;
@@ -141,11 +147,28 @@ function getInitialSharePayload() {
   return decodeSharePayload(hash.replace("#/s/", ""));
 }
 
-function getInitialStudioMode() {
+function getStudioModeFromUrl() {
+  const hash = window.location.hash.toLowerCase();
+  const params = new URLSearchParams(window.location.search);
+  const path = window.location.pathname.toLowerCase();
+
   return (
-    window.location.hash === "#studio" ||
-    new URLSearchParams(window.location.search).get("studio") === "1"
+    hash === "#studio" ||
+    hash === "#/studio" ||
+    hash === "#owner" ||
+    hash === "#/owner" ||
+    params.get("studio") === "1" ||
+    params.get("owner") === "1" ||
+    path.endsWith("/studio") ||
+    path.endsWith("/owner")
   );
+}
+
+function getRouteState(): RouteState {
+  return {
+    isStudio: getStudioModeFromUrl(),
+    sharePayload: getSharePayloadFromUrl(),
+  };
 }
 
 function buildShareUrl(payload: SharePayload) {
@@ -293,16 +316,25 @@ function ReviewerPortfolio({ payload }: { payload: SharePayload | null }) {
 export function TailoredPortfolioStudio() {
   const [company, setCompany] = useState("Target Company");
   const [jd, setJd] = useState(sampleJd);
-  const [sharePayload] = useState<SharePayload | null>(getInitialSharePayload);
-  const [isStudio] = useState(getInitialStudioMode);
+  const [route, setRoute] = useState<RouteState>(getRouteState);
   const [links, setLinks] = useState<
     Array<{ url: string; company: string; lanes: Lane[]; expires: string }>
   >([]);
 
   const model = useMemo(() => getTailoredModel(company, jd), [company, jd]);
 
-  if (!isStudio) {
-    return <ReviewerPortfolio payload={sharePayload} />;
+  useEffect(() => {
+    const syncRoute = () => setRoute(getRouteState());
+    window.addEventListener("hashchange", syncRoute);
+    window.addEventListener("popstate", syncRoute);
+    return () => {
+      window.removeEventListener("hashchange", syncRoute);
+      window.removeEventListener("popstate", syncRoute);
+    };
+  }, []);
+
+  if (!route.isStudio) {
+    return <ReviewerPortfolio payload={route.sharePayload} />;
   }
 
   const createLink = () => {
@@ -414,8 +446,9 @@ export function TailoredPortfolioStudio() {
           <CardContent>
             {links.length === 0 ? (
               <p className="text-sm text-muted-foreground">
-                No links yet. Generated links open a clean reviewer page with
-                only selected proof, projects, and language.
+                No links yet. This studio changes the generated reviewer view.
+                Source-bank editing and saved archive/history controls still
+                need to be wired to backend storage.
               </p>
             ) : (
               <div className="space-y-3">
@@ -433,6 +466,13 @@ export function TailoredPortfolioStudio() {
                     <p className="mt-2 break-all text-muted-foreground">
                       {link.url}
                     </p>
+                    <a
+                      className="mt-3 inline-flex items-center gap-2 text-primary"
+                      href={link.url}
+                    >
+                      Open reviewer view
+                      <ExternalLink className="h-4 w-4" />
+                    </a>
                     <div className="mt-3 flex flex-wrap gap-2">
                       {link.lanes.map((lane) => (
                         <Badge key={lane} variant="outline">

@@ -30650,11 +30650,24 @@ const createLucideIcon = (iconName, iconNode) => {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$6 = [
+const __iconNode$7 = [
   ["path", { d: "M7 7h10v10", key: "1tivn9" }],
   ["path", { d: "M7 17 17 7", key: "1vkiza" }]
 ];
-const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$6);
+const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$7);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$6 = [
+  ["path", { d: "M12 12h.01", key: "1mp3jc" }],
+  ["path", { d: "M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2", key: "1ksdt3" }],
+  ["path", { d: "M22 13a18.15 18.15 0 0 1-20 0", key: "12hx5q" }],
+  ["rect", { width: "20", height: "14", x: "2", y: "6", rx: "2", key: "i6l2r4" }]
+];
+const BriefcaseBusiness = createLucideIcon("briefcase-business", __iconNode$6);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -30662,19 +30675,6 @@ const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$6);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$5 = [
-  ["path", { d: "M12 12h.01", key: "1mp3jc" }],
-  ["path", { d: "M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2", key: "1ksdt3" }],
-  ["path", { d: "M22 13a18.15 18.15 0 0 1-20 0", key: "12hx5q" }],
-  ["rect", { width: "20", height: "14", x: "2", y: "6", rx: "2", key: "i6l2r4" }]
-];
-const BriefcaseBusiness = createLucideIcon("briefcase-business", __iconNode$5);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$4 = [
   ["rect", { width: "8", height: "4", x: "8", y: "2", rx: "1", ry: "1", key: "tgr4d6" }],
   [
     "path",
@@ -30684,7 +30684,19 @@ const __iconNode$4 = [
     }
   ]
 ];
-const Clipboard = createLucideIcon("clipboard", __iconNode$4);
+const Clipboard = createLucideIcon("clipboard", __iconNode$5);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$4 = [
+  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
+  ["path", { d: "M10 14 21 3", key: "gplh6r" }],
+  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
+];
+const ExternalLink = createLucideIcon("external-link", __iconNode$4);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -30823,15 +30835,24 @@ function decodeSharePayload(token) {
     return null;
   }
 }
-function getInitialSharePayload() {
+function getSharePayloadFromUrl() {
   const hash = window.location.hash;
   if (!hash.startsWith("#/s/")) {
     return null;
   }
   return decodeSharePayload(hash.replace("#/s/", ""));
 }
-function getInitialStudioMode() {
-  return window.location.hash === "#studio" || new URLSearchParams(window.location.search).get("studio") === "1";
+function getStudioModeFromUrl() {
+  const hash = window.location.hash.toLowerCase();
+  const params = new URLSearchParams(window.location.search);
+  const path = window.location.pathname.toLowerCase();
+  return hash === "#studio" || hash === "#/studio" || hash === "#owner" || hash === "#/owner" || params.get("studio") === "1" || params.get("owner") === "1" || path.endsWith("/studio") || path.endsWith("/owner");
+}
+function getRouteState() {
+  return {
+    isStudio: getStudioModeFromUrl(),
+    sharePayload: getSharePayloadFromUrl()
+  };
 }
 function buildShareUrl(payload) {
   const url = new URL(window.location.href);
@@ -30918,12 +30939,20 @@ function ReviewerPortfolio({ payload }) {
 function TailoredPortfolioStudio() {
   const [company, setCompany] = reactExports.useState("Target Company");
   const [jd, setJd] = reactExports.useState(sampleJd);
-  const [sharePayload] = reactExports.useState(getInitialSharePayload);
-  const [isStudio] = reactExports.useState(getInitialStudioMode);
+  const [route, setRoute] = reactExports.useState(getRouteState);
   const [links, setLinks] = reactExports.useState([]);
   const model = reactExports.useMemo(() => getTailoredModel(company, jd), [company, jd]);
-  if (!isStudio) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(ReviewerPortfolio, { payload: sharePayload });
+  reactExports.useEffect(() => {
+    const syncRoute = () => setRoute(getRouteState());
+    window.addEventListener("hashchange", syncRoute);
+    window.addEventListener("popstate", syncRoute);
+    return () => {
+      window.removeEventListener("hashchange", syncRoute);
+      window.removeEventListener("popstate", syncRoute);
+    };
+  }, []);
+  if (!route.isStudio) {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(ReviewerPortfolio, { payload: route.sharePayload });
   }
   const createLink = () => {
     const expires = /* @__PURE__ */ new Date();
@@ -31008,7 +31037,7 @@ function TailoredPortfolioStudio() {
           /* @__PURE__ */ jsxRuntimeExports.jsx(LockKeyhole, { className: "h-5 w-5 text-primary" }),
           "Generated links"
         ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { children: links.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: "No links yet. Generated links open a clean reviewer page with only selected proof, projects, and language." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: links.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { children: links.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: "No links yet. This studio changes the generated reviewer view. Source-bank editing and saved archive/history controls still need to be wired to backend storage." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: links.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
           "div",
           {
             className: "rounded-md border border-border p-3 text-sm",
@@ -31021,6 +31050,17 @@ function TailoredPortfolioStudio() {
                 ] })
               ] }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 break-all text-muted-foreground", children: link.url }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "a",
+                {
+                  className: "mt-3 inline-flex items-center gap-2 text-primary",
+                  href: link.url,
+                  children: [
+                    "Open reviewer view",
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { className: "h-4 w-4" })
+                  ]
+                }
+              ),
               /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 flex flex-wrap gap-2", children: link.lanes.map((lane) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: lane }, lane)) })
             ]
           },
