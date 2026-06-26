@@ -1,5 +1,4 @@
 import List "mo:core/List";
-import Time "mo:core/Time";
 import TailoredViewTypes "../types/tailored-view";
 
 module {
@@ -33,7 +32,7 @@ module {
       skillIds = input.skillIds;
       angle = input.angle;
       expiresAt = input.expiresAt;
-      createdAt = Time.now();
+      createdAt = 0;
       archived = false;
     };
     views.add(view);

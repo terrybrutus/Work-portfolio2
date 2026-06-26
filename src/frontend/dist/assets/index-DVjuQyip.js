@@ -28746,7 +28746,7 @@ const TailoredView = Record({
   "skillIds": Vec(Text),
   "angle": Text,
   "expiresAt": Opt(Text),
-  "createdAt": Int,
+  "createdAt": Nat,
   "archived": Bool
 });
 const TailoredViewInput = Record({
@@ -28859,7 +28859,7 @@ const idlFactory = ({ IDL: IDL2 }) => {
     "skillIds": IDL2.Vec(IDL2.Text),
     "angle": IDL2.Text,
     "expiresAt": IDL2.Opt(IDL2.Text),
-    "createdAt": IDL2.Int,
+    "createdAt": IDL2.Nat,
     "archived": IDL2.Bool
   });
   const TailoredViewInput2 = IDL2.Record({
