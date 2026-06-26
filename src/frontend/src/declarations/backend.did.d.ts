@@ -69,7 +69,7 @@ export interface Resume {
 export interface Skill { 'id' : bigint, 'name' : string, 'category' : string }
 export interface TailoredView {
   'slug' : string,
-  'label' : string,
+  'viewLabel' : string,
   'privateCompany' : string,
   'privateJobDescription' : string,
   'primaryLane' : string,
@@ -84,7 +84,7 @@ export interface TailoredView {
 }
 export interface TailoredViewInput {
   'slug' : string,
-  'label' : string,
+  'viewLabel' : string,
   'privateCompany' : string,
   'privateJobDescription' : string,
   'primaryLane' : string,

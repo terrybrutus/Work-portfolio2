@@ -28736,7 +28736,7 @@ const Resume = Record({
 });
 const TailoredView = Record({
   "slug": Text,
-  "label": Text,
+  "viewLabel": Text,
   "privateCompany": Text,
   "privateJobDescription": Text,
   "primaryLane": Text,
@@ -28751,7 +28751,7 @@ const TailoredView = Record({
 });
 const TailoredViewInput = Record({
   "slug": Text,
-  "label": Text,
+  "viewLabel": Text,
   "privateCompany": Text,
   "privateJobDescription": Text,
   "primaryLane": Text,
@@ -28849,7 +28849,7 @@ const idlFactory = ({ IDL: IDL2 }) => {
   });
   const TailoredView2 = IDL2.Record({
     "slug": IDL2.Text,
-    "label": IDL2.Text,
+    "viewLabel": IDL2.Text,
     "privateCompany": IDL2.Text,
     "privateJobDescription": IDL2.Text,
     "primaryLane": IDL2.Text,
@@ -28864,7 +28864,7 @@ const idlFactory = ({ IDL: IDL2 }) => {
   });
   const TailoredViewInput2 = IDL2.Record({
     "slug": IDL2.Text,
-    "label": IDL2.Text,
+    "viewLabel": IDL2.Text,
     "privateCompany": IDL2.Text,
     "privateJobDescription": IDL2.Text,
     "primaryLane": IDL2.Text,
@@ -29153,7 +29153,7 @@ function from_candid_record_n24(_uploadFile, _downloadFile, value) {
 function from_candid_record_n29(_uploadFile, _downloadFile, value) {
   return {
     slug: value.slug,
-    label: value.label,
+    viewLabel: value.viewLabel,
     privateCompany: value.privateCompany,
     privateJobDescription: value.privateJobDescription,
     primaryLane: value.primaryLane,
@@ -29218,7 +29218,7 @@ function to_candid_opt_n31(_uploadFile, _downloadFile, value) {
 function to_candid_record_n30(_uploadFile, _downloadFile, value) {
   return {
     slug: value.slug,
-    label: value.label,
+    viewLabel: value.viewLabel,
     privateCompany: value.privateCompany,
     privateJobDescription: value.privateJobDescription,
     primaryLane: value.primaryLane,
@@ -33165,7 +33165,7 @@ function TailoredPortfolioStudio() {
   const openGeneralPortfolio = reactExports.useCallback(() => {
     const generalView = {
       slug: "general",
-      label: "General portfolio",
+      viewLabel: "General portfolio",
       privateCompany: "",
       privateJobDescription: "",
       primaryLane: "Enablement",
@@ -33226,7 +33226,7 @@ function TailoredPortfolioStudio() {
     expires.setDate(expires.getDate() + 21);
     const input = {
       slug,
-      label: company.trim() || "Private target view",
+      viewLabel: company.trim() || "Private target view",
       privateCompany: company.trim(),
       privateJobDescription: jd.slice(0, 2200),
       primaryLane: activeLanes[0],
@@ -33252,7 +33252,7 @@ function TailoredPortfolioStudio() {
       {
         url,
         slug,
-        label: input.label,
+        label: input.viewLabel,
         lanes: activeLanes,
         expires: expires.toLocaleDateString(),
         source

@@ -1,7 +1,7 @@
 module {
   public type TailoredViewInput = {
     slug : Text;
-    label : Text;
+    viewLabel : Text;
     privateCompany : Text;
     privateJobDescription : Text;
     primaryLane : Text;
@@ -15,7 +15,7 @@ module {
 
   public type TailoredView = {
     slug : Text;
-    label : Text;
+    viewLabel : Text;
     privateCompany : Text;
     privateJobDescription : Text;
     primaryLane : Text;

@@ -154,7 +154,7 @@ export enum Modality {
 }
 export interface TailoredViewInput {
     slug: string;
-    label: string;
+    viewLabel: string;
     privateCompany: string;
     privateJobDescription: string;
     primaryLane: string;
@@ -492,7 +492,7 @@ function from_candid_record_n24(_uploadFile: (file: ExternalBlob) => Promise<Uin
 }
 function from_candid_record_n29(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
     slug: string;
-    label: string;
+    viewLabel: string;
     privateCompany: string;
     privateJobDescription: string;
     primaryLane: string;
@@ -507,7 +507,7 @@ function from_candid_record_n29(_uploadFile: (file: ExternalBlob) => Promise<Uin
 }): TailoredView {
     return {
         slug: value.slug,
-        label: value.label,
+        viewLabel: value.viewLabel,
         privateCompany: value.privateCompany,
         privateJobDescription: value.privateJobDescription,
         primaryLane: value.primaryLane,
@@ -604,7 +604,7 @@ function to_candid_opt_n31(_uploadFile: (file: ExternalBlob) => Promise<Uint8Arr
 function to_candid_record_n30(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: TailoredViewInput): _TailoredViewInput {
     return {
         slug: value.slug,
-        label: value.label,
+        viewLabel: value.viewLabel,
         privateCompany: value.privateCompany,
         privateJobDescription: value.privateJobDescription,
         primaryLane: value.primaryLane,

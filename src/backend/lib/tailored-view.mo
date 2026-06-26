@@ -23,7 +23,7 @@ module {
   ) : TailoredView {
     let view : TailoredView = {
       slug = input.slug;
-      label = input.label;
+      viewLabel = input.viewLabel;
       privateCompany = input.privateCompany;
       privateJobDescription = input.privateJobDescription;
       primaryLane = input.primaryLane;

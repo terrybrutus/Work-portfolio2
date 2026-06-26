@@ -73,7 +73,7 @@ export const Resume = IDL.Record({
 });
 export const TailoredView = IDL.Record({
   'slug' : IDL.Text,
-  'label' : IDL.Text,
+  'viewLabel' : IDL.Text,
   'privateCompany' : IDL.Text,
   'privateJobDescription' : IDL.Text,
   'primaryLane' : IDL.Text,
@@ -88,7 +88,7 @@ export const TailoredView = IDL.Record({
 });
 export const TailoredViewInput = IDL.Record({
   'slug' : IDL.Text,
-  'label' : IDL.Text,
+  'viewLabel' : IDL.Text,
   'privateCompany' : IDL.Text,
   'privateJobDescription' : IDL.Text,
   'primaryLane' : IDL.Text,
@@ -190,7 +190,7 @@ export const idlFactory = ({ IDL }) => {
   });
   const TailoredView = IDL.Record({
     'slug' : IDL.Text,
-    'label' : IDL.Text,
+    'viewLabel' : IDL.Text,
     'privateCompany' : IDL.Text,
     'privateJobDescription' : IDL.Text,
     'primaryLane' : IDL.Text,
@@ -205,7 +205,7 @@ export const idlFactory = ({ IDL }) => {
   });
   const TailoredViewInput = IDL.Record({
     'slug' : IDL.Text,
-    'label' : IDL.Text,
+    'viewLabel' : IDL.Text,
     'privateCompany' : IDL.Text,
     'privateJobDescription' : IDL.Text,
     'primaryLane' : IDL.Text,

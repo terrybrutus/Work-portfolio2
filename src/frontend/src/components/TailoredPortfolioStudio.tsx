@@ -53,7 +53,7 @@ type Analysis = {
 
 type TailoredViewInput = {
   slug: string;
-  label: string;
+  viewLabel: string;
   privateCompany: string;
   privateJobDescription: string;
   primaryLane: string;
@@ -711,7 +711,7 @@ export function TailoredPortfolioStudio() {
   const openGeneralPortfolio = useCallback(() => {
     const generalView: TailoredView = {
       slug: "general",
-      label: "General portfolio",
+      viewLabel: "General portfolio",
       privateCompany: "",
       privateJobDescription: "",
       primaryLane: "Enablement",
@@ -784,7 +784,7 @@ export function TailoredPortfolioStudio() {
     expires.setDate(expires.getDate() + 21);
     const input: TailoredViewInput = {
       slug,
-      label: company.trim() || "Private target view",
+      viewLabel: company.trim() || "Private target view",
       privateCompany: company.trim(),
       privateJobDescription: jd.slice(0, 2200),
       primaryLane: activeLanes[0],
@@ -812,7 +812,7 @@ export function TailoredPortfolioStudio() {
       {
         url,
         slug,
-        label: input.label,
+        label: input.viewLabel,
         lanes: activeLanes,
         expires: expires.toLocaleDateString(),
         source,
