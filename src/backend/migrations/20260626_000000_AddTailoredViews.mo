@@ -12,7 +12,7 @@ module {
     results : Text;
     thumbnailUrl : ?Text;
     tags : [Text];
-    createdAt : Nat;
+    createdAt : Int;
   };
 
   type Resume = {

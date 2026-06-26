@@ -83,7 +83,7 @@ export const TailoredView = IDL.Record({
   'skillIds' : IDL.Vec(IDL.Text),
   'angle' : IDL.Text,
   'expiresAt' : IDL.Opt(IDL.Text),
-  'createdAt' : IDL.Nat,
+  'createdAt' : IDL.Int,
   'archived' : IDL.Bool,
 });
 export const TailoredViewInput = IDL.Record({
@@ -200,7 +200,7 @@ export const idlFactory = ({ IDL }) => {
     'skillIds' : IDL.Vec(IDL.Text),
     'angle' : IDL.Text,
     'expiresAt' : IDL.Opt(IDL.Text),
-    'createdAt' : IDL.Nat,
+    'createdAt' : IDL.Int,
     'archived' : IDL.Bool,
   });
   const TailoredViewInput = IDL.Record({

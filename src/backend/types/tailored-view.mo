@@ -25,7 +25,7 @@ module {
     skillIds : [Text];
     angle : Text;
     expiresAt : ?Text;
-    createdAt : Nat;
+    createdAt : Int;
     archived : Bool;
   };
 };
