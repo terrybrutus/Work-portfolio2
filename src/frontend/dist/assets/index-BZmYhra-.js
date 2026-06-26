@@ -17,7 +17,7 @@ var __privateWrapper = (obj, member, setter, getter) => ({
     return __privateGet(obj, member, getter);
   }
 });
-var _disableTimeVerification, _agent, _dbName, _storeName, _dbPromise, _IndexedDBExpirableStore_instances, getDb_fn, openDb_fn, openRequest_fn, prune_fn, _entries, _InMemoryExpirableStore_instances, prune_fn2, _rawKey, _derKey, _a, _currentInterval, _randomizationFactor, _multiplier, _maxInterval, _startTime, _maxElapsedTime, _maxIterations, _date, _count, _rootKeyPromise, _shouldFetchRootKey, _timeDiffMsecs, _hasSyncedTime, _syncTimePromise, _shouldSyncTime, _identity, _fetch, _fetchOptions, _callOptions, _credentials, _retryTimes, _backoffStrategy, _maxIngressExpiryInMinutes, _subnetNodeKeyExpirableStore, _HttpAgent_instances, maxIngressExpiryInMs_get, _queryPipeline, _updatePipeline, _subnetKeysFetching, _verifyQuerySignatures, handleV4SyncResponse_fn, handleV2Rejection_fn, requestAndRetryQuery_fn, requestAndRetry_fn, _verifyQueryResponse, readStateInner_fn, setTimeDiffMsecs_fn, asyncGuard_fn, rootKeyGuard_fn, syncTimeGuard_fn, doFetchSubnetKeys_fn, _focused, _cleanup, _setup, _b, _provider, _providerCalled, _c, _online, _cleanup2, _setup2, _d, _gcTimeout, _e, _initialState, _revertState, _cache, _client, _retryer, _defaultOptions, _abortSignalConsumed, _Query_instances, isInitialPausedFetch_fn, dispatch_fn, _f, _client2, _observers, _mutationCache, _retryer2, _Mutation_instances, dispatch_fn2, _g, _mutations, _scopes, _mutationId, _h, _queries, _i, _queryCache, _mutationCache2, _defaultOptions2, _queryDefaults, _mutationDefaults, _mountCount, _unsubscribeFocus, _unsubscribeOnline, _j, _rawKey2, _derKey2, _publicKey, _privateKey, _inner, _delegation, _inner2, _attributes, _signer, _options, _channel, _establishingChannel, _scheduledChannelClosure, _pendingRequestCount, _Signer_instances, rpc_fn, applyTransforms_fn, _options2, _status, _HeartbeatClient_instances, establish_fn, maintain_fn, receiveStatusResponse_fn, sendStatusRequest_fn, _options3, _closeListeners, _options4, _closed, _pendingQueue, _instance, _callbacks, _idleTimeout, _timeoutID, _resetTimer, _options5, _identity2, _chain, _storage, _signer2, _options6, _initPromise, _AuthClient_instances, resolveNonce_fn, init_fn, hydrate_fn, registerDefaultIdleCallback_fn;
+var _disableTimeVerification, _agent, _dbName, _storeName, _dbPromise, _IndexedDBExpirableStore_instances, getDb_fn, openDb_fn, openRequest_fn, prune_fn, _entries, _InMemoryExpirableStore_instances, prune_fn2, _rawKey, _derKey, _a, _currentInterval, _randomizationFactor, _multiplier, _maxInterval, _startTime, _maxElapsedTime, _maxIterations, _date, _count, _rootKeyPromise, _shouldFetchRootKey, _timeDiffMsecs, _hasSyncedTime, _syncTimePromise, _shouldSyncTime, _identity, _fetch, _fetchOptions, _callOptions, _credentials, _retryTimes, _backoffStrategy, _maxIngressExpiryInMinutes, _subnetNodeKeyExpirableStore, _HttpAgent_instances, maxIngressExpiryInMs_get, _queryPipeline, _updatePipeline, _subnetKeysFetching, _verifyQuerySignatures, handleV4SyncResponse_fn, handleV2Rejection_fn, requestAndRetryQuery_fn, requestAndRetry_fn, _verifyQueryResponse, readStateInner_fn, setTimeDiffMsecs_fn, asyncGuard_fn, rootKeyGuard_fn, syncTimeGuard_fn, doFetchSubnetKeys_fn, _focused, _cleanup, _setup, _b, _provider, _providerCalled, _c, _online, _cleanup2, _setup2, _d, _gcTimeout, _e, _initialState, _revertState, _cache, _client, _retryer, _defaultOptions, _abortSignalConsumed, _Query_instances, isInitialPausedFetch_fn, dispatch_fn, _f, _client2, _currentQuery, _currentQueryInitialState, _currentResult, _currentResultState, _currentResultOptions, _currentThenable, _selectError, _selectFn, _selectResult, _lastQueryWithDefinedData, _staleTimeoutId, _refetchIntervalId, _currentRefetchInterval, _trackedProps, _QueryObserver_instances, executeFetch_fn, updateStaleTimeout_fn, computeRefetchInterval_fn, updateRefetchInterval_fn, updateTimers_fn, clearStaleTimeout_fn, clearRefetchInterval_fn, updateQuery_fn, notify_fn, _g, _client3, _observers, _mutationCache, _retryer2, _Mutation_instances, dispatch_fn2, _h, _mutations, _scopes, _mutationId, _i, _queries, _j, _queryCache, _mutationCache2, _defaultOptions2, _queryDefaults, _mutationDefaults, _mountCount, _unsubscribeFocus, _unsubscribeOnline, _k, _rawKey2, _derKey2, _publicKey, _privateKey, _inner, _delegation, _inner2, _attributes, _signer, _options, _channel, _establishingChannel, _scheduledChannelClosure, _pendingRequestCount, _Signer_instances, rpc_fn, applyTransforms_fn, _options2, _status, _HeartbeatClient_instances, establish_fn, maintain_fn, receiveStatusResponse_fn, sendStatusRequest_fn, _options3, _closeListeners, _options4, _closed, _pendingQueue, _instance, _callbacks, _idleTimeout, _timeoutID, _resetTimer, _options5, _identity2, _chain, _storage, _signer2, _options6, _initPromise, _AuthClient_instances, resolveNonce_fn, init_fn, hydrate_fn, registerDefaultIdleCallback_fn;
 function _mergeNamespaces(n, m2) {
   for (var i = 0; i < m2.length; i++) {
     const e = m2[i];
@@ -114,6 +114,42 @@ reactJsxRuntime_production.jsxs = jsxProd;
   jsxRuntime.exports = reactJsxRuntime_production;
 }
 var jsxRuntimeExports = jsxRuntime.exports;
+class ExternalBlob {
+  constructor(directURL, blob) {
+    __publicField(this, "_blob");
+    __publicField(this, "directURL");
+    __publicField(this, "onProgress");
+    if (blob) {
+      this._blob = blob;
+    }
+    this.directURL = directURL;
+  }
+  static fromURL(url) {
+    return new ExternalBlob(url, null);
+  }
+  static fromBytes(blob) {
+    const url = URL.createObjectURL(new Blob([new Uint8Array(blob)], {
+      type: "application/octet-stream"
+    }));
+    return new ExternalBlob(url, blob);
+  }
+  async getBytes() {
+    if (this._blob) {
+      return this._blob;
+    }
+    const response = await fetch(this.directURL);
+    const blob = await response.blob();
+    this._blob = new Uint8Array(await blob.arrayBuffer());
+    return this._blob;
+  }
+  getDirectURL() {
+    return this.directURL;
+  }
+  withUploadProgress(onProgress) {
+    this.onProgress = onProgress;
+    return this;
+  }
+}
 var ReplicaRejectCode;
 (function(ReplicaRejectCode2) {
   ReplicaRejectCode2[ReplicaRejectCode2["SysFatal"] = 1] = "SysFatal";
@@ -1823,7 +1859,7 @@ class UnexpectedV4StatusErrorCode extends ErrorCode {
     Object.setPrototypeOf(this, UnexpectedV4StatusErrorCode.prototype);
   }
   toErrorMessage() {
-    const replacer = (_k, v2) => v2 instanceof Uint8Array ? `hex(${v2.length}):${bytesToHex(v2)}` : v2;
+    const replacer = (_k2, v2) => v2 instanceof Uint8Array ? `hex(${v2.length}):${bytesToHex(v2)}` : v2;
     return `Unexpected request status in v4 sync response: "${this.status}"
   Request ID (hex): ${bytesToHex(this.requestId)}
   Response: ${JSON.stringify(this.response, replacer, 2)}`;
@@ -11261,9 +11297,386 @@ function _createActorMethod(actor, methodName, func, blsVerify2) {
   handler.withOptions = (options) => (...args) => caller(options, ...args);
   return handler;
 }
-new TextEncoder().encode("icfs-chunk/");
-new TextEncoder().encode("icfs-metadata/");
-new TextEncoder().encode("ynode/");
+const MAXIMUM_CONCURRENT_UPLOADS = 10;
+const MAX_RETRIES = 3;
+const BASE_DELAY_MS = 1e3;
+const MAX_DELAY_MS = 3e4;
+const GATEWAY_VERSION = "v1";
+const HASH_ALGORITHM = "SHA-256";
+const SHA256_PREFIX = "sha256:";
+const DOMAIN_SEPARATOR_FOR_CHUNKS = new TextEncoder().encode("icfs-chunk/");
+const DOMAIN_SEPARATOR_FOR_METADATA = new TextEncoder().encode("icfs-metadata/");
+const DOMAIN_SEPARATOR_FOR_NODES = new TextEncoder().encode("ynode/");
+async function withRetry(operation) {
+  let lastError;
+  for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
+    try {
+      return await operation();
+    } catch (error) {
+      lastError = error instanceof Error ? error : new Error(String(error));
+      const shouldRetry = isRetriableError(error);
+      if (attempt === MAX_RETRIES || !shouldRetry) {
+        if (!shouldRetry && attempt < MAX_RETRIES) {
+          console.warn(`Non-retriable error encountered: ${lastError.message}. Not retrying.`);
+        }
+        throw error;
+      }
+      const delay = Math.min(BASE_DELAY_MS * 2 ** attempt + Math.random() * 1e3, MAX_DELAY_MS);
+      console.warn(`Request failed (attempt ${attempt + 1}/${MAX_RETRIES + 1}): ${lastError.message}. Retrying in ${Math.round(delay)}ms...`);
+      await new Promise((resolve) => setTimeout(resolve, delay));
+    }
+  }
+  throw lastError || new Error("Unknown error occurred during retry attempts");
+}
+function isRetriableError(error) {
+  var _a2, _b2;
+  const errorMessage = ((_a2 = error == null ? void 0 : error.message) == null ? void 0 : _a2.toLowerCase()) || "";
+  if ((_b2 = error == null ? void 0 : error.response) == null ? void 0 : _b2.status) {
+    const status = error.response.status;
+    if (status === 408 || status === 429)
+      return true;
+    if (status >= 400 && status < 500)
+      return false;
+    if (status >= 500)
+      return true;
+  }
+  if (errorMessage.includes("ssl") || errorMessage.includes("tls") || errorMessage.includes("network error") || errorMessage.includes("connection") || errorMessage.includes("timeout") || errorMessage.includes("fetch")) {
+    return true;
+  }
+  if (errorMessage.includes("validation") || errorMessage.includes("invalid") || errorMessage.includes("malformed") || errorMessage.includes("unauthorized") || errorMessage.includes("forbidden") || errorMessage.includes("not found")) {
+    return false;
+  }
+  return true;
+}
+function validateHashFormat(hash, context) {
+  if (!hash) {
+    throw new Error(`${context}: Hash cannot be empty`);
+  }
+  if (!hash.startsWith(SHA256_PREFIX)) {
+    throw new Error(`${context}: Invalid hash format. Expected format: ${SHA256_PREFIX}<64-char-hex>, got: ${hash}`);
+  }
+  const hexPart = hash.substring(SHA256_PREFIX.length);
+  if (hexPart.length !== 64) {
+    throw new Error(`${context}: Invalid hash format. Expected 64 hex characters after ${SHA256_PREFIX}, got ${hexPart.length} characters: ${hash}`);
+  }
+  if (!/^[0-9a-f]{64}$/i.test(hexPart)) {
+    throw new Error(`${context}: Invalid hash format. Hash must contain only hex characters (0-9, a-f), got: ${hash}`);
+  }
+}
+class YHash {
+  constructor(bytes) {
+    __publicField(this, "bytes");
+    if (bytes.length !== 32) {
+      throw new Error(`YHash must be exactly 32 bytes, got ${bytes.length}`);
+    }
+    this.bytes = new Uint8Array(bytes);
+  }
+  static async fromNodes(left, right) {
+    const leftBytes = left instanceof YHash ? left.bytes : new TextEncoder().encode("UNBALANCED");
+    const rightBytes = right instanceof YHash ? right.bytes : new TextEncoder().encode("UNBALANCED");
+    const combined = new Uint8Array(DOMAIN_SEPARATOR_FOR_NODES.length + leftBytes.length + rightBytes.length);
+    const arrays = [DOMAIN_SEPARATOR_FOR_NODES, leftBytes, rightBytes];
+    let offset = 0;
+    for (const data of arrays) {
+      combined.set(data, offset);
+      offset += data.length;
+    }
+    const hashBuffer = await crypto.subtle.digest(HASH_ALGORITHM, combined);
+    return new YHash(new Uint8Array(hashBuffer));
+  }
+  static async fromChunk(data) {
+    return YHash.fromBytes(DOMAIN_SEPARATOR_FOR_CHUNKS, data);
+  }
+  static async fromHeaders(headers) {
+    const headerLines = [];
+    for (const [key, value] of Object.entries(headers)) {
+      headerLines.push(`${key.trim()}: ${value.trim()}
+`);
+    }
+    headerLines.sort();
+    const hash = await YHash.fromBytes(DOMAIN_SEPARATOR_FOR_METADATA, new TextEncoder().encode(headerLines.join("")));
+    return hash;
+  }
+  static async fromBytes(domainSeparator, data) {
+    const combined = new Uint8Array(domainSeparator.length + data.length);
+    combined.set(domainSeparator);
+    combined.set(data, domainSeparator.length);
+    const hashBuffer = await crypto.subtle.digest(HASH_ALGORITHM, combined);
+    return new YHash(new Uint8Array(hashBuffer));
+  }
+  static fromHex(hexString) {
+    const bytes = new Uint8Array(hexString.match(/.{1,2}/g).map((byte) => Number.parseInt(byte, 16)));
+    return new YHash(bytes);
+  }
+  toShaString() {
+    return `${SHA256_PREFIX}${this.toHex()}`;
+  }
+  toString() {
+    throw new Error("toString is not supported for YHash");
+  }
+  toHex() {
+    return Array.from(this.bytes).map((b2) => b2.toString(16).padStart(2, "0")).join("");
+  }
+}
+function nodeToJSON(node) {
+  return {
+    hash: node.hash.toShaString(),
+    left: node.left ? nodeToJSON(node.left) : null,
+    right: node.right ? nodeToJSON(node.right) : null
+  };
+}
+class BlobHashTree {
+  constructor(chunk_hashes, tree, headers = null) {
+    __publicField(this, "tree_type");
+    __publicField(this, "chunk_hashes");
+    __publicField(this, "tree");
+    __publicField(this, "headers");
+    this.tree_type = "DSBMTWH";
+    this.chunk_hashes = chunk_hashes;
+    this.tree = tree;
+    if (headers == null) {
+      this.headers = [];
+    } else if (Array.isArray(headers)) {
+      this.headers = headers;
+    } else {
+      this.headers = Object.entries(headers).map(([key, value]) => `${key.trim()}: ${value.trim()}`);
+    }
+    this.headers.sort();
+  }
+  static async build(chunkHashes, headers = {}) {
+    if (chunkHashes.length === 0) {
+      const hex = "8b8e620f084e48da0be2287fd12c5aaa4dbe14b468fd2e360f48d741fe7628a0";
+      const bytes = new TextEncoder().encode(hex);
+      chunkHashes.push(new YHash(bytes));
+    }
+    let level = chunkHashes.map((hash) => ({
+      hash,
+      left: null,
+      right: null
+    }));
+    while (level.length > 1) {
+      const nextLevel = [];
+      for (let i = 0; i < level.length; i += 2) {
+        const left = level[i];
+        const right = level[i + 1] || null;
+        const parentHash = await YHash.fromNodes(left.hash, right ? right.hash : null);
+        nextLevel.push({
+          hash: parentHash,
+          left,
+          right
+        });
+      }
+      level = nextLevel;
+    }
+    const chunksRoot = level[0];
+    if (headers && Object.keys(headers).length > 0) {
+      const metadataRootHash = await YHash.fromHeaders(headers);
+      const metadataRoot = {
+        hash: metadataRootHash,
+        left: null,
+        right: null
+      };
+      const combinedRootHash = await YHash.fromNodes(chunksRoot.hash, metadataRoot.hash);
+      const combinedRoot = {
+        hash: combinedRootHash,
+        left: chunksRoot,
+        right: metadataRoot
+      };
+      return new BlobHashTree(chunkHashes, combinedRoot, headers);
+    }
+    return new BlobHashTree(chunkHashes, chunksRoot, headers);
+  }
+  toJSON() {
+    return {
+      tree_type: this.tree_type,
+      chunk_hashes: this.chunk_hashes.map((h2) => h2.toShaString()),
+      tree: nodeToJSON(this.tree),
+      headers: this.headers
+    };
+  }
+}
+class StorageGatewayClient {
+  constructor(storageGatewayUrl) {
+    __publicField(this, "storageGatewayUrl");
+    this.storageGatewayUrl = storageGatewayUrl;
+  }
+  getStorageGatewayUrl() {
+    return this.storageGatewayUrl;
+  }
+  async uploadChunk(params) {
+    const blobHashString = params.blobRootHash.toShaString();
+    const chunkHashString = params.chunkHash.toShaString();
+    validateHashFormat(blobHashString, `uploadChunk[${params.chunkIndex}] blob_hash`);
+    validateHashFormat(chunkHashString, `uploadChunk[${params.chunkIndex}] chunk_hash`);
+    return await withRetry(async () => {
+      const queryParams = new URLSearchParams({
+        owner_id: params.owner,
+        blob_hash: blobHashString,
+        chunk_hash: chunkHashString,
+        chunk_index: params.chunkIndex.toString(),
+        bucket_name: params.bucketName,
+        project_id: params.projectId
+      });
+      const url = `${this.storageGatewayUrl}/${GATEWAY_VERSION}/chunk/?${queryParams.toString()}`;
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/octet-stream",
+          "X-Caffeine-Project-ID": params.projectId
+        },
+        body: params.chunkData
+      });
+      if (!response.ok) {
+        const errorText = await response.text();
+        const error = new Error(`Failed to upload chunk ${params.chunkIndex}: ${response.status} ${response.statusText} - ${errorText}`);
+        error.response = { status: response.status };
+        throw error;
+      }
+      const result = await response.json();
+      return {
+        isComplete: result.status === "blob_complete"
+      };
+    });
+  }
+  async uploadBlobTree(blobHashTree, bucketName, numBlobBytes, owner, projectId, certificateBytes) {
+    const treeJSON = blobHashTree.toJSON();
+    validateHashFormat(treeJSON.tree.hash, "uploadBlobTree root hash");
+    treeJSON.chunk_hashes.forEach((hash, index2) => {
+      validateHashFormat(hash, `uploadBlobTree chunk_hash[${index2}]`);
+    });
+    return await withRetry(async () => {
+      const url = `${this.storageGatewayUrl}/${GATEWAY_VERSION}/blob-tree/`;
+      const requestBody = {
+        blob_tree: treeJSON,
+        bucket_name: bucketName,
+        num_blob_bytes: numBlobBytes,
+        owner,
+        project_id: projectId,
+        headers: blobHashTree.headers,
+        auth: {
+          OwnerEgressSignature: Array.from(certificateBytes)
+        }
+      };
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Caffeine-Project-ID": projectId
+        },
+        body: JSON.stringify(requestBody)
+      });
+      if (!response.ok) {
+        const errorText = await response.text();
+        const error = new Error(`Failed to upload blob tree: ${response.status} ${response.statusText} - ${errorText}`);
+        error.response = { status: response.status };
+        throw error;
+      }
+    });
+  }
+}
+class StorageClient {
+  constructor(bucket, storageGatewayUrl, backendCanisterId, projectId, agent) {
+    __publicField(this, "bucket");
+    __publicField(this, "backendCanisterId");
+    __publicField(this, "projectId");
+    __publicField(this, "agent");
+    __publicField(this, "storageGatewayClient");
+    this.bucket = bucket;
+    this.backendCanisterId = backendCanisterId;
+    this.projectId = projectId;
+    this.agent = agent;
+    this.storageGatewayClient = new StorageGatewayClient(storageGatewayUrl);
+  }
+  async getCertificate(hash) {
+    const args = encode$1([Text], [hash]);
+    const result = await this.agent.call(this.backendCanisterId, {
+      methodName: "_immutableObjectStorageCreateCertificate",
+      arg: args,
+      effectiveCanisterId: this.backendCanisterId
+    });
+    const respone = result.response.body;
+    if (isV4ResponseBody(respone)) {
+      console.log("Certificate:", respone.certificate);
+      return respone.certificate;
+    }
+    throw new Error("Expected v4 response body");
+  }
+  async putFile(blobBytes, onProgress) {
+    const httpHeaders = {
+      "Content-Type": "application/json"
+    };
+    const file = new Blob([new Uint8Array(blobBytes)], {
+      type: "application/octet-stream"
+    });
+    const fileHeaders = {
+      "Content-Type": "application/octet-stream",
+      "Content-Length": file.size.toString()
+    };
+    const { chunks, chunkHashes, blobHashTree } = await this.processFileForUpload(file, fileHeaders);
+    const blobRootHash = blobHashTree.tree.hash;
+    const hashString2 = blobRootHash.toShaString();
+    const certificateBytes = await this.getCertificate(hashString2);
+    await this.storageGatewayClient.uploadBlobTree(blobHashTree, this.bucket, file.size, this.backendCanisterId, this.projectId, certificateBytes);
+    await this.parallelUpload(chunks, chunkHashes, blobRootHash, httpHeaders, onProgress);
+    return { hash: hashString2 };
+  }
+  async getDirectURL(hash) {
+    if (!hash) {
+      throw new Error("Hash must not be empty");
+    }
+    validateHashFormat(hash, `getDirectURL for path '${hash}'`);
+    return `${this.storageGatewayClient.getStorageGatewayUrl()}/${GATEWAY_VERSION}/blob/?blob_hash=${encodeURIComponent(hash)}&owner_id=${encodeURIComponent(this.backendCanisterId)}&project_id=${encodeURIComponent(this.projectId)}`;
+  }
+  async processFileForUpload(file, headers) {
+    const chunks = this.createFileChunks(file);
+    const chunkHashes = [];
+    for (let i = 0; i < chunks.length; i++) {
+      const chunkData = new Uint8Array(await chunks[i].arrayBuffer());
+      const hash = await YHash.fromChunk(chunkData);
+      chunkHashes.push(hash);
+    }
+    const blobHashTree = await BlobHashTree.build(chunkHashes, headers);
+    return { chunks, chunkHashes, blobHashTree };
+  }
+  async parallelUpload(chunks, chunkHashes, blobRootHash, httpHeaders, onProgress) {
+    let completedChunks = 0;
+    const uploadSingleChunk = async (index2) => {
+      const chunkData = new Uint8Array(await chunks[index2].arrayBuffer());
+      const chunkHash = chunkHashes[index2];
+      await this.storageGatewayClient.uploadChunk({
+        blobRootHash,
+        chunkHash,
+        chunkIndex: index2,
+        chunkData,
+        bucketName: this.bucket,
+        owner: this.backendCanisterId,
+        projectId: this.projectId,
+        httpHeaders
+      });
+      const currentCompleted = ++completedChunks;
+      if (onProgress != null) {
+        const percentage = chunks.length === 0 ? 100 : Math.round(currentCompleted / chunks.length * 100);
+        onProgress(percentage);
+      }
+    };
+    await Promise.all(Array.from({ length: MAXIMUM_CONCURRENT_UPLOADS }, async (_2, workerId) => {
+      for (let i = workerId; i < chunks.length; i += MAXIMUM_CONCURRENT_UPLOADS) {
+        await uploadSingleChunk(i);
+      }
+    }));
+  }
+  createFileChunks(file, chunkSize = 1024 * 1024) {
+    const chunks = [];
+    const totalChunks = Math.ceil(file.size / chunkSize);
+    for (let index2 = 0; index2 < totalChunks; index2++) {
+      const start = index2 * chunkSize;
+      const end = Math.min(start + chunkSize, file.size);
+      const chunk = file.slice(start, end);
+      chunks.push(chunk);
+    }
+    return chunks;
+  }
+}
 var define_process_env_default$1 = {};
 const DEFAULT_STORAGE_GATEWAY_URL = "https://blob.caffeine.ai";
 const DEFAULT_BUCKET_NAME = "default-bucket";
@@ -11309,6 +11722,59 @@ async function loadConfig() {
     };
     return fallbackConfig;
   }
+}
+function extractAgentErrorMessage(error) {
+  const errorString = String(error);
+  const match = errorString.match(/with message:\s*'([^']+)'/s);
+  return match ? match[1] : errorString;
+}
+function processError(e) {
+  if (e && typeof e === "object" && "message" in e) {
+    throw new Error(extractAgentErrorMessage(`${e.message}`));
+  }
+  throw e;
+}
+async function maybeLoadMockBackend() {
+  {
+    return null;
+  }
+}
+async function createActorWithConfig(createActor2, options) {
+  var _a2;
+  const mock = await maybeLoadMockBackend();
+  if (mock) {
+    return mock;
+  }
+  const config = await loadConfig();
+  const resolvedOptions = options ?? {};
+  const agent = new HttpAgent({
+    ...resolvedOptions.agentOptions,
+    host: config.backend_host
+  });
+  if ((_a2 = config.backend_host) == null ? void 0 : _a2.includes("localhost")) {
+    await agent.fetchRootKey().catch((err) => {
+      console.warn("Unable to fetch root key. Check to ensure that your local replica is running");
+      console.error(err);
+    });
+  }
+  const actorOptions = {
+    ...resolvedOptions,
+    agent,
+    processError
+  };
+  const storageClient = new StorageClient(config.bucket_name, config.storage_gateway_url, config.backend_canister_id, config.project_id, agent);
+  const MOTOKO_DEDUPLICATION_SENTINEL = "!caf!";
+  const uploadFile = async (file) => {
+    const { hash } = await storageClient.putFile(await file.getBytes(), file.onProgress);
+    return new TextEncoder().encode(MOTOKO_DEDUPLICATION_SENTINEL + hash);
+  };
+  const downloadFile = async (bytes) => {
+    const hashWithPrefix = new TextDecoder().decode(new Uint8Array(bytes));
+    const hash = hashWithPrefix.substring(MOTOKO_DEDUPLICATION_SENTINEL.length);
+    const url = await storageClient.getDirectURL(hash);
+    return ExternalBlob.fromURL(url);
+  };
+  return createActor2(config.backend_canister_id, uploadFile, downloadFile, actorOptions);
 }
 var Subscribable = class {
   constructor() {
@@ -11578,6 +12044,17 @@ function replaceEqualDeep(a2, b2, depth = 0) {
   }
   return aSize === bSize && equalItems === aSize ? a2 : copy;
 }
+function shallowEqualObjects(a2, b2) {
+  if (!b2 || Object.keys(a2).length !== Object.keys(b2).length) {
+    return false;
+  }
+  for (const key in a2) {
+    if (a2[key] !== b2[key]) {
+      return false;
+    }
+  }
+  return true;
+}
 function isPlainArray(value) {
   return Array.isArray(value) && value.length === Object.keys(value).length;
 }
@@ -11634,6 +12111,12 @@ function ensureQueryFn(options, fetchOptions) {
     return () => Promise.reject(new Error(`Missing queryFn: '${options.queryHash}'`));
   }
   return options.queryFn;
+}
+function shouldThrowError(throwOnError, params) {
+  if (typeof throwOnError === "function") {
+    return throwOnError(...params);
+  }
+  return !!throwOnError;
 }
 function addConsumeAwareSignal(object, getSignal, onCancelled) {
   let consumed = false;
@@ -12148,7 +12631,7 @@ var Query = (_f = class extends Removable {
     }
   }
   async fetch(options, fetchOptions) {
-    var _a2, _b2, _c2, _d2, _e2, _f2, _g2, _h2, _i2, _j2, _k, _l;
+    var _a2, _b2, _c2, _d2, _e2, _f2, _g2, _h2, _i2, _j2, _k2, _l;
     if (this.state.fetchStatus !== "idle" && // If the promise in the retryer is already rejected, we have to definitely
     // re-start the fetch; there is a chance that the query is still in a
     // pending state when that happens
@@ -12280,8 +12763,8 @@ var Query = (_f = class extends Removable {
         error,
         this
       );
-      (_l = (_k = __privateGet(this, _cache).config).onSettled) == null ? void 0 : _l.call(
-        _k,
+      (_l = (_k2 = __privateGet(this, _cache).config).onSettled) == null ? void 0 : _l.call(
+        _k2,
         this.state.data,
         error,
         this
@@ -12405,6 +12888,450 @@ function getDefaultState$1(options) {
     fetchStatus: "idle"
   };
 }
+var QueryObserver = (_g = class extends Subscribable {
+  constructor(client2, options) {
+    super();
+    __privateAdd(this, _QueryObserver_instances);
+    __privateAdd(this, _client2);
+    __privateAdd(this, _currentQuery);
+    __privateAdd(this, _currentQueryInitialState);
+    __privateAdd(this, _currentResult);
+    __privateAdd(this, _currentResultState);
+    __privateAdd(this, _currentResultOptions);
+    __privateAdd(this, _currentThenable);
+    __privateAdd(this, _selectError);
+    __privateAdd(this, _selectFn);
+    __privateAdd(this, _selectResult);
+    // This property keeps track of the last query with defined data.
+    // It will be used to pass the previous data and query to the placeholder function between renders.
+    __privateAdd(this, _lastQueryWithDefinedData);
+    __privateAdd(this, _staleTimeoutId);
+    __privateAdd(this, _refetchIntervalId);
+    __privateAdd(this, _currentRefetchInterval);
+    __privateAdd(this, _trackedProps, /* @__PURE__ */ new Set());
+    this.options = options;
+    __privateSet(this, _client2, client2);
+    __privateSet(this, _selectError, null);
+    __privateSet(this, _currentThenable, pendingThenable());
+    this.bindMethods();
+    this.setOptions(options);
+  }
+  bindMethods() {
+    this.refetch = this.refetch.bind(this);
+  }
+  onSubscribe() {
+    if (this.listeners.size === 1) {
+      __privateGet(this, _currentQuery).addObserver(this);
+      if (shouldFetchOnMount(__privateGet(this, _currentQuery), this.options)) {
+        __privateMethod(this, _QueryObserver_instances, executeFetch_fn).call(this);
+      } else {
+        this.updateResult();
+      }
+      __privateMethod(this, _QueryObserver_instances, updateTimers_fn).call(this);
+    }
+  }
+  onUnsubscribe() {
+    if (!this.hasListeners()) {
+      this.destroy();
+    }
+  }
+  shouldFetchOnReconnect() {
+    return shouldFetchOn(
+      __privateGet(this, _currentQuery),
+      this.options,
+      this.options.refetchOnReconnect
+    );
+  }
+  shouldFetchOnWindowFocus() {
+    return shouldFetchOn(
+      __privateGet(this, _currentQuery),
+      this.options,
+      this.options.refetchOnWindowFocus
+    );
+  }
+  destroy() {
+    this.listeners = /* @__PURE__ */ new Set();
+    __privateMethod(this, _QueryObserver_instances, clearStaleTimeout_fn).call(this);
+    __privateMethod(this, _QueryObserver_instances, clearRefetchInterval_fn).call(this);
+    __privateGet(this, _currentQuery).removeObserver(this);
+  }
+  setOptions(options) {
+    const prevOptions = this.options;
+    const prevQuery = __privateGet(this, _currentQuery);
+    this.options = __privateGet(this, _client2).defaultQueryOptions(options);
+    if (this.options.enabled !== void 0 && typeof this.options.enabled !== "boolean" && typeof this.options.enabled !== "function" && typeof resolveEnabled(this.options.enabled, __privateGet(this, _currentQuery)) !== "boolean") {
+      throw new Error(
+        "Expected enabled to be a boolean or a callback that returns a boolean"
+      );
+    }
+    __privateMethod(this, _QueryObserver_instances, updateQuery_fn).call(this);
+    __privateGet(this, _currentQuery).setOptions(this.options);
+    if (prevOptions._defaulted && !shallowEqualObjects(this.options, prevOptions)) {
+      __privateGet(this, _client2).getQueryCache().notify({
+        type: "observerOptionsUpdated",
+        query: __privateGet(this, _currentQuery),
+        observer: this
+      });
+    }
+    const mounted = this.hasListeners();
+    if (mounted && shouldFetchOptionally(
+      __privateGet(this, _currentQuery),
+      prevQuery,
+      this.options,
+      prevOptions
+    )) {
+      __privateMethod(this, _QueryObserver_instances, executeFetch_fn).call(this);
+    }
+    this.updateResult();
+    if (mounted && (__privateGet(this, _currentQuery) !== prevQuery || resolveEnabled(this.options.enabled, __privateGet(this, _currentQuery)) !== resolveEnabled(prevOptions.enabled, __privateGet(this, _currentQuery)) || resolveStaleTime(this.options.staleTime, __privateGet(this, _currentQuery)) !== resolveStaleTime(prevOptions.staleTime, __privateGet(this, _currentQuery)))) {
+      __privateMethod(this, _QueryObserver_instances, updateStaleTimeout_fn).call(this);
+    }
+    const nextRefetchInterval = __privateMethod(this, _QueryObserver_instances, computeRefetchInterval_fn).call(this);
+    if (mounted && (__privateGet(this, _currentQuery) !== prevQuery || resolveEnabled(this.options.enabled, __privateGet(this, _currentQuery)) !== resolveEnabled(prevOptions.enabled, __privateGet(this, _currentQuery)) || nextRefetchInterval !== __privateGet(this, _currentRefetchInterval))) {
+      __privateMethod(this, _QueryObserver_instances, updateRefetchInterval_fn).call(this, nextRefetchInterval);
+    }
+  }
+  getOptimisticResult(options) {
+    const query = __privateGet(this, _client2).getQueryCache().build(__privateGet(this, _client2), options);
+    const result = this.createResult(query, options);
+    if (shouldAssignObserverCurrentProperties(this, result)) {
+      __privateSet(this, _currentResult, result);
+      __privateSet(this, _currentResultOptions, this.options);
+      __privateSet(this, _currentResultState, __privateGet(this, _currentQuery).state);
+    }
+    return result;
+  }
+  getCurrentResult() {
+    return __privateGet(this, _currentResult);
+  }
+  trackResult(result, onPropTracked) {
+    return new Proxy(result, {
+      get: (target, key) => {
+        this.trackProp(key);
+        onPropTracked == null ? void 0 : onPropTracked(key);
+        if (key === "promise") {
+          this.trackProp("data");
+          if (!this.options.experimental_prefetchInRender && __privateGet(this, _currentThenable).status === "pending") {
+            __privateGet(this, _currentThenable).reject(
+              new Error(
+                "experimental_prefetchInRender feature flag is not enabled"
+              )
+            );
+          }
+        }
+        return Reflect.get(target, key);
+      }
+    });
+  }
+  trackProp(key) {
+    __privateGet(this, _trackedProps).add(key);
+  }
+  getCurrentQuery() {
+    return __privateGet(this, _currentQuery);
+  }
+  refetch({ ...options } = {}) {
+    return this.fetch({
+      ...options
+    });
+  }
+  fetchOptimistic(options) {
+    const defaultedOptions = __privateGet(this, _client2).defaultQueryOptions(options);
+    const query = __privateGet(this, _client2).getQueryCache().build(__privateGet(this, _client2), defaultedOptions);
+    return query.fetch().then(() => this.createResult(query, defaultedOptions));
+  }
+  fetch(fetchOptions) {
+    return __privateMethod(this, _QueryObserver_instances, executeFetch_fn).call(this, {
+      ...fetchOptions,
+      cancelRefetch: fetchOptions.cancelRefetch ?? true
+    }).then(() => {
+      this.updateResult();
+      return __privateGet(this, _currentResult);
+    });
+  }
+  createResult(query, options) {
+    var _a2;
+    const prevQuery = __privateGet(this, _currentQuery);
+    const prevOptions = this.options;
+    const prevResult = __privateGet(this, _currentResult);
+    const prevResultState = __privateGet(this, _currentResultState);
+    const prevResultOptions = __privateGet(this, _currentResultOptions);
+    const queryChange = query !== prevQuery;
+    const queryInitialState = queryChange ? query.state : __privateGet(this, _currentQueryInitialState);
+    const { state } = query;
+    let newState = { ...state };
+    let isPlaceholderData = false;
+    let data;
+    if (options._optimisticResults) {
+      const mounted = this.hasListeners();
+      const fetchOnMount = !mounted && shouldFetchOnMount(query, options);
+      const fetchOptionally = mounted && shouldFetchOptionally(query, prevQuery, options, prevOptions);
+      if (fetchOnMount || fetchOptionally) {
+        newState = {
+          ...newState,
+          ...fetchState(state.data, query.options)
+        };
+      }
+      if (options._optimisticResults === "isRestoring") {
+        newState.fetchStatus = "idle";
+      }
+    }
+    let { error, errorUpdatedAt, status } = newState;
+    data = newState.data;
+    let skipSelect = false;
+    if (options.placeholderData !== void 0 && data === void 0 && status === "pending") {
+      let placeholderData;
+      if ((prevResult == null ? void 0 : prevResult.isPlaceholderData) && options.placeholderData === (prevResultOptions == null ? void 0 : prevResultOptions.placeholderData)) {
+        placeholderData = prevResult.data;
+        skipSelect = true;
+      } else {
+        placeholderData = typeof options.placeholderData === "function" ? options.placeholderData(
+          (_a2 = __privateGet(this, _lastQueryWithDefinedData)) == null ? void 0 : _a2.state.data,
+          __privateGet(this, _lastQueryWithDefinedData)
+        ) : options.placeholderData;
+      }
+      if (placeholderData !== void 0) {
+        status = "success";
+        data = replaceData(
+          prevResult == null ? void 0 : prevResult.data,
+          placeholderData,
+          options
+        );
+        isPlaceholderData = true;
+      }
+    }
+    if (options.select && data !== void 0 && !skipSelect) {
+      if (prevResult && data === (prevResultState == null ? void 0 : prevResultState.data) && options.select === __privateGet(this, _selectFn)) {
+        data = __privateGet(this, _selectResult);
+      } else {
+        try {
+          __privateSet(this, _selectFn, options.select);
+          data = options.select(data);
+          data = replaceData(prevResult == null ? void 0 : prevResult.data, data, options);
+          __privateSet(this, _selectResult, data);
+          __privateSet(this, _selectError, null);
+        } catch (selectError) {
+          __privateSet(this, _selectError, selectError);
+        }
+      }
+    }
+    if (__privateGet(this, _selectError)) {
+      error = __privateGet(this, _selectError);
+      data = __privateGet(this, _selectResult);
+      errorUpdatedAt = Date.now();
+      status = "error";
+    }
+    const isFetching = newState.fetchStatus === "fetching";
+    const isPending = status === "pending";
+    const isError = status === "error";
+    const isLoading = isPending && isFetching;
+    const hasData = data !== void 0;
+    const result = {
+      status,
+      fetchStatus: newState.fetchStatus,
+      isPending,
+      isSuccess: status === "success",
+      isError,
+      isInitialLoading: isLoading,
+      isLoading,
+      data,
+      dataUpdatedAt: newState.dataUpdatedAt,
+      error,
+      errorUpdatedAt,
+      failureCount: newState.fetchFailureCount,
+      failureReason: newState.fetchFailureReason,
+      errorUpdateCount: newState.errorUpdateCount,
+      isFetched: query.isFetched(),
+      isFetchedAfterMount: newState.dataUpdateCount > queryInitialState.dataUpdateCount || newState.errorUpdateCount > queryInitialState.errorUpdateCount,
+      isFetching,
+      isRefetching: isFetching && !isPending,
+      isLoadingError: isError && !hasData,
+      isPaused: newState.fetchStatus === "paused",
+      isPlaceholderData,
+      isRefetchError: isError && hasData,
+      isStale: isStale(query, options),
+      refetch: this.refetch,
+      promise: __privateGet(this, _currentThenable),
+      isEnabled: resolveEnabled(options.enabled, query) !== false
+    };
+    const nextResult = result;
+    if (this.options.experimental_prefetchInRender) {
+      const hasResultData = nextResult.data !== void 0;
+      const isErrorWithoutData = nextResult.status === "error" && !hasResultData;
+      const finalizeThenableIfPossible = (thenable) => {
+        if (isErrorWithoutData) {
+          thenable.reject(nextResult.error);
+        } else if (hasResultData) {
+          thenable.resolve(nextResult.data);
+        }
+      };
+      const recreateThenable = () => {
+        const pending = __privateSet(this, _currentThenable, nextResult.promise = pendingThenable());
+        finalizeThenableIfPossible(pending);
+      };
+      const prevThenable = __privateGet(this, _currentThenable);
+      switch (prevThenable.status) {
+        case "pending":
+          if (query.queryHash === prevQuery.queryHash) {
+            finalizeThenableIfPossible(prevThenable);
+          }
+          break;
+        case "fulfilled":
+          if (isErrorWithoutData || nextResult.data !== prevThenable.value) {
+            recreateThenable();
+          }
+          break;
+        case "rejected":
+          if (!isErrorWithoutData || nextResult.error !== prevThenable.reason) {
+            recreateThenable();
+          }
+          break;
+      }
+    }
+    return nextResult;
+  }
+  updateResult() {
+    const prevResult = __privateGet(this, _currentResult);
+    const nextResult = this.createResult(__privateGet(this, _currentQuery), this.options);
+    __privateSet(this, _currentResultState, __privateGet(this, _currentQuery).state);
+    __privateSet(this, _currentResultOptions, this.options);
+    if (__privateGet(this, _currentResultState).data !== void 0) {
+      __privateSet(this, _lastQueryWithDefinedData, __privateGet(this, _currentQuery));
+    }
+    if (shallowEqualObjects(nextResult, prevResult)) {
+      return;
+    }
+    __privateSet(this, _currentResult, nextResult);
+    const shouldNotifyListeners = () => {
+      if (!prevResult) {
+        return true;
+      }
+      const { notifyOnChangeProps } = this.options;
+      const notifyOnChangePropsValue = typeof notifyOnChangeProps === "function" ? notifyOnChangeProps() : notifyOnChangeProps;
+      if (notifyOnChangePropsValue === "all" || !notifyOnChangePropsValue && !__privateGet(this, _trackedProps).size) {
+        return true;
+      }
+      const includedProps = new Set(
+        notifyOnChangePropsValue ?? __privateGet(this, _trackedProps)
+      );
+      if (this.options.throwOnError) {
+        includedProps.add("error");
+      }
+      return Object.keys(__privateGet(this, _currentResult)).some((key) => {
+        const typedKey = key;
+        const changed = __privateGet(this, _currentResult)[typedKey] !== prevResult[typedKey];
+        return changed && includedProps.has(typedKey);
+      });
+    };
+    __privateMethod(this, _QueryObserver_instances, notify_fn).call(this, { listeners: shouldNotifyListeners() });
+  }
+  onQueryUpdate() {
+    this.updateResult();
+    if (this.hasListeners()) {
+      __privateMethod(this, _QueryObserver_instances, updateTimers_fn).call(this);
+    }
+  }
+}, _client2 = new WeakMap(), _currentQuery = new WeakMap(), _currentQueryInitialState = new WeakMap(), _currentResult = new WeakMap(), _currentResultState = new WeakMap(), _currentResultOptions = new WeakMap(), _currentThenable = new WeakMap(), _selectError = new WeakMap(), _selectFn = new WeakMap(), _selectResult = new WeakMap(), _lastQueryWithDefinedData = new WeakMap(), _staleTimeoutId = new WeakMap(), _refetchIntervalId = new WeakMap(), _currentRefetchInterval = new WeakMap(), _trackedProps = new WeakMap(), _QueryObserver_instances = new WeakSet(), executeFetch_fn = function(fetchOptions) {
+  __privateMethod(this, _QueryObserver_instances, updateQuery_fn).call(this);
+  let promise = __privateGet(this, _currentQuery).fetch(
+    this.options,
+    fetchOptions
+  );
+  if (!(fetchOptions == null ? void 0 : fetchOptions.throwOnError)) {
+    promise = promise.catch(noop$6);
+  }
+  return promise;
+}, updateStaleTimeout_fn = function() {
+  __privateMethod(this, _QueryObserver_instances, clearStaleTimeout_fn).call(this);
+  const staleTime = resolveStaleTime(
+    this.options.staleTime,
+    __privateGet(this, _currentQuery)
+  );
+  if (environmentManager.isServer() || __privateGet(this, _currentResult).isStale || !isValidTimeout(staleTime)) {
+    return;
+  }
+  const time = timeUntilStale(__privateGet(this, _currentResult).dataUpdatedAt, staleTime);
+  const timeout2 = time + 1;
+  __privateSet(this, _staleTimeoutId, timeoutManager.setTimeout(() => {
+    if (!__privateGet(this, _currentResult).isStale) {
+      this.updateResult();
+    }
+  }, timeout2));
+}, computeRefetchInterval_fn = function() {
+  return (typeof this.options.refetchInterval === "function" ? this.options.refetchInterval(__privateGet(this, _currentQuery)) : this.options.refetchInterval) ?? false;
+}, updateRefetchInterval_fn = function(nextInterval) {
+  __privateMethod(this, _QueryObserver_instances, clearRefetchInterval_fn).call(this);
+  __privateSet(this, _currentRefetchInterval, nextInterval);
+  if (environmentManager.isServer() || resolveEnabled(this.options.enabled, __privateGet(this, _currentQuery)) === false || !isValidTimeout(__privateGet(this, _currentRefetchInterval)) || __privateGet(this, _currentRefetchInterval) === 0) {
+    return;
+  }
+  __privateSet(this, _refetchIntervalId, timeoutManager.setInterval(() => {
+    if (this.options.refetchIntervalInBackground || focusManager.isFocused()) {
+      __privateMethod(this, _QueryObserver_instances, executeFetch_fn).call(this);
+    }
+  }, __privateGet(this, _currentRefetchInterval)));
+}, updateTimers_fn = function() {
+  __privateMethod(this, _QueryObserver_instances, updateStaleTimeout_fn).call(this);
+  __privateMethod(this, _QueryObserver_instances, updateRefetchInterval_fn).call(this, __privateMethod(this, _QueryObserver_instances, computeRefetchInterval_fn).call(this));
+}, clearStaleTimeout_fn = function() {
+  if (__privateGet(this, _staleTimeoutId)) {
+    timeoutManager.clearTimeout(__privateGet(this, _staleTimeoutId));
+    __privateSet(this, _staleTimeoutId, void 0);
+  }
+}, clearRefetchInterval_fn = function() {
+  if (__privateGet(this, _refetchIntervalId)) {
+    timeoutManager.clearInterval(__privateGet(this, _refetchIntervalId));
+    __privateSet(this, _refetchIntervalId, void 0);
+  }
+}, updateQuery_fn = function() {
+  const query = __privateGet(this, _client2).getQueryCache().build(__privateGet(this, _client2), this.options);
+  if (query === __privateGet(this, _currentQuery)) {
+    return;
+  }
+  const prevQuery = __privateGet(this, _currentQuery);
+  __privateSet(this, _currentQuery, query);
+  __privateSet(this, _currentQueryInitialState, query.state);
+  if (this.hasListeners()) {
+    prevQuery == null ? void 0 : prevQuery.removeObserver(this);
+    query.addObserver(this);
+  }
+}, notify_fn = function(notifyOptions) {
+  notifyManager.batch(() => {
+    if (notifyOptions.listeners) {
+      this.listeners.forEach((listener) => {
+        listener(__privateGet(this, _currentResult));
+      });
+    }
+    __privateGet(this, _client2).getQueryCache().notify({
+      query: __privateGet(this, _currentQuery),
+      type: "observerResultsUpdated"
+    });
+  });
+}, _g);
+function shouldLoadOnMount(query, options) {
+  return resolveEnabled(options.enabled, query) !== false && query.state.data === void 0 && !(query.state.status === "error" && options.retryOnMount === false);
+}
+function shouldFetchOnMount(query, options) {
+  return shouldLoadOnMount(query, options) || query.state.data !== void 0 && shouldFetchOn(query, options, options.refetchOnMount);
+}
+function shouldFetchOn(query, options, field) {
+  if (resolveEnabled(options.enabled, query) !== false && resolveStaleTime(options.staleTime, query) !== "static") {
+    const value = typeof field === "function" ? field(query) : field;
+    return value === "always" || value !== false && isStale(query, options);
+  }
+  return false;
+}
+function shouldFetchOptionally(query, prevQuery, options, prevOptions) {
+  return (query !== prevQuery || resolveEnabled(prevOptions.enabled, query) === false) && (!options.suspense || query.state.status !== "error") && isStale(query, options);
+}
+function isStale(query, options) {
+  return resolveEnabled(options.enabled, query) !== false && query.isStaleByTime(resolveStaleTime(options.staleTime, query));
+}
+function shouldAssignObserverCurrentProperties(observer, optimisticResult) {
+  if (!shallowEqualObjects(observer.getCurrentResult(), optimisticResult)) {
+    return true;
+  }
+  return false;
+}
 function infiniteQueryBehavior(pages) {
   return {
     onFetch: (context, query) => {
@@ -12508,15 +13435,15 @@ function getPreviousPageParam(options, { pages, pageParams }) {
   var _a2;
   return pages.length > 0 ? (_a2 = options.getPreviousPageParam) == null ? void 0 : _a2.call(options, pages[0], pages, pageParams[0], pageParams) : void 0;
 }
-var Mutation = (_g = class extends Removable {
+var Mutation = (_h = class extends Removable {
   constructor(config) {
     super();
     __privateAdd(this, _Mutation_instances);
-    __privateAdd(this, _client2);
+    __privateAdd(this, _client3);
     __privateAdd(this, _observers);
     __privateAdd(this, _mutationCache);
     __privateAdd(this, _retryer2);
-    __privateSet(this, _client2, config.client);
+    __privateSet(this, _client3, config.client);
     this.mutationId = config.mutationId;
     __privateSet(this, _mutationCache, config.mutationCache);
     __privateSet(this, _observers, []);
@@ -12566,12 +13493,12 @@ var Mutation = (_g = class extends Removable {
     this.execute(this.state.variables);
   }
   async execute(variables) {
-    var _a2, _b2, _c2, _d2, _e2, _f2, _g2, _h2, _i2, _j2, _k, _l, _m, _n, _o, _p, _q, _r;
+    var _a2, _b2, _c2, _d2, _e2, _f2, _g2, _h2, _i2, _j2, _k2, _l, _m, _n, _o, _p, _q, _r;
     const onContinue = () => {
       __privateMethod(this, _Mutation_instances, dispatch_fn2).call(this, { type: "continue" });
     };
     const mutationFnContext = {
-      client: __privateGet(this, _client2),
+      client: __privateGet(this, _client3),
       meta: this.options.meta,
       mutationKey: this.options.mutationKey
     };
@@ -12659,8 +13586,8 @@ var Mutation = (_g = class extends Removable {
       return data;
     } catch (error) {
       try {
-        await ((_l = (_k = __privateGet(this, _mutationCache).config).onError) == null ? void 0 : _l.call(
-          _k,
+        await ((_l = (_k2 = __privateGet(this, _mutationCache).config).onError) == null ? void 0 : _l.call(
+          _k2,
           error,
           variables,
           this.state.context,
@@ -12712,7 +13639,7 @@ var Mutation = (_g = class extends Removable {
       __privateGet(this, _mutationCache).runNext(this);
     }
   }
-}, _client2 = new WeakMap(), _observers = new WeakMap(), _mutationCache = new WeakMap(), _retryer2 = new WeakMap(), _Mutation_instances = new WeakSet(), dispatch_fn2 = function(action) {
+}, _client3 = new WeakMap(), _observers = new WeakMap(), _mutationCache = new WeakMap(), _retryer2 = new WeakMap(), _Mutation_instances = new WeakSet(), dispatch_fn2 = function(action) {
   const reducer = (state) => {
     switch (action.type) {
       case "failed":
@@ -12777,7 +13704,7 @@ var Mutation = (_g = class extends Removable {
       action
     });
   });
-}, _g);
+}, _h);
 function getDefaultState() {
   return {
     context: void 0,
@@ -12791,7 +13718,7 @@ function getDefaultState() {
     submittedAt: 0
   };
 }
-var MutationCache = (_h = class extends Subscribable {
+var MutationCache = (_i = class extends Subscribable {
   constructor(config = {}) {
     super();
     __privateAdd(this, _mutations);
@@ -12903,12 +13830,12 @@ var MutationCache = (_h = class extends Subscribable {
       )
     );
   }
-}, _mutations = new WeakMap(), _scopes = new WeakMap(), _mutationId = new WeakMap(), _h);
+}, _mutations = new WeakMap(), _scopes = new WeakMap(), _mutationId = new WeakMap(), _i);
 function scopeFor(mutation) {
   var _a2;
   return (_a2 = mutation.options.scope) == null ? void 0 : _a2.id;
 }
-var QueryCache = (_i = class extends Subscribable {
+var QueryCache = (_j = class extends Subscribable {
   constructor(config = {}) {
     super();
     __privateAdd(this, _queries);
@@ -12995,8 +13922,8 @@ var QueryCache = (_i = class extends Subscribable {
       });
     });
   }
-}, _queries = new WeakMap(), _i);
-var QueryClient = (_j = class {
+}, _queries = new WeakMap(), _j);
+var QueryClient = (_k = class {
   constructor(config = {}) {
     __privateAdd(this, _queryCache);
     __privateAdd(this, _mutationCache2);
@@ -13283,7 +14210,7 @@ var QueryClient = (_j = class {
     __privateGet(this, _queryCache).clear();
     __privateGet(this, _mutationCache2).clear();
   }
-}, _queryCache = new WeakMap(), _mutationCache2 = new WeakMap(), _defaultOptions2 = new WeakMap(), _queryDefaults = new WeakMap(), _mutationDefaults = new WeakMap(), _mountCount = new WeakMap(), _unsubscribeFocus = new WeakMap(), _unsubscribeOnline = new WeakMap(), _j);
+}, _queryCache = new WeakMap(), _mutationCache2 = new WeakMap(), _defaultOptions2 = new WeakMap(), _queryDefaults = new WeakMap(), _mutationDefaults = new WeakMap(), _mountCount = new WeakMap(), _unsubscribeFocus = new WeakMap(), _unsubscribeOnline = new WeakMap(), _k);
 var react = { exports: {} };
 var react_production = {};
 /**
@@ -13731,6 +14658,13 @@ const React$2 = /* @__PURE__ */ _mergeNamespaces({
 var QueryClientContext = reactExports.createContext(
   void 0
 );
+var useQueryClient = (queryClient2) => {
+  const client2 = reactExports.useContext(QueryClientContext);
+  if (!client2) {
+    throw new Error("No QueryClient set, use QueryClientProvider to set one");
+  }
+  return client2;
+};
 var QueryClientProvider = ({
   client: client2,
   children
@@ -13743,6 +14677,139 @@ var QueryClientProvider = ({
   }, [client2]);
   return /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientContext.Provider, { value: client2, children });
 };
+var IsRestoringContext = reactExports.createContext(false);
+var useIsRestoring = () => reactExports.useContext(IsRestoringContext);
+IsRestoringContext.Provider;
+function createValue() {
+  let isReset = false;
+  return {
+    clearReset: () => {
+      isReset = false;
+    },
+    reset: () => {
+      isReset = true;
+    },
+    isReset: () => {
+      return isReset;
+    }
+  };
+}
+var QueryErrorResetBoundaryContext = reactExports.createContext(createValue());
+var useQueryErrorResetBoundary = () => reactExports.useContext(QueryErrorResetBoundaryContext);
+var ensurePreventErrorBoundaryRetry = (options, errorResetBoundary, query) => {
+  const throwOnError = (query == null ? void 0 : query.state.error) && typeof options.throwOnError === "function" ? shouldThrowError(options.throwOnError, [query.state.error, query]) : options.throwOnError;
+  if (options.suspense || options.experimental_prefetchInRender || throwOnError) {
+    if (!errorResetBoundary.isReset()) {
+      options.retryOnMount = false;
+    }
+  }
+};
+var useClearResetErrorBoundary = (errorResetBoundary) => {
+  reactExports.useEffect(() => {
+    errorResetBoundary.clearReset();
+  }, [errorResetBoundary]);
+};
+var getHasError = ({
+  result,
+  errorResetBoundary,
+  throwOnError,
+  query,
+  suspense
+}) => {
+  return result.isError && !errorResetBoundary.isReset() && !result.isFetching && query && (suspense && result.data === void 0 || shouldThrowError(throwOnError, [result.error, query]));
+};
+var ensureSuspenseTimers = (defaultedOptions) => {
+  if (defaultedOptions.suspense) {
+    const MIN_SUSPENSE_TIME_MS = 1e3;
+    const clamp = (value) => value === "static" ? value : Math.max(value ?? MIN_SUSPENSE_TIME_MS, MIN_SUSPENSE_TIME_MS);
+    const originalStaleTime = defaultedOptions.staleTime;
+    defaultedOptions.staleTime = typeof originalStaleTime === "function" ? (...args) => clamp(originalStaleTime(...args)) : clamp(originalStaleTime);
+    if (typeof defaultedOptions.gcTime === "number") {
+      defaultedOptions.gcTime = Math.max(
+        defaultedOptions.gcTime,
+        MIN_SUSPENSE_TIME_MS
+      );
+    }
+  }
+};
+var willFetch = (result, isRestoring) => result.isLoading && result.isFetching && !isRestoring;
+var shouldSuspend = (defaultedOptions, result) => (defaultedOptions == null ? void 0 : defaultedOptions.suspense) && result.isPending;
+var fetchOptimistic = (defaultedOptions, observer, errorResetBoundary) => observer.fetchOptimistic(defaultedOptions).catch(() => {
+  errorResetBoundary.clearReset();
+});
+function useBaseQuery(options, Observer, queryClient2) {
+  var _a2, _b2, _c2, _d2;
+  const isRestoring = useIsRestoring();
+  const errorResetBoundary = useQueryErrorResetBoundary();
+  const client2 = useQueryClient();
+  const defaultedOptions = client2.defaultQueryOptions(options);
+  (_b2 = (_a2 = client2.getDefaultOptions().queries) == null ? void 0 : _a2._experimental_beforeQuery) == null ? void 0 : _b2.call(
+    _a2,
+    defaultedOptions
+  );
+  const query = client2.getQueryCache().get(defaultedOptions.queryHash);
+  defaultedOptions._optimisticResults = isRestoring ? "isRestoring" : "optimistic";
+  ensureSuspenseTimers(defaultedOptions);
+  ensurePreventErrorBoundaryRetry(defaultedOptions, errorResetBoundary, query);
+  useClearResetErrorBoundary(errorResetBoundary);
+  const isNewCacheEntry = !client2.getQueryCache().get(defaultedOptions.queryHash);
+  const [observer] = reactExports.useState(
+    () => new Observer(
+      client2,
+      defaultedOptions
+    )
+  );
+  const result = observer.getOptimisticResult(defaultedOptions);
+  const shouldSubscribe = !isRestoring && options.subscribed !== false;
+  reactExports.useSyncExternalStore(
+    reactExports.useCallback(
+      (onStoreChange) => {
+        const unsubscribe = shouldSubscribe ? observer.subscribe(notifyManager.batchCalls(onStoreChange)) : noop$6;
+        observer.updateResult();
+        return unsubscribe;
+      },
+      [observer, shouldSubscribe]
+    ),
+    () => observer.getCurrentResult(),
+    () => observer.getCurrentResult()
+  );
+  reactExports.useEffect(() => {
+    observer.setOptions(defaultedOptions);
+  }, [defaultedOptions, observer]);
+  if (shouldSuspend(defaultedOptions, result)) {
+    throw fetchOptimistic(defaultedOptions, observer, errorResetBoundary);
+  }
+  if (getHasError({
+    result,
+    errorResetBoundary,
+    throwOnError: defaultedOptions.throwOnError,
+    query,
+    suspense: defaultedOptions.suspense
+  })) {
+    throw result.error;
+  }
+  (_d2 = (_c2 = client2.getDefaultOptions().queries) == null ? void 0 : _c2._experimental_afterQuery) == null ? void 0 : _d2.call(
+    _c2,
+    defaultedOptions,
+    result
+  );
+  if (defaultedOptions.experimental_prefetchInRender && !environmentManager.isServer() && willFetch(result, isRestoring)) {
+    const promise = isNewCacheEntry ? (
+      // Fetch immediately on render in order to ensure `.promise` is resolved even if the component is unmounted
+      fetchOptimistic(defaultedOptions, observer, errorResetBoundary)
+    ) : (
+      // subscribe to the "cache promise" so that we can finalize the currentThenable once data comes in
+      query == null ? void 0 : query.promise
+    );
+    promise == null ? void 0 : promise.catch(noop$6).finally(() => {
+      observer.updateResult();
+    });
+  }
+  return !defaultedOptions.notifyOnChangeProps ? observer.trackResult(result) : result;
+}
+function useQuery(options, queryClient2) {
+  return useBaseQuery(options, QueryObserver);
+}
 function isObject(value) {
   return value !== null && typeof value === "object";
 }
@@ -15901,6 +16968,16 @@ async function createIIAttributesActor(identity) {
     canisterId: config.backend_canister_id
   });
 }
+function assertProviderPresent(context) {
+  if (!context) {
+    throw new Error("InternetIdentityProvider is not present. Wrap your component tree with it.");
+  }
+}
+const useInternetIdentity = () => {
+  const context = reactExports.useContext(InternetIdentityReactContext);
+  assertProviderPresent(context);
+  return context;
+};
 function InternetIdentityProvider({ children, createOptions, withAttributes = {} }) {
   const [authClient, setAuthClient] = reactExports.useState(void 0);
   const [identity, setIdentity] = reactExports.useState(void 0);
@@ -16047,6 +17124,45 @@ function InternetIdentityProvider({ children, createOptions, withAttributes = {}
     value,
     children
   });
+}
+const ACTOR_QUERY_KEY = "actor";
+function useActor(createActor2) {
+  const { identity, isAuthenticated } = useInternetIdentity();
+  const queryClient2 = useQueryClient();
+  const actorQuery = useQuery({
+    queryKey: [ACTOR_QUERY_KEY, identity == null ? void 0 : identity.getPrincipal().toString()],
+    queryFn: async () => {
+      if (!isAuthenticated) {
+        return await createActorWithConfig(createActor2);
+      }
+      const actor = await createActorWithConfig(createActor2, {
+        agentOptions: { identity }
+      });
+      return actor;
+    },
+    // Only refetch when identity changes
+    staleTime: Number.POSITIVE_INFINITY,
+    // This will cause the actor to be recreated when the identity changes
+    enabled: true
+  });
+  reactExports.useEffect(() => {
+    if (actorQuery.data) {
+      queryClient2.invalidateQueries({
+        predicate: (query) => {
+          return !query.queryKey.includes(ACTOR_QUERY_KEY);
+        }
+      });
+      queryClient2.refetchQueries({
+        predicate: (query) => {
+          return !query.queryKey.includes(ACTOR_QUERY_KEY);
+        }
+      });
+    }
+  }, [actorQuery.data, queryClient2]);
+  return {
+    actor: actorQuery.data || null,
+    isFetching: actorQuery.isFetching
+  };
 }
 var client = { exports: {} };
 var reactDomClient_production = {};
@@ -27555,6 +28671,605 @@ function checkDCE() {
 }
 var clientExports = client.exports;
 const ReactDOM = /* @__PURE__ */ getDefaultExportFromCjs(clientExports);
+const Modality = Variant({
+  "ilt": Null,
+  "eLearning": Null,
+  "hybrid": Null,
+  "jobAid": Null
+});
+const Project = Record({
+  "id": Nat,
+  "title": Text,
+  "thumbnailUrl": Opt(Text),
+  "challenge": Text,
+  "createdAt": Nat,
+  "tags": Vec(Text),
+  "description": Text,
+  "results": Text,
+  "modality": Modality,
+  "approach": Text,
+  "deliverables": Vec(Text)
+});
+const EducationEntry = Record({
+  "id": Nat,
+  "field": Text,
+  "endDate": Opt(Text),
+  "institution": Text,
+  "degree": Text,
+  "startDate": Text
+});
+const ExperienceEntry = Record({
+  "id": Nat,
+  "title": Text,
+  "endDate": Opt(Text),
+  "description": Text,
+  "company": Text,
+  "achievements": Vec(Text),
+  "location": Text,
+  "startDate": Text
+});
+const Certification = Record({
+  "id": Nat,
+  "url": Opt(Text),
+  "dateEarned": Text,
+  "name": Text,
+  "issuer": Text
+});
+const Skill = Record({
+  "id": Nat,
+  "name": Text,
+  "category": Text
+});
+const Resume = Record({
+  "linkedIn": Opt(Text),
+  "title": Text,
+  "name": Text,
+  "education": Vec(EducationEntry),
+  "email": Text,
+  "website": Opt(Text),
+  "experience": Vec(ExperienceEntry),
+  "summary": Text,
+  "phone": Opt(Text),
+  "certifications": Vec(Certification),
+  "skills": Vec(Skill),
+  "location": Text
+});
+const TailoredView = Record({
+  "slug": Text,
+  "label": Text,
+  "privateCompany": Text,
+  "privateJobDescription": Text,
+  "primaryLane": Text,
+  "lanes": Vec(Text),
+  "projectIds": Vec(Text),
+  "proofIds": Vec(Text),
+  "skillIds": Vec(Text),
+  "angle": Text,
+  "expiresAt": Opt(Text),
+  "createdAt": Nat,
+  "archived": Bool
+});
+const TailoredViewInput = Record({
+  "slug": Text,
+  "label": Text,
+  "privateCompany": Text,
+  "privateJobDescription": Text,
+  "primaryLane": Text,
+  "lanes": Vec(Text),
+  "projectIds": Vec(Text),
+  "proofIds": Vec(Text),
+  "skillIds": Vec(Text),
+  "angle": Text,
+  "expiresAt": Opt(Text)
+});
+Service({
+  "__projects": Func(
+    [Opt(Nat), Opt(Nat)],
+    [Vec(Project)],
+    ["query"]
+  ),
+  "__resume": Func([], [Reserved], ["query"]),
+  "addProject": Func([Project], [], []),
+  "getProject": Func([Nat], [Opt(Project)], ["query"]),
+  "getResume": Func([], [Opt(Resume)], ["query"]),
+  "getTailoredView": Func(
+    [Text],
+    [Opt(TailoredView)],
+    ["query"]
+  ),
+  "listProjects": Func([], [Vec(Project)], ["query"]),
+  "listTailoredViews": Func([], [Vec(TailoredView)], ["query"]),
+  "seedPortfolio": Func([], [], []),
+  "seedResume": Func([], [], []),
+  "saveTailoredView": Func([TailoredViewInput], [TailoredView], [])
+});
+const idlFactory = ({ IDL: IDL2 }) => {
+  const Modality2 = IDL2.Variant({
+    "ilt": IDL2.Null,
+    "eLearning": IDL2.Null,
+    "hybrid": IDL2.Null,
+    "jobAid": IDL2.Null
+  });
+  const Project2 = IDL2.Record({
+    "id": IDL2.Nat,
+    "title": IDL2.Text,
+    "thumbnailUrl": IDL2.Opt(IDL2.Text),
+    "challenge": IDL2.Text,
+    "createdAt": IDL2.Nat,
+    "tags": IDL2.Vec(IDL2.Text),
+    "description": IDL2.Text,
+    "results": IDL2.Text,
+    "modality": Modality2,
+    "approach": IDL2.Text,
+    "deliverables": IDL2.Vec(IDL2.Text)
+  });
+  const EducationEntry2 = IDL2.Record({
+    "id": IDL2.Nat,
+    "field": IDL2.Text,
+    "endDate": IDL2.Opt(IDL2.Text),
+    "institution": IDL2.Text,
+    "degree": IDL2.Text,
+    "startDate": IDL2.Text
+  });
+  const ExperienceEntry2 = IDL2.Record({
+    "id": IDL2.Nat,
+    "title": IDL2.Text,
+    "endDate": IDL2.Opt(IDL2.Text),
+    "description": IDL2.Text,
+    "company": IDL2.Text,
+    "achievements": IDL2.Vec(IDL2.Text),
+    "location": IDL2.Text,
+    "startDate": IDL2.Text
+  });
+  const Certification2 = IDL2.Record({
+    "id": IDL2.Nat,
+    "url": IDL2.Opt(IDL2.Text),
+    "dateEarned": IDL2.Text,
+    "name": IDL2.Text,
+    "issuer": IDL2.Text
+  });
+  const Skill2 = IDL2.Record({
+    "id": IDL2.Nat,
+    "name": IDL2.Text,
+    "category": IDL2.Text
+  });
+  const Resume2 = IDL2.Record({
+    "linkedIn": IDL2.Opt(IDL2.Text),
+    "title": IDL2.Text,
+    "name": IDL2.Text,
+    "education": IDL2.Vec(EducationEntry2),
+    "email": IDL2.Text,
+    "website": IDL2.Opt(IDL2.Text),
+    "experience": IDL2.Vec(ExperienceEntry2),
+    "summary": IDL2.Text,
+    "phone": IDL2.Opt(IDL2.Text),
+    "certifications": IDL2.Vec(Certification2),
+    "skills": IDL2.Vec(Skill2),
+    "location": IDL2.Text
+  });
+  const TailoredView2 = IDL2.Record({
+    "slug": IDL2.Text,
+    "label": IDL2.Text,
+    "privateCompany": IDL2.Text,
+    "privateJobDescription": IDL2.Text,
+    "primaryLane": IDL2.Text,
+    "lanes": IDL2.Vec(IDL2.Text),
+    "projectIds": IDL2.Vec(IDL2.Text),
+    "proofIds": IDL2.Vec(IDL2.Text),
+    "skillIds": IDL2.Vec(IDL2.Text),
+    "angle": IDL2.Text,
+    "expiresAt": IDL2.Opt(IDL2.Text),
+    "createdAt": IDL2.Nat,
+    "archived": IDL2.Bool
+  });
+  const TailoredViewInput2 = IDL2.Record({
+    "slug": IDL2.Text,
+    "label": IDL2.Text,
+    "privateCompany": IDL2.Text,
+    "privateJobDescription": IDL2.Text,
+    "primaryLane": IDL2.Text,
+    "lanes": IDL2.Vec(IDL2.Text),
+    "projectIds": IDL2.Vec(IDL2.Text),
+    "proofIds": IDL2.Vec(IDL2.Text),
+    "skillIds": IDL2.Vec(IDL2.Text),
+    "angle": IDL2.Text,
+    "expiresAt": IDL2.Opt(IDL2.Text)
+  });
+  return IDL2.Service({
+    "__projects": IDL2.Func(
+      [IDL2.Opt(IDL2.Nat), IDL2.Opt(IDL2.Nat)],
+      [IDL2.Vec(Project2)],
+      ["query"]
+    ),
+    "__resume": IDL2.Func([], [IDL2.Reserved], ["query"]),
+    "addProject": IDL2.Func([Project2], [], []),
+    "getProject": IDL2.Func([IDL2.Nat], [IDL2.Opt(Project2)], ["query"]),
+    "getResume": IDL2.Func([], [IDL2.Opt(Resume2)], ["query"]),
+    "getTailoredView": IDL2.Func(
+      [IDL2.Text],
+      [IDL2.Opt(TailoredView2)],
+      ["query"]
+    ),
+    "listProjects": IDL2.Func([], [IDL2.Vec(Project2)], ["query"]),
+    "listTailoredViews": IDL2.Func([], [IDL2.Vec(TailoredView2)], ["query"]),
+    "seedPortfolio": IDL2.Func([], [], []),
+    "seedResume": IDL2.Func([], [], []),
+    "saveTailoredView": IDL2.Func([TailoredViewInput2], [TailoredView2], [])
+  });
+};
+function candid_some(value) {
+  return [
+    value
+  ];
+}
+function candid_none() {
+  return [];
+}
+function record_opt_to_undefined(arg) {
+  return arg == null ? void 0 : arg;
+}
+class Backend {
+  constructor(actor, _uploadFile, _downloadFile, processError2) {
+    this.actor = actor;
+    this._uploadFile = _uploadFile;
+    this._downloadFile = _downloadFile;
+    this.processError = processError2;
+  }
+  async __projects(arg0, arg1) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.__projects(to_candid_opt_n1(this._uploadFile, this._downloadFile, arg0), to_candid_opt_n1(this._uploadFile, this._downloadFile, arg1));
+        return from_candid_vec_n2(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.__projects(to_candid_opt_n1(this._uploadFile, this._downloadFile, arg0), to_candid_opt_n1(this._uploadFile, this._downloadFile, arg1));
+      return from_candid_vec_n2(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async __resume() {
+    if (this.processError) {
+      try {
+        const result = await this.actor.__resume();
+        return result;
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.__resume();
+      return result;
+    }
+  }
+  async addProject(arg0) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.addProject(to_candid_Project_n8(this._uploadFile, this._downloadFile, arg0));
+        return result;
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.addProject(to_candid_Project_n8(this._uploadFile, this._downloadFile, arg0));
+      return result;
+    }
+  }
+  async getProject(arg0) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.getProject(arg0);
+        return from_candid_opt_n12(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.getProject(arg0);
+      return from_candid_opt_n12(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async getResume() {
+    if (this.processError) {
+      try {
+        const result = await this.actor.getResume();
+        return from_candid_opt_n13(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.getResume();
+      return from_candid_opt_n13(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async getTailoredView(arg0) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.getTailoredView(arg0);
+        return from_candid_opt_n25(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.getTailoredView(arg0);
+      return from_candid_opt_n25(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async listProjects() {
+    if (this.processError) {
+      try {
+        const result = await this.actor.listProjects();
+        return from_candid_vec_n2(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.listProjects();
+      return from_candid_vec_n2(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async listTailoredViews() {
+    if (this.processError) {
+      try {
+        const result = await this.actor.listTailoredViews();
+        return from_candid_vec_n26(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.listTailoredViews();
+      return from_candid_vec_n26(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async seedPortfolio() {
+    if (this.processError) {
+      try {
+        const result = await this.actor.seedPortfolio();
+        return result;
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.seedPortfolio();
+      return result;
+    }
+  }
+  async seedResume() {
+    if (this.processError) {
+      try {
+        const result = await this.actor.seedResume();
+        return result;
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.seedResume();
+      return result;
+    }
+  }
+  async saveTailoredView(arg0) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.saveTailoredView(to_candid_TailoredViewInput_n27(this._uploadFile, this._downloadFile, arg0));
+        return from_candid_TailoredView_n28(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.saveTailoredView(to_candid_TailoredViewInput_n27(this._uploadFile, this._downloadFile, arg0));
+      return from_candid_TailoredView_n28(this._uploadFile, this._downloadFile, result);
+    }
+  }
+}
+function from_candid_Certification_n23(_uploadFile, _downloadFile, value) {
+  return from_candid_record_n24(_uploadFile, _downloadFile, value);
+}
+function from_candid_EducationEntry_n17(_uploadFile, _downloadFile, value) {
+  return from_candid_record_n18(_uploadFile, _downloadFile, value);
+}
+function from_candid_ExperienceEntry_n20(_uploadFile, _downloadFile, value) {
+  return from_candid_record_n21(_uploadFile, _downloadFile, value);
+}
+function from_candid_Modality_n6(_uploadFile, _downloadFile, value) {
+  return from_candid_variant_n7(_uploadFile, _downloadFile, value);
+}
+function from_candid_Project_n3(_uploadFile, _downloadFile, value) {
+  return from_candid_record_n4(_uploadFile, _downloadFile, value);
+}
+function from_candid_Resume_n14(_uploadFile, _downloadFile, value) {
+  return from_candid_record_n15(_uploadFile, _downloadFile, value);
+}
+function from_candid_TailoredView_n28(_uploadFile, _downloadFile, value) {
+  return from_candid_record_n29(_uploadFile, _downloadFile, value);
+}
+function from_candid_opt_n12(_uploadFile, _downloadFile, value) {
+  return value.length === 0 ? null : from_candid_Project_n3(_uploadFile, _downloadFile, value[0]);
+}
+function from_candid_opt_n13(_uploadFile, _downloadFile, value) {
+  return value.length === 0 ? null : from_candid_Resume_n14(_uploadFile, _downloadFile, value[0]);
+}
+function from_candid_opt_n25(_uploadFile, _downloadFile, value) {
+  return value.length === 0 ? null : from_candid_TailoredView_n28(_uploadFile, _downloadFile, value[0]);
+}
+function from_candid_opt_n5(_uploadFile, _downloadFile, value) {
+  return value.length === 0 ? null : value[0];
+}
+function from_candid_record_n15(_uploadFile, _downloadFile, value) {
+  return {
+    linkedIn: record_opt_to_undefined(from_candid_opt_n5(_uploadFile, _downloadFile, value.linkedIn)),
+    title: value.title,
+    name: value.name,
+    education: from_candid_vec_n16(_uploadFile, _downloadFile, value.education),
+    email: value.email,
+    website: record_opt_to_undefined(from_candid_opt_n5(_uploadFile, _downloadFile, value.website)),
+    experience: from_candid_vec_n19(_uploadFile, _downloadFile, value.experience),
+    summary: value.summary,
+    phone: record_opt_to_undefined(from_candid_opt_n5(_uploadFile, _downloadFile, value.phone)),
+    certifications: from_candid_vec_n22(_uploadFile, _downloadFile, value.certifications),
+    skills: value.skills,
+    location: value.location
+  };
+}
+function from_candid_record_n18(_uploadFile, _downloadFile, value) {
+  return {
+    id: value.id,
+    field: value.field,
+    endDate: record_opt_to_undefined(from_candid_opt_n5(_uploadFile, _downloadFile, value.endDate)),
+    institution: value.institution,
+    degree: value.degree,
+    startDate: value.startDate
+  };
+}
+function from_candid_record_n21(_uploadFile, _downloadFile, value) {
+  return {
+    id: value.id,
+    title: value.title,
+    endDate: record_opt_to_undefined(from_candid_opt_n5(_uploadFile, _downloadFile, value.endDate)),
+    description: value.description,
+    company: value.company,
+    achievements: value.achievements,
+    location: value.location,
+    startDate: value.startDate
+  };
+}
+function from_candid_record_n24(_uploadFile, _downloadFile, value) {
+  return {
+    id: value.id,
+    url: record_opt_to_undefined(from_candid_opt_n5(_uploadFile, _downloadFile, value.url)),
+    dateEarned: value.dateEarned,
+    name: value.name,
+    issuer: value.issuer
+  };
+}
+function from_candid_record_n29(_uploadFile, _downloadFile, value) {
+  return {
+    slug: value.slug,
+    label: value.label,
+    privateCompany: value.privateCompany,
+    privateJobDescription: value.privateJobDescription,
+    primaryLane: value.primaryLane,
+    lanes: value.lanes,
+    projectIds: value.projectIds,
+    proofIds: value.proofIds,
+    skillIds: value.skillIds,
+    angle: value.angle,
+    expiresAt: record_opt_to_undefined(from_candid_opt_n5(_uploadFile, _downloadFile, value.expiresAt)),
+    createdAt: value.createdAt,
+    archived: value.archived
+  };
+}
+function from_candid_record_n4(_uploadFile, _downloadFile, value) {
+  return {
+    id: value.id,
+    title: value.title,
+    thumbnailUrl: record_opt_to_undefined(from_candid_opt_n5(_uploadFile, _downloadFile, value.thumbnailUrl)),
+    challenge: value.challenge,
+    createdAt: value.createdAt,
+    tags: value.tags,
+    description: value.description,
+    results: value.results,
+    modality: from_candid_Modality_n6(_uploadFile, _downloadFile, value.modality),
+    approach: value.approach,
+    deliverables: value.deliverables
+  };
+}
+function from_candid_variant_n7(_uploadFile, _downloadFile, value) {
+  return "ilt" in value ? "ilt" : "eLearning" in value ? "eLearning" : "hybrid" in value ? "hybrid" : "jobAid" in value ? "jobAid" : value;
+}
+function from_candid_vec_n16(_uploadFile, _downloadFile, value) {
+  return value.map((x2) => from_candid_EducationEntry_n17(_uploadFile, _downloadFile, x2));
+}
+function from_candid_vec_n19(_uploadFile, _downloadFile, value) {
+  return value.map((x2) => from_candid_ExperienceEntry_n20(_uploadFile, _downloadFile, x2));
+}
+function from_candid_vec_n2(_uploadFile, _downloadFile, value) {
+  return value.map((x2) => from_candid_Project_n3(_uploadFile, _downloadFile, x2));
+}
+function from_candid_vec_n22(_uploadFile, _downloadFile, value) {
+  return value.map((x2) => from_candid_Certification_n23(_uploadFile, _downloadFile, x2));
+}
+function from_candid_vec_n26(_uploadFile, _downloadFile, value) {
+  return value.map((x2) => from_candid_TailoredView_n28(_uploadFile, _downloadFile, x2));
+}
+function to_candid_Modality_n10(_uploadFile, _downloadFile, value) {
+  return to_candid_variant_n11(_uploadFile, _downloadFile, value);
+}
+function to_candid_Project_n8(_uploadFile, _downloadFile, value) {
+  return to_candid_record_n9(_uploadFile, _downloadFile, value);
+}
+function to_candid_TailoredViewInput_n27(_uploadFile, _downloadFile, value) {
+  return to_candid_record_n30(_uploadFile, _downloadFile, value);
+}
+function to_candid_opt_n1(_uploadFile, _downloadFile, value) {
+  return value === null ? candid_none() : candid_some(value);
+}
+function to_candid_opt_n31(_uploadFile, _downloadFile, value) {
+  return value === void 0 ? candid_none() : candid_some(value);
+}
+function to_candid_record_n30(_uploadFile, _downloadFile, value) {
+  return {
+    slug: value.slug,
+    label: value.label,
+    privateCompany: value.privateCompany,
+    privateJobDescription: value.privateJobDescription,
+    primaryLane: value.primaryLane,
+    lanes: value.lanes,
+    projectIds: value.projectIds,
+    proofIds: value.proofIds,
+    skillIds: value.skillIds,
+    angle: value.angle,
+    expiresAt: to_candid_opt_n31(_uploadFile, _downloadFile, value.expiresAt)
+  };
+}
+function to_candid_record_n9(_uploadFile, _downloadFile, value) {
+  return {
+    id: value.id,
+    title: value.title,
+    thumbnailUrl: value.thumbnailUrl ? candid_some(value.thumbnailUrl) : candid_none(),
+    challenge: value.challenge,
+    createdAt: value.createdAt,
+    tags: value.tags,
+    description: value.description,
+    results: value.results,
+    modality: to_candid_Modality_n10(_uploadFile, _downloadFile, value.modality),
+    approach: value.approach,
+    deliverables: value.deliverables
+  };
+}
+function to_candid_variant_n11(_uploadFile, _downloadFile, value) {
+  return value == "ilt" ? {
+    ilt: null
+  } : value == "eLearning" ? {
+    eLearning: null
+  } : value == "hybrid" ? {
+    hybrid: null
+  } : value == "jobAid" ? {
+    jobAid: null
+  } : value;
+}
+function createActor(canisterId, _uploadFile, _downloadFile, options = {}) {
+  const agent = options.agent || HttpAgent.createSync({
+    ...options.agentOptions
+  });
+  if (options.agent && options.agentOptions) {
+    console.warn("Detected both agent and agentOptions passed to createActor. Ignoring agentOptions and proceeding with the provided agent.");
+  }
+  const actor = Actor.createActor(idlFactory, {
+    agent,
+    canisterId,
+    ...options.actorOptions
+  });
+  return new Backend(actor, _uploadFile, _downloadFile, options.processError);
+}
 function setRef(ref, value) {
   if (typeof ref === "function") {
     return ref(value);
@@ -30333,47 +32048,169 @@ function Textarea({ className, ...props }) {
   );
 }
 const profile = {
-  shortSummary: "Technical enablement leader with a learning architecture background, AI workflow depth, and a track record across federal, SaaS, municipal, sales, healthcare, and fintech environments."
+  linkedIn: "https://www.linkedin.com/in/terrybrutus",
+  github: "https://github.com/terrybrutus",
+  shortSummary: "Enablement and learning systems builder with experience across defense, SaaS, municipal, sales, healthcare, fintech, and AI-assisted content operations."
 };
+const laneProfiles = [
+  {
+    lane: "Enablement",
+    headline: "Enablement systems for teams that need clearer execution.",
+    reviewerTakeaway: "Strongest when the role needs onboarding, manager enablement, skills frameworks, stakeholder alignment, and performance support.",
+    keywords: [
+      "enablement",
+      "onboarding",
+      "talent",
+      "workforce",
+      "manager",
+      "stakeholder",
+      "readiness",
+      "performance",
+      "adoption",
+      "change"
+    ]
+  },
+  {
+    lane: "AI Operations",
+    headline: "AI-assisted workflows that make production faster and cleaner.",
+    reviewerTakeaway: "Strongest when the role needs practical AI adoption, content operations, workflow automation, QA, and human-in-the-loop judgment.",
+    keywords: [
+      "ai",
+      "automation",
+      "rag",
+      "agent",
+      "workflow",
+      "python",
+      "genai",
+      "llm",
+      "notebooklm",
+      "process",
+      "operations"
+    ]
+  },
+  {
+    lane: "Learning Experience",
+    headline: "Learning products that turn complex material into usable practice.",
+    reviewerTakeaway: "Strongest when the role needs instructional design, simulations, curriculum, eLearning, facilitation, and learner-centered product thinking.",
+    keywords: [
+      "learning",
+      "instructional",
+      "lxd",
+      "training",
+      "curriculum",
+      "elearning",
+      "facilitation",
+      "course",
+      "storyboard",
+      "addie"
+    ]
+  },
+  {
+    lane: "Technical Product",
+    headline: "Product-minded builds that make messy workflows easier to use.",
+    reviewerTakeaway: "Strongest when the role needs systems thinking, tooling, prototypes, platforms, user flows, and technical translation.",
+    keywords: [
+      "product",
+      "platform",
+      "app",
+      "technical",
+      "systems",
+      "prototype",
+      "tool",
+      "ux",
+      "data",
+      "dashboard"
+    ]
+  },
+  {
+    lane: "Sales Enablement",
+    headline: "Sales and customer enablement tied to field execution.",
+    reviewerTakeaway: "Strongest when the role needs GTM readiness, sales onboarding, stakeholder messaging, field support, and measurable adoption.",
+    keywords: [
+      "sales",
+      "customer",
+      "revenue",
+      "gtm",
+      "field",
+      "seller",
+      "readiness",
+      "go-to-market",
+      "client"
+    ]
+  },
+  {
+    lane: "Compliance",
+    headline: "Audit-ready learning and workflow systems for regulated teams.",
+    reviewerTakeaway: "Strongest when the role needs 508/WCAG, governance, documentation, regulated training, or operational compliance.",
+    keywords: [
+      "compliance",
+      "508",
+      "wcag",
+      "audit",
+      "regulated",
+      "governance",
+      "policy",
+      "accessibility",
+      "risk",
+      "security"
+    ]
+  }
+];
 const proofPoints = [
   {
+    id: "defense-workforce",
     label: "Defense workforce supported",
     value: "158,000",
+    detail: "Supported learning and talent-development systems for a large defense acquisition audience.",
     lanes: ["Enablement", "Compliance"]
   },
   {
+    id: "army-lms",
     label: "Army LMS platform scale",
     value: "1.2M+ users",
-    lanes: ["Learning Experience", "Compliance"]
+    detail: "Worked in a technical simulation and LMS environment with enterprise-scale deployment expectations.",
+    lanes: ["Learning Experience", "Compliance", "Technical Product"]
   },
   {
-    label: "Asset pipeline improvement",
+    id: "asset-cycle",
+    label: "Asset cycle improvement",
     value: "1.5 hrs to 9.5 min",
+    detail: "Reduced repeated talent-content processing with AI-assisted analysis, scripting, and QA standards.",
     lanes: ["AI Operations", "Enablement"]
   },
   {
+    id: "audit-cost",
     label: "Audit cost reduction",
     value: "90%",
+    detail: "Used structured review logic to reduce manual audit burden while keeping human quality gates.",
     lanes: ["AI Operations", "Compliance"]
   },
   {
+    id: "market-lots",
     label: "Market lots standardized",
     value: "76,000",
+    detail: "Designed scalable enablement touchpoints for a distributed selling-community environment.",
     lanes: ["Sales Enablement", "Enablement"]
   },
   {
+    id: "municipal-coverage",
     label: "Municipal coverage",
     value: "1,750+ employees",
+    detail: "Built mobile-first compliance support for a workforce without formal LMS infrastructure.",
     lanes: ["Compliance", "Learning Experience"]
   },
   {
+    id: "release-depth",
     label: "Product iteration depth",
     value: "77+ releases",
+    detail: "Used rapid iteration and GitHub-connected workflows to move ideas into working tools.",
     lanes: ["Technical Product", "AI Operations"]
   },
   {
+    id: "feature-set",
     label: "Workflow feature set",
     value: "50+ features",
+    detail: "Built production workflow features around visibility, handoffs, readiness, and delivery governance.",
     lanes: ["Technical Product", "Enablement"]
   }
 ];
@@ -30381,151 +32218,213 @@ const projects = [
   {
     id: "ai-talent-content-pipeline",
     title: "AI Talent Content Pipeline",
+    shortTitle: "AI Content Pipeline",
     role: "AI Enablement Architect",
-    summary: "NotebookLM RAG, scripting, and human-in-the-loop QA process for a 100+ asset talent content pipeline.",
-    problem: "High-volume learning assets needed faster analysis, cleaner metadata, and repeatable compliance alignment without adding manual review load.",
+    summary: "A repeatable content-operations system using RAG-style review, scripting, and human QA to speed high-volume talent asset production.",
+    problem: "High-volume learning assets needed faster analysis, cleaner metadata, and repeatable compliance alignment without removing expert review.",
     actions: [
-      "Built an AI-assisted content analysis workflow using NotebookLM, Python, VBA, and Claude Code.",
-      "Converted repeatable review logic into documented production standards.",
-      "Aligned skill and knowledge assets to operational and regulatory requirements."
+      "Converted repeated analysis work into a structured AI-assisted review workflow.",
+      "Used NotebookLM, scripting, and documented standards to keep the workflow repeatable.",
+      "Kept human QA gates in the process so the system accelerated judgment instead of replacing it."
     ],
     outcomes: [
-      "Reduced per-deliverable processing time from 1.5 hours to 9.5 minutes.",
-      "Adopted as the client standard for future talent content production.",
-      "Supported a six-figure contract extension and expanded engagement scope."
+      "Reduced per-deliverable processing from 1.5 hours to 9.5 minutes.",
+      "Helped establish a repeatable production standard for future content work.",
+      "Created credible proof of practical AI adoption inside a real enablement workflow."
     ],
-    metrics: proofPoints.filter(
-      (p2) => ["Asset pipeline improvement", "Audit cost reduction"].includes(p2.label)
-    ),
-    tools: ["NotebookLM", "RAG", "Python", "VBA", "Claude Code", "PowerShell"],
-    lanes: ["AI Operations", "Enablement", "Compliance"]
-  },
-  {
-    id: "living-portfolio-studio",
-    title: "Living Portfolio Studio",
-    role: "Product Architect / AI Builder",
-    summary: "Tailorable portfolio system that adapts proof points, projects, language, and visual emphasis to a company or job description.",
-    problem: "Static resumes and portfolios undersell cross-functional work and cannot speak differently to enablement, AI, product, and LXD audiences.",
-    actions: [
-      "Designed the source-bank model for projects, metrics, lanes, company language, and expiring tailored links.",
-      "Built the interface around company/JD input instead of a static landing page.",
-      "Kept LinkedIn and resume lean while moving detailed evidence into tailored portfolio views."
-    ],
-    outcomes: [
-      "Creates focused views for recruiters, hiring managers, and niche role requirements.",
-      "Positions AI-assisted build skill as observable product work, not just a resume claim."
-    ],
-    metrics: proofPoints.filter(
-      (p2) => ["Product iteration depth", "Workflow feature set"].includes(p2.label)
-    ),
-    tools: ["Caffeine AI", "React", "Motoko", "GitHub", "Claude Code", "Codex"],
-    lanes: ["Technical Product", "AI Operations", "Enablement"],
-    repo: "https://github.com/terrybrutus/Work-portfolio2"
+    proofIds: ["asset-cycle", "audit-cost"],
+    tools: ["NotebookLM", "RAG", "Python", "VBA", "PowerShell", "QA"],
+    lanes: ["AI Operations", "Enablement", "Compliance"],
+    visual: {
+      src: "/assets/portfolio/terrylxd-projects.png",
+      alt: "Screenshot of a dark portfolio projects section with interactive learning project cards.",
+      caption: "Representative project-card treatment from TerryLXD."
+    }
   },
   {
     id: "workflow-management-platform",
     title: "Multi-Project Workflow Management Platform",
+    shortTitle: "Workflow Platform",
     role: "Enablement Systems Designer",
-    summary: "Custom 6-stage workflow platform for cross-functional content readiness, production visibility, and delivery governance.",
-    problem: "Manual tracking and handoff friction slowed readiness across a multi-project talent content operation.",
+    summary: "A custom workflow layer for content readiness, production visibility, stakeholder handoffs, and delivery governance.",
+    problem: "Manual tracking and handoff friction made it harder to see what work was ready, blocked, in review, or ready to ship.",
     actions: [
-      "Designed a production workflow with status visibility, iterative releases, and stakeholder handoff logic.",
-      "Used GitHub-connected deployment to ship directly into production workflows.",
-      "Built for scale across a 100+ user operating model."
+      "Designed a multi-stage production workflow with clearer status movement.",
+      "Built delivery views around handoffs, ownership, and production readiness.",
+      "Used AI-assisted prototyping to move from requirements to release faster."
     ],
     outcomes: [
-      "Eliminated manual tracking friction.",
-      "Created a production-grade operating layer across 50+ features and 77+ releases."
+      "Reduced manual tracking friction across a multi-project operating model.",
+      "Created a product-style proof point for enablement operations and workflow design."
     ],
-    metrics: proofPoints.filter(
-      (p2) => ["Product iteration depth", "Workflow feature set"].includes(p2.label)
-    ),
-    tools: [
-      "Caffeine AI",
-      "GitHub",
-      "JSON",
-      "AI prototyping",
-      "Agile delivery"
-    ],
-    lanes: ["Technical Product", "Enablement", "AI Operations"]
+    proofIds: ["release-depth", "feature-set"],
+    tools: ["Caffeine AI", "GitHub", "React", "JSON", "Agile delivery"],
+    lanes: ["Technical Product", "Enablement", "AI Operations"],
+    visual: {
+      src: "/assets/portfolio/terrylxd-hero.png",
+      alt: "Screenshot of TerryLXD portfolio hero with dark interactive visual style.",
+      caption: "Visual direction from the TerryLXD portfolio system."
+    }
   },
   {
     id: "enterprise-onboarding-journey",
-    title: "Enterprise Onboarding Journey",
+    title: "Enterprise Onboarding and Sales Readiness Journey",
+    shortTitle: "Onboarding Journey",
     role: "Lead Talent Enablement Architect",
-    summary: "Distributed onboarding architecture for a Fortune 500 luxury homebuilder with a large selling-community footprint.",
-    problem: "A distributed sales ecosystem needed standardized enablement delivery across communities, roles, and employee lifecycle touchpoints.",
+    summary: "A distributed enablement architecture for onboarding, role readiness, and field execution across a large selling-community footprint.",
+    problem: "A distributed sales ecosystem needed clearer readiness paths across communities, roles, and employee lifecycle moments.",
     actions: [
-      "Mapped onboarding touchpoints across the full employee lifecycle.",
-      "Designed scalable enablement architecture for distributed selling communities.",
-      "Aligned learning touchpoints to field execution and business operating rhythm."
+      "Mapped employee lifecycle moments into a practical enablement journey.",
+      "Aligned learning touchpoints to role expectations and business operating rhythm.",
+      "Created a more scalable foundation for field-facing readiness support."
     ],
     outcomes: [
       "Standardized enablement delivery across 76,000 market lots.",
       "Created a clearer learning path for 400+ selling communities."
     ],
-    metrics: proofPoints.filter(
-      (p2) => ["Market lots standardized"].includes(p2.label)
-    ),
-    tools: [
-      "Journey mapping",
-      "Sales enablement",
-      "Lifecycle design",
-      "Stakeholder alignment"
-    ],
-    lanes: ["Sales Enablement", "Enablement", "Learning Experience"]
+    proofIds: ["market-lots"],
+    tools: ["Journey mapping", "Sales enablement", "Lifecycle design"],
+    lanes: ["Sales Enablement", "Enablement", "Learning Experience"],
+    visual: {
+      src: "/assets/portfolio/old-site-recent-projects.png",
+      alt: "Screenshot of older portfolio recent projects page showing an eLearning module visual.",
+      caption: "Legacy portfolio artifact showing eLearning and project evidence."
+    }
   },
   {
     id: "compliance-enablement-ecosystem",
     title: "Mobile-First Compliance Enablement Ecosystem",
+    shortTitle: "Compliance Ecosystem",
     role: "Learning Experience Engineer",
-    summary: "Low-code compliance enablement ecosystem for a zero-LMS municipal environment.",
-    problem: "A regulated workforce needed audit-ready training coverage without a formal LMS infrastructure.",
+    summary: "A low-code, mobile-first compliance learning system for a regulated workforce operating without a formal LMS.",
+    problem: "A municipal workforce needed audit-ready training coverage without the infrastructure of a traditional learning platform.",
     actions: [
-      "Designed a mobile-first compliance experience using low-code delivery tools.",
-      "Structured tracking and content access for a zero-LMS environment.",
-      "Balanced usability with regulatory and audit requirements."
+      "Designed mobile-first access patterns for required training and job support.",
+      "Balanced audit evidence, usability, and low-code deployment constraints.",
+      "Organized content so compliance felt easier to complete and easier to track."
     ],
     outcomes: [
-      "Achieved 100% audit-ready regulatory coverage.",
-      "Supported 1,750+ municipal employees."
+      "Supported audit-ready coverage for 1,750+ employees.",
+      "Demonstrated practical constraints-based design in a regulated environment."
     ],
-    metrics: proofPoints.filter(
-      (p2) => ["Municipal coverage"].includes(p2.label)
-    ),
-    tools: [
-      "Low-code tools",
-      "Compliance design",
-      "Mobile-first UX",
-      "Audit readiness"
+    proofIds: ["municipal-coverage"],
+    tools: ["Low-code tools", "Compliance design", "Mobile-first UX"],
+    lanes: ["Compliance", "Learning Experience", "Enablement"],
+    visual: {
+      src: "/assets/portfolio/old-site-project-menu.png",
+      alt: "Screenshot of old instructional design portfolio project menu.",
+      caption: "Legacy project menu with compliance and instructional-design artifacts."
+    }
+  },
+  {
+    id: "phishing-red-flags",
+    title: "Spot the Red Flags Phishing Interaction",
+    shortTitle: "Phishing Interaction",
+    role: "Interactive Learning Designer",
+    summary: "A scenario-based security learning interaction built around identifying suspicious sender, link, attachment, and urgency cues.",
+    problem: "Security topics can become passive compliance content when learners only read policy instead of practicing judgment.",
+    actions: [
+      "Turned phishing recognition into a visual decision activity.",
+      "Used focused feedback around realistic red-flag categories.",
+      "Kept the interaction short enough for workplace performance support."
     ],
-    lanes: ["Compliance", "Learning Experience", "Enablement"]
+    outcomes: [
+      "Shows how compliance content can become active judgment practice.",
+      "Provides strong visual evidence for eLearning, security, and scenario design roles."
+    ],
+    proofIds: ["municipal-coverage", "army-lms"],
+    tools: ["Scenario design", "eLearning", "Security awareness"],
+    lanes: ["Learning Experience", "Compliance", "Technical Product"],
+    visual: {
+      src: "/assets/portfolio/terrylxd-projects.png",
+      alt: "Screenshot showing a phishing red flags learning interaction card.",
+      caption: "Project screenshot from TerryLXD featured work."
+    },
+    source: "terrylxd.com"
+  },
+  {
+    id: "crypto-decentralization-module",
+    title: "Centralized vs. Decentralized Learning Module",
+    shortTitle: "Crypto Module",
+    role: "Complex-Concept Learning Designer",
+    summary: "A visual learning module that explains decentralization by comparing network structures and learner-controlled progression.",
+    problem: "Abstract technical topics need concrete visuals and pacing that help non-experts build accurate mental models.",
+    actions: [
+      "Converted abstract blockchain concepts into a visual comparison interaction.",
+      "Used minimalist motion and contrast to clarify centralized versus decentralized structures.",
+      "Designed the module as a short conceptual bridge rather than a dense technical lecture."
+    ],
+    outcomes: [
+      "Demonstrates technical translation and visual learning strategy.",
+      "Fits roles involving product education, customer education, and technical enablement."
+    ],
+    proofIds: ["army-lms"],
+    tools: ["Technical training", "Visual explanation", "Interaction design"],
+    lanes: ["Learning Experience", "Technical Product", "Enablement"],
+    visual: {
+      src: "/assets/portfolio/terrylxd-projects.png",
+      alt: "Screenshot showing a centralized versus decentralized learning module card.",
+      caption: "Project screenshot from TerryLXD featured work."
+    },
+    source: "terrylxd.com"
+  },
+  {
+    id: "addie-qa-job-aid-suite",
+    title: "ADDIE, QA, Job Aid, and Facilitator Guide Suite",
+    shortTitle: "ISD Artifact Suite",
+    role: "Instructional Systems Designer",
+    summary: "A collection of instructional-design artifacts covering analysis, QA, job aids, facilitator support, and storyboard structure.",
+    problem: "Hiring teams often need evidence that a designer can produce the unglamorous but essential artifacts that keep training consistent.",
+    actions: [
+      "Created project artifacts across analysis, design, development, QA, and facilitation.",
+      "Organized legacy work into reviewer-friendly categories.",
+      "Used artifacts to prove process discipline, not just final-course polish."
+    ],
+    outcomes: [
+      "Strengthens credibility for instructional design and learning systems roles.",
+      "Gives reviewers practical evidence beyond high-level claims."
+    ],
+    proofIds: ["army-lms", "defense-workforce"],
+    tools: ["ADDIE", "QA", "Facilitator guides", "Storyboards", "Job aids"],
+    lanes: ["Learning Experience", "Compliance", "Enablement"],
+    visual: {
+      src: "/assets/portfolio/old-site-project-menu.png",
+      alt: "Screenshot of legacy instructional design portfolio menu with ADDIE, QA, job aid, and facilitator guide items.",
+      caption: "Legacy instructional-design artifacts to be consolidated into the new portfolio."
+    },
+    source: "instructionaldesignbyterry.com"
   },
   {
     id: "career-city",
     title: "Career City",
+    shortTitle: "Career City",
     role: "Learning Product Designer",
-    summary: "Interactive career-development concept that turns career growth into a more visual, explorable learning experience.",
-    problem: "Career development often feels abstract and hard to navigate, especially when users need to compare paths, choices, and next steps.",
+    summary: "An interactive career-development concept that frames career growth as a visual, explorable learning product.",
+    problem: "Career growth often feels abstract, especially when people need to compare paths, choices, and next steps.",
     actions: [
-      "Designed a visual product concept around career exploration and progression.",
-      "Used AI-assisted build workflows to move from idea to working app direction.",
+      "Designed a gameful learning concept around career exploration and decision-making.",
+      "Used AI-assisted build workflows to move from concept to working app direction.",
       "Framed learning strategy as an interactive product rather than a static course."
     ],
     outcomes: [
-      "Shows product thinking, learning strategy, and AI-enabled build capability in one portfolio item.",
+      "Shows product thinking, learning strategy, and AI-enabled build capability in one artifact.",
       "Creates a foundation for future learning experience apps."
     ],
-    metrics: [],
+    proofIds: ["release-depth"],
     tools: ["Caffeine AI", "Gameful learning", "React", "Learning strategy"],
     lanes: ["Learning Experience", "Technical Product", "AI Operations"],
+    visual: {
+      src: "/assets/images/placeholder.svg",
+      alt: "Placeholder visual for Career City until a production screenshot is added.",
+      caption: "Needs a current screenshot or short GIF from the Career City build."
+    },
     repo: "https://github.com/terrybrutus/career-city"
   }
 ];
 const resumeHighlights = [
-  "Senior Talent Development Lead & AI Enablement Architect at CTEC, supporting a 158,000-person defense acquisition workforce.",
-  "Lead Talent Enablement & Experience Architect through Legacy Learning Consulting across enterprise, municipal, sales, healthcare, and SaaS contexts.",
-  "Instructional Systems Designer at Pinnacle Solutions/Akima, with technical simulation and Army LMS deployment experience at 1.2M+ user scale."
+  "Senior Talent Development Lead and AI Enablement Architect at CTEC, supporting a 158,000-person defense acquisition workforce.",
+  "Lead Talent Enablement and Experience Architect through Legacy Learning Consulting across enterprise, municipal, sales, healthcare, and SaaS contexts.",
+  "Instructional Systems Designer background with technical simulation and Army LMS deployment experience at 1.2M+ user scale."
 ];
 const skills = [
   "Talent journey architecture",
@@ -30543,8 +32442,15 @@ const skills = [
   "Codex",
   "Articulate/Rise 360",
   "SQL",
-  "Agile/Scrum"
+  "Agile/Scrum",
+  "Scenario design",
+  "Facilitator guides",
+  "Job aids",
+  "Storyboard design"
 ];
+function getProofPoints(ids) {
+  return ids.map((id) => proofPoints.find((proofPoint) => proofPoint.id === id)).filter((proofPoint) => Boolean(proofPoint));
+}
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -30650,31 +32556,65 @@ const createLucideIcon = (iconName, iconNode) => {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$7 = [
-  ["path", { d: "M7 7h10v10", key: "1tivn9" }],
-  ["path", { d: "M7 17 17 7", key: "1vkiza" }]
+const __iconNode$d = [
+  ["path", { d: "M5 12h14", key: "1ays0h" }],
+  ["path", { d: "m12 5 7 7-7 7", key: "xquz4c" }]
 ];
-const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$7);
+const ArrowRight = createLucideIcon("arrow-right", __iconNode$d);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$6 = [
+const __iconNode$c = [
+  ["path", { d: "M7 7h10v10", key: "1tivn9" }],
+  ["path", { d: "M7 17 17 7", key: "1vkiza" }]
+];
+const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$c);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$b = [
+  ["path", { d: "M12 8V4H8", key: "hb8ula" }],
+  ["rect", { width: "16", height: "12", x: "4", y: "8", rx: "2", key: "enze0r" }],
+  ["path", { d: "M2 14h2", key: "vft8re" }],
+  ["path", { d: "M20 14h2", key: "4cs60a" }],
+  ["path", { d: "M15 13v2", key: "1xurst" }],
+  ["path", { d: "M9 13v2", key: "rq6x2g" }]
+];
+const Bot = createLucideIcon("bot", __iconNode$b);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$a = [
   ["path", { d: "M12 12h.01", key: "1mp3jc" }],
   ["path", { d: "M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2", key: "1ksdt3" }],
   ["path", { d: "M22 13a18.15 18.15 0 0 1-20 0", key: "12hx5q" }],
   ["rect", { width: "20", height: "14", x: "2", y: "6", rx: "2", key: "i6l2r4" }]
 ];
-const BriefcaseBusiness = createLucideIcon("briefcase-business", __iconNode$6);
+const BriefcaseBusiness = createLucideIcon("briefcase-business", __iconNode$a);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$5 = [
+const __iconNode$9 = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = createLucideIcon("check", __iconNode$9);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$8 = [
   ["rect", { width: "8", height: "4", x: "8", y: "2", rx: "1", ry: "1", key: "tgr4d6" }],
   [
     "path",
@@ -30684,26 +32624,26 @@ const __iconNode$5 = [
     }
   ]
 ];
-const Clipboard = createLucideIcon("clipboard", __iconNode$5);
+const Clipboard = createLucideIcon("clipboard", __iconNode$8);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$4 = [
+const __iconNode$7 = [
   ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
   ["path", { d: "M10 14 21 3", key: "gplh6r" }],
   ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
 ];
-const ExternalLink = createLucideIcon("external-link", __iconNode$4);
+const ExternalLink = createLucideIcon("external-link", __iconNode$7);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$3 = [
+const __iconNode$6 = [
   [
     "path",
     {
@@ -30713,7 +32653,43 @@ const __iconNode$3 = [
   ],
   ["path", { d: "M9 18c-4.51 2-5-2-7-2", key: "9comsn" }]
 ];
-const Github = createLucideIcon("github", __iconNode$3);
+const Github = createLucideIcon("github", __iconNode$6);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$5 = [
+  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", ry: "2", key: "1m3agn" }],
+  ["circle", { cx: "9", cy: "9", r: "2", key: "af1f0g" }],
+  ["path", { d: "m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21", key: "1xmnt7" }]
+];
+const Image = createLucideIcon("image", __iconNode$5);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$4 = [
+  ["path", { d: "M9 17H7A5 5 0 0 1 7 7h2", key: "8i5ue5" }],
+  ["path", { d: "M15 7h2a5 5 0 1 1 0 10h-2", key: "1b9ql8" }],
+  ["line", { x1: "8", x2: "16", y1: "12", y2: "12", key: "1jonct" }]
+];
+const Link2 = createLucideIcon("link-2", __iconNode$4);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$3 = [
+  ["circle", { cx: "12", cy: "16", r: "1", key: "1au0dj" }],
+  ["rect", { x: "3", y: "10", width: "18", height: "12", rx: "2", key: "6s8ecr" }],
+  ["path", { d: "M7 10V7a5 5 0 0 1 10 0v3", key: "1pqi11" }]
+];
+const LockKeyhole = createLucideIcon("lock-keyhole", __iconNode$3);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -30721,11 +32697,10 @@ const Github = createLucideIcon("github", __iconNode$3);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$2 = [
-  ["path", { d: "M9 17H7A5 5 0 0 1 7 7h2", key: "8i5ue5" }],
-  ["path", { d: "M15 7h2a5 5 0 1 1 0 10h-2", key: "1b9ql8" }],
-  ["line", { x1: "8", x2: "16", y1: "12", y2: "12", key: "1jonct" }]
+  ["path", { d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8", key: "1357e3" }],
+  ["path", { d: "M3 3v5h5", key: "1xhq8a" }]
 ];
-const Link2 = createLucideIcon("link-2", __iconNode$2);
+const RotateCcw = createLucideIcon("rotate-ccw", __iconNode$2);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -30733,11 +32708,11 @@ const Link2 = createLucideIcon("link-2", __iconNode$2);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1 = [
-  ["circle", { cx: "12", cy: "16", r: "1", key: "1au0dj" }],
-  ["rect", { x: "3", y: "10", width: "18", height: "12", rx: "2", key: "6s8ecr" }],
-  ["path", { d: "M7 10V7a5 5 0 0 1 10 0v3", key: "1pqi11" }]
+  ["path", { d: "m8 11 2 2 4-4", key: "1sed1v" }],
+  ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }],
+  ["path", { d: "m21 21-4.3-4.3", key: "1qie3q" }]
 ];
-const LockKeyhole = createLucideIcon("lock-keyhole", __iconNode$1);
+const SearchCheck = createLucideIcon("search-check", __iconNode$1);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -30748,200 +32723,425 @@ const __iconNode = [
   [
     "path",
     {
-      d: "M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z",
-      key: "4pj2yx"
+      d: "m21.64 3.64-1.28-1.28a1.21 1.21 0 0 0-1.72 0L2.36 18.64a1.21 1.21 0 0 0 0 1.72l1.28 1.28a1.2 1.2 0 0 0 1.72 0L21.64 5.36a1.2 1.2 0 0 0 0-1.72",
+      key: "ul74o6"
     }
   ],
-  ["path", { d: "M20 3v4", key: "1olli1" }],
-  ["path", { d: "M22 5h-4", key: "1gvqau" }],
-  ["path", { d: "M4 17v2", key: "vumght" }],
-  ["path", { d: "M5 18H3", key: "zchphs" }]
+  ["path", { d: "m14 7 3 3", key: "1r5n42" }],
+  ["path", { d: "M5 6v4", key: "ilb8ba" }],
+  ["path", { d: "M19 14v4", key: "blhpug" }],
+  ["path", { d: "M10 2v2", key: "7u0qdc" }],
+  ["path", { d: "M7 8H3", key: "zfb6yr" }],
+  ["path", { d: "M21 16h-4", key: "1cnmox" }],
+  ["path", { d: "M11 3H9", key: "1obp7u" }]
 ];
-const Sparkles = createLucideIcon("sparkles", __iconNode);
-const laneKeywords = {
-  Enablement: ["enablement", "onboarding", "talent", "workforce", "manager"],
-  "AI Operations": ["ai", "automation", "rag", "agent", "workflow", "python"],
-  "Learning Experience": [
-    "learning",
-    "instructional",
-    "lxd",
-    "training",
-    "curriculum"
-  ],
-  "Technical Product": ["product", "platform", "app", "technical", "systems"],
-  "Sales Enablement": ["sales", "customer", "revenue", "gtm", "meddpicc"],
-  Compliance: ["compliance", "508", "wcag", "audit", "regulated", "governance"]
-};
-const sampleJd = "Principal Enablement role owning AI-assisted workflows, technical onboarding, sales readiness, stakeholder alignment, learning operations, compliance, and measurable business outcomes.";
+const WandSparkles = createLucideIcon("wand-sparkles", __iconNode);
+const sampleJd = "Senior enablement role partnering with product, sales, and operations teams to build AI-assisted onboarding, technical training, stakeholder-ready assets, and measurable adoption programs.";
+const localStorageKey = "terry-portfolio-tailored-views";
+function isLane(value) {
+  return laneProfiles.some((profileItem) => profileItem.lane === value);
+}
+function normalizeText(value) {
+  return value.toLowerCase().replace(/[^a-z0-9+#./\s-]/g, " ");
+}
 function analyzeTarget(text) {
-  const normalized = text.toLowerCase();
-  const matches = Object.entries(laneKeywords).map(([lane, words]) => {
-    const terms = words.filter((word) => normalized.includes(word));
-    return { lane, terms, score: terms.length };
-  }).filter((item) => item.score > 0).sort((a2, b2) => b2.score - a2.score);
-  if (matches.length === 0) {
+  const normalized = normalizeText(text);
+  const matches = laneProfiles.map((laneProfile2) => {
+    const terms = laneProfile2.keywords.filter(
+      (word) => normalized.includes(word)
+    );
+    const score = terms.length;
     return {
-      lanes: ["Enablement", "AI Operations", "Learning Experience"],
-      matches: [
-        {
-          lane: "Enablement",
-          terms: ["default"],
-          score: 1
-        }
-      ]
+      lane: laneProfile2.lane,
+      terms,
+      score,
+      confidence: Math.min(0.95, 0.42 + score * 0.12)
     };
-  }
+  }).filter((item) => item.score > 0).sort((a2, b2) => b2.score - a2.score);
+  const ranked = matches.length > 0 ? matches : [
+    {
+      lane: "Enablement",
+      terms: ["default"],
+      score: 1,
+      confidence: 0.48
+    },
+    {
+      lane: "Learning Experience",
+      terms: ["default"],
+      score: 1,
+      confidence: 0.44
+    },
+    {
+      lane: "AI Operations",
+      terms: ["default"],
+      score: 1,
+      confidence: 0.42
+    }
+  ];
+  const lanes = ranked.slice(0, 3).map((item) => item.lane);
+  const primaryLane = lanes[0];
+  const laneProfile = laneProfiles.find((item) => item.lane === primaryLane) ?? laneProfiles[0];
   return {
-    lanes: matches.slice(0, 3).map((item) => item.lane),
-    matches
+    primaryLane,
+    lanes,
+    matches: ranked,
+    angle: laneProfile.headline,
+    reviewerTakeaway: laneProfile.reviewerTakeaway,
+    aiPromptPreview: `Classify JD into ${laneProfiles.map((item) => item.lane).join(", ")}. Return JSON: lane, confidence, projectIds, proofIds.`
   };
 }
-function scoreProject(projectLanes, selectedLanes) {
-  return projectLanes.reduce(
-    (score, lane) => score + (selectedLanes.includes(lane) ? 1 : 0),
+function scoreProject(project, selectedLanes) {
+  const laneScore = project.lanes.reduce(
+    (score, lane) => score + (selectedLanes.includes(lane) ? 4 : 0),
     0
   );
+  const proofScore = getProofPoints(project.proofIds).reduce(
+    (score, proofPoint) => score + proofPoint.lanes.filter((lane) => selectedLanes.includes(lane)).length,
+    0
+  );
+  return laneScore + proofScore;
 }
-function getTailoredModel(company, jd, lanes) {
-  const analysis = analyzeTarget(`${company} ${jd}`);
-  const selectedLanes = lanes && lanes.length > 0 ? lanes : analysis.lanes;
-  const selectedProjects = [...projects].sort(
-    (a2, b2) => scoreProject(b2.lanes, selectedLanes) - scoreProject(a2.lanes, selectedLanes)
+function getRecommendedProjects(selectedLanes) {
+  return [...projects].sort(
+    (a2, b2) => scoreProject(b2, selectedLanes) - scoreProject(a2, selectedLanes)
   ).slice(0, 3);
-  const selectedMetrics = proofPoints.filter(
-    (metric) => metric.lanes.some((lane) => selectedLanes.includes(lane))
+}
+function getRecommendedProofPoints(selectedLanes) {
+  return proofPoints.filter(
+    (proofPoint) => proofPoint.lanes.some((lane) => selectedLanes.includes(lane))
   ).slice(0, 4);
-  const selectedSkills = skills.filter((skill) => {
-    const normalized = skill.toLowerCase();
-    return selectedLanes.some(
-      (lane) => laneKeywords[lane].some((keyword) => normalized.includes(keyword))
-    );
-  }).slice(0, 10);
-  return {
-    analysis,
-    selectedLanes,
-    selectedProjects,
-    selectedMetrics,
-    selectedSkills: selectedSkills.length > 0 ? selectedSkills : skills.slice(0, 10)
-  };
 }
-function encodeSharePayload(payload) {
-  return btoa(encodeURIComponent(JSON.stringify(payload)));
-}
-function decodeSharePayload(token) {
-  try {
-    return JSON.parse(decodeURIComponent(atob(token)));
-  } catch {
-    return null;
-  }
-}
-function getSharePayloadFromUrl() {
-  const hash = window.location.hash;
-  if (!hash.startsWith("#/s/")) {
-    return null;
-  }
-  return decodeSharePayload(hash.replace("#/s/", ""));
-}
-function getStudioModeFromUrl() {
-  const hash = window.location.hash.toLowerCase();
-  const params = new URLSearchParams(window.location.search);
-  const path = window.location.pathname.toLowerCase();
-  return hash === "#studio" || hash === "#/studio" || hash === "#owner" || hash === "#/owner" || params.get("studio") === "1" || params.get("owner") === "1" || path.endsWith("/studio") || path.endsWith("/owner");
+function getRecommendedSkills(selectedLanes) {
+  const keywords = laneProfiles.filter((laneProfile) => selectedLanes.includes(laneProfile.lane)).flatMap((laneProfile) => laneProfile.keywords);
+  const rankedSkills = skills.filter((skill) => {
+    const normalized = normalizeText(skill);
+    return keywords.some((keyword) => normalized.includes(keyword));
+  });
+  return (rankedSkills.length > 0 ? rankedSkills : skills).slice(0, 10);
 }
 function getRouteState() {
+  var _a2, _b2;
+  const hash = window.location.hash;
+  const normalizedHash = hash.toLowerCase();
+  const params = new URLSearchParams(window.location.search);
+  const path = window.location.pathname.toLowerCase();
+  const slugFromHash = ((_a2 = hash.match(/^#\/v\/([a-z0-9-]+)$/i)) == null ? void 0 : _a2[1]) ?? null;
+  const slugFromPath = ((_b2 = path.match(/\/v\/([a-z0-9-]+)$/i)) == null ? void 0 : _b2[1]) ?? null;
   return {
-    isStudio: getStudioModeFromUrl(),
-    sharePayload: getSharePayloadFromUrl()
+    isStudio: normalizedHash === "#studio" || normalizedHash === "#/studio" || normalizedHash === "#owner" || normalizedHash === "#/owner" || params.get("studio") === "1" || params.get("owner") === "1" || path.endsWith("/studio") || path.endsWith("/owner"),
+    slug: slugFromHash ?? slugFromPath
   };
 }
-function buildShareUrl(payload) {
+function makeSlug() {
+  const bytes = new Uint8Array(5);
+  window.crypto.getRandomValues(bytes);
+  return Array.from(bytes).map((byte) => byte.toString(36).padStart(2, "0")).join("").slice(0, 8);
+}
+function buildShareUrl(slug) {
   const url = new URL(window.location.href);
   url.search = "";
-  url.hash = `/s/${encodeSharePayload(payload)}`;
+  url.hash = `/v/${slug}`;
   return url.toString();
 }
-function ReviewerPortfolio({ payload }) {
-  const company = (payload == null ? void 0 : payload.company) ?? "your team";
-  const jd = (payload == null ? void 0 : payload.jd) ?? "";
-  const model = getTailoredModel(company, jd, payload == null ? void 0 : payload.lanes);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "min-h-screen bg-background text-foreground", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "border-b border-border bg-[linear-gradient(135deg,_rgba(17,24,39,0.92),_rgba(10,10,10,1))]", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mx-auto max-w-6xl px-5 py-12 md:py-16", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "max-w-3xl space-y-5", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium uppercase tracking-[0.2em] text-primary", children: "Terry Brutus" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "font-display text-4xl font-semibold leading-tight sm:text-5xl", children: [
-        "Enablement systems, AI workflows, and learning products for",
-        " ",
-        company,
-        "."
+function getLocalViews() {
+  try {
+    return JSON.parse(localStorage.getItem(localStorageKey) ?? "{}");
+  } catch {
+    return {};
+  }
+}
+function saveLocalView(view) {
+  const current = getLocalViews();
+  current[view.slug] = view;
+  localStorage.setItem(localStorageKey, JSON.stringify(current));
+}
+function getLocalView(slug) {
+  return getLocalViews()[slug] ?? null;
+}
+function buildViewModel(view) {
+  var _a2, _b2;
+  const lanes = ((view == null ? void 0 : view.lanes) ?? []).filter(isLane).slice(0, 3);
+  const selectedLanes = lanes.length > 0 ? lanes : ["Enablement", "AI Operations", "Learning Experience"];
+  const selectedProjects = ((_a2 = view == null ? void 0 : view.projectIds) == null ? void 0 : _a2.map((id) => projects.find((project) => project.id === id)).filter((project) => Boolean(project))) ?? getRecommendedProjects(selectedLanes);
+  const selectedProofPoints = ((_b2 = view == null ? void 0 : view.proofIds) == null ? void 0 : _b2.map((id) => proofPoints.find((proofPoint) => proofPoint.id === id)).filter((proofPoint) => Boolean(proofPoint))) ?? getRecommendedProofPoints(selectedLanes);
+  const selectedSkills = (view == null ? void 0 : view.skillIds) && view.skillIds.length > 0 ? view.skillIds : getRecommendedSkills(selectedLanes);
+  const primaryLane = isLane((view == null ? void 0 : view.primaryLane) ?? "") ? view == null ? void 0 : view.primaryLane : selectedLanes[0];
+  const laneProfile = laneProfiles.find((item) => item.lane === primaryLane) ?? laneProfiles[0];
+  return {
+    selectedLanes,
+    selectedProjects: selectedProjects.slice(0, 4),
+    selectedProofPoints: selectedProofPoints.slice(0, 4),
+    selectedSkills: selectedSkills.slice(0, 10),
+    angle: (view == null ? void 0 : view.angle) || laneProfile.headline,
+    primaryLane
+  };
+}
+function useTailoredView(slug, actor) {
+  const [view, setView] = reactExports.useState(null);
+  const [status, setStatus] = reactExports.useState("idle");
+  reactExports.useEffect(() => {
+    let cancelled = false;
+    async function load() {
+      if (!slug) {
+        setStatus("ready");
+        setView(null);
+        return;
+      }
+      setStatus("loading");
+      try {
+        const backendView = (actor == null ? void 0 : actor.getTailoredView) ? await actor.getTailoredView(slug) : null;
+        const nextView = backendView ?? getLocalView(slug);
+        if (!cancelled) {
+          setView(nextView);
+          setStatus(nextView ? "ready" : "missing");
+        }
+      } catch {
+        const nextView = getLocalView(slug);
+        if (!cancelled) {
+          setView(nextView);
+          setStatus(nextView ? "ready" : "missing");
+        }
+      }
+    }
+    load();
+    return () => {
+      cancelled = true;
+    };
+  }, [slug, actor]);
+  return { view, status };
+}
+function VisualProjectCard({ project }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("article", { className: "overflow-hidden rounded-lg border border-border bg-card", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative aspect-[16/9] overflow-hidden bg-muted", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(
+        "img",
+        {
+          src: project.visual.src,
+          alt: project.visual.alt,
+          className: "h-full w-full object-cover"
+        }
+      ),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-3 top-3 rounded-full border border-white/20 bg-black/60 px-3 py-1 text-xs text-white", children: project.shortTitle })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4 p-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-primary", children: project.role }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-1 font-display text-xl font-semibold", children: project.title })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-base leading-7 text-muted-foreground", children: profile.shortSummary }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: model.selectedLanes.map((lane) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: lane }, lane)) })
-    ] }) }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto grid max-w-6xl gap-5 px-5 py-8 sm:grid-cols-2 lg:grid-cols-4", children: model.selectedMetrics.map((metric) => /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-3xl font-semibold", children: metric.value }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm text-muted-foreground", children: metric.label })
-    ] }) }, metric.label)) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto grid max-w-6xl gap-6 px-5 pb-10 lg:grid-cols-[0.78fr_1.22fr]", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(BriefcaseBusiness, { className: "h-5 w-5 text-primary" }),
-          "Relevant background"
-        ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-4", children: [
-          resumeHighlights.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-muted-foreground", children: item }, item)),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2 pt-2", children: model.selectedSkills.map((skill) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: skill }, skill)) })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-muted-foreground", children: project.summary }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-4 md:grid-cols-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Problem" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm leading-5", children: project.problem })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Moves" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm leading-5", children: project.actions.slice(0, 2).map((action) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: action }, action)) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Results" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm leading-5", children: project.outcomes.slice(0, 2).map((outcome) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: outcome }, outcome)) })
         ] })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-5", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-2xl font-semibold", children: "Selected work" }),
-        model.selectedProjects.map((project) => /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-start justify-between gap-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { children: project.title }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm text-primary", children: project.role })
-            ] }),
-            project.repo && /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "a",
-              {
-                href: project.repo,
-                target: "_blank",
-                rel: "noreferrer",
-                className: "inline-flex items-center gap-1 text-sm text-primary",
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(Github, { className: "h-4 w-4" }),
-                  "Repo",
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "h-4 w-4" })
-                ]
-              }
-            )
-          ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-muted-foreground", children: project.summary }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-4 md:grid-cols-3", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Problem" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm", children: project.problem })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Moves" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm", children: project.actions.slice(0, 2).map((action) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: action }, action)) })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Outcomes" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm", children: project.outcomes.slice(0, 2).map((outcome) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: outcome }, outcome)) })
-              ] })
-            ] })
-          ] })
-        ] }, project.id))
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-2", children: [
+        project.tools.slice(0, 5).map((tool) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: tool }, tool)),
+        project.repo && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "a",
+          {
+            href: project.repo,
+            target: "_blank",
+            rel: "noreferrer",
+            className: "ml-auto inline-flex items-center gap-1 text-sm text-primary",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Github, { className: "h-4 w-4" }),
+              "Repo",
+              /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "h-4 w-4" })
+            ]
+          }
+        )
       ] })
     ] })
   ] });
 }
+function PublicLanding({ onExplore }) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "min-h-screen bg-background text-foreground", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative overflow-hidden border-b border-border bg-[radial-gradient(circle_at_20%_20%,_rgba(229,190,105,0.18),_transparent_30%),radial-gradient(circle_at_80%_10%,_rgba(45,212,191,0.12),_transparent_28%),linear-gradient(135deg,_#0f1115,_#08090b)]", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 opacity-40 [background-image:linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:48px_48px]" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative mx-auto grid min-h-[92vh] max-w-6xl content-center gap-10 px-5 py-16 lg:grid-cols-[0.95fr_1.05fr]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-7", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "w-fit", variant: "outline", children: "Terry Brutus" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display text-5xl font-semibold leading-tight sm:text-6xl", children: "Systems that help people do complex work better." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "max-w-2xl text-lg leading-8 text-muted-foreground", children: "Enablement, AI workflow, and learning experience work across technical training, compliance, product education, and performance support." })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { type: "button", onClick: onExplore, children: [
+            "View selected work",
+            /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "ml-2 h-4 w-4" })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "a",
+            {
+              href: profile.linkedIn,
+              target: "_blank",
+              rel: "noreferrer",
+              className: "inline-flex items-center justify-center rounded-md border border-border px-4 py-2 text-sm font-medium transition-smooth hover:bg-muted",
+              children: [
+                "LinkedIn",
+                /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { className: "ml-2 h-4 w-4" })
+              ]
+            }
+          )
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid content-center gap-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "overflow-hidden rounded-lg border border-border bg-card shadow-2xl", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "img",
+          {
+            src: "/assets/portfolio/terrylxd-hero.png",
+            alt: "TerryLXD portfolio hero screenshot.",
+            className: "aspect-[16/10] w-full object-cover"
+          }
+        ) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-3 gap-3", children: laneProfiles.slice(0, 3).map((laneProfile) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "div",
+          {
+            className: "rounded-md border border-border bg-card/80 p-3",
+            children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: laneProfile.lane })
+          },
+          laneProfile.lane
+        )) })
+      ] })
+    ] })
+  ] }) });
+}
+function ReviewerPortfolio({
+  view,
+  status,
+  onExplore
+}) {
+  var _a2, _b2, _c2;
+  if (!view && status === "ready") {
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(PublicLanding, { onExplore });
+  }
+  const model = buildViewModel(view);
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "min-h-screen bg-background text-foreground", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "border-b border-border bg-[linear-gradient(135deg,_rgba(17,24,39,0.96),_rgba(10,10,10,1))]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-6xl gap-8 px-5 py-12 lg:grid-cols-[1.05fr_0.95fr] lg:py-16", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "w-fit", variant: "outline", children: "Selected Work" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display text-4xl font-semibold leading-tight sm:text-5xl", children: model.angle }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "max-w-3xl text-base leading-7 text-muted-foreground", children: profile.shortSummary })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: model.selectedLanes.map((lane) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { children: lane }, lane)) })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "overflow-hidden rounded-lg border border-border bg-card", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "img",
+          {
+            src: ((_a2 = model.selectedProjects[0]) == null ? void 0 : _a2.visual.src) ?? "/assets/portfolio/terrylxd-projects.png",
+            alt: ((_b2 = model.selectedProjects[0]) == null ? void 0 : _b2.visual.alt) ?? "Portfolio project visual.",
+            className: "aspect-[16/10] w-full object-cover"
+          }
+        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: (_c2 = model.selectedProjects[0]) == null ? void 0 : _c2.visual.caption }) })
+      ] })
+    ] }) }),
+    status === "missing" && /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto max-w-6xl px-5 pt-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-md border border-primary/30 bg-primary/10 p-4 text-sm", children: "This private view was not found, so the page is showing a general selected-work portfolio." }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto grid max-w-6xl gap-4 px-5 py-8 sm:grid-cols-2 lg:grid-cols-4", children: model.selectedProofPoints.map((metric) => /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-3xl font-semibold", children: metric.value }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm font-medium", children: metric.label }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-xs leading-5 text-muted-foreground", children: metric.detail })
+    ] }) }, metric.id)) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto grid max-w-6xl gap-6 px-5 pb-12 lg:grid-cols-[0.72fr_1.28fr]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "space-y-5", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(BriefcaseBusiness, { className: "h-5 w-5 text-primary" }),
+            "Background"
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "space-y-4", children: resumeHighlights.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "p",
+            {
+              className: "text-sm leading-6 text-muted-foreground",
+              children: item
+            },
+            item
+          )) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { children: "Relevant Skills" }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "flex flex-wrap gap-2", children: model.selectedSkills.map((skill) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: skill }, skill)) })
+        ] })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-5", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-2xl font-semibold", children: "Featured Evidence" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "a",
+            {
+              href: profile.github,
+              target: "_blank",
+              rel: "noreferrer",
+              className: "inline-flex items-center gap-2 text-sm text-primary",
+              children: [
+                "GitHub",
+                /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "h-4 w-4" })
+              ]
+            }
+          )
+        ] }),
+        model.selectedProjects.map((project) => /* @__PURE__ */ jsxRuntimeExports.jsx(VisualProjectCard, { project }, project.id))
+      ] })
+    ] })
+  ] });
+}
+function ToggleChip({
+  active,
+  children,
+  onClick
+}) {
+  return /* @__PURE__ */ jsxRuntimeExports.jsx(
+    "button",
+    {
+      type: "button",
+      onClick,
+      className: `rounded-full border px-3 py-1 text-sm transition-smooth ${active ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card text-muted-foreground hover:text-foreground"}`,
+      children
+    }
+  );
+}
 function TailoredPortfolioStudio() {
-  const [company, setCompany] = reactExports.useState("Target Company");
-  const [jd, setJd] = reactExports.useState(sampleJd);
+  const actorResult = useActor(createActor);
+  const actor = actorResult.actor ?? null;
   const [route, setRoute] = reactExports.useState(getRouteState);
+  const { view, status } = useTailoredView(route.slug, actor);
+  const [company, setCompany] = reactExports.useState("");
+  const [jd, setJd] = reactExports.useState(sampleJd);
+  const [aiMode, setAiMode] = reactExports.useState("suggest");
+  const [selectedLanes, setSelectedLanes] = reactExports.useState([]);
+  const [selectedProjectIds, setSelectedProjectIds] = reactExports.useState([]);
+  const [selectedProofIds, setSelectedProofIds] = reactExports.useState([]);
   const [links, setLinks] = reactExports.useState([]);
-  const model = reactExports.useMemo(() => getTailoredModel(company, jd), [company, jd]);
+  const [saving, setSaving] = reactExports.useState(false);
+  const analysis = reactExports.useMemo(
+    () => analyzeTarget(`${company} ${jd}`),
+    [company, jd]
+  );
+  const activeLanes = selectedLanes.length > 0 ? selectedLanes : analysis.lanes;
+  const recommendedProjects = reactExports.useMemo(
+    () => getRecommendedProjects(activeLanes),
+    [activeLanes]
+  );
+  const recommendedProofPoints = reactExports.useMemo(
+    () => getRecommendedProofPoints(activeLanes),
+    [activeLanes]
+  );
+  const recommendedSkills = reactExports.useMemo(
+    () => getRecommendedSkills(activeLanes),
+    [activeLanes]
+  );
+  const activeProjectIds = selectedProjectIds.length > 0 ? selectedProjectIds : recommendedProjects.map((project) => project.id);
+  const activeProofIds = selectedProofIds.length > 0 ? selectedProofIds : recommendedProofPoints.map((proofPoint) => proofPoint.id);
   reactExports.useEffect(() => {
     const syncRoute = () => setRoute(getRouteState());
     window.addEventListener("hashchange", syncRoute);
@@ -30951,143 +33151,428 @@ function TailoredPortfolioStudio() {
       window.removeEventListener("popstate", syncRoute);
     };
   }, []);
+  reactExports.useEffect(() => {
+    setSelectedLanes(analysis.lanes);
+    setSelectedProjectIds(
+      getRecommendedProjects(analysis.lanes).map((project) => project.id)
+    );
+    setSelectedProofIds(
+      getRecommendedProofPoints(analysis.lanes).map(
+        (proofPoint) => proofPoint.id
+      )
+    );
+  }, [analysis]);
+  const openGeneralPortfolio = reactExports.useCallback(() => {
+    const generalView = {
+      slug: "general",
+      label: "General portfolio",
+      privateCompany: "",
+      privateJobDescription: "",
+      primaryLane: "Enablement",
+      lanes: ["Enablement", "AI Operations", "Learning Experience"],
+      projectIds: [
+        "ai-talent-content-pipeline",
+        "workflow-management-platform",
+        "phishing-red-flags"
+      ],
+      proofIds: ["defense-workforce", "asset-cycle", "audit-cost", "army-lms"],
+      skillIds: getRecommendedSkills([
+        "Enablement",
+        "AI Operations",
+        "Learning Experience"
+      ]),
+      angle: "Enablement, AI workflow, and learning systems with visible proof.",
+      expiresAt: void 0
+    };
+    saveLocalView(generalView);
+    window.location.hash = "/v/general";
+  }, []);
   if (!route.isStudio) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(ReviewerPortfolio, { payload: route.sharePayload });
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(
+      ReviewerPortfolio,
+      {
+        view,
+        status,
+        onExplore: openGeneralPortfolio
+      }
+    );
   }
-  const createLink = () => {
+  const toggleLane = (lane) => {
+    setSelectedLanes(
+      (current) => current.includes(lane) ? current.filter((item) => item !== lane) : [...current, lane].slice(0, 3)
+    );
+  };
+  const toggleProject = (projectId) => {
+    setSelectedProjectIds(
+      (current) => current.includes(projectId) ? current.filter((item) => item !== projectId) : [...current, projectId].slice(0, 4)
+    );
+  };
+  const toggleProof = (proofId) => {
+    setSelectedProofIds(
+      (current) => current.includes(proofId) ? current.filter((item) => item !== proofId) : [...current, proofId].slice(0, 4)
+    );
+  };
+  const resetRecommendations = () => {
+    setSelectedLanes(analysis.lanes);
+    setSelectedProjectIds(recommendedProjects.map((project) => project.id));
+    setSelectedProofIds(
+      recommendedProofPoints.map((proofPoint) => proofPoint.id)
+    );
+  };
+  const createLink = async () => {
+    setSaving(true);
+    const slug = makeSlug();
     const expires = /* @__PURE__ */ new Date();
     expires.setDate(expires.getDate() + 21);
-    const payload = {
-      company,
-      jd,
-      lanes: model.selectedLanes,
-      expires: expires.toISOString()
+    const input = {
+      slug,
+      label: company.trim() || "Private target view",
+      privateCompany: company.trim(),
+      privateJobDescription: jd.slice(0, 2200),
+      primaryLane: activeLanes[0],
+      lanes: activeLanes,
+      projectIds: activeProjectIds,
+      proofIds: activeProofIds,
+      skillIds: recommendedSkills,
+      angle: analysis.angle,
+      expiresAt: expires.toISOString()
     };
-    const url = buildShareUrl(payload);
+    let source = "local";
+    try {
+      if (actor == null ? void 0 : actor.saveTailoredView) {
+        await actor.saveTailoredView(input);
+        source = "backend";
+      }
+    } catch {
+      source = "local";
+    }
+    saveLocalView(input);
+    const url = buildShareUrl(slug);
     setLinks((current) => [
       {
         url,
-        company,
-        lanes: model.selectedLanes,
-        expires: expires.toLocaleDateString()
+        slug,
+        label: input.label,
+        lanes: activeLanes,
+        expires: expires.toLocaleDateString(),
+        source
       },
       ...current
     ]);
+    setSaving(false);
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "min-h-screen bg-background text-foreground", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "border-b border-border bg-[radial-gradient(circle_at_top_left,_rgba(229,190,105,0.16),_transparent_34%),linear-gradient(135deg,_rgba(17,24,39,0.9),_rgba(10,10,10,1))]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-7xl gap-10 px-5 py-12 md:grid-cols-[1.05fr_0.95fr] md:py-16", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "border-b border-border bg-[radial-gradient(circle_at_top_left,_rgba(229,190,105,0.16),_transparent_34%),linear-gradient(135deg,_rgba(17,24,39,0.95),_rgba(10,10,10,1))]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-7xl gap-8 px-5 py-10 lg:grid-cols-[0.9fr_1.1fr]", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "w-fit", variant: "outline", children: "Owner studio" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "w-fit", variant: "outline", children: "Owner Studio" }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "max-w-4xl font-display text-4xl font-semibold leading-tight sm:text-5xl", children: "Tailor a reviewer-facing portfolio." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "max-w-3xl text-base leading-7 text-muted-foreground", children: "Paste a company or JD signal. The app scores keywords into role lanes, ranks proof points, and generates a clean hash-link view that does not expose this studio." })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display text-4xl font-semibold leading-tight sm:text-5xl", children: "Build a quiet, tailored reviewer view." }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "max-w-3xl text-base leading-7 text-muted-foreground", children: "Paste a JD, let the app recommend the lane, projects, visuals, and proof points, then override anything before generating a short opaque link." })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-card/70 p-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "How the JD is interpreted" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 grid gap-3 sm:grid-cols-2", children: model.analysis.matches.slice(0, 6).map((match) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md bg-muted/40 p-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: match.lane }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-1 text-xs text-muted-foreground", children: [
-              "Matched: ",
-              match.terms.join(", ")
-            ] })
-          ] }, match.lane)) })
-        ] })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3 sm:grid-cols-3", children: [
+          ["Short links", "Stored by slug"],
+          ["AI assist", aiMode === "suggest" ? "Suggest only" : "Off"],
+          ["Public view", "No studio language"]
+        ].map(([label, value]) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            className: "rounded-md border border-border bg-card/80 p-4",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs uppercase text-muted-foreground", children: label }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 font-medium", children: value })
+            ]
+          },
+          label
+        )) })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "border-border/80 bg-card/90", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Sparkles, { className: "h-5 w-5 text-primary" }),
-          "Build target view"
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Clipboard, { className: "h-5 w-5 text-primary" }),
+          "Step 1. Target Signal"
         ] }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-4", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block space-y-2", htmlFor: "target-company", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium", children: "Company" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium", children: "Private company / role label" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               "input",
               {
                 id: "target-company",
                 className: "w-full rounded-md border border-input bg-background px-3 py-2 text-sm",
                 value: company,
-                onChange: (event) => setCompany(event.target.value)
+                onChange: (event) => setCompany(event.target.value),
+                placeholder: "Used only inside the studio"
               }
             )
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block space-y-2", htmlFor: "target-jd", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium", children: "Job description / signal" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium", children: "Job description or hiring signal" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx(
               Textarea,
               {
                 id: "target-jd",
                 value: jd,
                 onChange: (event) => setJd(event.target.value),
-                className: "min-h-36"
+                className: "min-h-36",
+                maxLength: 2200
               }
             )
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: model.selectedLanes.map((lane) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { children: lane }, lane)) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { type: "button", onClick: createLink, className: "w-full", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Link2, { className: "mr-2 h-4 w-4" }),
-            "Generate reviewer link"
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              Button,
+              {
+                type: "button",
+                variant: aiMode === "suggest" ? "default" : "outline",
+                onClick: () => setAiMode(aiMode === "suggest" ? "off" : "suggest"),
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(Bot, { className: "mr-2 h-4 w-4" }),
+                  "AI assist ",
+                  aiMode === "suggest" ? "on" : "off"
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs leading-5 text-muted-foreground", children: "Gemini-ready, capped prompt. The deterministic scorer still works when AI is off." })
           ] })
         ] })
       ] })
     ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto grid max-w-7xl gap-6 px-5 py-8 lg:grid-cols-[0.8fr_1.2fr]", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(LockKeyhole, { className: "h-5 w-5 text-primary" }),
-          "Generated links"
-        ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { children: links.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: "No links yet. This studio changes the generated reviewer view. Source-bank editing and saved archive/history controls still need to be wired to backend storage." }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: links.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          "div",
-          {
-            className: "rounded-md border border-border p-3 text-sm",
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-3", children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium", children: link.company }),
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-muted-foreground", children: [
-                  "Expires ",
-                  link.expires
-                ] })
-              ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 break-all text-muted-foreground", children: link.url }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "a",
-                {
-                  className: "mt-3 inline-flex items-center gap-2 text-primary",
-                  href: link.url,
-                  children: [
-                    "Open reviewer view",
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { className: "h-4 w-4" })
-                  ]
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 flex flex-wrap gap-2", children: link.lanes.map((lane) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: lane }, lane)) })
-            ]
-          },
-          link.url
-        )) }) })
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto grid max-w-7xl gap-6 px-5 py-8 lg:grid-cols-[0.9fr_1.1fr]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(SearchCheck, { className: "h-5 w-5 text-primary" }),
+            "Step 2. Recommended Lane"
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-primary/25 bg-primary/10 p-4", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: analysis.primaryLane }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm leading-6 text-muted-foreground", children: analysis.reviewerTakeaway })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3", children: analysis.matches.slice(0, 6).map((match) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "div",
+              {
+                className: "rounded-md border border-border bg-muted/25 p-3",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-3", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: match.lane }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-xs text-muted-foreground", children: [
+                      Math.round(match.confidence * 100),
+                      "%"
+                    ] })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-1 text-xs text-muted-foreground", children: [
+                    "Matched: ",
+                    match.terms.join(", ")
+                  ] })
+                ]
+              },
+              match.lane
+            )) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: laneProfiles.map((laneProfile) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+              ToggleChip,
+              {
+                active: activeLanes.includes(laneProfile.lane),
+                onClick: () => toggleLane(laneProfile.lane),
+                children: laneProfile.lane
+              },
+              laneProfile.lane
+            )) })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(WandSparkles, { className: "h-5 w-5 text-primary" }),
+            "AI Cost Guardrails"
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-3 text-sm text-muted-foreground", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { children: "Gemini should only receive the trimmed JD, lane names, project IDs, and proof IDs. No full portfolio dump, no reviewer traffic, and no automatic calls when a link is opened." }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-md border border-border bg-muted/25 p-3 font-mono text-xs", children: analysis.aiPromptPreview })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(LockKeyhole, { className: "h-5 w-5 text-primary" }),
+            "Step 5. Short Links"
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              Button,
+              {
+                type: "button",
+                onClick: createLink,
+                className: "w-full",
+                disabled: saving,
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(Link2, { className: "mr-2 h-4 w-4" }),
+                  saving ? "Generating..." : "Generate short reviewer link"
+                ]
+              }
+            ),
+            links.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground", children: [
+              "Links will look like",
+              " ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-mono", children: "#/v/a7k92p" }),
+              ". The company/JD stays private in the studio data."
+            ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: links.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "div",
+              {
+                className: "rounded-md border border-border p-3 text-sm",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-3", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium", children: link.label }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: link.source })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 break-all text-muted-foreground", children: link.url }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 flex flex-wrap gap-2", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      "a",
+                      {
+                        className: "inline-flex items-center gap-2 text-primary",
+                        href: link.url,
+                        children: [
+                          "Open",
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { className: "h-4 w-4" })
+                        ]
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-muted-foreground", children: [
+                      "Expires ",
+                      link.expires
+                    ] })
+                  ] })
+                ]
+              },
+              link.slug
+            )) })
+          ] })
+        ] })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(Clipboard, { className: "h-5 w-5 text-primary" }),
-          "Previewed reviewer output"
-        ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-5", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3 sm:grid-cols-2", children: model.selectedMetrics.map((metric) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "div",
-            {
-              className: "rounded-md border border-border p-3",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-2xl font-semibold", children: metric.value }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: metric.label })
-              ]
-            },
-            metric.label
-          )) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: model.selectedProjects.map((project) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md bg-muted/30 p-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-medium", children: project.title }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm text-muted-foreground", children: project.summary })
-          ] }, project.id)) })
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Image, { className: "h-5 w-5 text-primary" }),
+            "Step 3. Recommended Projects and Metrics"
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-5", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3 md:grid-cols-3", children: recommendedProjects.map((project) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "button",
+              {
+                type: "button",
+                onClick: () => toggleProject(project.id),
+                className: `overflow-hidden rounded-md border text-left transition-smooth ${activeProjectIds.includes(project.id) ? "border-primary bg-primary/10" : "border-border bg-muted/20 hover:border-muted-foreground"}`,
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "img",
+                    {
+                      src: project.visual.src,
+                      alt: project.visual.alt,
+                      className: "aspect-[16/9] w-full object-cover"
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "p-3", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-2", children: [
+                      activeProjectIds.includes(project.id) && /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { className: "h-4 w-4 text-primary" }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: project.shortTitle })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-xs text-muted-foreground", children: project.role })
+                  ] })
+                ]
+              },
+              project.id
+            )) }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3 sm:grid-cols-2", children: recommendedProofPoints.map((proofPoint) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "button",
+              {
+                type: "button",
+                onClick: () => toggleProof(proofPoint.id),
+                className: `rounded-md border p-3 text-left transition-smooth ${activeProofIds.includes(proofPoint.id) ? "border-primary bg-primary/10" : "border-border bg-muted/20 hover:border-muted-foreground"}`,
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-2xl font-semibold", children: proofPoint.value }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: proofPoint.label }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs leading-5 text-muted-foreground", children: proofPoint.detail })
+                ]
+              },
+              proofPoint.id
+            )) })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { children: "Step 4. Manual Override" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              Button,
+              {
+                type: "button",
+                variant: "outline",
+                onClick: resetRecommendations,
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(RotateCcw, { className: "mr-2 h-4 w-4" }),
+                  "Reset"
+                ]
+              }
+            )
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-2 text-sm font-medium", children: "All project options" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-2 md:grid-cols-2", children: projects.map((project) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                ToggleChip,
+                {
+                  active: activeProjectIds.includes(project.id),
+                  onClick: () => toggleProject(project.id),
+                  children: project.shortTitle
+                },
+                project.id
+              )) })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-2 text-sm font-medium", children: "All metric options" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: proofPoints.map((proofPoint) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                ToggleChip,
+                {
+                  active: activeProofIds.includes(proofPoint.id),
+                  onClick: () => toggleProof(proofPoint.id),
+                  children: [
+                    proofPoint.value,
+                    " ",
+                    proofPoint.label
+                  ]
+                },
+                proofPoint.id
+              )) })
+            ] })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { children: "Reviewer Preview" }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-muted/20 p-4", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs uppercase text-muted-foreground", children: "Public headline" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 font-display text-2xl font-semibold", children: analysis.angle })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3 md:grid-cols-3", children: activeProjectIds.slice(0, 3).map((id) => {
+              const project = projects.find((item) => item.id === id);
+              if (!project) return null;
+              return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "div",
+                {
+                  className: "rounded-md border border-border p-3",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "img",
+                      {
+                        src: project.visual.src,
+                        alt: project.visual.alt,
+                        className: "aspect-[16/9] w-full rounded object-cover"
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm font-medium", children: project.shortTitle })
+                  ]
+                },
+                id
+              );
+            }) })
+          ] })
         ] })
       ] })
     ] })

@@ -71,6 +71,34 @@ export const Resume = IDL.Record({
   'skills' : IDL.Vec(Skill),
   'location' : IDL.Text,
 });
+export const TailoredView = IDL.Record({
+  'slug' : IDL.Text,
+  'label' : IDL.Text,
+  'privateCompany' : IDL.Text,
+  'privateJobDescription' : IDL.Text,
+  'primaryLane' : IDL.Text,
+  'lanes' : IDL.Vec(IDL.Text),
+  'projectIds' : IDL.Vec(IDL.Text),
+  'proofIds' : IDL.Vec(IDL.Text),
+  'skillIds' : IDL.Vec(IDL.Text),
+  'angle' : IDL.Text,
+  'expiresAt' : IDL.Opt(IDL.Text),
+  'createdAt' : IDL.Nat,
+  'archived' : IDL.Bool,
+});
+export const TailoredViewInput = IDL.Record({
+  'slug' : IDL.Text,
+  'label' : IDL.Text,
+  'privateCompany' : IDL.Text,
+  'privateJobDescription' : IDL.Text,
+  'primaryLane' : IDL.Text,
+  'lanes' : IDL.Vec(IDL.Text),
+  'projectIds' : IDL.Vec(IDL.Text),
+  'proofIds' : IDL.Vec(IDL.Text),
+  'skillIds' : IDL.Vec(IDL.Text),
+  'angle' : IDL.Text,
+  'expiresAt' : IDL.Opt(IDL.Text),
+});
 
 export const idlService = IDL.Service({
   '__projects' : IDL.Func(
@@ -82,9 +110,16 @@ export const idlService = IDL.Service({
   'addProject' : IDL.Func([Project], [], []),
   'getProject' : IDL.Func([IDL.Nat], [IDL.Opt(Project)], ['query']),
   'getResume' : IDL.Func([], [IDL.Opt(Resume)], ['query']),
+  'getTailoredView' : IDL.Func(
+      [IDL.Text],
+      [IDL.Opt(TailoredView)],
+      ['query'],
+    ),
   'listProjects' : IDL.Func([], [IDL.Vec(Project)], ['query']),
+  'listTailoredViews' : IDL.Func([], [IDL.Vec(TailoredView)], ['query']),
   'seedPortfolio' : IDL.Func([], [], []),
   'seedResume' : IDL.Func([], [], []),
+  'saveTailoredView' : IDL.Func([TailoredViewInput], [TailoredView], []),
 });
 
 export const idlInitArgs = [];
@@ -153,6 +188,34 @@ export const idlFactory = ({ IDL }) => {
     'skills' : IDL.Vec(Skill),
     'location' : IDL.Text,
   });
+  const TailoredView = IDL.Record({
+    'slug' : IDL.Text,
+    'label' : IDL.Text,
+    'privateCompany' : IDL.Text,
+    'privateJobDescription' : IDL.Text,
+    'primaryLane' : IDL.Text,
+    'lanes' : IDL.Vec(IDL.Text),
+    'projectIds' : IDL.Vec(IDL.Text),
+    'proofIds' : IDL.Vec(IDL.Text),
+    'skillIds' : IDL.Vec(IDL.Text),
+    'angle' : IDL.Text,
+    'expiresAt' : IDL.Opt(IDL.Text),
+    'createdAt' : IDL.Nat,
+    'archived' : IDL.Bool,
+  });
+  const TailoredViewInput = IDL.Record({
+    'slug' : IDL.Text,
+    'label' : IDL.Text,
+    'privateCompany' : IDL.Text,
+    'privateJobDescription' : IDL.Text,
+    'primaryLane' : IDL.Text,
+    'lanes' : IDL.Vec(IDL.Text),
+    'projectIds' : IDL.Vec(IDL.Text),
+    'proofIds' : IDL.Vec(IDL.Text),
+    'skillIds' : IDL.Vec(IDL.Text),
+    'angle' : IDL.Text,
+    'expiresAt' : IDL.Opt(IDL.Text),
+  });
   
   return IDL.Service({
     '__projects' : IDL.Func(
@@ -164,9 +227,16 @@ export const idlFactory = ({ IDL }) => {
     'addProject' : IDL.Func([Project], [], []),
     'getProject' : IDL.Func([IDL.Nat], [IDL.Opt(Project)], ['query']),
     'getResume' : IDL.Func([], [IDL.Opt(Resume)], ['query']),
+    'getTailoredView' : IDL.Func(
+        [IDL.Text],
+        [IDL.Opt(TailoredView)],
+        ['query'],
+      ),
     'listProjects' : IDL.Func([], [IDL.Vec(Project)], ['query']),
+    'listTailoredViews' : IDL.Func([], [IDL.Vec(TailoredView)], ['query']),
     'seedPortfolio' : IDL.Func([], [], []),
     'seedResume' : IDL.Func([], [], []),
+    'saveTailoredView' : IDL.Func([TailoredViewInput], [TailoredView], []),
   });
 };
 

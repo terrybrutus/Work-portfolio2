@@ -67,15 +67,46 @@ export interface Resume {
   'location' : string,
 }
 export interface Skill { 'id' : bigint, 'name' : string, 'category' : string }
+export interface TailoredView {
+  'slug' : string,
+  'label' : string,
+  'privateCompany' : string,
+  'privateJobDescription' : string,
+  'primaryLane' : string,
+  'lanes' : Array<string>,
+  'projectIds' : Array<string>,
+  'proofIds' : Array<string>,
+  'skillIds' : Array<string>,
+  'angle' : string,
+  'expiresAt' : [] | [string],
+  'createdAt' : bigint,
+  'archived' : boolean,
+}
+export interface TailoredViewInput {
+  'slug' : string,
+  'label' : string,
+  'privateCompany' : string,
+  'privateJobDescription' : string,
+  'primaryLane' : string,
+  'lanes' : Array<string>,
+  'projectIds' : Array<string>,
+  'proofIds' : Array<string>,
+  'skillIds' : Array<string>,
+  'angle' : string,
+  'expiresAt' : [] | [string],
+}
 export interface _SERVICE {
   '__projects' : ActorMethod<[[] | [bigint], [] | [bigint]], Array<Project>>,
   '__resume' : ActorMethod<[], any>,
   'addProject' : ActorMethod<[Project], undefined>,
   'getProject' : ActorMethod<[bigint], [] | [Project]>,
   'getResume' : ActorMethod<[], [] | [Resume]>,
+  'getTailoredView' : ActorMethod<[string], [] | [TailoredView]>,
   'listProjects' : ActorMethod<[], Array<Project>>,
+  'listTailoredViews' : ActorMethod<[], Array<TailoredView>>,
   'seedPortfolio' : ActorMethod<[], undefined>,
   'seedResume' : ActorMethod<[], undefined>,
+  'saveTailoredView' : ActorMethod<[TailoredViewInput], TailoredView>,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];

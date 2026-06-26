@@ -152,17 +152,37 @@ export enum Modality {
     hybrid = "hybrid",
     jobAid = "jobAid"
 }
+export interface TailoredViewInput {
+    slug: string;
+    label: string;
+    privateCompany: string;
+    privateJobDescription: string;
+    primaryLane: string;
+    lanes: Array<string>;
+    projectIds: Array<string>;
+    proofIds: Array<string>;
+    skillIds: Array<string>;
+    angle: string;
+    expiresAt?: string;
+}
+export interface TailoredView extends TailoredViewInput {
+    createdAt: bigint;
+    archived: boolean;
+}
 export interface backendInterface {
     __projects(io: bigint | null, count: bigint | null): Promise<Array<Project>>;
     __resume(): Promise<any>;
     addProject(project: Project): Promise<void>;
     getProject(id: bigint): Promise<Project | null>;
     getResume(): Promise<Resume | null>;
+    getTailoredView(slug: string): Promise<TailoredView | null>;
     listProjects(): Promise<Array<Project>>;
+    listTailoredViews(): Promise<Array<TailoredView>>;
     seedPortfolio(): Promise<void>;
     seedResume(): Promise<void>;
+    saveTailoredView(input: TailoredViewInput): Promise<TailoredView>;
 }
-import type { Certification as _Certification, EducationEntry as _EducationEntry, ExperienceEntry as _ExperienceEntry, Modality as _Modality, Project as _Project, Resume as _Resume, Skill as _Skill } from "./declarations/backend.did.d.ts";
+import type { Certification as _Certification, EducationEntry as _EducationEntry, ExperienceEntry as _ExperienceEntry, Modality as _Modality, Project as _Project, Resume as _Resume, Skill as _Skill, TailoredView as _TailoredView, TailoredViewInput as _TailoredViewInput } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
     async __projects(arg0: bigint | null, arg1: bigint | null): Promise<Array<Project>> {
@@ -235,6 +255,20 @@ export class Backend implements backendInterface {
             return from_candid_opt_n13(this._uploadFile, this._downloadFile, result);
         }
     }
+    async getTailoredView(arg0: string): Promise<TailoredView | null> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getTailoredView(arg0);
+                return from_candid_opt_n25(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getTailoredView(arg0);
+            return from_candid_opt_n25(this._uploadFile, this._downloadFile, result);
+        }
+    }
     async listProjects(): Promise<Array<Project>> {
         if (this.processError) {
             try {
@@ -247,6 +281,20 @@ export class Backend implements backendInterface {
         } else {
             const result = await this.actor.listProjects();
             return from_candid_vec_n2(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async listTailoredViews(): Promise<Array<TailoredView>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.listTailoredViews();
+                return from_candid_vec_n26(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.listTailoredViews();
+            return from_candid_vec_n26(this._uploadFile, this._downloadFile, result);
         }
     }
     async seedPortfolio(): Promise<void> {
@@ -277,6 +325,20 @@ export class Backend implements backendInterface {
             return result;
         }
     }
+    async saveTailoredView(arg0: TailoredViewInput): Promise<TailoredView> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.saveTailoredView(to_candid_TailoredViewInput_n27(this._uploadFile, this._downloadFile, arg0));
+                return from_candid_TailoredView_n28(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.saveTailoredView(to_candid_TailoredViewInput_n27(this._uploadFile, this._downloadFile, arg0));
+            return from_candid_TailoredView_n28(this._uploadFile, this._downloadFile, result);
+        }
+    }
 }
 function from_candid_Certification_n23(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _Certification): Certification {
     return from_candid_record_n24(_uploadFile, _downloadFile, value);
@@ -296,11 +358,17 @@ function from_candid_Project_n3(_uploadFile: (file: ExternalBlob) => Promise<Uin
 function from_candid_Resume_n14(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _Resume): Resume {
     return from_candid_record_n15(_uploadFile, _downloadFile, value);
 }
+function from_candid_TailoredView_n28(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _TailoredView): TailoredView {
+    return from_candid_record_n29(_uploadFile, _downloadFile, value);
+}
 function from_candid_opt_n12(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_Project]): Project | null {
     return value.length === 0 ? null : from_candid_Project_n3(_uploadFile, _downloadFile, value[0]);
 }
 function from_candid_opt_n13(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_Resume]): Resume | null {
     return value.length === 0 ? null : from_candid_Resume_n14(_uploadFile, _downloadFile, value[0]);
+}
+function from_candid_opt_n25(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_TailoredView]): TailoredView | null {
+    return value.length === 0 ? null : from_candid_TailoredView_n28(_uploadFile, _downloadFile, value[0]);
 }
 function from_candid_opt_n5(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [string]): string | null {
     return value.length === 0 ? null : value[0];
@@ -422,6 +490,37 @@ function from_candid_record_n24(_uploadFile: (file: ExternalBlob) => Promise<Uin
         issuer: value.issuer
     };
 }
+function from_candid_record_n29(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+    slug: string;
+    label: string;
+    privateCompany: string;
+    privateJobDescription: string;
+    primaryLane: string;
+    lanes: Array<string>;
+    projectIds: Array<string>;
+    proofIds: Array<string>;
+    skillIds: Array<string>;
+    angle: string;
+    expiresAt: [] | [string];
+    createdAt: bigint;
+    archived: boolean;
+}): TailoredView {
+    return {
+        slug: value.slug,
+        label: value.label,
+        privateCompany: value.privateCompany,
+        privateJobDescription: value.privateJobDescription,
+        primaryLane: value.primaryLane,
+        lanes: value.lanes,
+        projectIds: value.projectIds,
+        proofIds: value.proofIds,
+        skillIds: value.skillIds,
+        angle: value.angle,
+        expiresAt: record_opt_to_undefined(from_candid_opt_n5(_uploadFile, _downloadFile, value.expiresAt)),
+        createdAt: value.createdAt,
+        archived: value.archived
+    };
+}
 function from_candid_record_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
     id: bigint;
     title: string;
@@ -484,14 +583,38 @@ function from_candid_vec_n2(_uploadFile: (file: ExternalBlob) => Promise<Uint8Ar
 function from_candid_vec_n22(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_Certification>): Array<Certification> {
     return value.map((x)=>from_candid_Certification_n23(_uploadFile, _downloadFile, x));
 }
+function from_candid_vec_n26(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_TailoredView>): Array<TailoredView> {
+    return value.map((x)=>from_candid_TailoredView_n28(_uploadFile, _downloadFile, x));
+}
 function to_candid_Modality_n10(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Modality): _Modality {
     return to_candid_variant_n11(_uploadFile, _downloadFile, value);
 }
 function to_candid_Project_n8(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Project): _Project {
     return to_candid_record_n9(_uploadFile, _downloadFile, value);
 }
+function to_candid_TailoredViewInput_n27(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: TailoredViewInput): _TailoredViewInput {
+    return to_candid_record_n30(_uploadFile, _downloadFile, value);
+}
 function to_candid_opt_n1(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: bigint | null): [] | [bigint] {
     return value === null ? candid_none() : candid_some(value);
+}
+function to_candid_opt_n31(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: string | undefined): [] | [string] {
+    return value === undefined ? candid_none() : candid_some(value);
+}
+function to_candid_record_n30(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: TailoredViewInput): _TailoredViewInput {
+    return {
+        slug: value.slug,
+        label: value.label,
+        privateCompany: value.privateCompany,
+        privateJobDescription: value.privateJobDescription,
+        primaryLane: value.primaryLane,
+        lanes: value.lanes,
+        projectIds: value.projectIds,
+        proofIds: value.proofIds,
+        skillIds: value.skillIds,
+        angle: value.angle,
+        expiresAt: to_candid_opt_n31(_uploadFile, _downloadFile, value.expiresAt)
+    };
 }
 function to_candid_record_n9(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
     id: bigint;
