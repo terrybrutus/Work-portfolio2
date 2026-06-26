@@ -32050,7 +32050,7 @@ function Textarea({ className, ...props }) {
 const profile = {
   linkedIn: "https://www.linkedin.com/in/terrybrutus",
   github: "https://github.com/terrybrutus",
-  shortSummary: "Enablement and learning systems builder with experience across defense, SaaS, municipal, sales, healthcare, fintech, and AI-assisted content operations."
+  shortSummary: "Enablement systems builder with a learning architecture background, practical AI workflow experience, and proof across regulated, technical, and distributed work environments."
 };
 const laneProfiles = [
   {
@@ -32107,7 +32107,7 @@ const laneProfiles = [
   },
   {
     lane: "Technical Product",
-    headline: "Product-minded builds that make messy workflows easier to use.",
+    headline: "Workflow tools and learning systems built around execution, evidence, and adoption.",
     reviewerTakeaway: "Strongest when the role needs systems thinking, tooling, prototypes, platforms, user flows, and technical translation.",
     keywords: [
       "product",
@@ -32220,7 +32220,7 @@ const projects = [
     title: "AI Talent Content Pipeline",
     shortTitle: "AI Content Pipeline",
     role: "AI Enablement Architect",
-    summary: "A repeatable content-operations system using RAG-style review, scripting, and human QA to speed high-volume talent asset production.",
+    summary: "A repeatable content-operations system using AI-assisted source review, scripting, and human QA to speed high-volume talent asset production.",
     problem: "High-volume learning assets needed faster analysis, cleaner metadata, and repeatable compliance alignment without removing expert review.",
     actions: [
       "Converted repeated analysis work into a structured AI-assisted review workflow.",
@@ -32229,17 +32229,28 @@ const projects = [
     ],
     outcomes: [
       "Reduced per-deliverable processing from 1.5 hours to 9.5 minutes.",
-      "Helped establish a repeatable production standard for future content work.",
-      "Created credible proof of practical AI adoption inside a real enablement workflow."
+      "Standardized the review workflow for future talent-content production.",
+      "Kept expert review in the loop while reducing repetitive analysis work."
     ],
     proofIds: ["asset-cycle", "audit-cost"],
     tools: ["NotebookLM", "RAG", "Python", "VBA", "PowerShell", "QA"],
     lanes: ["AI Operations", "Enablement", "Compliance"],
     visual: {
-      src: "/assets/portfolio/terrylxd-projects.png",
-      alt: "Screenshot of a dark portfolio projects section with interactive learning project cards.",
-      caption: "Representative project-card treatment from TerryLXD."
-    }
+      src: "/assets/portfolio/ai-content-pipeline-map.svg",
+      alt: "Process map showing source review, AI review, scripting, QA, and production standard steps.",
+      caption: "Pipeline map showing the workflow evidence this case study needs to support.",
+      quality: "needs-source",
+      missing: [
+        "Redacted pipeline screenshot",
+        "Before/after processing-time visual",
+        "Sample output or QA checklist preview"
+      ]
+    },
+    evidenceNeeds: [
+      "Redacted pipeline screenshot",
+      "Before/after timing visual",
+      "Sample output or QA checklist preview"
+    ]
   },
   {
     id: "workflow-management-platform",
@@ -32255,16 +32266,27 @@ const projects = [
     ],
     outcomes: [
       "Reduced manual tracking friction across a multi-project operating model.",
-      "Created a product-style proof point for enablement operations and workflow design."
+      "Improved visibility into ownership, review status, and delivery readiness."
     ],
     proofIds: ["release-depth", "feature-set"],
     tools: ["Caffeine AI", "GitHub", "React", "JSON", "Agile delivery"],
     lanes: ["Technical Product", "Enablement", "AI Operations"],
     visual: {
-      src: "/assets/portfolio/terrylxd-hero.png",
-      alt: "Screenshot of TerryLXD portfolio hero with dark interactive visual style.",
-      caption: "Visual direction from the TerryLXD portfolio system."
-    }
+      src: "/assets/portfolio/workflow-platform-map.svg",
+      alt: "Workflow map showing intake, build, review, ready, and measure states.",
+      caption: "Workflow evidence map for status visibility, ownership, review gates, and delivery readiness.",
+      quality: "needs-source",
+      missing: [
+        "Actual workflow app screenshot",
+        "Redacted status board",
+        "Before/after tracking diagram"
+      ]
+    },
+    evidenceNeeds: [
+      "Actual workflow app screenshot",
+      "Redacted status board",
+      "Before/after tracking diagram"
+    ]
   },
   {
     id: "enterprise-onboarding-journey",
@@ -32286,10 +32308,21 @@ const projects = [
     tools: ["Journey mapping", "Sales enablement", "Lifecycle design"],
     lanes: ["Sales Enablement", "Enablement", "Learning Experience"],
     visual: {
-      src: "/assets/portfolio/old-site-recent-projects.png",
-      alt: "Screenshot of older portfolio recent projects page showing an eLearning module visual.",
-      caption: "Legacy portfolio artifact showing eLearning and project evidence."
-    }
+      src: "/assets/portfolio/onboarding-journey-map.svg",
+      alt: "Journey map connecting preboarding, role readiness, practice, manager support, and measurement.",
+      caption: "Journey map showing lifecycle moments, readiness support, and field execution.",
+      quality: "needs-source",
+      missing: [
+        "Actual journey map",
+        "Redacted stakeholder map",
+        "Onboarding architecture artifact"
+      ]
+    },
+    evidenceNeeds: [
+      "Actual journey map",
+      "Redacted stakeholder map",
+      "Onboarding architecture artifact"
+    ]
   },
   {
     id: "compliance-enablement-ecosystem",
@@ -32311,10 +32344,21 @@ const projects = [
     tools: ["Low-code tools", "Compliance design", "Mobile-first UX"],
     lanes: ["Compliance", "Learning Experience", "Enablement"],
     visual: {
-      src: "/assets/portfolio/old-site-project-menu.png",
-      alt: "Screenshot of old instructional design portfolio project menu.",
-      caption: "Legacy project menu with compliance and instructional-design artifacts."
-    }
+      src: "/assets/portfolio/compliance-mobile-flow.svg",
+      alt: "Mobile compliance flow showing role access, evidence tracking, and audit readiness.",
+      caption: "Mobile-first compliance flow for access, completion evidence, and audit readiness.",
+      quality: "needs-source",
+      missing: [
+        "Mobile screen preview",
+        "Tracking artifact",
+        "Redacted audit-readiness evidence"
+      ]
+    },
+    evidenceNeeds: [
+      "Mobile screen preview",
+      "Tracking artifact",
+      "Redacted audit-readiness evidence"
+    ]
   },
   {
     id: "phishing-red-flags",
@@ -32329,8 +32373,8 @@ const projects = [
       "Kept the interaction short enough for workplace performance support."
     ],
     outcomes: [
-      "Shows how compliance content can become active judgment practice.",
-      "Provides strong visual evidence for eLearning, security, and scenario design roles."
+      "Turned compliance content into active judgment practice.",
+      "Created a concise interaction pattern for security-awareness decisions."
     ],
     proofIds: ["municipal-coverage", "army-lms"],
     tools: ["Scenario design", "eLearning", "Security awareness"],
@@ -32338,8 +32382,19 @@ const projects = [
     visual: {
       src: "/assets/portfolio/terrylxd-projects.png",
       alt: "Screenshot showing a phishing red flags learning interaction card.",
-      caption: "Project screenshot from TerryLXD featured work."
+      caption: "Legacy screenshot showing the phishing red-flags interaction inside the TerryLXD featured work section.",
+      quality: "legacy",
+      missing: [
+        "Direct interaction screenshot",
+        "Short click-through GIF",
+        "Clean exported course screen"
+      ]
     },
+    evidenceNeeds: [
+      "Direct interaction screenshot",
+      "Short click-through GIF",
+      "Clean exported course screen"
+    ],
     source: "terrylxd.com"
   },
   {
@@ -32350,13 +32405,13 @@ const projects = [
     summary: "A visual learning module that explains decentralization by comparing network structures and learner-controlled progression.",
     problem: "Abstract technical topics need concrete visuals and pacing that help non-experts build accurate mental models.",
     actions: [
-      "Converted abstract blockchain concepts into a visual comparison interaction.",
+      "Converted abstract blockchain ideas into a visual comparison interaction.",
       "Used minimalist motion and contrast to clarify centralized versus decentralized structures.",
-      "Designed the module as a short conceptual bridge rather than a dense technical lecture."
+      "Designed the module as a short visual bridge rather than a dense technical lecture."
     ],
     outcomes: [
-      "Demonstrates technical translation and visual learning strategy.",
-      "Fits roles involving product education, customer education, and technical enablement."
+      "Made a technical idea easier to compare visually.",
+      "Supports product education, customer education, and technical enablement roles."
     ],
     proofIds: ["army-lms"],
     tools: ["Technical training", "Visual explanation", "Interaction design"],
@@ -32364,8 +32419,19 @@ const projects = [
     visual: {
       src: "/assets/portfolio/terrylxd-projects.png",
       alt: "Screenshot showing a centralized versus decentralized learning module card.",
-      caption: "Project screenshot from TerryLXD featured work."
+      caption: "Legacy screenshot showing the decentralization module inside the TerryLXD featured work section.",
+      quality: "legacy",
+      missing: [
+        "Direct module screenshot",
+        "Short interaction GIF",
+        "Clean exported course screen"
+      ]
     },
+    evidenceNeeds: [
+      "Direct module screenshot",
+      "Short interaction GIF",
+      "Clean exported course screen"
+    ],
     source: "terrylxd.com"
   },
   {
@@ -32388,10 +32454,21 @@ const projects = [
     tools: ["ADDIE", "QA", "Facilitator guides", "Storyboards", "Job aids"],
     lanes: ["Learning Experience", "Compliance", "Enablement"],
     visual: {
-      src: "/assets/portfolio/old-site-project-menu.png",
-      alt: "Screenshot of legacy instructional design portfolio menu with ADDIE, QA, job aid, and facilitator guide items.",
-      caption: "Legacy instructional-design artifacts to be consolidated into the new portfolio."
+      src: "/assets/portfolio/isd-artifact-suite.svg",
+      alt: "Document-preview layout for ADDIE, QA, facilitator guide, job aid, and storyboard artifacts.",
+      caption: "Artifact suite map for instructional design process evidence.",
+      quality: "needs-source",
+      missing: [
+        "Redacted document previews",
+        "PDF thumbnails",
+        "Storyboard or job-aid screenshots"
+      ]
     },
+    evidenceNeeds: [
+      "Redacted document previews",
+      "PDF thumbnails",
+      "Storyboard or job-aid screenshots"
+    ],
     source: "instructionaldesignbyterry.com"
   },
   {
@@ -32399,28 +32476,63 @@ const projects = [
     title: "Career City",
     shortTitle: "Career City",
     role: "Learning Product Designer",
-    summary: "An interactive career-development concept that frames career growth as a visual, explorable learning product.",
+    summary: "An interactive career-development prototype that frames career growth as a visual, explorable learning product.",
     problem: "Career growth often feels abstract, especially when people need to compare paths, choices, and next steps.",
     actions: [
-      "Designed a gameful learning concept around career exploration and decision-making.",
-      "Used AI-assisted build workflows to move from concept to working app direction.",
+      "Designed a gameful learning flow around career exploration and decision-making.",
+      "Used AI-assisted build workflows to move from idea to working prototype.",
       "Framed learning strategy as an interactive product rather than a static course."
     ],
     outcomes: [
       "Shows product thinking, learning strategy, and AI-enabled build capability in one artifact.",
-      "Creates a foundation for future learning experience apps."
+      "Demonstrates how career navigation can become an interactive learning product."
     ],
     proofIds: ["release-depth"],
     tools: ["Caffeine AI", "Gameful learning", "React", "Learning strategy"],
     lanes: ["Learning Experience", "Technical Product", "AI Operations"],
     visual: {
-      src: "/assets/images/placeholder.svg",
-      alt: "Placeholder visual for Career City until a production screenshot is added.",
-      caption: "Needs a current screenshot or short GIF from the Career City build."
+      src: "/assets/portfolio/career-city-preview.svg",
+      alt: "Career City preview showing explore, choose, practice, and earn-artifact steps.",
+      caption: "Prototype map for the Career City learning-product flow.",
+      quality: "needs-source",
+      missing: [
+        "Actual app screenshot",
+        "Short gameplay GIF",
+        "Demo or deployed app link"
+      ]
     },
+    evidenceNeeds: [
+      "Actual app screenshot",
+      "Short gameplay GIF",
+      "Demo or deployed app link"
+    ],
     repo: "https://github.com/terrybrutus/career-city"
   }
 ];
+const evidenceBrain = {
+  acceptedFiles: [
+    ".png",
+    ".jpg",
+    ".jpeg",
+    ".webp",
+    ".gif",
+    ".mp4",
+    ".webm",
+    ".pdf",
+    ".docx",
+    ".pptx",
+    ".txt",
+    ".md",
+    ".csv"
+  ],
+  qualityChecks: [
+    "Project match",
+    "Readable crop",
+    "No private/client-sensitive information",
+    "Clear artifact status",
+    "Strong enough for reviewer view"
+  ]
+};
 const resumeHighlights = [
   "Senior Talent Development Lead and AI Enablement Architect at CTEC, supporting a 158,000-person defense acquisition workforce.",
   "Lead Talent Enablement and Experience Architect through Legacy Learning Consulting across enterprise, municipal, sales, healthcare, and SaaS contexts.",
@@ -32556,29 +32668,29 @@ const createLucideIcon = (iconName, iconNode) => {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$d = [
+const __iconNode$g = [
   ["path", { d: "M5 12h14", key: "1ays0h" }],
   ["path", { d: "m12 5 7 7-7 7", key: "xquz4c" }]
 ];
-const ArrowRight = createLucideIcon("arrow-right", __iconNode$d);
+const ArrowRight = createLucideIcon("arrow-right", __iconNode$g);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$c = [
+const __iconNode$f = [
   ["path", { d: "M7 7h10v10", key: "1tivn9" }],
   ["path", { d: "M7 17 17 7", key: "1vkiza" }]
 ];
-const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$c);
+const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$f);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$b = [
+const __iconNode$e = [
   ["path", { d: "M12 8V4H8", key: "hb8ula" }],
   ["rect", { width: "16", height: "12", x: "4", y: "8", rx: "2", key: "enze0r" }],
   ["path", { d: "M2 14h2", key: "vft8re" }],
@@ -32586,35 +32698,35 @@ const __iconNode$b = [
   ["path", { d: "M15 13v2", key: "1xurst" }],
   ["path", { d: "M9 13v2", key: "rq6x2g" }]
 ];
-const Bot = createLucideIcon("bot", __iconNode$b);
+const Bot = createLucideIcon("bot", __iconNode$e);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$a = [
+const __iconNode$d = [
   ["path", { d: "M12 12h.01", key: "1mp3jc" }],
   ["path", { d: "M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2", key: "1ksdt3" }],
   ["path", { d: "M22 13a18.15 18.15 0 0 1-20 0", key: "12hx5q" }],
   ["rect", { width: "20", height: "14", x: "2", y: "6", rx: "2", key: "i6l2r4" }]
 ];
-const BriefcaseBusiness = createLucideIcon("briefcase-business", __iconNode$a);
+const BriefcaseBusiness = createLucideIcon("briefcase-business", __iconNode$d);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$9 = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
-const Check = createLucideIcon("check", __iconNode$9);
+const __iconNode$c = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = createLucideIcon("check", __iconNode$c);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$8 = [
+const __iconNode$b = [
   ["rect", { width: "8", height: "4", x: "8", y: "2", rx: "1", ry: "1", key: "tgr4d6" }],
   [
     "path",
@@ -32624,7 +32736,47 @@ const __iconNode$8 = [
     }
   ]
 ];
-const Clipboard = createLucideIcon("clipboard", __iconNode$8);
+const Clipboard = createLucideIcon("clipboard", __iconNode$b);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$a = [
+  ["ellipse", { cx: "12", cy: "5", rx: "9", ry: "3", key: "msslwz" }],
+  ["path", { d: "M3 5V19A9 3 0 0 0 21 19V5", key: "1wlel7" }],
+  ["path", { d: "M3 12A9 3 0 0 0 21 12", key: "mv7ke4" }]
+];
+const Database = createLucideIcon("database", __iconNode$a);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$9 = [
+  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
+  ["path", { d: "M10 14 21 3", key: "gplh6r" }],
+  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
+];
+const ExternalLink = createLucideIcon("external-link", __iconNode$9);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$8 = [
+  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
+  [
+    "path",
+    { d: "M4.268 21a2 2 0 0 0 1.727 1H18a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3", key: "ms7g94" }
+  ],
+  ["path", { d: "m9 18-1.5-1.5", key: "1j6qii" }],
+  ["circle", { cx: "5", cy: "14", r: "3", key: "ufru5t" }]
+];
+const FileSearch = createLucideIcon("file-search", __iconNode$8);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32632,18 +32784,6 @@ const Clipboard = createLucideIcon("clipboard", __iconNode$8);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$7 = [
-  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
-  ["path", { d: "M10 14 21 3", key: "gplh6r" }],
-  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
-];
-const ExternalLink = createLucideIcon("external-link", __iconNode$7);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$6 = [
   [
     "path",
     {
@@ -32653,7 +32793,19 @@ const __iconNode$6 = [
   ],
   ["path", { d: "M9 18c-4.51 2-5-2-7-2", key: "9comsn" }]
 ];
-const Github = createLucideIcon("github", __iconNode$6);
+const Github = createLucideIcon("github", __iconNode$7);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$6 = [
+  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", ry: "2", key: "1m3agn" }],
+  ["circle", { cx: "9", cy: "9", r: "2", key: "af1f0g" }],
+  ["path", { d: "m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21", key: "1xmnt7" }]
+];
+const Image = createLucideIcon("image", __iconNode$6);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32661,11 +32813,11 @@ const Github = createLucideIcon("github", __iconNode$6);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$5 = [
-  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", ry: "2", key: "1m3agn" }],
-  ["circle", { cx: "9", cy: "9", r: "2", key: "af1f0g" }],
-  ["path", { d: "m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21", key: "1xmnt7" }]
+  ["path", { d: "M9 17H7A5 5 0 0 1 7 7h2", key: "8i5ue5" }],
+  ["path", { d: "M15 7h2a5 5 0 1 1 0 10h-2", key: "1b9ql8" }],
+  ["line", { x1: "8", x2: "16", y1: "12", y2: "12", key: "1jonct" }]
 ];
-const Image = createLucideIcon("image", __iconNode$5);
+const Link2 = createLucideIcon("link-2", __iconNode$5);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32673,11 +32825,11 @@ const Image = createLucideIcon("image", __iconNode$5);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$4 = [
-  ["path", { d: "M9 17H7A5 5 0 0 1 7 7h2", key: "8i5ue5" }],
-  ["path", { d: "M15 7h2a5 5 0 1 1 0 10h-2", key: "1b9ql8" }],
-  ["line", { x1: "8", x2: "16", y1: "12", y2: "12", key: "1jonct" }]
+  ["circle", { cx: "12", cy: "16", r: "1", key: "1au0dj" }],
+  ["rect", { x: "3", y: "10", width: "18", height: "12", rx: "2", key: "6s8ecr" }],
+  ["path", { d: "M7 10V7a5 5 0 0 1 10 0v3", key: "1pqi11" }]
 ];
-const Link2 = createLucideIcon("link-2", __iconNode$4);
+const LockKeyhole = createLucideIcon("lock-keyhole", __iconNode$4);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32685,11 +32837,10 @@ const Link2 = createLucideIcon("link-2", __iconNode$4);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$3 = [
-  ["circle", { cx: "12", cy: "16", r: "1", key: "1au0dj" }],
-  ["rect", { x: "3", y: "10", width: "18", height: "12", rx: "2", key: "6s8ecr" }],
-  ["path", { d: "M7 10V7a5 5 0 0 1 10 0v3", key: "1pqi11" }]
+  ["path", { d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8", key: "1357e3" }],
+  ["path", { d: "M3 3v5h5", key: "1xhq8a" }]
 ];
-const LockKeyhole = createLucideIcon("lock-keyhole", __iconNode$3);
+const RotateCcw = createLucideIcon("rotate-ccw", __iconNode$3);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32697,10 +32848,11 @@ const LockKeyhole = createLucideIcon("lock-keyhole", __iconNode$3);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$2 = [
-  ["path", { d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8", key: "1357e3" }],
-  ["path", { d: "M3 3v5h5", key: "1xhq8a" }]
+  ["path", { d: "m8 11 2 2 4-4", key: "1sed1v" }],
+  ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }],
+  ["path", { d: "m21 21-4.3-4.3", key: "1qie3q" }]
 ];
-const RotateCcw = createLucideIcon("rotate-ccw", __iconNode$2);
+const SearchCheck = createLucideIcon("search-check", __iconNode$2);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32708,11 +32860,17 @@ const RotateCcw = createLucideIcon("rotate-ccw", __iconNode$2);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1 = [
-  ["path", { d: "m8 11 2 2 4-4", key: "1sed1v" }],
-  ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }],
-  ["path", { d: "m21 21-4.3-4.3", key: "1qie3q" }]
+  [
+    "path",
+    {
+      d: "m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3",
+      key: "wmoenq"
+    }
+  ],
+  ["path", { d: "M12 9v4", key: "juzpu7" }],
+  ["path", { d: "M12 17h.01", key: "p32p05" }]
 ];
-const SearchCheck = createLucideIcon("search-check", __iconNode$1);
+const TriangleAlert = createLucideIcon("triangle-alert", __iconNode$1);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32818,6 +32976,30 @@ function getRecommendedSkills(selectedLanes) {
     return keywords.some((keyword) => normalized.includes(keyword));
   });
   return (rankedSkills.length > 0 ? rankedSkills : skills).slice(0, 10);
+}
+function getReviewerBadge(primaryLane) {
+  const labels = {
+    Enablement: "Enablement Systems",
+    "AI Operations": "AI Workflow Evidence",
+    "Learning Experience": "Learning Experience Proof",
+    "Technical Product": "Workflow and Product Evidence",
+    "Sales Enablement": "Sales Readiness Evidence",
+    Compliance: "Compliance Enablement Proof"
+  };
+  return labels[primaryLane];
+}
+function getProjectMediaStatus(projectsToCheck) {
+  return projectsToCheck.map((project) => ({
+    project,
+    status: project.visual.quality,
+    needs: project.visual.missing ?? project.evidenceNeeds
+  }));
+}
+function getMetricSourceNote(metric, selectedProjects) {
+  const linkedProject = selectedProjects.find(
+    (project) => project.proofIds.includes(metric.id)
+  );
+  return linkedProject ? `Used by ${linkedProject.shortTitle}` : "Background evidence";
 }
 function getRouteState() {
   var _a2, _b2;
@@ -32975,7 +33157,7 @@ function PublicLanding({ onExplore }) {
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-3", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { type: "button", onClick: onExplore, children: [
-            "View selected work",
+            "View proof of work",
             /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "ml-2 h-4 w-4" })
           ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -33024,10 +33206,11 @@ function ReviewerPortfolio({
     return /* @__PURE__ */ jsxRuntimeExports.jsx(PublicLanding, { onExplore });
   }
   const model = buildViewModel(view);
+  const reviewerBadge = getReviewerBadge(model.primaryLane);
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "min-h-screen bg-background text-foreground", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "border-b border-border bg-[linear-gradient(135deg,_rgba(17,24,39,0.96),_rgba(10,10,10,1))]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-6xl gap-8 px-5 py-12 lg:grid-cols-[1.05fr_0.95fr] lg:py-16", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "w-fit", variant: "outline", children: "Selected Work" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "w-fit", variant: "outline", children: reviewerBadge }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display text-4xl font-semibold leading-tight sm:text-5xl", children: model.angle }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "max-w-3xl text-base leading-7 text-muted-foreground", children: profile.shortSummary })
@@ -33050,6 +33233,7 @@ function ReviewerPortfolio({
     /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto grid max-w-6xl gap-4 px-5 py-8 sm:grid-cols-2 lg:grid-cols-4", children: model.selectedProofPoints.map((metric) => /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-3xl font-semibold", children: metric.value }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm font-medium", children: metric.label }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs font-medium text-primary", children: getMetricSourceNote(metric, model.selectedProjects) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-xs leading-5 text-muted-foreground", children: metric.detail })
     ] }) }, metric.id)) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto grid max-w-6xl gap-6 px-5 pb-12 lg:grid-cols-[0.72fr_1.28fr]", children: [
@@ -33142,6 +33326,9 @@ function TailoredPortfolioStudio() {
   );
   const activeProjectIds = selectedProjectIds.length > 0 ? selectedProjectIds : recommendedProjects.map((project) => project.id);
   const activeProofIds = selectedProofIds.length > 0 ? selectedProofIds : recommendedProofPoints.map((proofPoint) => proofPoint.id);
+  const activeProjects = activeProjectIds.map((id) => projects.find((project) => project.id === id)).filter((project) => Boolean(project));
+  const mediaStatus = getProjectMediaStatus(activeProjects);
+  const mediaNeeds = mediaStatus.filter((item) => item.status !== "approved");
   reactExports.useEffect(() => {
     const syncRoute = () => setRoute(getRouteState());
     window.addEventListener("hashchange", syncRoute);
@@ -33267,7 +33454,7 @@ function TailoredPortfolioStudio() {
         /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "w-fit", variant: "outline", children: "Owner Studio" }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display text-4xl font-semibold leading-tight sm:text-5xl", children: "Build a quiet, tailored reviewer view." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "max-w-3xl text-base leading-7 text-muted-foreground", children: "Paste a JD, let the app recommend the lane, projects, visuals, and proof points, then override anything before generating a short opaque link." })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "max-w-3xl text-base leading-7 text-muted-foreground", children: "Paste a JD, let the app recommend the lane, projects, visuals, and evidence, then override anything before generating a short opaque link." })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3 sm:grid-cols-3", children: [
           ["Short links", "Stored by slug"],
@@ -33391,6 +33578,54 @@ function TailoredPortfolioStudio() {
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Database, { className: "h-5 w-5 text-primary" }),
+            "Evidence Brain"
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-muted-foreground", children: "Add raw notes, screenshots, transcripts, repos, documents, and old-site artifacts here over time. The reviewer page should only use approved evidence that matches the selected project." }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-2 text-xs font-semibold uppercase text-muted-foreground", children: "Accepted source files" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: evidenceBrain.acceptedFiles.map((fileType) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: fileType }, fileType)) })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-2 text-xs font-semibold uppercase text-muted-foreground", children: "Brain checks before public use" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-2 sm:grid-cols-2", children: evidenceBrain.qualityChecks.map((check) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "div",
+                {
+                  className: "rounded-md border border-border bg-muted/20 p-3 text-sm",
+                  children: check
+                },
+                check
+              )) })
+            ] })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(TriangleAlert, { className: "h-5 w-5 text-primary" }),
+            "Missing Media for This View"
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "space-y-3", children: mediaNeeds.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: "Current project media is approved for reviewer use." }) : mediaNeeds.map(({ project, status: status2, needs }) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            "div",
+            {
+              className: "rounded-md border border-border bg-muted/20 p-3",
+              children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-2", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: project.shortTitle }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: status2 })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs leading-5 text-muted-foreground", children: "Add or approve one of these before this becomes a high-trust reviewer case:" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm", children: needs.slice(0, 3).map((need) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex gap-2", children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(FileSearch, { className: "mt-0.5 h-4 w-4 text-primary" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: need })
+                ] }, need)) })
+              ]
+            },
+            project.id
+          )) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(LockKeyhole, { className: "h-5 w-5 text-primary" }),
             "Step 5. Short Links"
           ] }) }),
@@ -33474,7 +33709,15 @@ function TailoredPortfolioStudio() {
                       activeProjectIds.includes(project.id) && /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { className: "h-4 w-4 text-primary" }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: project.shortTitle })
                     ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-xs text-muted-foreground", children: project.role })
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-xs text-muted-foreground", children: project.role }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      Badge,
+                      {
+                        className: "mt-3",
+                        variant: project.visual.quality === "approved" ? "default" : "outline",
+                        children: project.visual.quality
+                      }
+                    )
                   ] })
                 ]
               },

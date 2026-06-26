@@ -18,6 +18,8 @@ export type VisualAsset = {
   src: string;
   alt: string;
   caption: string;
+  quality: "approved" | "needs-source" | "legacy";
+  missing?: string[];
 };
 
 export type PortfolioProject = {
@@ -33,6 +35,7 @@ export type PortfolioProject = {
   tools: string[];
   lanes: Lane[];
   visual: VisualAsset;
+  evidenceNeeds: string[];
   repo?: string;
   source?: string;
 };
@@ -55,7 +58,7 @@ export const profile = {
   headline:
     "I design the systems, tools, and learning experiences that help people do complex work with less friction.",
   shortSummary:
-    "Enablement and learning systems builder with experience across defense, SaaS, municipal, sales, healthcare, fintech, and AI-assisted content operations.",
+    "Enablement systems builder with a learning architecture background, practical AI workflow experience, and proof across regulated, technical, and distributed work environments.",
 };
 
 export const laneProfiles: LaneProfile[] = [
@@ -117,7 +120,8 @@ export const laneProfiles: LaneProfile[] = [
   },
   {
     lane: "Technical Product",
-    headline: "Product-minded builds that make messy workflows easier to use.",
+    headline:
+      "Workflow tools and learning systems built around execution, evidence, and adoption.",
     reviewerTakeaway:
       "Strongest when the role needs systems thinking, tooling, prototypes, platforms, user flows, and technical translation.",
     keywords: [
@@ -244,7 +248,7 @@ export const projects: PortfolioProject[] = [
     shortTitle: "AI Content Pipeline",
     role: "AI Enablement Architect",
     summary:
-      "A repeatable content-operations system using RAG-style review, scripting, and human QA to speed high-volume talent asset production.",
+      "A repeatable content-operations system using AI-assisted source review, scripting, and human QA to speed high-volume talent asset production.",
     problem:
       "High-volume learning assets needed faster analysis, cleaner metadata, and repeatable compliance alignment without removing expert review.",
     actions: [
@@ -254,17 +258,29 @@ export const projects: PortfolioProject[] = [
     ],
     outcomes: [
       "Reduced per-deliverable processing from 1.5 hours to 9.5 minutes.",
-      "Helped establish a repeatable production standard for future content work.",
-      "Created credible proof of practical AI adoption inside a real enablement workflow.",
+      "Standardized the review workflow for future talent-content production.",
+      "Kept expert review in the loop while reducing repetitive analysis work.",
     ],
     proofIds: ["asset-cycle", "audit-cost"],
     tools: ["NotebookLM", "RAG", "Python", "VBA", "PowerShell", "QA"],
     lanes: ["AI Operations", "Enablement", "Compliance"],
     visual: {
-      src: "/assets/portfolio/terrylxd-projects.png",
-      alt: "Screenshot of a dark portfolio projects section with interactive learning project cards.",
-      caption: "Representative project-card treatment from TerryLXD.",
+      src: "/assets/portfolio/ai-content-pipeline-map.svg",
+      alt: "Process map showing source review, AI review, scripting, QA, and production standard steps.",
+      caption:
+        "Pipeline map showing the workflow evidence this case study needs to support.",
+      quality: "needs-source",
+      missing: [
+        "Redacted pipeline screenshot",
+        "Before/after processing-time visual",
+        "Sample output or QA checklist preview",
+      ],
     },
+    evidenceNeeds: [
+      "Redacted pipeline screenshot",
+      "Before/after timing visual",
+      "Sample output or QA checklist preview",
+    ],
   },
   {
     id: "workflow-management-platform",
@@ -282,16 +298,28 @@ export const projects: PortfolioProject[] = [
     ],
     outcomes: [
       "Reduced manual tracking friction across a multi-project operating model.",
-      "Created a product-style proof point for enablement operations and workflow design.",
+      "Improved visibility into ownership, review status, and delivery readiness.",
     ],
     proofIds: ["release-depth", "feature-set"],
     tools: ["Caffeine AI", "GitHub", "React", "JSON", "Agile delivery"],
     lanes: ["Technical Product", "Enablement", "AI Operations"],
     visual: {
-      src: "/assets/portfolio/terrylxd-hero.png",
-      alt: "Screenshot of TerryLXD portfolio hero with dark interactive visual style.",
-      caption: "Visual direction from the TerryLXD portfolio system.",
+      src: "/assets/portfolio/workflow-platform-map.svg",
+      alt: "Workflow map showing intake, build, review, ready, and measure states.",
+      caption:
+        "Workflow evidence map for status visibility, ownership, review gates, and delivery readiness.",
+      quality: "needs-source",
+      missing: [
+        "Actual workflow app screenshot",
+        "Redacted status board",
+        "Before/after tracking diagram",
+      ],
     },
+    evidenceNeeds: [
+      "Actual workflow app screenshot",
+      "Redacted status board",
+      "Before/after tracking diagram",
+    ],
   },
   {
     id: "enterprise-onboarding-journey",
@@ -315,11 +343,22 @@ export const projects: PortfolioProject[] = [
     tools: ["Journey mapping", "Sales enablement", "Lifecycle design"],
     lanes: ["Sales Enablement", "Enablement", "Learning Experience"],
     visual: {
-      src: "/assets/portfolio/old-site-recent-projects.png",
-      alt: "Screenshot of older portfolio recent projects page showing an eLearning module visual.",
+      src: "/assets/portfolio/onboarding-journey-map.svg",
+      alt: "Journey map connecting preboarding, role readiness, practice, manager support, and measurement.",
       caption:
-        "Legacy portfolio artifact showing eLearning and project evidence.",
+        "Journey map showing lifecycle moments, readiness support, and field execution.",
+      quality: "needs-source",
+      missing: [
+        "Actual journey map",
+        "Redacted stakeholder map",
+        "Onboarding architecture artifact",
+      ],
     },
+    evidenceNeeds: [
+      "Actual journey map",
+      "Redacted stakeholder map",
+      "Onboarding architecture artifact",
+    ],
   },
   {
     id: "compliance-enablement-ecosystem",
@@ -343,11 +382,22 @@ export const projects: PortfolioProject[] = [
     tools: ["Low-code tools", "Compliance design", "Mobile-first UX"],
     lanes: ["Compliance", "Learning Experience", "Enablement"],
     visual: {
-      src: "/assets/portfolio/old-site-project-menu.png",
-      alt: "Screenshot of old instructional design portfolio project menu.",
+      src: "/assets/portfolio/compliance-mobile-flow.svg",
+      alt: "Mobile compliance flow showing role access, evidence tracking, and audit readiness.",
       caption:
-        "Legacy project menu with compliance and instructional-design artifacts.",
+        "Mobile-first compliance flow for access, completion evidence, and audit readiness.",
+      quality: "needs-source",
+      missing: [
+        "Mobile screen preview",
+        "Tracking artifact",
+        "Redacted audit-readiness evidence",
+      ],
     },
+    evidenceNeeds: [
+      "Mobile screen preview",
+      "Tracking artifact",
+      "Redacted audit-readiness evidence",
+    ],
   },
   {
     id: "phishing-red-flags",
@@ -364,8 +414,8 @@ export const projects: PortfolioProject[] = [
       "Kept the interaction short enough for workplace performance support.",
     ],
     outcomes: [
-      "Shows how compliance content can become active judgment practice.",
-      "Provides strong visual evidence for eLearning, security, and scenario design roles.",
+      "Turned compliance content into active judgment practice.",
+      "Created a concise interaction pattern for security-awareness decisions.",
     ],
     proofIds: ["municipal-coverage", "army-lms"],
     tools: ["Scenario design", "eLearning", "Security awareness"],
@@ -373,8 +423,20 @@ export const projects: PortfolioProject[] = [
     visual: {
       src: "/assets/portfolio/terrylxd-projects.png",
       alt: "Screenshot showing a phishing red flags learning interaction card.",
-      caption: "Project screenshot from TerryLXD featured work.",
+      caption:
+        "Legacy screenshot showing the phishing red-flags interaction inside the TerryLXD featured work section.",
+      quality: "legacy",
+      missing: [
+        "Direct interaction screenshot",
+        "Short click-through GIF",
+        "Clean exported course screen",
+      ],
     },
+    evidenceNeeds: [
+      "Direct interaction screenshot",
+      "Short click-through GIF",
+      "Clean exported course screen",
+    ],
     source: "terrylxd.com",
   },
   {
@@ -387,13 +449,13 @@ export const projects: PortfolioProject[] = [
     problem:
       "Abstract technical topics need concrete visuals and pacing that help non-experts build accurate mental models.",
     actions: [
-      "Converted abstract blockchain concepts into a visual comparison interaction.",
+      "Converted abstract blockchain ideas into a visual comparison interaction.",
       "Used minimalist motion and contrast to clarify centralized versus decentralized structures.",
-      "Designed the module as a short conceptual bridge rather than a dense technical lecture.",
+      "Designed the module as a short visual bridge rather than a dense technical lecture.",
     ],
     outcomes: [
-      "Demonstrates technical translation and visual learning strategy.",
-      "Fits roles involving product education, customer education, and technical enablement.",
+      "Made a technical idea easier to compare visually.",
+      "Supports product education, customer education, and technical enablement roles.",
     ],
     proofIds: ["army-lms"],
     tools: ["Technical training", "Visual explanation", "Interaction design"],
@@ -401,8 +463,20 @@ export const projects: PortfolioProject[] = [
     visual: {
       src: "/assets/portfolio/terrylxd-projects.png",
       alt: "Screenshot showing a centralized versus decentralized learning module card.",
-      caption: "Project screenshot from TerryLXD featured work.",
+      caption:
+        "Legacy screenshot showing the decentralization module inside the TerryLXD featured work section.",
+      quality: "legacy",
+      missing: [
+        "Direct module screenshot",
+        "Short interaction GIF",
+        "Clean exported course screen",
+      ],
     },
+    evidenceNeeds: [
+      "Direct module screenshot",
+      "Short interaction GIF",
+      "Clean exported course screen",
+    ],
     source: "terrylxd.com",
   },
   {
@@ -427,11 +501,21 @@ export const projects: PortfolioProject[] = [
     tools: ["ADDIE", "QA", "Facilitator guides", "Storyboards", "Job aids"],
     lanes: ["Learning Experience", "Compliance", "Enablement"],
     visual: {
-      src: "/assets/portfolio/old-site-project-menu.png",
-      alt: "Screenshot of legacy instructional design portfolio menu with ADDIE, QA, job aid, and facilitator guide items.",
-      caption:
-        "Legacy instructional-design artifacts to be consolidated into the new portfolio.",
+      src: "/assets/portfolio/isd-artifact-suite.svg",
+      alt: "Document-preview layout for ADDIE, QA, facilitator guide, job aid, and storyboard artifacts.",
+      caption: "Artifact suite map for instructional design process evidence.",
+      quality: "needs-source",
+      missing: [
+        "Redacted document previews",
+        "PDF thumbnails",
+        "Storyboard or job-aid screenshots",
+      ],
     },
+    evidenceNeeds: [
+      "Redacted document previews",
+      "PDF thumbnails",
+      "Storyboard or job-aid screenshots",
+    ],
     source: "instructionaldesignbyterry.com",
   },
   {
@@ -440,30 +524,75 @@ export const projects: PortfolioProject[] = [
     shortTitle: "Career City",
     role: "Learning Product Designer",
     summary:
-      "An interactive career-development concept that frames career growth as a visual, explorable learning product.",
+      "An interactive career-development prototype that frames career growth as a visual, explorable learning product.",
     problem:
       "Career growth often feels abstract, especially when people need to compare paths, choices, and next steps.",
     actions: [
-      "Designed a gameful learning concept around career exploration and decision-making.",
-      "Used AI-assisted build workflows to move from concept to working app direction.",
+      "Designed a gameful learning flow around career exploration and decision-making.",
+      "Used AI-assisted build workflows to move from idea to working prototype.",
       "Framed learning strategy as an interactive product rather than a static course.",
     ],
     outcomes: [
       "Shows product thinking, learning strategy, and AI-enabled build capability in one artifact.",
-      "Creates a foundation for future learning experience apps.",
+      "Demonstrates how career navigation can become an interactive learning product.",
     ],
     proofIds: ["release-depth"],
     tools: ["Caffeine AI", "Gameful learning", "React", "Learning strategy"],
     lanes: ["Learning Experience", "Technical Product", "AI Operations"],
     visual: {
-      src: "/assets/images/placeholder.svg",
-      alt: "Placeholder visual for Career City until a production screenshot is added.",
-      caption:
-        "Needs a current screenshot or short GIF from the Career City build.",
+      src: "/assets/portfolio/career-city-preview.svg",
+      alt: "Career City preview showing explore, choose, practice, and earn-artifact steps.",
+      caption: "Prototype map for the Career City learning-product flow.",
+      quality: "needs-source",
+      missing: [
+        "Actual app screenshot",
+        "Short gameplay GIF",
+        "Demo or deployed app link",
+      ],
     },
+    evidenceNeeds: [
+      "Actual app screenshot",
+      "Short gameplay GIF",
+      "Demo or deployed app link",
+    ],
     repo: "https://github.com/terrybrutus/career-city",
   },
 ];
+
+export const evidenceBrain = {
+  acceptedFiles: [
+    ".png",
+    ".jpg",
+    ".jpeg",
+    ".webp",
+    ".gif",
+    ".mp4",
+    ".webm",
+    ".pdf",
+    ".docx",
+    ".pptx",
+    ".txt",
+    ".md",
+    ".csv",
+  ],
+  sourceTypes: [
+    "Project screenshot",
+    "Demo GIF/video",
+    "Document preview",
+    "Raw notes",
+    "Transcript",
+    "GitHub repo",
+    "Old website artifact",
+    "Metric/source evidence",
+  ],
+  qualityChecks: [
+    "Project match",
+    "Readable crop",
+    "No private/client-sensitive information",
+    "Clear artifact status",
+    "Strong enough for reviewer view",
+  ],
+};
 
 export const resumeHighlights = [
   "Senior Talent Development Lead and AI Enablement Architect at CTEC, supporting a 158,000-person defense acquisition workforce.",

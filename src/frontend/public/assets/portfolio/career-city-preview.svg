@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Career City app preview</title>
+  <desc id="desc">A gameful career-development preview with districts, path choices, badges, and progress signals.</desc>
+  <rect width="1200" height="675" fill="#111827"/>
+  <rect x="60" y="50" width="1080" height="575" rx="24" fill="#172033" stroke="#384457" stroke-width="2"/>
+  <text x="96" y="118" fill="#f8fafc" font-family="Arial, sans-serif" font-size="40" font-weight="700">Career City</text>
+  <text x="96" y="158" fill="#b7c3d0" font-family="Arial, sans-serif" font-size="21">Interactive career-development prototype with role paths, choices, and earned artifacts</text>
+  <g font-family="Arial, sans-serif">
+    <rect x="104" y="234" width="216" height="152" rx="18" fill="#1e3a8a" stroke="#93c5fd"/>
+    <text x="142" y="302" fill="#f8fafc" font-size="24" font-weight="700">Explore</text>
+    <text x="142" y="336" fill="#dbeafe" font-size="18">paths + roles</text>
+    <rect x="386" y="184" width="216" height="152" rx="18" fill="#854d0e" stroke="#facc15"/>
+    <text x="426" y="252" fill="#f8fafc" font-size="24" font-weight="700">Choose</text>
+    <text x="426" y="286" fill="#fef3c7" font-size="18">skills + tradeoffs</text>
+    <rect x="668" y="234" width="216" height="152" rx="18" fill="#065f46" stroke="#34d399"/>
+    <text x="710" y="302" fill="#f8fafc" font-size="24" font-weight="700">Practice</text>
+    <text x="710" y="336" fill="#d1fae5" font-size="18">scenario moves</text>
+    <rect x="480" y="442" width="246" height="98" rx="18" fill="#312e81" stroke="#a5b4fc"/>
+    <text x="522" y="502" fill="#f8fafc" font-size="24" font-weight="700">Earn artifact</text>
+  </g>
+  <path d="M320 310C360 250 360 250 386 260M602 260C640 286 640 286 668 310M776 386C738 438 738 438 726 491M480 491C392 432 392 432 320 310" stroke="#d9a441" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <text x="96" y="586" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="18">Interactive flow: explore career paths, choose tradeoffs, practice decisions, and earn artifacts.</text>
+</svg>

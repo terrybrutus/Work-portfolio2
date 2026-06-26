@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Workflow platform evidence map</title>
+  <desc id="desc">A structured workflow map showing intake, in production, review, approved, shipped, and measured states.</desc>
+  <rect width="1200" height="675" fill="#101216"/>
+  <rect x="58" y="54" width="1084" height="567" rx="22" fill="#161a20" stroke="#3a4049" stroke-width="2"/>
+  <text x="96" y="118" fill="#f1f5f9" font-family="Arial, sans-serif" font-size="38" font-weight="700">Multi-project workflow layer</text>
+  <text x="96" y="158" fill="#9ca3af" font-family="Arial, sans-serif" font-size="21">Status visibility, ownership, review gates, and delivery readiness</text>
+  <g font-family="Arial, sans-serif">
+    <g>
+      <rect x="94" y="222" width="148" height="220" rx="14" fill="#212731" stroke="#505967"/>
+      <text x="124" y="270" fill="#f8fafc" font-size="22" font-weight="700">Intake</text>
+      <text x="124" y="318" fill="#cbd5e1" font-size="17">source</text>
+      <text x="124" y="346" fill="#cbd5e1" font-size="17">scope</text>
+      <text x="124" y="374" fill="#cbd5e1" font-size="17">owner</text>
+    </g>
+    <g>
+      <rect x="286" y="222" width="148" height="220" rx="14" fill="#1f2937" stroke="#505967"/>
+      <text x="316" y="270" fill="#f8fafc" font-size="22" font-weight="700">Build</text>
+      <text x="316" y="318" fill="#cbd5e1" font-size="17">draft</text>
+      <text x="316" y="346" fill="#cbd5e1" font-size="17">assets</text>
+      <text x="316" y="374" fill="#cbd5e1" font-size="17">blocked?</text>
+    </g>
+    <g>
+      <rect x="478" y="222" width="148" height="220" rx="14" fill="#24303b" stroke="#d9a441"/>
+      <text x="508" y="270" fill="#f8fafc" font-size="22" font-weight="700">Review</text>
+      <text x="508" y="318" fill="#cbd5e1" font-size="17">SME QA</text>
+      <text x="508" y="346" fill="#cbd5e1" font-size="17">508 check</text>
+      <text x="508" y="374" fill="#cbd5e1" font-size="17">revision</text>
+    </g>
+    <g>
+      <rect x="670" y="222" width="148" height="220" rx="14" fill="#1e293b" stroke="#505967"/>
+      <text x="700" y="270" fill="#f8fafc" font-size="22" font-weight="700">Ready</text>
+      <text x="700" y="318" fill="#cbd5e1" font-size="17">approved</text>
+      <text x="700" y="346" fill="#cbd5e1" font-size="17">handoff</text>
+      <text x="700" y="374" fill="#cbd5e1" font-size="17">release</text>
+    </g>
+    <g>
+      <rect x="862" y="222" width="148" height="220" rx="14" fill="#102f2f" stroke="#2dd4bf"/>
+      <text x="892" y="270" fill="#f8fafc" font-size="22" font-weight="700">Measure</text>
+      <text x="892" y="318" fill="#cbd5e1" font-size="17">adoption</text>
+      <text x="892" y="346" fill="#cbd5e1" font-size="17">cycle time</text>
+      <text x="892" y="374" fill="#cbd5e1" font-size="17">risk</text>
+    </g>
+  </g>
+  <path d="M242 332h44M434 332h44M626 332h44M818 332h44" stroke="#d9a441" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="168" cy="514" r="10" fill="#d9a441"/>
+  <text x="194" y="522" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="18">Designed to make ownership, status, review gates, and delivery readiness visible.</text>
+</svg>

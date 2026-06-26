@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">AI content pipeline map</title>
+  <desc id="desc">A process diagram showing source review, retrieval workspace, scripting, QA, and production standard outputs.</desc>
+  <rect width="1200" height="675" fill="#0f1115"/>
+  <rect x="70" y="58" width="1060" height="559" rx="24" fill="#171b22" stroke="#344052" stroke-width="2"/>
+  <text x="104" y="124" fill="#f8fafc" font-family="Arial, sans-serif" font-size="38" font-weight="700">AI-assisted talent content pipeline</text>
+  <text x="104" y="164" fill="#a8b3c1" font-family="Arial, sans-serif" font-size="21">Source review, structured extraction, scripting support, and human QA gates</text>
+  <g font-family="Arial, sans-serif" font-size="19">
+    <rect x="112" y="244" width="160" height="116" rx="16" fill="#222936" stroke="#64748b"/>
+    <text x="145" y="294" fill="#f8fafc" font-weight="700">Source set</text>
+    <text x="145" y="326" fill="#cbd5e1">docs, notes</text>
+    <rect x="338" y="244" width="160" height="116" rx="16" fill="#1b2a3a" stroke="#38bdf8"/>
+    <text x="372" y="294" fill="#f8fafc" font-weight="700">AI review</text>
+    <text x="372" y="326" fill="#cbd5e1">extract, tag</text>
+    <rect x="564" y="244" width="160" height="116" rx="16" fill="#29243a" stroke="#c084fc"/>
+    <text x="592" y="294" fill="#f8fafc" font-weight="700">Script pass</text>
+    <text x="592" y="326" fill="#cbd5e1">clean, format</text>
+    <rect x="790" y="244" width="160" height="116" rx="16" fill="#34251b" stroke="#f59e0b"/>
+    <text x="833" y="294" fill="#f8fafc" font-weight="700">QA gate</text>
+    <text x="833" y="326" fill="#cbd5e1">human check</text>
+    <rect x="451" y="438" width="298" height="94" rx="18" fill="#102f2f" stroke="#2dd4bf"/>
+    <text x="510" y="492" fill="#f8fafc" font-size="24" font-weight="700">Production standard</text>
+  </g>
+  <path d="M272 302h66M498 302h66M724 302h66M870 360v64M870 424H750M451 485H338M338 485V360" stroke="#d9a441" stroke-width="5" stroke-linecap="round" fill="none"/>
+  <text x="104" y="580" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="18">Structured to accelerate repeated analysis while keeping human QA in the loop.</text>
+</svg>

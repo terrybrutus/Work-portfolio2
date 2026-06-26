@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Mobile compliance enablement flow</title>
+  <desc id="desc">A mobile-first compliance flow with role access, task completion, evidence tracking, and audit readiness.</desc>
+  <rect width="1200" height="675" fill="#0f1115"/>
+  <text x="104" y="112" fill="#f8fafc" font-family="Arial, sans-serif" font-size="38" font-weight="700">Mobile-first compliance ecosystem</text>
+  <text x="104" y="152" fill="#a8b3c1" font-family="Arial, sans-serif" font-size="21">Low-code access, completion evidence, and audit-ready support without a formal LMS</text>
+  <rect x="162" y="206" width="222" height="370" rx="34" fill="#1f2937" stroke="#64748b" stroke-width="4"/>
+  <rect x="190" y="258" width="166" height="42" rx="10" fill="#334155"/><rect x="190" y="324" width="166" height="42" rx="10" fill="#334155"/><rect x="190" y="390" width="166" height="42" rx="10" fill="#0f766e"/><rect x="190" y="456" width="166" height="42" rx="10" fill="#334155"/>
+  <g font-family="Arial, sans-serif" font-size="22" font-weight="700">
+    <rect x="488" y="240" width="190" height="96" rx="18" fill="#18212c" stroke="#38bdf8"/>
+    <text x="530" y="296" fill="#f8fafc">Role access</text>
+    <rect x="488" y="402" width="190" height="96" rx="18" fill="#18212c" stroke="#f59e0b"/>
+    <text x="524" y="458" fill="#f8fafc">Evidence</text>
+    <rect x="786" y="320" width="230" height="112" rx="18" fill="#102f2f" stroke="#2dd4bf"/>
+    <text x="836" y="384" fill="#f8fafc">Audit ready</text>
+  </g>
+  <path d="M384 382h104M678 288c64 0 70 88 108 88M678 450c64 0 70-74 108-74" stroke="#d9a441" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <text x="104" y="628" fill="#cbd5e1" font-family="Arial, sans-serif" font-size="18">Designed around accessible completion, evidence capture, and audit readiness.</text>
+</svg>

@@ -7,6 +7,7 @@ import {
   type Lane,
   type PortfolioProject,
   type ProofPoint,
+  evidenceBrain,
   getProofPoints,
   laneProfiles,
   profile,
@@ -17,13 +18,16 @@ import {
 } from "@/data/sourceBank";
 import { useActor } from "@caffeineai/core-infrastructure";
 import {
+  AlertTriangle,
   ArrowRight,
   ArrowUpRight,
   Bot,
   BriefcaseBusiness,
   Check,
   Clipboard,
+  Database,
   ExternalLink,
+  FileSearch,
   Github,
   Image as ImageIcon,
   Link2,
@@ -203,6 +207,39 @@ function getRecommendedSkills(selectedLanes: Lane[]) {
   });
 
   return (rankedSkills.length > 0 ? rankedSkills : skills).slice(0, 10);
+}
+
+function getReviewerBadge(primaryLane: Lane) {
+  const labels: Record<Lane, string> = {
+    Enablement: "Enablement Systems",
+    "AI Operations": "AI Workflow Evidence",
+    "Learning Experience": "Learning Experience Proof",
+    "Technical Product": "Workflow and Product Evidence",
+    "Sales Enablement": "Sales Readiness Evidence",
+    Compliance: "Compliance Enablement Proof",
+  };
+
+  return labels[primaryLane];
+}
+
+function getProjectMediaStatus(projectsToCheck: PortfolioProject[]) {
+  return projectsToCheck.map((project) => ({
+    project,
+    status: project.visual.quality,
+    needs: project.visual.missing ?? project.evidenceNeeds,
+  }));
+}
+
+function getMetricSourceNote(
+  metric: ProofPoint,
+  selectedProjects: PortfolioProject[],
+) {
+  const linkedProject = selectedProjects.find((project) =>
+    project.proofIds.includes(metric.id),
+  );
+  return linkedProject
+    ? `Used by ${linkedProject.shortTitle}`
+    : "Background evidence";
 }
 
 function getRouteState(): RouteState {
@@ -440,7 +477,7 @@ function PublicLanding({ onExplore }: { onExplore: () => void }) {
             </div>
             <div className="flex flex-wrap gap-3">
               <Button type="button" onClick={onExplore}>
-                View selected work
+                View proof of work
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
               <a
@@ -493,6 +530,7 @@ function ReviewerPortfolio({
   }
 
   const model = buildViewModel(view);
+  const reviewerBadge = getReviewerBadge(model.primaryLane);
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -500,7 +538,7 @@ function ReviewerPortfolio({
         <div className="mx-auto grid max-w-6xl gap-8 px-5 py-12 lg:grid-cols-[1.05fr_0.95fr] lg:py-16">
           <div className="space-y-6">
             <Badge className="w-fit" variant="outline">
-              Selected Work
+              {reviewerBadge}
             </Badge>
             <div className="space-y-4">
               <h1 className="font-display text-4xl font-semibold leading-tight sm:text-5xl">
@@ -554,6 +592,9 @@ function ReviewerPortfolio({
                 {metric.value}
               </p>
               <p className="mt-1 text-sm font-medium">{metric.label}</p>
+              <p className="mt-2 text-xs font-medium text-primary">
+                {getMetricSourceNote(metric, model.selectedProjects)}
+              </p>
               <p className="mt-3 text-xs leading-5 text-muted-foreground">
                 {metric.detail}
               </p>
@@ -685,6 +726,11 @@ export function TailoredPortfolioStudio() {
     selectedProofIds.length > 0
       ? selectedProofIds
       : recommendedProofPoints.map((proofPoint) => proofPoint.id);
+  const activeProjects = activeProjectIds
+    .map((id) => projects.find((project) => project.id === id))
+    .filter((project): project is PortfolioProject => Boolean(project));
+  const mediaStatus = getProjectMediaStatus(activeProjects);
+  const mediaNeeds = mediaStatus.filter((item) => item.status !== "approved");
 
   useEffect(() => {
     const syncRoute = () => setRoute(getRouteState());
@@ -836,8 +882,8 @@ export function TailoredPortfolioStudio() {
               </h1>
               <p className="max-w-3xl text-base leading-7 text-muted-foreground">
                 Paste a JD, let the app recommend the lane, projects, visuals,
-                and proof points, then override anything before generating a
-                short opaque link.
+                and evidence, then override anything before generating a short
+                opaque link.
               </p>
             </div>
             <div className="grid gap-3 sm:grid-cols-3">
@@ -982,6 +1028,91 @@ export function TailoredPortfolioStudio() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
+                <Database className="h-5 w-5 text-primary" />
+                Evidence Brain
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-sm leading-6 text-muted-foreground">
+                Add raw notes, screenshots, transcripts, repos, documents, and
+                old-site artifacts here over time. The reviewer page should only
+                use approved evidence that matches the selected project.
+              </p>
+              <div>
+                <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
+                  Accepted source files
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {evidenceBrain.acceptedFiles.map((fileType) => (
+                    <Badge key={fileType} variant="outline">
+                      {fileType}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
+                  Brain checks before public use
+                </p>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {evidenceBrain.qualityChecks.map((check) => (
+                    <div
+                      key={check}
+                      className="rounded-md border border-border bg-muted/20 p-3 text-sm"
+                    >
+                      {check}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <AlertTriangle className="h-5 w-5 text-primary" />
+                Missing Media for This View
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {mediaNeeds.length === 0 ? (
+                <p className="text-sm text-muted-foreground">
+                  Current project media is approved for reviewer use.
+                </p>
+              ) : (
+                mediaNeeds.map(({ project, status, needs }) => (
+                  <div
+                    key={project.id}
+                    className="rounded-md border border-border bg-muted/20 p-3"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <p className="text-sm font-medium">
+                        {project.shortTitle}
+                      </p>
+                      <Badge variant="outline">{status}</Badge>
+                    </div>
+                    <p className="mt-2 text-xs leading-5 text-muted-foreground">
+                      Add or approve one of these before this becomes a
+                      high-trust reviewer case:
+                    </p>
+                    <ul className="mt-2 space-y-1 text-sm">
+                      {needs.slice(0, 3).map((need) => (
+                        <li key={need} className="flex gap-2">
+                          <FileSearch className="mt-0.5 h-4 w-4 text-primary" />
+                          <span>{need}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))
+              )}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
                 <LockKeyhole className="h-5 w-5 text-primary" />
                 Step 5. Short Links
               </CardTitle>
@@ -1074,6 +1205,16 @@ export function TailoredPortfolioStudio() {
                       <p className="mt-1 text-xs text-muted-foreground">
                         {project.role}
                       </p>
+                      <Badge
+                        className="mt-3"
+                        variant={
+                          project.visual.quality === "approved"
+                            ? "default"
+                            : "outline"
+                        }
+                      >
+                        {project.visual.quality}
+                      </Badge>
                     </div>
                   </button>
                 ))}
