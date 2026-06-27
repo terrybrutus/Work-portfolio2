@@ -120,6 +120,12 @@ type StudioBrainSource = {
   linkedProjectIds: string[];
   note: string;
   rawText: string;
+  createdAt?: string;
+  fileName?: string;
+  fileSize?: number;
+  fileType?: string;
+  extractionStatus?: "text captured" | "media recorded" | "record only";
+  matchedTerms?: string[];
 };
 
 const sampleJd =
@@ -369,6 +375,107 @@ function getStudioBrainSources(): StudioBrainSource[] {
 
 function setStudioBrainSources(sources: StudioBrainSource[]) {
   localStorage.setItem(studioBrainKey, JSON.stringify(sources));
+}
+
+function formatBytes(bytes = 0) {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
+}
+
+function inferSourceType(file: File) {
+  const extension = file.name.split(".").pop()?.toLowerCase() ?? "";
+  if (["png", "jpg", "jpeg", "webp"].includes(extension)) {
+    return "Project screenshot";
+  }
+  if (["gif", "mp4", "webm"].includes(extension)) return "Demo GIF/video";
+  if (["pdf", "docx", "pptx"].includes(extension)) return "Document preview";
+  if (["txt", "md", "csv"].includes(extension)) return "Raw notes";
+  return "Old website artifact";
+}
+
+function canReadTextFile(file: File) {
+  const extension = file.name.split(".").pop()?.toLowerCase() ?? "";
+  return (
+    file.type.startsWith("text/") ||
+    ["txt", "md", "csv", "json"].includes(extension)
+  );
+}
+
+function readFileText(file: File) {
+  return new Promise<string>((resolve) => {
+    if (!canReadTextFile(file)) {
+      resolve("");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result ?? "").slice(0, 4000));
+    reader.onerror = () => resolve("");
+    reader.readAsText(file);
+  });
+}
+
+function getProjectMatchTerms(project: PortfolioProject) {
+  return [
+    project.title,
+    project.shortTitle,
+    project.role,
+    project.source ?? "",
+    ...project.lanes,
+    ...project.tools,
+    ...project.evidenceNeeds,
+  ]
+    .flatMap((term) => normalizeText(term).split(/\s+/))
+    .filter((term) => term.length > 3);
+}
+
+function getLinkedProjectIdsFromSource(text: string, fallbackIds: string[]) {
+  const normalized = normalizeText(text);
+  const ranked = projects
+    .map((project) => {
+      const terms = [...new Set(getProjectMatchTerms(project))];
+      const matchedTerms = terms.filter((term) => normalized.includes(term));
+      return { project, matchedTerms, score: matchedTerms.length };
+    })
+    .filter((item) => item.score > 0)
+    .sort((a, b) => b.score - a.score);
+
+  return {
+    ids:
+      ranked.length > 0
+        ? ranked.slice(0, 4).map((item) => item.project.id)
+        : fallbackIds.slice(0, 4),
+    terms: ranked
+      .slice(0, 4)
+      .flatMap((item) => item.matchedTerms)
+      .slice(0, 8),
+  };
+}
+
+function seedSourceToStudioSource(
+  source: (typeof brainSources)[number],
+): StudioBrainSource {
+  return {
+    ...source,
+    rawText: "",
+    extractionStatus: "record only" as const,
+    matchedTerms: [],
+  };
+}
+
+function isReviewerSafeSource(source: StudioBrainSource) {
+  return source.status === "approved" || source.status === "public-safe";
+}
+
+function getSourceCoverage(
+  project: PortfolioProject,
+  sources: StudioBrainSource[],
+) {
+  return sources.filter(
+    (source) =>
+      isReviewerSafeSource(source) &&
+      source.linkedProjectIds.includes(project.id),
+  );
 }
 
 function buildViewModel(view: TailoredView | null) {
@@ -659,7 +766,7 @@ function ReviewerPortfolio({
             <img
               src={
                 model.selectedProjects[0]?.visual.src ??
-                "/assets/portfolio/terrylxd-projects.png"
+                "/assets/portfolio/workflow-platform-map.svg"
               }
               alt={
                 model.selectedProjects[0]?.visual.alt ??
@@ -839,6 +946,7 @@ export function TailoredPortfolioStudio() {
   const [sourceType, setSourceType] = useState(evidenceBrain.sourceTypes[0]);
   const [sourceStatus, setSourceStatus] = useState(evidenceBrain.statuses[4]);
   const [sourceText, setSourceText] = useState("");
+  const [importingSources, setImportingSources] = useState(false);
 
   const analysis = useMemo(
     () => analyzeTarget(`${company} ${jd}`),
@@ -872,8 +980,19 @@ export function TailoredPortfolioStudio() {
   const activeProofPoints = activeProofIds
     .map((id) => proofPoints.find((proofPoint) => proofPoint.id === id))
     .filter((proofPoint): proofPoint is ProofPoint => Boolean(proofPoint));
+  const allBrainSources = useMemo(
+    () => [...brainDrafts, ...brainSources.map(seedSourceToStudioSource)],
+    [brainDrafts],
+  );
   const mediaStatus = getProjectMediaStatus(activeProjects);
-  const mediaNeeds = mediaStatus.filter((item) => item.status !== "approved");
+  const mediaNeeds = mediaStatus
+    .map((item) => ({
+      ...item,
+      approvedSources: getSourceCoverage(item.project, allBrainSources),
+    }))
+    .filter(
+      (item) => item.status !== "approved" || item.approvedSources.length === 0,
+    );
   const studioOutputs = buildStudioOutputs(
     activeLanes,
     activeProjects,
@@ -975,20 +1094,73 @@ export function TailoredPortfolioStudio() {
 
   const addBrainSource = () => {
     if (!sourceTitle.trim() && !sourceText.trim()) return;
+    const match = getLinkedProjectIdsFromSource(
+      `${sourceTitle} ${sourceText}`,
+      activeProjectIds,
+    );
     const source: StudioBrainSource = {
       id: makeSlug(activeLanes[0]),
       title: sourceTitle.trim() || "Untitled source note",
       type: sourceType,
       status: sourceStatus,
-      linkedProjectIds: activeProjectIds.slice(0, 4),
+      linkedProjectIds: match.ids,
       note: "Review before public use; raw content stays in the owner workspace.",
       rawText: sourceText.slice(0, 4000),
+      createdAt: new Date().toISOString(),
+      extractionStatus: sourceText.trim() ? "text captured" : "record only",
+      matchedTerms: match.terms,
     };
     const nextSources = [source, ...brainDrafts].slice(0, 20);
     setStudioBrainSources(nextSources);
     setBrainDrafts(nextSources);
     setSourceTitle("");
     setSourceText("");
+  };
+
+  const importSourceFiles = async (files: FileList | null) => {
+    if (!files || files.length === 0) return;
+    setImportingSources(true);
+    const importedSources = await Promise.all(
+      Array.from(files).map(async (file) => {
+        const text = await readFileText(file);
+        const match = getLinkedProjectIdsFromSource(
+          `${file.name} ${text}`,
+          activeProjectIds,
+        );
+        const isMedia =
+          file.type.startsWith("image/") || file.type.startsWith("video/");
+        const source: StudioBrainSource = {
+          id: makeSlug(activeLanes[0]),
+          title: file.name,
+          type: inferSourceType(file),
+          status: "needs verification",
+          linkedProjectIds: match.ids,
+          note:
+            text.length > 0
+              ? "Text captured locally. Review, redact, and approve before public use."
+              : isMedia
+                ? "Media recorded locally. Check crop, readability, and project match before approval."
+                : "File recorded locally. Add text extraction, OCR, or a redacted preview before approval.",
+          rawText: text,
+          createdAt: new Date().toISOString(),
+          fileName: file.name,
+          fileSize: file.size,
+          fileType: file.type || "unknown",
+          extractionStatus:
+            text.length > 0
+              ? "text captured"
+              : isMedia
+                ? "media recorded"
+                : "record only",
+          matchedTerms: match.terms,
+        };
+        return source;
+      }),
+    );
+    const nextSources = [...importedSources, ...brainDrafts].slice(0, 20);
+    setStudioBrainSources(nextSources);
+    setBrainDrafts(nextSources);
+    setImportingSources(false);
   };
 
   const createLink = async () => {
@@ -1160,8 +1332,8 @@ export function TailoredPortfolioStudio() {
                           {targetProfile.name}
                         </p>
                         <p className="mt-1 text-xs text-muted-foreground">
-                          {targetProfile.lanes.join(", ")} ·{" "}
-                          {targetProfile.projectIds.length} projects ·{" "}
+                          {targetProfile.lanes.join(", ")} -{" "}
+                          {targetProfile.projectIds.length} projects -{" "}
                           {targetProfile.proofIds.length} metrics
                         </p>
                       </div>
@@ -1271,6 +1443,35 @@ export function TailoredPortfolioStudio() {
                 </div>
               </div>
               <div className="grid gap-3 sm:grid-cols-2">
+                <label
+                  className="block space-y-2 rounded-md border border-dashed border-border bg-muted/20 p-3 sm:col-span-2"
+                  htmlFor="source-files"
+                >
+                  <span className="text-sm font-medium">
+                    Import files or media records
+                  </span>
+                  <input
+                    id="source-files"
+                    type="file"
+                    multiple
+                    accept={evidenceBrain.acceptedFiles.join(",")}
+                    className="block w-full text-sm text-muted-foreground file:mr-3 file:rounded-md file:border-0 file:bg-primary file:px-3 file:py-2 file:text-sm file:font-medium file:text-primary-foreground"
+                    onChange={(event) => {
+                      void importSourceFiles(event.target.files);
+                      event.target.value = "";
+                    }}
+                  />
+                  <span className="block text-xs leading-5 text-muted-foreground">
+                    Text files are read locally. Images, PDFs, DOCX, PPTX, GIF,
+                    and video are recorded with the cleanup needed before
+                    approval.
+                  </span>
+                  {importingSources && (
+                    <span className="block text-xs font-medium text-primary">
+                      Reading source records...
+                    </span>
+                  )}
+                </label>
                 <label className="block space-y-2" htmlFor="source-title">
                   <span className="text-sm font-medium">Source title</span>
                   <input
@@ -1357,28 +1558,43 @@ export function TailoredPortfolioStudio() {
                   Review queue
                 </p>
                 <div className="space-y-2">
-                  {[...brainDrafts, ...brainSources]
-                    .slice(0, 8)
-                    .map((source) => (
-                      <div
-                        key={source.id}
-                        className="rounded-md border border-border bg-muted/20 p-3"
-                      >
-                        <div className="flex flex-wrap items-center justify-between gap-2">
-                          <p className="text-sm font-medium">{source.title}</p>
-                          <Badge variant="outline">{source.status}</Badge>
-                        </div>
-                        <p className="mt-1 text-xs text-muted-foreground">
-                          {source.type} ·{" "}
-                          {source.linkedProjectIds.length > 0
-                            ? `${source.linkedProjectIds.length} linked projects`
-                            : "not linked yet"}
-                        </p>
-                        <p className="mt-2 text-xs leading-5 text-muted-foreground">
-                          {source.note}
-                        </p>
+                  {allBrainSources.slice(0, 8).map((source) => (
+                    <div
+                      key={source.id}
+                      className="rounded-md border border-border bg-muted/20 p-3"
+                    >
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <p className="text-sm font-medium">{source.title}</p>
+                        <Badge variant="outline">{source.status}</Badge>
                       </div>
-                    ))}
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {source.type} -{" "}
+                        {source.linkedProjectIds.length > 0
+                          ? `${source.linkedProjectIds.length} linked projects`
+                          : "not linked yet"}
+                      </p>
+                      <div className="mt-2 flex flex-wrap gap-2">
+                        {source.extractionStatus && (
+                          <Badge variant="outline">
+                            {source.extractionStatus}
+                          </Badge>
+                        )}
+                        {source.fileSize ? (
+                          <Badge variant="outline">
+                            {formatBytes(source.fileSize)}
+                          </Badge>
+                        ) : null}
+                        {source.matchedTerms?.slice(0, 4).map((term) => (
+                          <Badge key={term} variant="outline">
+                            {term}
+                          </Badge>
+                        ))}
+                      </div>
+                      <p className="mt-2 text-xs leading-5 text-muted-foreground">
+                        {source.note}
+                      </p>
+                    </div>
+                  ))}
                 </div>
               </div>
             </CardContent>
@@ -1397,31 +1613,48 @@ export function TailoredPortfolioStudio() {
                   Current project media is approved for reviewer use.
                 </p>
               ) : (
-                mediaNeeds.map(({ project, status, needs }) => (
-                  <div
-                    key={project.id}
-                    className="rounded-md border border-border bg-muted/20 p-3"
-                  >
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <p className="text-sm font-medium">
-                        {project.shortTitle}
+                mediaNeeds.map(
+                  ({ project, status, needs, approvedSources }) => (
+                    <div
+                      key={project.id}
+                      className="rounded-md border border-border bg-muted/20 p-3"
+                    >
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <p className="text-sm font-medium">
+                          {project.shortTitle}
+                        </p>
+                        <Badge variant="outline">{status}</Badge>
+                      </div>
+                      <p className="mt-2 text-xs leading-5 text-muted-foreground">
+                        Add or approve one of these before this becomes a
+                        stronger reviewer case:
                       </p>
-                      <Badge variant="outline">{status}</Badge>
+                      <ul className="mt-2 space-y-1 text-sm">
+                        {needs.slice(0, 3).map((need) => (
+                          <li key={need} className="flex gap-2">
+                            <FileSearch className="mt-0.5 h-4 w-4 text-primary" />
+                            <span>{need}</span>
+                          </li>
+                        ))}
+                      </ul>
+                      {approvedSources.length > 0 ? (
+                        <p className="mt-3 text-xs leading-5 text-primary">
+                          Approved source coverage:{" "}
+                          {approvedSources
+                            .map((source) => source.title)
+                            .slice(0, 2)
+                            .join(", ")}
+                        </p>
+                      ) : (
+                        <p className="mt-3 text-xs leading-5 text-muted-foreground">
+                          No approved source is linked to this project yet.
+                          Import a screenshot, artifact, metric note, or repo
+                          record and mark it approved after review.
+                        </p>
+                      )}
                     </div>
-                    <p className="mt-2 text-xs leading-5 text-muted-foreground">
-                      Add or approve one of these before this becomes a
-                      high-trust reviewer case:
-                    </p>
-                    <ul className="mt-2 space-y-1 text-sm">
-                      {needs.slice(0, 3).map((need) => (
-                        <li key={need} className="flex gap-2">
-                          <FileSearch className="mt-0.5 h-4 w-4 text-primary" />
-                          <span>{need}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))
+                  ),
+                )
               )}
             </CardContent>
           </Card>

@@ -32384,10 +32384,10 @@ const projects = [
     tools: ["Scenario design", "eLearning", "Security awareness"],
     lanes: ["Learning Experience", "Compliance", "Technical Product"],
     visual: {
-      src: "/assets/portfolio/terrylxd-projects.png",
-      alt: "Screenshot showing a phishing red flags learning interaction card.",
-      caption: "Legacy screenshot showing the phishing red-flags interaction inside the TerryLXD featured work section.",
-      quality: "legacy",
+      src: "/assets/portfolio/phishing-red-flags-flow.svg",
+      alt: "Phishing red flags interaction map showing sender, link, attachment, and urgency cues.",
+      caption: "Interaction map for a short phishing-recognition practice activity.",
+      quality: "needs-source",
       missing: [
         "Direct interaction screenshot",
         "Short click-through GIF",
@@ -32422,10 +32422,10 @@ const projects = [
     tools: ["Technical training", "Visual explanation", "Interaction design"],
     lanes: ["Learning Experience", "Technical Product", "Enablement"],
     visual: {
-      src: "/assets/portfolio/terrylxd-projects.png",
-      alt: "Screenshot showing a centralized versus decentralized learning module card.",
-      caption: "Legacy screenshot showing the decentralization module inside the TerryLXD featured work section.",
-      quality: "legacy",
+      src: "/assets/portfolio/decentralization-module-map.svg",
+      alt: "Centralized versus decentralized network comparison map for a technical learning module.",
+      caption: "Technical concept map comparing centralized and decentralized structures.",
+      quality: "needs-source",
       missing: [
         "Direct module screenshot",
         "Short interaction GIF",
@@ -33216,6 +33216,78 @@ function getStudioBrainSources() {
 function setStudioBrainSources(sources) {
   localStorage.setItem(studioBrainKey, JSON.stringify(sources));
 }
+function formatBytes(bytes = 0) {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
+}
+function inferSourceType(file) {
+  var _a2;
+  const extension = ((_a2 = file.name.split(".").pop()) == null ? void 0 : _a2.toLowerCase()) ?? "";
+  if (["png", "jpg", "jpeg", "webp"].includes(extension)) {
+    return "Project screenshot";
+  }
+  if (["gif", "mp4", "webm"].includes(extension)) return "Demo GIF/video";
+  if (["pdf", "docx", "pptx"].includes(extension)) return "Document preview";
+  if (["txt", "md", "csv"].includes(extension)) return "Raw notes";
+  return "Old website artifact";
+}
+function canReadTextFile(file) {
+  var _a2;
+  const extension = ((_a2 = file.name.split(".").pop()) == null ? void 0 : _a2.toLowerCase()) ?? "";
+  return file.type.startsWith("text/") || ["txt", "md", "csv", "json"].includes(extension);
+}
+function readFileText(file) {
+  return new Promise((resolve) => {
+    if (!canReadTextFile(file)) {
+      resolve("");
+      return;
+    }
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result ?? "").slice(0, 4e3));
+    reader.onerror = () => resolve("");
+    reader.readAsText(file);
+  });
+}
+function getProjectMatchTerms(project) {
+  return [
+    project.title,
+    project.shortTitle,
+    project.role,
+    project.source ?? "",
+    ...project.lanes,
+    ...project.tools,
+    ...project.evidenceNeeds
+  ].flatMap((term) => normalizeText(term).split(/\s+/)).filter((term) => term.length > 3);
+}
+function getLinkedProjectIdsFromSource(text, fallbackIds) {
+  const normalized = normalizeText(text);
+  const ranked = projects.map((project) => {
+    const terms = [...new Set(getProjectMatchTerms(project))];
+    const matchedTerms = terms.filter((term) => normalized.includes(term));
+    return { project, matchedTerms, score: matchedTerms.length };
+  }).filter((item) => item.score > 0).sort((a2, b2) => b2.score - a2.score);
+  return {
+    ids: ranked.length > 0 ? ranked.slice(0, 4).map((item) => item.project.id) : fallbackIds.slice(0, 4),
+    terms: ranked.slice(0, 4).flatMap((item) => item.matchedTerms).slice(0, 8)
+  };
+}
+function seedSourceToStudioSource(source) {
+  return {
+    ...source,
+    rawText: "",
+    extractionStatus: "record only",
+    matchedTerms: []
+  };
+}
+function isReviewerSafeSource(source) {
+  return source.status === "approved" || source.status === "public-safe";
+}
+function getSourceCoverage(project, sources) {
+  return sources.filter(
+    (source) => isReviewerSafeSource(source) && source.linkedProjectIds.includes(project.id)
+  );
+}
 function buildViewModel(view) {
   var _a2, _b2;
   const lanes = ((view == null ? void 0 : view.lanes) ?? []).filter(isLane).slice(0, 3);
@@ -33410,7 +33482,7 @@ function ReviewerPortfolio({
         /* @__PURE__ */ jsxRuntimeExports.jsx(
           "img",
           {
-            src: ((_a2 = model.selectedProjects[0]) == null ? void 0 : _a2.visual.src) ?? "/assets/portfolio/terrylxd-projects.png",
+            src: ((_a2 = model.selectedProjects[0]) == null ? void 0 : _a2.visual.src) ?? "/assets/portfolio/workflow-platform-map.svg",
             alt: ((_b2 = model.selectedProjects[0]) == null ? void 0 : _b2.visual.alt) ?? "Portfolio project visual.",
             className: "aspect-[16/10] w-full object-cover"
           }
@@ -33521,6 +33593,7 @@ function TailoredPortfolioStudio() {
   const [sourceType, setSourceType] = reactExports.useState(evidenceBrain.sourceTypes[0]);
   const [sourceStatus, setSourceStatus] = reactExports.useState(evidenceBrain.statuses[4]);
   const [sourceText, setSourceText] = reactExports.useState("");
+  const [importingSources, setImportingSources] = reactExports.useState(false);
   const analysis = reactExports.useMemo(
     () => analyzeTarget(`${company} ${jd}`),
     [company, jd]
@@ -33542,8 +33615,17 @@ function TailoredPortfolioStudio() {
   const activeProofIds = selectedProofIds.length > 0 ? selectedProofIds : recommendedProofPoints.map((proofPoint) => proofPoint.id);
   const activeProjects = activeProjectIds.map((id) => projects.find((project) => project.id === id)).filter((project) => Boolean(project));
   const activeProofPoints = activeProofIds.map((id) => proofPoints.find((proofPoint) => proofPoint.id === id)).filter((proofPoint) => Boolean(proofPoint));
+  const allBrainSources = reactExports.useMemo(
+    () => [...brainDrafts, ...brainSources.map(seedSourceToStudioSource)],
+    [brainDrafts]
+  );
   const mediaStatus = getProjectMediaStatus(activeProjects);
-  const mediaNeeds = mediaStatus.filter((item) => item.status !== "approved");
+  const mediaNeeds = mediaStatus.map((item) => ({
+    ...item,
+    approvedSources: getSourceCoverage(item.project, allBrainSources)
+  })).filter(
+    (item) => item.status !== "approved" || item.approvedSources.length === 0
+  );
   const studioOutputs = buildStudioOutputs(
     activeLanes,
     activeProjects,
@@ -33628,20 +33710,61 @@ function TailoredPortfolioStudio() {
   };
   const addBrainSource = () => {
     if (!sourceTitle.trim() && !sourceText.trim()) return;
+    const match = getLinkedProjectIdsFromSource(
+      `${sourceTitle} ${sourceText}`,
+      activeProjectIds
+    );
     const source = {
       id: makeSlug(activeLanes[0]),
       title: sourceTitle.trim() || "Untitled source note",
       type: sourceType,
       status: sourceStatus,
-      linkedProjectIds: activeProjectIds.slice(0, 4),
+      linkedProjectIds: match.ids,
       note: "Review before public use; raw content stays in the owner workspace.",
-      rawText: sourceText.slice(0, 4e3)
+      rawText: sourceText.slice(0, 4e3),
+      createdAt: (/* @__PURE__ */ new Date()).toISOString(),
+      extractionStatus: sourceText.trim() ? "text captured" : "record only",
+      matchedTerms: match.terms
     };
     const nextSources = [source, ...brainDrafts].slice(0, 20);
     setStudioBrainSources(nextSources);
     setBrainDrafts(nextSources);
     setSourceTitle("");
     setSourceText("");
+  };
+  const importSourceFiles = async (files) => {
+    if (!files || files.length === 0) return;
+    setImportingSources(true);
+    const importedSources = await Promise.all(
+      Array.from(files).map(async (file) => {
+        const text = await readFileText(file);
+        const match = getLinkedProjectIdsFromSource(
+          `${file.name} ${text}`,
+          activeProjectIds
+        );
+        const isMedia = file.type.startsWith("image/") || file.type.startsWith("video/");
+        const source = {
+          id: makeSlug(activeLanes[0]),
+          title: file.name,
+          type: inferSourceType(file),
+          status: "needs verification",
+          linkedProjectIds: match.ids,
+          note: text.length > 0 ? "Text captured locally. Review, redact, and approve before public use." : isMedia ? "Media recorded locally. Check crop, readability, and project match before approval." : "File recorded locally. Add text extraction, OCR, or a redacted preview before approval.",
+          rawText: text,
+          createdAt: (/* @__PURE__ */ new Date()).toISOString(),
+          fileName: file.name,
+          fileSize: file.size,
+          fileType: file.type || "unknown",
+          extractionStatus: text.length > 0 ? "text captured" : isMedia ? "media recorded" : "record only",
+          matchedTerms: match.terms
+        };
+        return source;
+      })
+    );
+    const nextSources = [...importedSources, ...brainDrafts].slice(0, 20);
+    setStudioBrainSources(nextSources);
+    setBrainDrafts(nextSources);
+    setImportingSources(false);
   };
   const createLink = async () => {
     setSaving(true);
@@ -33785,10 +33908,10 @@ function TailoredPortfolioStudio() {
                   /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: targetProfile.name }),
                   /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-1 text-xs text-muted-foreground", children: [
                     targetProfile.lanes.join(", "),
-                    " ·",
+                    " -",
                     " ",
                     targetProfile.projectIds.length,
-                    " projects ·",
+                    " projects -",
                     " ",
                     targetProfile.proofIds.length,
                     " metrics"
@@ -33872,6 +33995,32 @@ function TailoredPortfolioStudio() {
               /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: evidenceBrain.acceptedFiles.map((fileType) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: fileType }, fileType)) })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-3 sm:grid-cols-2", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "label",
+                {
+                  className: "block space-y-2 rounded-md border border-dashed border-border bg-muted/20 p-3 sm:col-span-2",
+                  htmlFor: "source-files",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium", children: "Import files or media records" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "input",
+                      {
+                        id: "source-files",
+                        type: "file",
+                        multiple: true,
+                        accept: evidenceBrain.acceptedFiles.join(","),
+                        className: "block w-full text-sm text-muted-foreground file:mr-3 file:rounded-md file:border-0 file:bg-primary file:px-3 file:py-2 file:text-sm file:font-medium file:text-primary-foreground",
+                        onChange: (event) => {
+                          void importSourceFiles(event.target.files);
+                          event.target.value = "";
+                        }
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "block text-xs leading-5 text-muted-foreground", children: "Text files are read locally. Images, PDFs, DOCX, PPTX, GIF, and video are recorded with the cleanup needed before approval." }),
+                    importingSources && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "block text-xs font-medium text-primary", children: "Reading source records..." })
+                  ]
+                }
+              ),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block space-y-2", htmlFor: "source-title", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium", children: "Source title" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -33945,26 +34094,34 @@ function TailoredPortfolioStudio() {
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-2 text-xs font-semibold uppercase text-muted-foreground", children: "Review queue" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-2", children: [...brainDrafts, ...brainSources].slice(0, 8).map((source) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-                "div",
-                {
-                  className: "rounded-md border border-border bg-muted/20 p-3",
-                  children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-2", children: [
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: source.title }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: source.status })
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-1 text-xs text-muted-foreground", children: [
-                      source.type,
-                      " ·",
-                      " ",
-                      source.linkedProjectIds.length > 0 ? `${source.linkedProjectIds.length} linked projects` : "not linked yet"
-                    ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs leading-5 text-muted-foreground", children: source.note })
-                  ]
-                },
-                source.id
-              )) })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-2", children: allBrainSources.slice(0, 8).map((source) => {
+                var _a2;
+                return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "div",
+                  {
+                    className: "rounded-md border border-border bg-muted/20 p-3",
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-2", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: source.title }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: source.status })
+                      ] }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-1 text-xs text-muted-foreground", children: [
+                        source.type,
+                        " -",
+                        " ",
+                        source.linkedProjectIds.length > 0 ? `${source.linkedProjectIds.length} linked projects` : "not linked yet"
+                      ] }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex flex-wrap gap-2", children: [
+                        source.extractionStatus && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: source.extractionStatus }),
+                        source.fileSize ? /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: formatBytes(source.fileSize) }) : null,
+                        (_a2 = source.matchedTerms) == null ? void 0 : _a2.slice(0, 4).map((term) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: term }, term))
+                      ] }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs leading-5 text-muted-foreground", children: source.note })
+                    ]
+                  },
+                  source.id
+                );
+              }) })
             ] })
           ] })
         ] }),
@@ -33973,24 +34130,31 @@ function TailoredPortfolioStudio() {
             /* @__PURE__ */ jsxRuntimeExports.jsx(TriangleAlert, { className: "h-5 w-5 text-primary" }),
             "Missing Media for This View"
           ] }) }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "space-y-3", children: mediaNeeds.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: "Current project media is approved for reviewer use." }) : mediaNeeds.map(({ project, status: status2, needs }) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "div",
-            {
-              className: "rounded-md border border-border bg-muted/20 p-3",
-              children: [
-                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-2", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: project.shortTitle }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: status2 })
-                ] }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs leading-5 text-muted-foreground", children: "Add or approve one of these before this becomes a high-trust reviewer case:" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm", children: needs.slice(0, 3).map((need) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex gap-2", children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(FileSearch, { className: "mt-0.5 h-4 w-4 text-primary" }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: need })
-                ] }, need)) })
-              ]
-            },
-            project.id
-          )) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "space-y-3", children: mediaNeeds.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: "Current project media is approved for reviewer use." }) : mediaNeeds.map(
+            ({ project, status: status2, needs, approvedSources }) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "div",
+              {
+                className: "rounded-md border border-border bg-muted/20 p-3",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-2", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: project.shortTitle }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: status2 })
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs leading-5 text-muted-foreground", children: "Add or approve one of these before this becomes a stronger reviewer case:" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm", children: needs.slice(0, 3).map((need) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { className: "flex gap-2", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(FileSearch, { className: "mt-0.5 h-4 w-4 text-primary" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: need })
+                  ] }, need)) }),
+                  approvedSources.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-3 text-xs leading-5 text-primary", children: [
+                    "Approved source coverage:",
+                    " ",
+                    approvedSources.map((source) => source.title).slice(0, 2).join(", ")
+                  ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-xs leading-5 text-muted-foreground", children: "No approved source is linked to this project yet. Import a screenshot, artifact, metric note, or repo record and mark it approved after review." })
+                ]
+              },
+              project.id
+            )
+          ) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [

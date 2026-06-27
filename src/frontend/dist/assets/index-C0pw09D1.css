@@ -2221,6 +2221,10 @@ video {
   color: oklch(var(--primary-foreground));
 }
 
+.file\:mr-3::file-selector-button {
+  margin-right: 0.75rem;
+}
+
 .file\:inline-flex::file-selector-button {
   display: inline-flex;
 }
@@ -2229,12 +2233,31 @@ video {
   height: 1.75rem;
 }
 
+.file\:rounded-md::file-selector-button {
+  border-radius: calc(var(--radius) - 2px);
+}
+
 .file\:border-0::file-selector-button {
   border-width: 0px;
 }
 
+.file\:bg-primary::file-selector-button {
+  --tw-bg-opacity: 1;
+  background-color: oklch(var(--primary) / var(--tw-bg-opacity, 1));
+}
+
 .file\:bg-transparent::file-selector-button {
   background-color: transparent;
+}
+
+.file\:px-3::file-selector-button {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.file\:py-2::file-selector-button {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 
 .file\:text-sm::file-selector-button {
@@ -2248,6 +2271,10 @@ video {
 
 .file\:text-foreground::file-selector-button {
   color: oklch(var(--foreground));
+}
+
+.file\:text-primary-foreground::file-selector-button {
+  color: oklch(var(--primary-foreground));
 }
 
 .placeholder\:text-muted-foreground::-moz-placeholder {
@@ -3546,6 +3573,10 @@ video {
 }
 
 @media (min-width: 640px) {
+
+  .sm\:col-span-2 {
+    grid-column: span 2 / span 2;
+  }
 
   .sm\:block {
     display: block;

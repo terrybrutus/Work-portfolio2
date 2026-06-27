@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675" role="img" aria-labelledby="title desc">
+  <title id="title">Phishing red flags interaction flow</title>
+  <desc id="desc">A clean visual map of a phishing learning interaction with sender, link, attachment, and urgency decision cues.</desc>
+  <rect width="1200" height="675" fill="#111318"/>
+  <rect x="70" y="62" width="1060" height="551" rx="28" fill="#171b22" stroke="#2f3744" stroke-width="2"/>
+  <text x="106" y="125" fill="#f7f3e8" font-family="Arial, sans-serif" font-size="42" font-weight="700">Spot the Red Flags</text>
+  <text x="106" y="166" fill="#aeb7c4" font-family="Arial, sans-serif" font-size="22">Scenario practice for recognizing risky email cues before clicking.</text>
+  <rect x="108" y="218" width="984" height="112" rx="18" fill="#0f1218" stroke="#3d4655"/>
+  <text x="136" y="264" fill="#f7f3e8" font-family="Arial, sans-serif" font-size="24" font-weight="700">Inbox scenario</text>
+  <text x="136" y="298" fill="#aeb7c4" font-family="Arial, sans-serif" font-size="19">Learner reviews a realistic message, then chooses which warning signs matter.</text>
+  <g font-family="Arial, sans-serif" font-size="22" font-weight="700">
+    <rect x="108" y="378" width="224" height="118" rx="18" fill="#182329" stroke="#47d7ac"/>
+    <text x="142" y="444" fill="#47d7ac">Sender</text>
+    <rect x="358" y="378" width="224" height="118" rx="18" fill="#241d2f" stroke="#d6a7ff"/>
+    <text x="401" y="444" fill="#d6a7ff">Link</text>
+    <rect x="608" y="378" width="224" height="118" rx="18" fill="#2b2317" stroke="#e5be69"/>
+    <text x="647" y="444" fill="#e5be69">Attachment</text>
+    <rect x="858" y="378" width="224" height="118" rx="18" fill="#2c1d22" stroke="#ff8b8b"/>
+    <text x="899" y="444" fill="#ff8b8b">Urgency</text>
+  </g>
+  <path d="M220 330v48M470 330v48M720 330v48M970 330v48" stroke="#657184" stroke-width="4" stroke-linecap="round"/>
+  <text x="108" y="558" fill="#aeb7c4" font-family="Arial, sans-serif" font-size="20">Designed for short, active compliance practice rather than passive policy reading.</text>
+</svg>

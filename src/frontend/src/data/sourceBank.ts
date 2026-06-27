@@ -456,11 +456,11 @@ export const projects: PortfolioProject[] = [
     tools: ["Scenario design", "eLearning", "Security awareness"],
     lanes: ["Learning Experience", "Compliance", "Technical Product"],
     visual: {
-      src: "/assets/portfolio/terrylxd-projects.png",
-      alt: "Screenshot showing a phishing red flags learning interaction card.",
+      src: "/assets/portfolio/phishing-red-flags-flow.svg",
+      alt: "Phishing red flags interaction map showing sender, link, attachment, and urgency cues.",
       caption:
-        "Legacy screenshot showing the phishing red-flags interaction inside the TerryLXD featured work section.",
-      quality: "legacy",
+        "Interaction map for a short phishing-recognition practice activity.",
+      quality: "needs-source",
       missing: [
         "Direct interaction screenshot",
         "Short click-through GIF",
@@ -497,11 +497,11 @@ export const projects: PortfolioProject[] = [
     tools: ["Technical training", "Visual explanation", "Interaction design"],
     lanes: ["Learning Experience", "Technical Product", "Enablement"],
     visual: {
-      src: "/assets/portfolio/terrylxd-projects.png",
-      alt: "Screenshot showing a centralized versus decentralized learning module card.",
+      src: "/assets/portfolio/decentralization-module-map.svg",
+      alt: "Centralized versus decentralized network comparison map for a technical learning module.",
       caption:
-        "Legacy screenshot showing the decentralization module inside the TerryLXD featured work section.",
-      quality: "legacy",
+        "Technical concept map comparing centralized and decentralized structures.",
+      quality: "needs-source",
       missing: [
         "Direct module screenshot",
         "Short interaction GIF",
