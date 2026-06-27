@@ -4,11 +4,14 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import {
+  type EvidenceSourceStatus,
   type Lane,
   type PortfolioProject,
   type ProofPoint,
+  brainSources,
   evidenceBrain,
   getProofPoints,
+  humanHighlights,
   laneProfiles,
   profile,
   projects,
@@ -19,7 +22,6 @@ import {
 import { useActor } from "@caffeineai/core-infrastructure";
 import {
   AlertTriangle,
-  ArrowRight,
   ArrowUpRight,
   Bot,
   BriefcaseBusiness,
@@ -28,16 +30,19 @@ import {
   Database,
   ExternalLink,
   FileSearch,
+  FileText,
   Github,
   Image as ImageIcon,
   Link2,
   LockKeyhole,
   RotateCcw,
+  Save,
   SearchCheck,
   Sparkles,
+  UserRound,
   Wand2,
 } from "lucide-react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type AnalysisMatch = {
   lane: Lane;
@@ -90,14 +95,39 @@ type GeneratedLink = {
   slug: string;
   label: string;
   lanes: Lane[];
-  expires: string;
+  state: "active" | "archived";
   source: "backend" | "local";
+};
+
+type SavedTargetProfile = {
+  id: string;
+  name: string;
+  createdAt: string;
+  company: string;
+  jd: string;
+  lanes: Lane[];
+  projectIds: string[];
+  proofIds: string[];
+  skillIds: string[];
+  linkSlugs: string[];
+};
+
+type StudioBrainSource = {
+  id: string;
+  title: string;
+  type: string;
+  status: string;
+  linkedProjectIds: string[];
+  note: string;
+  rawText: string;
 };
 
 const sampleJd =
   "Senior enablement role partnering with product, sales, and operations teams to build AI-assisted onboarding, technical training, stakeholder-ready assets, and measurable adoption programs.";
 
 const localStorageKey = "terry-portfolio-tailored-views";
+const savedProfilesKey = "terry-portfolio-target-profiles";
+const studioBrainKey = "terry-portfolio-brain-sources";
 
 function isLane(value: string): value is Lane {
   return laneProfiles.some((profileItem) => profileItem.lane === value);
@@ -247,8 +277,14 @@ function getRouteState(): RouteState {
   const normalizedHash = hash.toLowerCase();
   const params = new URLSearchParams(window.location.search);
   const path = window.location.pathname.toLowerCase();
-  const slugFromHash = hash.match(/^#\/v\/([a-z0-9-]+)$/i)?.[1] ?? null;
-  const slugFromPath = path.match(/\/v\/([a-z0-9-]+)$/i)?.[1] ?? null;
+  const slugFromHash =
+    hash.match(/^#\/work\/([a-z0-9-]+)$/i)?.[1] ??
+    hash.match(/^#\/v\/([a-z0-9-]+)$/i)?.[1] ??
+    null;
+  const slugFromPath =
+    path.match(/\/work\/([a-z0-9-]+)$/i)?.[1] ??
+    path.match(/\/v\/([a-z0-9-]+)$/i)?.[1] ??
+    null;
 
   return {
     isStudio:
@@ -264,19 +300,32 @@ function getRouteState(): RouteState {
   };
 }
 
-function makeSlug() {
-  const bytes = new Uint8Array(5);
+function getSlugPrefix(primaryLane: Lane) {
+  const prefixes: Record<Lane, string> = {
+    Enablement: "readiness",
+    "AI Operations": "aiops",
+    "Learning Experience": "learning",
+    "Technical Product": "workflow",
+    "Sales Enablement": "field",
+    Compliance: "compliance",
+  };
+  return prefixes[primaryLane];
+}
+
+function makeSlug(primaryLane: Lane) {
+  const bytes = new Uint8Array(3);
   window.crypto.getRandomValues(bytes);
-  return Array.from(bytes)
+  const suffix = Array.from(bytes)
     .map((byte) => byte.toString(36).padStart(2, "0"))
     .join("")
-    .slice(0, 8);
+    .slice(0, 4);
+  return `${getSlugPrefix(primaryLane)}-${suffix}`;
 }
 
 function buildShareUrl(slug: string) {
   const url = new URL(window.location.href);
   url.search = "";
-  url.hash = `/v/${slug}`;
+  url.hash = `/work/${slug}`;
   return url.toString();
 }
 
@@ -296,6 +345,30 @@ function saveLocalView(view: TailoredView) {
 
 function getLocalView(slug: string) {
   return getLocalViews()[slug] ?? null;
+}
+
+function getSavedProfiles(): SavedTargetProfile[] {
+  try {
+    return JSON.parse(localStorage.getItem(savedProfilesKey) ?? "[]");
+  } catch {
+    return [];
+  }
+}
+
+function setSavedProfiles(profiles: SavedTargetProfile[]) {
+  localStorage.setItem(savedProfilesKey, JSON.stringify(profiles));
+}
+
+function getStudioBrainSources(): StudioBrainSource[] {
+  try {
+    return JSON.parse(localStorage.getItem(studioBrainKey) ?? "[]");
+  } catch {
+    return [];
+  }
+}
+
+function setStudioBrainSources(sources: StudioBrainSource[]) {
+  localStorage.setItem(studioBrainKey, JSON.stringify(sources));
 }
 
 function buildViewModel(view: TailoredView | null) {
@@ -334,6 +407,73 @@ function buildViewModel(view: TailoredView | null) {
   };
 }
 
+function getRelevanceCopy(selectedLanes: Lane[]) {
+  const laneText = selectedLanes.slice(0, 2).join(" and ");
+  return `This selection emphasizes ${laneText.toLowerCase()} work where the proof is tied to clearer execution, practical adoption, and measurable support for people doing complex work.`;
+}
+
+function getRecruiterSummary(
+  selectedLanes: Lane[],
+  selectedProjects: PortfolioProject[],
+  selectedProofPoints: ProofPoint[],
+) {
+  const bestFit = selectedLanes.slice(0, 3).join(", ");
+  const firstProject = selectedProjects[0]?.shortTitle ?? "portfolio evidence";
+  const strongestMetric = selectedProofPoints[0]
+    ? `${selectedProofPoints[0].value} ${selectedProofPoints[0].label.toLowerCase()}`
+    : "measurable enablement outcomes";
+
+  return {
+    focus:
+      "Enablement systems, AI-assisted workflows, and learning experiences that make complex work easier to perform.",
+    bestFit,
+    proof: strongestMetric,
+    firstReview: firstProject,
+  };
+}
+
+function getInterviewPrompts(project: PortfolioProject) {
+  return [
+    `What changed after ${project.shortTitle}, and how did you know it mattered?`,
+    "Which constraint shaped the design choices most?",
+    "What would you improve if you rebuilt this with a larger team or cleaner source data?",
+  ];
+}
+
+function buildStudioOutputs(
+  selectedLanes: Lane[],
+  selectedProjects: PortfolioProject[],
+  selectedProofPoints: ProofPoint[],
+) {
+  const recruiterSummary = getRecruiterSummary(
+    selectedLanes,
+    selectedProjects,
+    selectedProofPoints,
+  );
+  const metrics = selectedProofPoints
+    .slice(0, 3)
+    .map((proofPoint) => `${proofPoint.value} ${proofPoint.label}`)
+    .join("; ");
+  const projectsText = selectedProjects
+    .slice(0, 3)
+    .map((project) => project.shortTitle)
+    .join(", ");
+
+  return {
+    recruiter: `${profile.name} builds ${recruiterSummary.focus} Best-fit lanes: ${recruiterSummary.bestFit}. Strongest proof: ${recruiterSummary.proof}. Start with: ${recruiterSummary.firstReview}.`,
+    resume: [
+      `Built ${selectedLanes[0].toLowerCase()} systems connecting workflow, learning design, and practical adoption.`,
+      `Produced portfolio evidence across ${projectsText || "selected projects"} with metrics including ${metrics || "documented delivery outcomes"}.`,
+      "Used AI-assisted workflows with human QA to reduce repeat work while protecting quality.",
+    ],
+    linkedin:
+      "I build enablement systems, learning products, and AI-assisted workflows that help teams turn complex work into clearer execution.",
+    interview: selectedProjects
+      .slice(0, 2)
+      .flatMap((project) => getInterviewPrompts(project)),
+  };
+}
+
 function useTailoredView(slug: string | null, actor: TailoredBackend | null) {
   const [view, setView] = useState<TailoredView | null>(null);
   const [status, setStatus] = useState<
@@ -356,15 +496,17 @@ function useTailoredView(slug: string | null, actor: TailoredBackend | null) {
           ? await actor.getTailoredView(slug)
           : null;
         const nextView = backendView ?? getLocalView(slug);
+        const publicView = nextView?.archived ? null : nextView;
         if (!cancelled) {
-          setView(nextView);
-          setStatus(nextView ? "ready" : "missing");
+          setView(publicView);
+          setStatus(publicView ? "ready" : "missing");
         }
       } catch {
         const nextView = getLocalView(slug);
+        const publicView = nextView?.archived ? null : nextView;
         if (!cancelled) {
-          setView(nextView);
-          setStatus(nextView ? "ready" : "missing");
+          setView(publicView);
+          setStatus(publicView ? "ready" : "missing");
         }
       }
     }
@@ -406,13 +548,13 @@ function VisualProjectCard({ project }: { project: PortfolioProject }) {
         <div className="grid gap-4 md:grid-cols-3">
           <div>
             <p className="text-xs font-semibold uppercase text-muted-foreground">
-              Problem
+              Before
             </p>
             <p className="mt-2 text-sm leading-5">{project.problem}</p>
           </div>
           <div>
             <p className="text-xs font-semibold uppercase text-muted-foreground">
-              Moves
+              What changed
             </p>
             <ul className="mt-2 space-y-1 text-sm leading-5">
               {project.actions.slice(0, 2).map((action) => (
@@ -422,7 +564,7 @@ function VisualProjectCard({ project }: { project: PortfolioProject }) {
           </div>
           <div>
             <p className="text-xs font-semibold uppercase text-muted-foreground">
-              Results
+              Result
             </p>
             <ul className="mt-2 space-y-1 text-sm leading-5">
               {project.outcomes.slice(0, 2).map((outcome) => (
@@ -455,82 +597,20 @@ function VisualProjectCard({ project }: { project: PortfolioProject }) {
   );
 }
 
-function PublicLanding({ onExplore }: { onExplore: () => void }) {
-  return (
-    <main className="min-h-screen bg-background text-foreground">
-      <section className="relative overflow-hidden border-b border-border bg-[radial-gradient(circle_at_20%_20%,_rgba(229,190,105,0.18),_transparent_30%),radial-gradient(circle_at_80%_10%,_rgba(45,212,191,0.12),_transparent_28%),linear-gradient(135deg,_#0f1115,_#08090b)]">
-        <div className="absolute inset-0 opacity-40 [background-image:linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:48px_48px]" />
-        <div className="relative mx-auto grid min-h-[92vh] max-w-6xl content-center gap-10 px-5 py-16 lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="space-y-7">
-            <Badge className="w-fit" variant="outline">
-              Terry Brutus
-            </Badge>
-            <div className="space-y-4">
-              <h1 className="font-display text-5xl font-semibold leading-tight sm:text-6xl">
-                Systems that help people do complex work better.
-              </h1>
-              <p className="max-w-2xl text-lg leading-8 text-muted-foreground">
-                Enablement, AI workflow, and learning experience work across
-                technical training, compliance, product education, and
-                performance support.
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <Button type="button" onClick={onExplore}>
-                View proof of work
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-              <a
-                href={profile.linkedIn}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-md border border-border px-4 py-2 text-sm font-medium transition-smooth hover:bg-muted"
-              >
-                LinkedIn
-                <ExternalLink className="ml-2 h-4 w-4" />
-              </a>
-            </div>
-          </div>
-          <div className="grid content-center gap-4">
-            <div className="overflow-hidden rounded-lg border border-border bg-card shadow-2xl">
-              <img
-                src="/assets/portfolio/terrylxd-hero.png"
-                alt="TerryLXD portfolio hero screenshot."
-                className="aspect-[16/10] w-full object-cover"
-              />
-            </div>
-            <div className="grid grid-cols-3 gap-3">
-              {laneProfiles.slice(0, 3).map((laneProfile) => (
-                <div
-                  key={laneProfile.lane}
-                  className="rounded-md border border-border bg-card/80 p-3"
-                >
-                  <p className="text-sm font-medium">{laneProfile.lane}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-  );
-}
-
 function ReviewerPortfolio({
   view,
   status,
-  onExplore,
 }: {
   view: TailoredView | null;
   status: "idle" | "loading" | "ready" | "missing";
-  onExplore: () => void;
 }) {
-  if (!view && status === "ready") {
-    return <PublicLanding onExplore={onExplore} />;
-  }
-
   const model = buildViewModel(view);
   const reviewerBadge = getReviewerBadge(model.primaryLane);
+  const recruiterSummary = getRecruiterSummary(
+    model.selectedLanes,
+    model.selectedProjects,
+    model.selectedProofPoints,
+  );
 
   return (
     <main className="min-h-screen bg-background text-foreground">
@@ -551,6 +631,27 @@ function ReviewerPortfolio({
             <div className="flex flex-wrap gap-2">
               {model.selectedLanes.map((lane) => (
                 <Badge key={lane}>{lane}</Badge>
+              ))}
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {[
+                ["Best fit", recruiterSummary.bestFit],
+                ["Strongest proof", recruiterSummary.proof],
+                ["Review first", recruiterSummary.firstReview],
+                [
+                  "Work style",
+                  "Systems thinker, maker, and practical AI adopter",
+                ],
+              ].map(([label, value]) => (
+                <div
+                  key={label}
+                  className="rounded-md border border-white/10 bg-white/[0.04] p-3"
+                >
+                  <p className="text-xs uppercase text-muted-foreground">
+                    {label}
+                  </p>
+                  <p className="mt-1 text-sm font-medium">{value}</p>
+                </div>
               ))}
             </div>
           </div>
@@ -575,13 +676,8 @@ function ReviewerPortfolio({
         </div>
       </section>
 
-      {status === "missing" && (
-        <section className="mx-auto max-w-6xl px-5 pt-6">
-          <div className="rounded-md border border-primary/30 bg-primary/10 p-4 text-sm">
-            This private view was not found, so the page is showing a general
-            selected-work portfolio.
-          </div>
-        </section>
+      {status === "loading" && (
+        <span className="sr-only">Loading portfolio</span>
       )}
 
       <section className="mx-auto grid max-w-6xl gap-4 px-5 py-8 sm:grid-cols-2 lg:grid-cols-4">
@@ -601,6 +697,24 @@ function ReviewerPortfolio({
             </CardContent>
           </Card>
         ))}
+      </section>
+
+      <section className="mx-auto max-w-6xl px-5 pb-8">
+        <Card>
+          <CardContent className="grid gap-5 p-5 lg:grid-cols-[0.8fr_1.2fr]">
+            <div>
+              <p className="text-xs font-semibold uppercase text-primary">
+                Why this work is relevant
+              </p>
+              <h2 className="mt-2 font-display text-2xl font-semibold">
+                Proof that connects strategy, systems, and adoption.
+              </h2>
+            </div>
+            <p className="text-sm leading-7 text-muted-foreground">
+              {getRelevanceCopy(model.selectedLanes)}
+            </p>
+          </CardContent>
+        </Card>
       </section>
 
       <section className="mx-auto grid max-w-6xl gap-6 px-5 pb-12 lg:grid-cols-[0.72fr_1.28fr]">
@@ -632,6 +746,24 @@ function ReviewerPortfolio({
                 <Badge key={skill} variant="outline">
                   {skill}
                 </Badge>
+              ))}
+            </CardContent>
+          </Card>
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <UserRound className="h-5 w-5 text-primary" />
+                Human Context
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {humanHighlights.map((item) => (
+                <div key={item.label}>
+                  <p className="text-sm font-medium">{item.label}</p>
+                  <p className="mt-1 text-sm leading-6 text-muted-foreground">
+                    {item.detail}
+                  </p>
+                </div>
               ))}
             </CardContent>
           </Card>
@@ -699,6 +831,14 @@ export function TailoredPortfolioStudio() {
   const [selectedProofIds, setSelectedProofIds] = useState<string[]>([]);
   const [links, setLinks] = useState<GeneratedLink[]>([]);
   const [saving, setSaving] = useState(false);
+  const [savedProfiles, setSavedProfilesState] = useState<SavedTargetProfile[]>(
+    [],
+  );
+  const [brainDrafts, setBrainDrafts] = useState<StudioBrainSource[]>([]);
+  const [sourceTitle, setSourceTitle] = useState("");
+  const [sourceType, setSourceType] = useState(evidenceBrain.sourceTypes[0]);
+  const [sourceStatus, setSourceStatus] = useState(evidenceBrain.statuses[4]);
+  const [sourceText, setSourceText] = useState("");
 
   const analysis = useMemo(
     () => analyzeTarget(`${company} ${jd}`),
@@ -729,8 +869,16 @@ export function TailoredPortfolioStudio() {
   const activeProjects = activeProjectIds
     .map((id) => projects.find((project) => project.id === id))
     .filter((project): project is PortfolioProject => Boolean(project));
+  const activeProofPoints = activeProofIds
+    .map((id) => proofPoints.find((proofPoint) => proofPoint.id === id))
+    .filter((proofPoint): proofPoint is ProofPoint => Boolean(proofPoint));
   const mediaStatus = getProjectMediaStatus(activeProjects);
   const mediaNeeds = mediaStatus.filter((item) => item.status !== "approved");
+  const studioOutputs = buildStudioOutputs(
+    activeLanes,
+    activeProjects,
+    activeProofPoints,
+  );
 
   useEffect(() => {
     const syncRoute = () => setRoute(getRouteState());
@@ -740,6 +888,11 @@ export function TailoredPortfolioStudio() {
       window.removeEventListener("hashchange", syncRoute);
       window.removeEventListener("popstate", syncRoute);
     };
+  }, []);
+
+  useEffect(() => {
+    setSavedProfilesState(getSavedProfiles());
+    setBrainDrafts(getStudioBrainSources());
   }, []);
 
   useEffect(() => {
@@ -754,41 +907,8 @@ export function TailoredPortfolioStudio() {
     );
   }, [analysis]);
 
-  const openGeneralPortfolio = useCallback(() => {
-    const generalView: TailoredView = {
-      slug: "general",
-      viewLabel: "General portfolio",
-      privateCompany: "",
-      privateJobDescription: "",
-      primaryLane: "Enablement",
-      lanes: ["Enablement", "AI Operations", "Learning Experience"],
-      projectIds: [
-        "ai-talent-content-pipeline",
-        "workflow-management-platform",
-        "phishing-red-flags",
-      ],
-      proofIds: ["defense-workforce", "asset-cycle", "audit-cost", "army-lms"],
-      skillIds: getRecommendedSkills([
-        "Enablement",
-        "AI Operations",
-        "Learning Experience",
-      ]),
-      angle:
-        "Enablement, AI workflow, and learning systems with visible proof.",
-      expiresAt: undefined,
-    };
-    saveLocalView(generalView);
-    window.location.hash = "/v/general";
-  }, []);
-
   if (!route.isStudio) {
-    return (
-      <ReviewerPortfolio
-        view={view}
-        status={status}
-        onExplore={openGeneralPortfolio}
-      />
-    );
+    return <ReviewerPortfolio view={view} status={status} />;
   }
 
   const toggleLane = (lane: Lane) => {
@@ -823,11 +943,57 @@ export function TailoredPortfolioStudio() {
     );
   };
 
+  const saveTargetProfile = () => {
+    const id = makeSlug(activeLanes[0]);
+    const profileToSave: SavedTargetProfile = {
+      id,
+      name: company.trim() || `${activeLanes[0]} target`,
+      createdAt: new Date().toISOString(),
+      company: company.trim(),
+      jd,
+      lanes: activeLanes,
+      projectIds: activeProjectIds,
+      proofIds: activeProofIds,
+      skillIds: recommendedSkills,
+      linkSlugs: links.slice(0, 4).map((link) => link.slug),
+    };
+    const nextProfiles = [
+      profileToSave,
+      ...savedProfiles.filter((item) => item.id !== profileToSave.id),
+    ].slice(0, 12);
+    setSavedProfiles(nextProfiles);
+    setSavedProfilesState(nextProfiles);
+  };
+
+  const applyTargetProfile = (targetProfile: SavedTargetProfile) => {
+    setCompany(targetProfile.company);
+    setJd(targetProfile.jd);
+    setSelectedLanes(targetProfile.lanes);
+    setSelectedProjectIds(targetProfile.projectIds);
+    setSelectedProofIds(targetProfile.proofIds);
+  };
+
+  const addBrainSource = () => {
+    if (!sourceTitle.trim() && !sourceText.trim()) return;
+    const source: StudioBrainSource = {
+      id: makeSlug(activeLanes[0]),
+      title: sourceTitle.trim() || "Untitled source note",
+      type: sourceType,
+      status: sourceStatus,
+      linkedProjectIds: activeProjectIds.slice(0, 4),
+      note: "Review before public use; raw content stays in the owner workspace.",
+      rawText: sourceText.slice(0, 4000),
+    };
+    const nextSources = [source, ...brainDrafts].slice(0, 20);
+    setStudioBrainSources(nextSources);
+    setBrainDrafts(nextSources);
+    setSourceTitle("");
+    setSourceText("");
+  };
+
   const createLink = async () => {
     setSaving(true);
-    const slug = makeSlug();
-    const expires = new Date();
-    expires.setDate(expires.getDate() + 21);
+    const slug = makeSlug(activeLanes[0]);
     const input: TailoredViewInput = {
       slug,
       viewLabel: company.trim() || "Private target view",
@@ -839,7 +1005,7 @@ export function TailoredPortfolioStudio() {
       proofIds: activeProofIds,
       skillIds: recommendedSkills,
       angle: analysis.angle,
-      expiresAt: expires.toISOString(),
+      expiresAt: undefined,
     };
 
     let source: "backend" | "local" = "local";
@@ -860,7 +1026,7 @@ export function TailoredPortfolioStudio() {
         slug,
         label: input.viewLabel,
         lanes: activeLanes,
-        expires: expires.toLocaleDateString(),
+        state: "active",
         source,
       },
       ...current,
@@ -962,6 +1128,60 @@ export function TailoredPortfolioStudio() {
         <div className="space-y-6">
           <Card>
             <CardHeader>
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <CardTitle className="flex items-center gap-2">
+                  <Save className="h-5 w-5 text-primary" />
+                  Saved Target Profiles
+                </CardTitle>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={saveTargetProfile}
+                >
+                  Save current setup
+                </Button>
+              </div>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {savedProfiles.length === 0 ? (
+                <p className="text-sm leading-6 text-muted-foreground">
+                  Save a role setup after the lane, projects, metrics, and link
+                  feel right. Profiles stay private to this browser for now.
+                </p>
+              ) : (
+                savedProfiles.map((targetProfile) => (
+                  <div
+                    key={targetProfile.id}
+                    className="rounded-md border border-border bg-muted/20 p-3"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-3">
+                      <div>
+                        <p className="text-sm font-medium">
+                          {targetProfile.name}
+                        </p>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          {targetProfile.lanes.join(", ")} ·{" "}
+                          {targetProfile.projectIds.length} projects ·{" "}
+                          {targetProfile.proofIds.length} metrics
+                        </p>
+                      </div>
+                      <Button
+                        type="button"
+                        size="sm"
+                        variant="outline"
+                        onClick={() => applyTargetProfile(targetProfile)}
+                      >
+                        Apply
+                      </Button>
+                    </div>
+                  </div>
+                ))
+              )}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <SearchCheck className="h-5 w-5 text-primary" />
                 Step 2. Recommended Lane
@@ -1050,6 +1270,73 @@ export function TailoredPortfolioStudio() {
                   ))}
                 </div>
               </div>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <label className="block space-y-2" htmlFor="source-title">
+                  <span className="text-sm font-medium">Source title</span>
+                  <input
+                    id="source-title"
+                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                    value={sourceTitle}
+                    onChange={(event) => setSourceTitle(event.target.value)}
+                    placeholder="Resume, transcript, screenshot note..."
+                  />
+                </label>
+                <label className="block space-y-2" htmlFor="source-type">
+                  <span className="text-sm font-medium">Source type</span>
+                  <select
+                    id="source-type"
+                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                    value={sourceType}
+                    onChange={(event) => setSourceType(event.target.value)}
+                  >
+                    {evidenceBrain.sourceTypes.map((type) => (
+                      <option key={type} value={type}>
+                        {type}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <label className="block space-y-2" htmlFor="source-status">
+                  <span className="text-sm font-medium">Safety status</span>
+                  <select
+                    id="source-status"
+                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                    value={sourceStatus}
+                    onChange={(event) =>
+                      setSourceStatus(
+                        event.target.value as EvidenceSourceStatus,
+                      )
+                    }
+                  >
+                    {evidenceBrain.statuses.map((status) => (
+                      <option key={status} value={status}>
+                        {status}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+                <div className="rounded-md border border-border bg-muted/20 p-3 text-sm leading-6 text-muted-foreground">
+                  Attachments are represented as records in this pass. Use the
+                  title and notes to point at the file, then mark it approved
+                  only after crop, redaction, and project match are checked.
+                </div>
+              </div>
+              <label className="block space-y-2" htmlFor="source-text">
+                <span className="text-sm font-medium">
+                  Paste notes, transcript, or extraction
+                </span>
+                <Textarea
+                  id="source-text"
+                  value={sourceText}
+                  onChange={(event) => setSourceText(event.target.value)}
+                  className="min-h-28"
+                  maxLength={4000}
+                />
+              </label>
+              <Button type="button" variant="outline" onClick={addBrainSource}>
+                <FileText className="mr-2 h-4 w-4" />
+                Add source record
+              </Button>
               <div>
                 <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
                   Brain checks before public use
@@ -1063,6 +1350,35 @@ export function TailoredPortfolioStudio() {
                       {check}
                     </div>
                   ))}
+                </div>
+              </div>
+              <div>
+                <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
+                  Review queue
+                </p>
+                <div className="space-y-2">
+                  {[...brainDrafts, ...brainSources]
+                    .slice(0, 8)
+                    .map((source) => (
+                      <div
+                        key={source.id}
+                        className="rounded-md border border-border bg-muted/20 p-3"
+                      >
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <p className="text-sm font-medium">{source.title}</p>
+                          <Badge variant="outline">{source.status}</Badge>
+                        </div>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          {source.type} ·{" "}
+                          {source.linkedProjectIds.length > 0
+                            ? `${source.linkedProjectIds.length} linked projects`
+                            : "not linked yet"}
+                        </p>
+                        <p className="mt-2 text-xs leading-5 text-muted-foreground">
+                          {source.note}
+                        </p>
+                      </div>
+                    ))}
                 </div>
               </div>
             </CardContent>
@@ -1130,8 +1446,8 @@ export function TailoredPortfolioStudio() {
               {links.length === 0 ? (
                 <p className="text-sm text-muted-foreground">
                   Links will look like{" "}
-                  <span className="font-mono">#/v/a7k92p</span>. The company/JD
-                  stays private in the studio data.
+                  <span className="font-mono">#/work/workflow-a7k9</span>. The
+                  company/JD stays private in the studio data.
                 </p>
               ) : (
                 <div className="space-y-3">
@@ -1142,7 +1458,9 @@ export function TailoredPortfolioStudio() {
                     >
                       <div className="flex flex-wrap items-center justify-between gap-3">
                         <span className="font-medium">{link.label}</span>
-                        <Badge variant="outline">{link.source}</Badge>
+                        <Badge variant="outline">
+                          {link.state} · {link.source}
+                        </Badge>
                       </div>
                       <p className="mt-2 break-all text-muted-foreground">
                         {link.url}
@@ -1156,7 +1474,7 @@ export function TailoredPortfolioStudio() {
                           <ExternalLink className="h-4 w-4" />
                         </a>
                         <span className="text-muted-foreground">
-                          Expires {link.expires}
+                          Active until archived
                         </span>
                       </div>
                     </div>
@@ -1215,6 +1533,16 @@ export function TailoredPortfolioStudio() {
                       >
                         {project.visual.quality}
                       </Badge>
+                      <div className="mt-2 flex flex-wrap gap-1">
+                        {project.readiness.slice(0, 2).map((status) => (
+                          <span
+                            key={status}
+                            className="rounded-full bg-background px-2 py-0.5 text-[11px] text-muted-foreground"
+                          >
+                            {status}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </button>
                 ))}
@@ -1323,6 +1651,53 @@ export function TailoredPortfolioStudio() {
                     </div>
                   );
                 })}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Sparkles className="h-5 w-5 text-primary" />
+                Copy-Ready Outputs
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="rounded-md border border-border bg-muted/20 p-3">
+                <p className="text-xs font-semibold uppercase text-muted-foreground">
+                  Recruiter summary
+                </p>
+                <p className="mt-2 text-sm leading-6">
+                  {studioOutputs.recruiter}
+                </p>
+              </div>
+              <div className="rounded-md border border-border bg-muted/20 p-3">
+                <p className="text-xs font-semibold uppercase text-muted-foreground">
+                  Resume emphasis bullets
+                </p>
+                <ul className="mt-2 space-y-2 text-sm leading-6">
+                  {studioOutputs.resume.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-md border border-border bg-muted/20 p-3">
+                <p className="text-xs font-semibold uppercase text-muted-foreground">
+                  LinkedIn summary
+                </p>
+                <p className="mt-2 text-sm leading-6">
+                  {studioOutputs.linkedin}
+                </p>
+              </div>
+              <div className="rounded-md border border-border bg-muted/20 p-3">
+                <p className="text-xs font-semibold uppercase text-muted-foreground">
+                  Interview talking points
+                </p>
+                <ul className="mt-2 space-y-2 text-sm leading-6">
+                  {studioOutputs.interview.map((prompt) => (
+                    <li key={prompt}>{prompt}</li>
+                  ))}
+                </ul>
               </div>
             </CardContent>
           </Card>

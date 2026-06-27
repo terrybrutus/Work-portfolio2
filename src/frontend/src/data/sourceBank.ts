@@ -22,6 +22,14 @@ export type VisualAsset = {
   missing?: string[];
 };
 
+export type ProjectReadiness =
+  | "portfolio-ready"
+  | "needs media"
+  | "needs metrics"
+  | "needs clearer outcome"
+  | "needs artifact"
+  | "studio-only";
+
 export type PortfolioProject = {
   id: string;
   title: string;
@@ -36,6 +44,7 @@ export type PortfolioProject = {
   lanes: Lane[];
   visual: VisualAsset;
   evidenceNeeds: string[];
+  readiness: ProjectReadiness[];
   repo?: string;
   source?: string;
 };
@@ -45,6 +54,28 @@ export type LaneProfile = {
   headline: string;
   reviewerTakeaway: string;
   keywords: string[];
+};
+
+export type HumanHighlight = {
+  label: string;
+  detail: string;
+};
+
+export type EvidenceSourceStatus =
+  | "approved"
+  | "public-safe"
+  | "needs redaction"
+  | "private only"
+  | "needs verification"
+  | "too vague";
+
+export type BrainSource = {
+  id: string;
+  title: string;
+  type: string;
+  status: EvidenceSourceStatus;
+  linkedProjectIds: string[];
+  note: string;
 };
 
 export const profile = {
@@ -268,7 +299,7 @@ export const projects: PortfolioProject[] = [
       src: "/assets/portfolio/ai-content-pipeline-map.svg",
       alt: "Process map showing source review, AI review, scripting, QA, and production standard steps.",
       caption:
-        "Pipeline map showing the workflow evidence this case study needs to support.",
+        "Pipeline map showing source review, AI review, scripting, QA, and production standards.",
       quality: "needs-source",
       missing: [
         "Redacted pipeline screenshot",
@@ -281,6 +312,7 @@ export const projects: PortfolioProject[] = [
       "Before/after timing visual",
       "Sample output or QA checklist preview",
     ],
+    readiness: ["needs media", "needs artifact"],
   },
   {
     id: "workflow-management-platform",
@@ -320,6 +352,7 @@ export const projects: PortfolioProject[] = [
       "Redacted status board",
       "Before/after tracking diagram",
     ],
+    readiness: ["needs media", "needs artifact"],
   },
   {
     id: "enterprise-onboarding-journey",
@@ -359,6 +392,7 @@ export const projects: PortfolioProject[] = [
       "Redacted stakeholder map",
       "Onboarding architecture artifact",
     ],
+    readiness: ["needs media", "needs artifact"],
   },
   {
     id: "compliance-enablement-ecosystem",
@@ -398,6 +432,7 @@ export const projects: PortfolioProject[] = [
       "Tracking artifact",
       "Redacted audit-readiness evidence",
     ],
+    readiness: ["needs media", "needs artifact"],
   },
   {
     id: "phishing-red-flags",
@@ -437,6 +472,7 @@ export const projects: PortfolioProject[] = [
       "Short click-through GIF",
       "Clean exported course screen",
     ],
+    readiness: ["needs media"],
     source: "terrylxd.com",
   },
   {
@@ -477,6 +513,7 @@ export const projects: PortfolioProject[] = [
       "Short interaction GIF",
       "Clean exported course screen",
     ],
+    readiness: ["needs media"],
     source: "terrylxd.com",
   },
   {
@@ -516,6 +553,7 @@ export const projects: PortfolioProject[] = [
       "PDF thumbnails",
       "Storyboard or job-aid screenshots",
     ],
+    readiness: ["needs media", "needs artifact"],
     source: "instructionaldesignbyterry.com",
   },
   {
@@ -555,6 +593,7 @@ export const projects: PortfolioProject[] = [
       "Short gameplay GIF",
       "Demo or deployed app link",
     ],
+    readiness: ["needs media", "needs artifact"],
     repo: "https://github.com/terrybrutus/career-city",
   },
 ];
@@ -576,6 +615,8 @@ export const evidenceBrain = {
     ".csv",
   ],
   sourceTypes: [
+    "Resume",
+    "LinkedIn text",
     "Project screenshot",
     "Demo GIF/video",
     "Document preview",
@@ -592,12 +633,87 @@ export const evidenceBrain = {
     "Clear artifact status",
     "Strong enough for reviewer view",
   ],
+  statuses: [
+    "approved",
+    "public-safe",
+    "needs redaction",
+    "private only",
+    "needs verification",
+    "too vague",
+  ] satisfies EvidenceSourceStatus[],
 };
+
+export const brainSources: BrainSource[] = [
+  {
+    id: "latest-resume",
+    title: "Current resume",
+    type: "Resume",
+    status: "needs verification",
+    linkedProjectIds: [
+      "ai-talent-content-pipeline",
+      "workflow-management-platform",
+    ],
+    note: "Good for role language, metrics, and work history; verify wording before publishing.",
+  },
+  {
+    id: "linkedin-profile",
+    title: "LinkedIn profile export",
+    type: "LinkedIn text",
+    status: "needs verification",
+    linkedProjectIds: [
+      "enterprise-onboarding-journey",
+      "addie-qa-job-aid-suite",
+    ],
+    note: "Useful for role history, but should be simmered down before becoming public copy.",
+  },
+  {
+    id: "legacy-isd-site",
+    title: "Instructional Design by Terry artifacts",
+    type: "Old website artifact",
+    status: "needs redaction",
+    linkedProjectIds: ["phishing-red-flags", "addie-qa-job-aid-suite"],
+    note: "Good source for older ISD proof; media needs cleaner crops and current framing.",
+  },
+  {
+    id: "terrylxd-site",
+    title: "TerryLXD portfolio screenshots",
+    type: "Old website artifact",
+    status: "needs redaction",
+    linkedProjectIds: ["phishing-red-flags", "crypto-decentralization-module"],
+    note: "Helpful as discovery evidence, but public cards need direct project media.",
+  },
+  {
+    id: "github-repos",
+    title: "GitHub project repos",
+    type: "GitHub repo",
+    status: "public-safe",
+    linkedProjectIds: ["career-city", "workflow-management-platform"],
+    note: "Useful for shipped-work evidence and technical credibility.",
+  },
+];
 
 export const resumeHighlights = [
   "Senior Talent Development Lead and AI Enablement Architect at CTEC, supporting a 158,000-person defense acquisition workforce.",
   "Lead Talent Enablement and Experience Architect through Legacy Learning Consulting across enterprise, municipal, sales, healthcare, and SaaS contexts.",
   "Instructional Systems Designer background with technical simulation and Army LMS deployment experience at 1.2M+ user scale.",
+];
+
+export const humanHighlights: HumanHighlight[] = [
+  {
+    label: "Former Division I athlete",
+    detail:
+      "Played basketball at Ole Miss, so preparation, feedback, pressure, and team standards are part of how I work.",
+  },
+  {
+    label: "Competitive outlet",
+    detail:
+      "Pickleball keeps the same quick-read, adjust-fast energy alive without pretending every problem needs a full playbook.",
+  },
+  {
+    label: "Maker mindset",
+    detail:
+      "Sewing and making clothes sharpen the same instincts I use in systems work: fit, iteration, detail, and craft.",
+  },
 ];
 
 export const skills = [

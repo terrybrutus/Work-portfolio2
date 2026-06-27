@@ -32048,7 +32048,7 @@ function Textarea({ className, ...props }) {
   );
 }
 const profile = {
-  linkedIn: "https://www.linkedin.com/in/terrybrutus",
+  name: "Terry Brutus",
   github: "https://github.com/terrybrutus",
   shortSummary: "Enablement systems builder with a learning architecture background, practical AI workflow experience, and proof across regulated, technical, and distributed work environments."
 };
@@ -32238,7 +32238,7 @@ const projects = [
     visual: {
       src: "/assets/portfolio/ai-content-pipeline-map.svg",
       alt: "Process map showing source review, AI review, scripting, QA, and production standard steps.",
-      caption: "Pipeline map showing the workflow evidence this case study needs to support.",
+      caption: "Pipeline map showing source review, AI review, scripting, QA, and production standards.",
       quality: "needs-source",
       missing: [
         "Redacted pipeline screenshot",
@@ -32250,7 +32250,8 @@ const projects = [
       "Redacted pipeline screenshot",
       "Before/after timing visual",
       "Sample output or QA checklist preview"
-    ]
+    ],
+    readiness: ["needs media", "needs artifact"]
   },
   {
     id: "workflow-management-platform",
@@ -32286,7 +32287,8 @@ const projects = [
       "Actual workflow app screenshot",
       "Redacted status board",
       "Before/after tracking diagram"
-    ]
+    ],
+    readiness: ["needs media", "needs artifact"]
   },
   {
     id: "enterprise-onboarding-journey",
@@ -32322,7 +32324,8 @@ const projects = [
       "Actual journey map",
       "Redacted stakeholder map",
       "Onboarding architecture artifact"
-    ]
+    ],
+    readiness: ["needs media", "needs artifact"]
   },
   {
     id: "compliance-enablement-ecosystem",
@@ -32358,7 +32361,8 @@ const projects = [
       "Mobile screen preview",
       "Tracking artifact",
       "Redacted audit-readiness evidence"
-    ]
+    ],
+    readiness: ["needs media", "needs artifact"]
   },
   {
     id: "phishing-red-flags",
@@ -32395,6 +32399,7 @@ const projects = [
       "Short click-through GIF",
       "Clean exported course screen"
     ],
+    readiness: ["needs media"],
     source: "terrylxd.com"
   },
   {
@@ -32432,6 +32437,7 @@ const projects = [
       "Short interaction GIF",
       "Clean exported course screen"
     ],
+    readiness: ["needs media"],
     source: "terrylxd.com"
   },
   {
@@ -32469,6 +32475,7 @@ const projects = [
       "PDF thumbnails",
       "Storyboard or job-aid screenshots"
     ],
+    readiness: ["needs media", "needs artifact"],
     source: "instructionaldesignbyterry.com"
   },
   {
@@ -32506,6 +32513,7 @@ const projects = [
       "Short gameplay GIF",
       "Demo or deployed app link"
     ],
+    readiness: ["needs media", "needs artifact"],
     repo: "https://github.com/terrybrutus/career-city"
   }
 ];
@@ -32525,18 +32533,100 @@ const evidenceBrain = {
     ".md",
     ".csv"
   ],
+  sourceTypes: [
+    "Resume",
+    "LinkedIn text",
+    "Project screenshot",
+    "Demo GIF/video",
+    "Document preview",
+    "Raw notes",
+    "Transcript",
+    "GitHub repo",
+    "Old website artifact",
+    "Metric/source evidence"
+  ],
   qualityChecks: [
     "Project match",
     "Readable crop",
     "No private/client-sensitive information",
     "Clear artifact status",
     "Strong enough for reviewer view"
+  ],
+  statuses: [
+    "approved",
+    "public-safe",
+    "needs redaction",
+    "private only",
+    "needs verification",
+    "too vague"
   ]
 };
+const brainSources = [
+  {
+    id: "latest-resume",
+    title: "Current resume",
+    type: "Resume",
+    status: "needs verification",
+    linkedProjectIds: [
+      "ai-talent-content-pipeline",
+      "workflow-management-platform"
+    ],
+    note: "Good for role language, metrics, and work history; verify wording before publishing."
+  },
+  {
+    id: "linkedin-profile",
+    title: "LinkedIn profile export",
+    type: "LinkedIn text",
+    status: "needs verification",
+    linkedProjectIds: [
+      "enterprise-onboarding-journey",
+      "addie-qa-job-aid-suite"
+    ],
+    note: "Useful for role history, but should be simmered down before becoming public copy."
+  },
+  {
+    id: "legacy-isd-site",
+    title: "Instructional Design by Terry artifacts",
+    type: "Old website artifact",
+    status: "needs redaction",
+    linkedProjectIds: ["phishing-red-flags", "addie-qa-job-aid-suite"],
+    note: "Good source for older ISD proof; media needs cleaner crops and current framing."
+  },
+  {
+    id: "terrylxd-site",
+    title: "TerryLXD portfolio screenshots",
+    type: "Old website artifact",
+    status: "needs redaction",
+    linkedProjectIds: ["phishing-red-flags", "crypto-decentralization-module"],
+    note: "Helpful as discovery evidence, but public cards need direct project media."
+  },
+  {
+    id: "github-repos",
+    title: "GitHub project repos",
+    type: "GitHub repo",
+    status: "public-safe",
+    linkedProjectIds: ["career-city", "workflow-management-platform"],
+    note: "Useful for shipped-work evidence and technical credibility."
+  }
+];
 const resumeHighlights = [
   "Senior Talent Development Lead and AI Enablement Architect at CTEC, supporting a 158,000-person defense acquisition workforce.",
   "Lead Talent Enablement and Experience Architect through Legacy Learning Consulting across enterprise, municipal, sales, healthcare, and SaaS contexts.",
   "Instructional Systems Designer background with technical simulation and Army LMS deployment experience at 1.2M+ user scale."
+];
+const humanHighlights = [
+  {
+    label: "Former Division I athlete",
+    detail: "Played basketball at Ole Miss, so preparation, feedback, pressure, and team standards are part of how I work."
+  },
+  {
+    label: "Competitive outlet",
+    detail: "Pickleball keeps the same quick-read, adjust-fast energy alive without pretending every problem needs a full playbook."
+  },
+  {
+    label: "Maker mindset",
+    detail: "Sewing and making clothes sharpen the same instincts I use in systems work: fit, iteration, detail, and craft."
+  }
 ];
 const skills = [
   "Talent journey architecture",
@@ -32668,29 +32758,18 @@ const createLucideIcon = (iconName, iconNode) => {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$g = [
-  ["path", { d: "M5 12h14", key: "1ays0h" }],
-  ["path", { d: "m12 5 7 7-7 7", key: "xquz4c" }]
-];
-const ArrowRight = createLucideIcon("arrow-right", __iconNode$g);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$f = [
+const __iconNode$j = [
   ["path", { d: "M7 7h10v10", key: "1tivn9" }],
   ["path", { d: "M7 17 17 7", key: "1vkiza" }]
 ];
-const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$f);
+const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$j);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$e = [
+const __iconNode$i = [
   ["path", { d: "M12 8V4H8", key: "hb8ula" }],
   ["rect", { width: "16", height: "12", x: "4", y: "8", rx: "2", key: "enze0r" }],
   ["path", { d: "M2 14h2", key: "vft8re" }],
@@ -32698,35 +32777,35 @@ const __iconNode$e = [
   ["path", { d: "M15 13v2", key: "1xurst" }],
   ["path", { d: "M9 13v2", key: "rq6x2g" }]
 ];
-const Bot = createLucideIcon("bot", __iconNode$e);
+const Bot = createLucideIcon("bot", __iconNode$i);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$d = [
+const __iconNode$h = [
   ["path", { d: "M12 12h.01", key: "1mp3jc" }],
   ["path", { d: "M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2", key: "1ksdt3" }],
   ["path", { d: "M22 13a18.15 18.15 0 0 1-20 0", key: "12hx5q" }],
   ["rect", { width: "20", height: "14", x: "2", y: "6", rx: "2", key: "i6l2r4" }]
 ];
-const BriefcaseBusiness = createLucideIcon("briefcase-business", __iconNode$d);
+const BriefcaseBusiness = createLucideIcon("briefcase-business", __iconNode$h);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$c = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
-const Check = createLucideIcon("check", __iconNode$c);
+const __iconNode$g = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = createLucideIcon("check", __iconNode$g);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$b = [
+const __iconNode$f = [
   ["rect", { width: "8", height: "4", x: "8", y: "2", rx: "1", ry: "1", key: "tgr4d6" }],
   [
     "path",
@@ -32736,38 +32815,38 @@ const __iconNode$b = [
     }
   ]
 ];
-const Clipboard = createLucideIcon("clipboard", __iconNode$b);
+const Clipboard = createLucideIcon("clipboard", __iconNode$f);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$a = [
+const __iconNode$e = [
   ["ellipse", { cx: "12", cy: "5", rx: "9", ry: "3", key: "msslwz" }],
   ["path", { d: "M3 5V19A9 3 0 0 0 21 19V5", key: "1wlel7" }],
   ["path", { d: "M3 12A9 3 0 0 0 21 12", key: "mv7ke4" }]
 ];
-const Database = createLucideIcon("database", __iconNode$a);
+const Database = createLucideIcon("database", __iconNode$e);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$9 = [
+const __iconNode$d = [
   ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
   ["path", { d: "M10 14 21 3", key: "gplh6r" }],
   ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
 ];
-const ExternalLink = createLucideIcon("external-link", __iconNode$9);
+const ExternalLink = createLucideIcon("external-link", __iconNode$d);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$8 = [
+const __iconNode$c = [
   ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
   [
     "path",
@@ -32776,14 +32855,28 @@ const __iconNode$8 = [
   ["path", { d: "m9 18-1.5-1.5", key: "1j6qii" }],
   ["circle", { cx: "5", cy: "14", r: "3", key: "ufru5t" }]
 ];
-const FileSearch = createLucideIcon("file-search", __iconNode$8);
+const FileSearch = createLucideIcon("file-search", __iconNode$c);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$7 = [
+const __iconNode$b = [
+  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
+  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
+  ["path", { d: "M10 9H8", key: "b1mrlr" }],
+  ["path", { d: "M16 13H8", key: "t4e002" }],
+  ["path", { d: "M16 17H8", key: "z1uh3a" }]
+];
+const FileText = createLucideIcon("file-text", __iconNode$b);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$a = [
   [
     "path",
     {
@@ -32793,7 +32886,43 @@ const __iconNode$7 = [
   ],
   ["path", { d: "M9 18c-4.51 2-5-2-7-2", key: "9comsn" }]
 ];
-const Github = createLucideIcon("github", __iconNode$7);
+const Github = createLucideIcon("github", __iconNode$a);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$9 = [
+  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", ry: "2", key: "1m3agn" }],
+  ["circle", { cx: "9", cy: "9", r: "2", key: "af1f0g" }],
+  ["path", { d: "m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21", key: "1xmnt7" }]
+];
+const Image = createLucideIcon("image", __iconNode$9);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$8 = [
+  ["path", { d: "M9 17H7A5 5 0 0 1 7 7h2", key: "8i5ue5" }],
+  ["path", { d: "M15 7h2a5 5 0 1 1 0 10h-2", key: "1b9ql8" }],
+  ["line", { x1: "8", x2: "16", y1: "12", y2: "12", key: "1jonct" }]
+];
+const Link2 = createLucideIcon("link-2", __iconNode$8);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$7 = [
+  ["circle", { cx: "12", cy: "16", r: "1", key: "1au0dj" }],
+  ["rect", { x: "3", y: "10", width: "18", height: "12", rx: "2", key: "6s8ecr" }],
+  ["path", { d: "M7 10V7a5 5 0 0 1 10 0v3", key: "1pqi11" }]
+];
+const LockKeyhole = createLucideIcon("lock-keyhole", __iconNode$7);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32801,11 +32930,10 @@ const Github = createLucideIcon("github", __iconNode$7);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$6 = [
-  ["rect", { width: "18", height: "18", x: "3", y: "3", rx: "2", ry: "2", key: "1m3agn" }],
-  ["circle", { cx: "9", cy: "9", r: "2", key: "af1f0g" }],
-  ["path", { d: "m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21", key: "1xmnt7" }]
+  ["path", { d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8", key: "1357e3" }],
+  ["path", { d: "M3 3v5h5", key: "1xhq8a" }]
 ];
-const Image = createLucideIcon("image", __iconNode$6);
+const RotateCcw = createLucideIcon("rotate-ccw", __iconNode$6);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32813,11 +32941,17 @@ const Image = createLucideIcon("image", __iconNode$6);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$5 = [
-  ["path", { d: "M9 17H7A5 5 0 0 1 7 7h2", key: "8i5ue5" }],
-  ["path", { d: "M15 7h2a5 5 0 1 1 0 10h-2", key: "1b9ql8" }],
-  ["line", { x1: "8", x2: "16", y1: "12", y2: "12", key: "1jonct" }]
+  [
+    "path",
+    {
+      d: "M15.2 3a2 2 0 0 1 1.4.6l3.8 3.8a2 2 0 0 1 .6 1.4V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z",
+      key: "1c8476"
+    }
+  ],
+  ["path", { d: "M17 21v-7a1 1 0 0 0-1-1H8a1 1 0 0 0-1 1v7", key: "1ydtos" }],
+  ["path", { d: "M7 3v4a1 1 0 0 0 1 1h7", key: "t51u73" }]
 ];
-const Link2 = createLucideIcon("link-2", __iconNode$5);
+const Save = createLucideIcon("save", __iconNode$5);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32825,11 +32959,11 @@ const Link2 = createLucideIcon("link-2", __iconNode$5);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$4 = [
-  ["circle", { cx: "12", cy: "16", r: "1", key: "1au0dj" }],
-  ["rect", { x: "3", y: "10", width: "18", height: "12", rx: "2", key: "6s8ecr" }],
-  ["path", { d: "M7 10V7a5 5 0 0 1 10 0v3", key: "1pqi11" }]
+  ["path", { d: "m8 11 2 2 4-4", key: "1sed1v" }],
+  ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }],
+  ["path", { d: "m21 21-4.3-4.3", key: "1qie3q" }]
 ];
-const LockKeyhole = createLucideIcon("lock-keyhole", __iconNode$4);
+const SearchCheck = createLucideIcon("search-check", __iconNode$4);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32837,10 +32971,19 @@ const LockKeyhole = createLucideIcon("lock-keyhole", __iconNode$4);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$3 = [
-  ["path", { d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8", key: "1357e3" }],
-  ["path", { d: "M3 3v5h5", key: "1xhq8a" }]
+  [
+    "path",
+    {
+      d: "M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z",
+      key: "4pj2yx"
+    }
+  ],
+  ["path", { d: "M20 3v4", key: "1olli1" }],
+  ["path", { d: "M22 5h-4", key: "1gvqau" }],
+  ["path", { d: "M4 17v2", key: "vumght" }],
+  ["path", { d: "M5 18H3", key: "zchphs" }]
 ];
-const RotateCcw = createLucideIcon("rotate-ccw", __iconNode$3);
+const Sparkles = createLucideIcon("sparkles", __iconNode$3);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32848,18 +32991,6 @@ const RotateCcw = createLucideIcon("rotate-ccw", __iconNode$3);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$2 = [
-  ["path", { d: "m8 11 2 2 4-4", key: "1sed1v" }],
-  ["circle", { cx: "11", cy: "11", r: "8", key: "4ej97u" }],
-  ["path", { d: "m21 21-4.3-4.3", key: "1qie3q" }]
-];
-const SearchCheck = createLucideIcon("search-check", __iconNode$2);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$1 = [
   [
     "path",
     {
@@ -32870,7 +33001,18 @@ const __iconNode$1 = [
   ["path", { d: "M12 9v4", key: "juzpu7" }],
   ["path", { d: "M12 17h.01", key: "p32p05" }]
 ];
-const TriangleAlert = createLucideIcon("triangle-alert", __iconNode$1);
+const TriangleAlert = createLucideIcon("triangle-alert", __iconNode$2);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$1 = [
+  ["circle", { cx: "12", cy: "8", r: "5", key: "1hypcn" }],
+  ["path", { d: "M20 21a8 8 0 0 0-16 0", key: "rfgkzh" }]
+];
+const UserRound = createLucideIcon("user-round", __iconNode$1);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32896,6 +33038,8 @@ const __iconNode = [
 const WandSparkles = createLucideIcon("wand-sparkles", __iconNode);
 const sampleJd = "Senior enablement role partnering with product, sales, and operations teams to build AI-assisted onboarding, technical training, stakeholder-ready assets, and measurable adoption programs.";
 const localStorageKey = "terry-portfolio-tailored-views";
+const savedProfilesKey = "terry-portfolio-target-profiles";
+const studioBrainKey = "terry-portfolio-brain-sources";
 function isLane(value) {
   return laneProfiles.some((profileItem) => profileItem.lane === value);
 }
@@ -33002,27 +33146,39 @@ function getMetricSourceNote(metric, selectedProjects) {
   return linkedProject ? `Used by ${linkedProject.shortTitle}` : "Background evidence";
 }
 function getRouteState() {
-  var _a2, _b2;
+  var _a2, _b2, _c2, _d2;
   const hash = window.location.hash;
   const normalizedHash = hash.toLowerCase();
   const params = new URLSearchParams(window.location.search);
   const path = window.location.pathname.toLowerCase();
-  const slugFromHash = ((_a2 = hash.match(/^#\/v\/([a-z0-9-]+)$/i)) == null ? void 0 : _a2[1]) ?? null;
-  const slugFromPath = ((_b2 = path.match(/\/v\/([a-z0-9-]+)$/i)) == null ? void 0 : _b2[1]) ?? null;
+  const slugFromHash = ((_a2 = hash.match(/^#\/work\/([a-z0-9-]+)$/i)) == null ? void 0 : _a2[1]) ?? ((_b2 = hash.match(/^#\/v\/([a-z0-9-]+)$/i)) == null ? void 0 : _b2[1]) ?? null;
+  const slugFromPath = ((_c2 = path.match(/\/work\/([a-z0-9-]+)$/i)) == null ? void 0 : _c2[1]) ?? ((_d2 = path.match(/\/v\/([a-z0-9-]+)$/i)) == null ? void 0 : _d2[1]) ?? null;
   return {
     isStudio: normalizedHash === "#studio" || normalizedHash === "#/studio" || normalizedHash === "#owner" || normalizedHash === "#/owner" || params.get("studio") === "1" || params.get("owner") === "1" || path.endsWith("/studio") || path.endsWith("/owner"),
     slug: slugFromHash ?? slugFromPath
   };
 }
-function makeSlug() {
-  const bytes = new Uint8Array(5);
+function getSlugPrefix(primaryLane) {
+  const prefixes = {
+    Enablement: "readiness",
+    "AI Operations": "aiops",
+    "Learning Experience": "learning",
+    "Technical Product": "workflow",
+    "Sales Enablement": "field",
+    Compliance: "compliance"
+  };
+  return prefixes[primaryLane];
+}
+function makeSlug(primaryLane) {
+  const bytes = new Uint8Array(3);
   window.crypto.getRandomValues(bytes);
-  return Array.from(bytes).map((byte) => byte.toString(36).padStart(2, "0")).join("").slice(0, 8);
+  const suffix2 = Array.from(bytes).map((byte) => byte.toString(36).padStart(2, "0")).join("").slice(0, 4);
+  return `${getSlugPrefix(primaryLane)}-${suffix2}`;
 }
 function buildShareUrl(slug) {
   const url = new URL(window.location.href);
   url.search = "";
-  url.hash = `/v/${slug}`;
+  url.hash = `/work/${slug}`;
   return url.toString();
 }
 function getLocalViews() {
@@ -33039,6 +33195,26 @@ function saveLocalView(view) {
 }
 function getLocalView(slug) {
   return getLocalViews()[slug] ?? null;
+}
+function getSavedProfiles() {
+  try {
+    return JSON.parse(localStorage.getItem(savedProfilesKey) ?? "[]");
+  } catch {
+    return [];
+  }
+}
+function setSavedProfiles(profiles) {
+  localStorage.setItem(savedProfilesKey, JSON.stringify(profiles));
+}
+function getStudioBrainSources() {
+  try {
+    return JSON.parse(localStorage.getItem(studioBrainKey) ?? "[]");
+  } catch {
+    return [];
+  }
+}
+function setStudioBrainSources(sources) {
+  localStorage.setItem(studioBrainKey, JSON.stringify(sources));
 }
 function buildViewModel(view) {
   var _a2, _b2;
@@ -33058,6 +33234,48 @@ function buildViewModel(view) {
     primaryLane
   };
 }
+function getRelevanceCopy(selectedLanes) {
+  const laneText = selectedLanes.slice(0, 2).join(" and ");
+  return `This selection emphasizes ${laneText.toLowerCase()} work where the proof is tied to clearer execution, practical adoption, and measurable support for people doing complex work.`;
+}
+function getRecruiterSummary(selectedLanes, selectedProjects, selectedProofPoints) {
+  var _a2;
+  const bestFit = selectedLanes.slice(0, 3).join(", ");
+  const firstProject = ((_a2 = selectedProjects[0]) == null ? void 0 : _a2.shortTitle) ?? "portfolio evidence";
+  const strongestMetric = selectedProofPoints[0] ? `${selectedProofPoints[0].value} ${selectedProofPoints[0].label.toLowerCase()}` : "measurable enablement outcomes";
+  return {
+    focus: "Enablement systems, AI-assisted workflows, and learning experiences that make complex work easier to perform.",
+    bestFit,
+    proof: strongestMetric,
+    firstReview: firstProject
+  };
+}
+function getInterviewPrompts(project) {
+  return [
+    `What changed after ${project.shortTitle}, and how did you know it mattered?`,
+    "Which constraint shaped the design choices most?",
+    "What would you improve if you rebuilt this with a larger team or cleaner source data?"
+  ];
+}
+function buildStudioOutputs(selectedLanes, selectedProjects, selectedProofPoints) {
+  const recruiterSummary = getRecruiterSummary(
+    selectedLanes,
+    selectedProjects,
+    selectedProofPoints
+  );
+  const metrics = selectedProofPoints.slice(0, 3).map((proofPoint) => `${proofPoint.value} ${proofPoint.label}`).join("; ");
+  const projectsText = selectedProjects.slice(0, 3).map((project) => project.shortTitle).join(", ");
+  return {
+    recruiter: `${profile.name} builds ${recruiterSummary.focus} Best-fit lanes: ${recruiterSummary.bestFit}. Strongest proof: ${recruiterSummary.proof}. Start with: ${recruiterSummary.firstReview}.`,
+    resume: [
+      `Built ${selectedLanes[0].toLowerCase()} systems connecting workflow, learning design, and practical adoption.`,
+      `Produced portfolio evidence across ${projectsText || "selected projects"} with metrics including ${metrics || "documented delivery outcomes"}.`,
+      "Used AI-assisted workflows with human QA to reduce repeat work while protecting quality."
+    ],
+    linkedin: "I build enablement systems, learning products, and AI-assisted workflows that help teams turn complex work into clearer execution.",
+    interview: selectedProjects.slice(0, 2).flatMap((project) => getInterviewPrompts(project))
+  };
+}
 function useTailoredView(slug, actor) {
   const [view, setView] = reactExports.useState(null);
   const [status, setStatus] = reactExports.useState("idle");
@@ -33073,15 +33291,17 @@ function useTailoredView(slug, actor) {
       try {
         const backendView = (actor == null ? void 0 : actor.getTailoredView) ? await actor.getTailoredView(slug) : null;
         const nextView = backendView ?? getLocalView(slug);
+        const publicView = (nextView == null ? void 0 : nextView.archived) ? null : nextView;
         if (!cancelled) {
-          setView(nextView);
-          setStatus(nextView ? "ready" : "missing");
+          setView(publicView);
+          setStatus(publicView ? "ready" : "missing");
         }
       } catch {
         const nextView = getLocalView(slug);
+        const publicView = (nextView == null ? void 0 : nextView.archived) ? null : nextView;
         if (!cancelled) {
-          setView(nextView);
-          setStatus(nextView ? "ready" : "missing");
+          setView(publicView);
+          setStatus(publicView ? "ready" : "missing");
         }
       }
     }
@@ -33113,15 +33333,15 @@ function VisualProjectCard({ project }) {
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-muted-foreground", children: project.summary }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-4 md:grid-cols-3", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Problem" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Before" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm leading-5", children: project.problem })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Moves" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "What changed" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm leading-5", children: project.actions.slice(0, 2).map((action) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: action }, action)) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Results" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Result" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm leading-5", children: project.outcomes.slice(0, 2).map((outcome) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: outcome }, outcome)) })
         ] })
       ] }),
@@ -33145,68 +33365,18 @@ function VisualProjectCard({ project }) {
     ] })
   ] });
 }
-function PublicLanding({ onExplore }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "min-h-screen bg-background text-foreground", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "relative overflow-hidden border-b border-border bg-[radial-gradient(circle_at_20%_20%,_rgba(229,190,105,0.18),_transparent_30%),radial-gradient(circle_at_80%_10%,_rgba(45,212,191,0.12),_transparent_28%),linear-gradient(135deg,_#0f1115,_#08090b)]", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 opacity-40 [background-image:linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] [background-size:48px_48px]" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative mx-auto grid min-h-[92vh] max-w-6xl content-center gap-10 px-5 py-16 lg:grid-cols-[0.95fr_1.05fr]", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-7", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "w-fit", variant: "outline", children: "Terry Brutus" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display text-5xl font-semibold leading-tight sm:text-6xl", children: "Systems that help people do complex work better." }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "max-w-2xl text-lg leading-8 text-muted-foreground", children: "Enablement, AI workflow, and learning experience work across technical training, compliance, product education, and performance support." })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-3", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { type: "button", onClick: onExplore, children: [
-            "View proof of work",
-            /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowRight, { className: "ml-2 h-4 w-4" })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs(
-            "a",
-            {
-              href: profile.linkedIn,
-              target: "_blank",
-              rel: "noreferrer",
-              className: "inline-flex items-center justify-center rounded-md border border-border px-4 py-2 text-sm font-medium transition-smooth hover:bg-muted",
-              children: [
-                "LinkedIn",
-                /* @__PURE__ */ jsxRuntimeExports.jsx(ExternalLink, { className: "ml-2 h-4 w-4" })
-              ]
-            }
-          )
-        ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid content-center gap-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "overflow-hidden rounded-lg border border-border bg-card shadow-2xl", children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "img",
-          {
-            src: "/assets/portfolio/terrylxd-hero.png",
-            alt: "TerryLXD portfolio hero screenshot.",
-            className: "aspect-[16/10] w-full object-cover"
-          }
-        ) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-3 gap-3", children: laneProfiles.slice(0, 3).map((laneProfile) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-          "div",
-          {
-            className: "rounded-md border border-border bg-card/80 p-3",
-            children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: laneProfile.lane })
-          },
-          laneProfile.lane
-        )) })
-      ] })
-    ] })
-  ] }) });
-}
 function ReviewerPortfolio({
   view,
-  status,
-  onExplore
+  status
 }) {
   var _a2, _b2, _c2;
-  if (!view && status === "ready") {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(PublicLanding, { onExplore });
-  }
   const model = buildViewModel(view);
   const reviewerBadge = getReviewerBadge(model.primaryLane);
+  const recruiterSummary = getRecruiterSummary(
+    model.selectedLanes,
+    model.selectedProjects,
+    model.selectedProofPoints
+  );
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "min-h-screen bg-background text-foreground", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "border-b border-border bg-[linear-gradient(135deg,_rgba(17,24,39,0.96),_rgba(10,10,10,1))]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-6xl gap-8 px-5 py-12 lg:grid-cols-[1.05fr_0.95fr] lg:py-16", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
@@ -33215,7 +33385,26 @@ function ReviewerPortfolio({
           /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display text-4xl font-semibold leading-tight sm:text-5xl", children: model.angle }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "max-w-3xl text-base leading-7 text-muted-foreground", children: profile.shortSummary })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: model.selectedLanes.map((lane) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { children: lane }, lane)) })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: model.selectedLanes.map((lane) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { children: lane }, lane)) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3 sm:grid-cols-2", children: [
+          ["Best fit", recruiterSummary.bestFit],
+          ["Strongest proof", recruiterSummary.proof],
+          ["Review first", recruiterSummary.firstReview],
+          [
+            "Work style",
+            "Systems thinker, maker, and practical AI adopter"
+          ]
+        ].map(([label, value]) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          "div",
+          {
+            className: "rounded-md border border-white/10 bg-white/[0.04] p-3",
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs uppercase text-muted-foreground", children: label }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm font-medium", children: value })
+            ]
+          },
+          label
+        )) })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "overflow-hidden rounded-lg border border-border bg-card", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -33229,13 +33418,20 @@ function ReviewerPortfolio({
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: (_c2 = model.selectedProjects[0]) == null ? void 0 : _c2.visual.caption }) })
       ] })
     ] }) }),
-    status === "missing" && /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto max-w-6xl px-5 pt-6", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-md border border-primary/30 bg-primary/10 p-4 text-sm", children: "This private view was not found, so the page is showing a general selected-work portfolio." }) }),
+    status === "loading" && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "sr-only", children: "Loading portfolio" }),
     /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto grid max-w-6xl gap-4 px-5 py-8 sm:grid-cols-2 lg:grid-cols-4", children: model.selectedProofPoints.map((metric) => /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-3xl font-semibold", children: metric.value }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm font-medium", children: metric.label }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs font-medium text-primary", children: getMetricSourceNote(metric, model.selectedProjects) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-xs leading-5 text-muted-foreground", children: metric.detail })
     ] }) }, metric.id)) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto max-w-6xl px-5 pb-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "grid gap-5 p-5 lg:grid-cols-[0.8fr_1.2fr]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-primary", children: "Why this work is relevant" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-2 font-display text-2xl font-semibold", children: "Proof that connects strategy, systems, and adoption." })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-7 text-muted-foreground", children: getRelevanceCopy(model.selectedLanes) })
+    ] }) }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto grid max-w-6xl gap-6 px-5 pb-12 lg:grid-cols-[0.72fr_1.28fr]", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "space-y-5", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
@@ -33255,6 +33451,16 @@ function ReviewerPortfolio({
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { children: "Relevant Skills" }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "flex flex-wrap gap-2", children: model.selectedSkills.map((skill) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: skill }, skill)) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(UserRound, { className: "h-5 w-5 text-primary" }),
+            "Human Context"
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "space-y-3", children: humanHighlights.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: item.label }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm leading-6 text-muted-foreground", children: item.detail })
+          ] }, item.label)) })
         ] })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-5", children: [
@@ -33307,6 +33513,14 @@ function TailoredPortfolioStudio() {
   const [selectedProofIds, setSelectedProofIds] = reactExports.useState([]);
   const [links, setLinks] = reactExports.useState([]);
   const [saving, setSaving] = reactExports.useState(false);
+  const [savedProfiles, setSavedProfilesState] = reactExports.useState(
+    []
+  );
+  const [brainDrafts, setBrainDrafts] = reactExports.useState([]);
+  const [sourceTitle, setSourceTitle] = reactExports.useState("");
+  const [sourceType, setSourceType] = reactExports.useState(evidenceBrain.sourceTypes[0]);
+  const [sourceStatus, setSourceStatus] = reactExports.useState(evidenceBrain.statuses[4]);
+  const [sourceText, setSourceText] = reactExports.useState("");
   const analysis = reactExports.useMemo(
     () => analyzeTarget(`${company} ${jd}`),
     [company, jd]
@@ -33327,8 +33541,14 @@ function TailoredPortfolioStudio() {
   const activeProjectIds = selectedProjectIds.length > 0 ? selectedProjectIds : recommendedProjects.map((project) => project.id);
   const activeProofIds = selectedProofIds.length > 0 ? selectedProofIds : recommendedProofPoints.map((proofPoint) => proofPoint.id);
   const activeProjects = activeProjectIds.map((id) => projects.find((project) => project.id === id)).filter((project) => Boolean(project));
+  const activeProofPoints = activeProofIds.map((id) => proofPoints.find((proofPoint) => proofPoint.id === id)).filter((proofPoint) => Boolean(proofPoint));
   const mediaStatus = getProjectMediaStatus(activeProjects);
   const mediaNeeds = mediaStatus.filter((item) => item.status !== "approved");
+  const studioOutputs = buildStudioOutputs(
+    activeLanes,
+    activeProjects,
+    activeProofPoints
+  );
   reactExports.useEffect(() => {
     const syncRoute = () => setRoute(getRouteState());
     window.addEventListener("hashchange", syncRoute);
@@ -33337,6 +33557,10 @@ function TailoredPortfolioStudio() {
       window.removeEventListener("hashchange", syncRoute);
       window.removeEventListener("popstate", syncRoute);
     };
+  }, []);
+  reactExports.useEffect(() => {
+    setSavedProfilesState(getSavedProfiles());
+    setBrainDrafts(getStudioBrainSources());
   }, []);
   reactExports.useEffect(() => {
     setSelectedLanes(analysis.lanes);
@@ -33349,40 +33573,8 @@ function TailoredPortfolioStudio() {
       )
     );
   }, [analysis]);
-  const openGeneralPortfolio = reactExports.useCallback(() => {
-    const generalView = {
-      slug: "general",
-      viewLabel: "General portfolio",
-      privateCompany: "",
-      privateJobDescription: "",
-      primaryLane: "Enablement",
-      lanes: ["Enablement", "AI Operations", "Learning Experience"],
-      projectIds: [
-        "ai-talent-content-pipeline",
-        "workflow-management-platform",
-        "phishing-red-flags"
-      ],
-      proofIds: ["defense-workforce", "asset-cycle", "audit-cost", "army-lms"],
-      skillIds: getRecommendedSkills([
-        "Enablement",
-        "AI Operations",
-        "Learning Experience"
-      ]),
-      angle: "Enablement, AI workflow, and learning systems with visible proof.",
-      expiresAt: void 0
-    };
-    saveLocalView(generalView);
-    window.location.hash = "/v/general";
-  }, []);
   if (!route.isStudio) {
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(
-      ReviewerPortfolio,
-      {
-        view,
-        status,
-        onExplore: openGeneralPortfolio
-      }
-    );
+    return /* @__PURE__ */ jsxRuntimeExports.jsx(ReviewerPortfolio, { view, status });
   }
   const toggleLane = (lane) => {
     setSelectedLanes(
@@ -33406,11 +33598,54 @@ function TailoredPortfolioStudio() {
       recommendedProofPoints.map((proofPoint) => proofPoint.id)
     );
   };
+  const saveTargetProfile = () => {
+    const id = makeSlug(activeLanes[0]);
+    const profileToSave = {
+      id,
+      name: company.trim() || `${activeLanes[0]} target`,
+      createdAt: (/* @__PURE__ */ new Date()).toISOString(),
+      company: company.trim(),
+      jd,
+      lanes: activeLanes,
+      projectIds: activeProjectIds,
+      proofIds: activeProofIds,
+      skillIds: recommendedSkills,
+      linkSlugs: links.slice(0, 4).map((link) => link.slug)
+    };
+    const nextProfiles = [
+      profileToSave,
+      ...savedProfiles.filter((item) => item.id !== profileToSave.id)
+    ].slice(0, 12);
+    setSavedProfiles(nextProfiles);
+    setSavedProfilesState(nextProfiles);
+  };
+  const applyTargetProfile = (targetProfile) => {
+    setCompany(targetProfile.company);
+    setJd(targetProfile.jd);
+    setSelectedLanes(targetProfile.lanes);
+    setSelectedProjectIds(targetProfile.projectIds);
+    setSelectedProofIds(targetProfile.proofIds);
+  };
+  const addBrainSource = () => {
+    if (!sourceTitle.trim() && !sourceText.trim()) return;
+    const source = {
+      id: makeSlug(activeLanes[0]),
+      title: sourceTitle.trim() || "Untitled source note",
+      type: sourceType,
+      status: sourceStatus,
+      linkedProjectIds: activeProjectIds.slice(0, 4),
+      note: "Review before public use; raw content stays in the owner workspace.",
+      rawText: sourceText.slice(0, 4e3)
+    };
+    const nextSources = [source, ...brainDrafts].slice(0, 20);
+    setStudioBrainSources(nextSources);
+    setBrainDrafts(nextSources);
+    setSourceTitle("");
+    setSourceText("");
+  };
   const createLink = async () => {
     setSaving(true);
-    const slug = makeSlug();
-    const expires = /* @__PURE__ */ new Date();
-    expires.setDate(expires.getDate() + 21);
+    const slug = makeSlug(activeLanes[0]);
     const input = {
       slug,
       viewLabel: company.trim() || "Private target view",
@@ -33422,7 +33657,7 @@ function TailoredPortfolioStudio() {
       proofIds: activeProofIds,
       skillIds: recommendedSkills,
       angle: analysis.angle,
-      expiresAt: expires.toISOString()
+      expiresAt: void 0
     };
     let source = "local";
     try {
@@ -33441,7 +33676,7 @@ function TailoredPortfolioStudio() {
         slug,
         label: input.viewLabel,
         lanes: activeLanes,
-        expires: expires.toLocaleDateString(),
+        state: "active",
         source
       },
       ...current
@@ -33526,6 +33761,55 @@ function TailoredPortfolioStudio() {
     /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto grid max-w-7xl gap-6 px-5 py-8 lg:grid-cols-[0.9fr_1.1fr]", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Save, { className: "h-5 w-5 text-primary" }),
+              "Saved Target Profiles"
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              Button,
+              {
+                type: "button",
+                variant: "outline",
+                onClick: saveTargetProfile,
+                children: "Save current setup"
+              }
+            )
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "space-y-3", children: savedProfiles.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-muted-foreground", children: "Save a role setup after the lane, projects, metrics, and link feel right. Profiles stay private to this browser for now." }) : savedProfiles.map((targetProfile) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "div",
+            {
+              className: "rounded-md border border-border bg-muted/20 p-3",
+              children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-3", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: targetProfile.name }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-1 text-xs text-muted-foreground", children: [
+                    targetProfile.lanes.join(", "),
+                    " ·",
+                    " ",
+                    targetProfile.projectIds.length,
+                    " projects ·",
+                    " ",
+                    targetProfile.proofIds.length,
+                    " metrics"
+                  ] })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  Button,
+                  {
+                    type: "button",
+                    size: "sm",
+                    variant: "outline",
+                    onClick: () => applyTargetProfile(targetProfile),
+                    children: "Apply"
+                  }
+                )
+              ] })
+            },
+            targetProfile.id
+          )) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(SearchCheck, { className: "h-5 w-5 text-primary" }),
             "Step 2. Recommended Lane"
@@ -33587,6 +33871,67 @@ function TailoredPortfolioStudio() {
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-2 text-xs font-semibold uppercase text-muted-foreground", children: "Accepted source files" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: evidenceBrain.acceptedFiles.map((fileType) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: fileType }, fileType)) })
             ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-3 sm:grid-cols-2", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block space-y-2", htmlFor: "source-title", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium", children: "Source title" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "input",
+                  {
+                    id: "source-title",
+                    className: "w-full rounded-md border border-input bg-background px-3 py-2 text-sm",
+                    value: sourceTitle,
+                    onChange: (event) => setSourceTitle(event.target.value),
+                    placeholder: "Resume, transcript, screenshot note..."
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block space-y-2", htmlFor: "source-type", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium", children: "Source type" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "select",
+                  {
+                    id: "source-type",
+                    className: "w-full rounded-md border border-input bg-background px-3 py-2 text-sm",
+                    value: sourceType,
+                    onChange: (event) => setSourceType(event.target.value),
+                    children: evidenceBrain.sourceTypes.map((type) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: type, children: type }, type))
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block space-y-2", htmlFor: "source-status", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium", children: "Safety status" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                  "select",
+                  {
+                    id: "source-status",
+                    className: "w-full rounded-md border border-input bg-background px-3 py-2 text-sm",
+                    value: sourceStatus,
+                    onChange: (event) => setSourceStatus(
+                      event.target.value
+                    ),
+                    children: evidenceBrain.statuses.map((status2) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: status2, children: status2 }, status2))
+                  }
+                )
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-md border border-border bg-muted/20 p-3 text-sm leading-6 text-muted-foreground", children: "Attachments are represented as records in this pass. Use the title and notes to point at the file, then mark it approved only after crop, redaction, and project match are checked." })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block space-y-2", htmlFor: "source-text", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium", children: "Paste notes, transcript, or extraction" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                Textarea,
+                {
+                  id: "source-text",
+                  value: sourceText,
+                  onChange: (event) => setSourceText(event.target.value),
+                  className: "min-h-28",
+                  maxLength: 4e3
+                }
+              )
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(Button, { type: "button", variant: "outline", onClick: addBrainSource, children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(FileText, { className: "mr-2 h-4 w-4" }),
+              "Add source record"
+            ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-2 text-xs font-semibold uppercase text-muted-foreground", children: "Brain checks before public use" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-2 sm:grid-cols-2", children: evidenceBrain.qualityChecks.map((check) => /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -33596,6 +33941,29 @@ function TailoredPortfolioStudio() {
                   children: check
                 },
                 check
+              )) })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-2 text-xs font-semibold uppercase text-muted-foreground", children: "Review queue" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-2", children: [...brainDrafts, ...brainSources].slice(0, 8).map((source) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "div",
+                {
+                  className: "rounded-md border border-border bg-muted/20 p-3",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-2", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: source.title }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: source.status })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-1 text-xs text-muted-foreground", children: [
+                      source.type,
+                      " ·",
+                      " ",
+                      source.linkedProjectIds.length > 0 ? `${source.linkedProjectIds.length} linked projects` : "not linked yet"
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs leading-5 text-muted-foreground", children: source.note })
+                  ]
+                },
+                source.id
               )) })
             ] })
           ] })
@@ -33646,7 +34014,7 @@ function TailoredPortfolioStudio() {
             links.length === 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground", children: [
               "Links will look like",
               " ",
-              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-mono", children: "#/v/a7k92p" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-mono", children: "#/work/workflow-a7k9" }),
               ". The company/JD stays private in the studio data."
             ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-3", children: links.map((link) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
               "div",
@@ -33655,7 +34023,11 @@ function TailoredPortfolioStudio() {
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-3", children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium", children: link.label }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: link.source })
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { variant: "outline", children: [
+                      link.state,
+                      " · ",
+                      link.source
+                    ] })
                   ] }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 break-all text-muted-foreground", children: link.url }),
                   /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 flex flex-wrap gap-2", children: [
@@ -33670,10 +34042,7 @@ function TailoredPortfolioStudio() {
                         ]
                       }
                     ),
-                    /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-muted-foreground", children: [
-                      "Expires ",
-                      link.expires
-                    ] })
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: "Active until archived" })
                   ] })
                 ]
               },
@@ -33717,7 +34086,15 @@ function TailoredPortfolioStudio() {
                         variant: project.visual.quality === "approved" ? "default" : "outline",
                         children: project.visual.quality
                       }
-                    )
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-2 flex flex-wrap gap-1", children: project.readiness.slice(0, 2).map((status2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "span",
+                      {
+                        className: "rounded-full bg-background px-2 py-0.5 text-[11px] text-muted-foreground",
+                        children: status2
+                      },
+                      status2
+                    )) })
                   ] })
                 ]
               },
@@ -33815,6 +34192,30 @@ function TailoredPortfolioStudio() {
                 id
               );
             }) })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Sparkles, { className: "h-5 w-5 text-primary" }),
+            "Copy-Ready Outputs"
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-4", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-muted/20 p-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Recruiter summary" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm leading-6", children: studioOutputs.recruiter })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-muted/20 p-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Resume emphasis bullets" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-2 text-sm leading-6", children: studioOutputs.resume.map((bullet) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: bullet }, bullet)) })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-muted/20 p-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "LinkedIn summary" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm leading-6", children: studioOutputs.linkedin })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-muted/20 p-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Interview talking points" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-2 text-sm leading-6", children: studioOutputs.interview.map((prompt) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: prompt }, prompt)) })
+            ] })
           ] })
         ] })
       ] })
