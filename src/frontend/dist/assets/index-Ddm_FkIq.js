@@ -34666,6 +34666,15 @@ function TailoredPortfolioStudio() {
             "Step 5. Short Links"
           ] }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-sm text-muted-foreground", children: [
+              "Reviewer links use private, natural slugs such as",
+              " ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-mono", children: "#/work/workflow-a7k9" }),
+              " or",
+              " ",
+              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-mono", children: "#/work/aiops-m6t1" }),
+              ". Company and JD details stay in Studio records."
+            ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs(
               Button,
               {

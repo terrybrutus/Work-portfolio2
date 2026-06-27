@@ -2254,6 +2254,12 @@ export function TailoredPortfolioStudio() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
+              <p className="text-sm text-muted-foreground">
+                Reviewer links use private, natural slugs such as{" "}
+                <span className="font-mono">#/work/workflow-a7k9</span> or{" "}
+                <span className="font-mono">#/work/aiops-m6t1</span>. Company
+                and JD details stay in Studio records.
+              </p>
               <Button
                 type="button"
                 onClick={createLink}
