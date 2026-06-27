@@ -33040,6 +33040,7 @@ const sampleJd = "Senior enablement role partnering with product, sales, and ope
 const localStorageKey = "terry-portfolio-tailored-views";
 const savedProfilesKey = "terry-portfolio-target-profiles";
 const studioBrainKey = "terry-portfolio-brain-sources";
+const generatedLinksKey = "terry-portfolio-generated-links";
 function isLane(value) {
   return laneProfiles.some((profileItem) => profileItem.lane === value);
 }
@@ -33195,6 +33196,23 @@ function saveLocalView(view) {
 }
 function getLocalView(slug) {
   return getLocalViews()[slug] ?? null;
+}
+function archiveLocalView(slug, archived) {
+  const current = getLocalViews();
+  const existing = current[slug];
+  if (!existing) return;
+  current[slug] = { ...existing, archived };
+  localStorage.setItem(localStorageKey, JSON.stringify(current));
+}
+function getGeneratedLinks() {
+  try {
+    return JSON.parse(localStorage.getItem(generatedLinksKey) ?? "[]");
+  } catch {
+    return [];
+  }
+}
+function setGeneratedLinks(links) {
+  localStorage.setItem(generatedLinksKey, JSON.stringify(links));
 }
 function getSavedProfiles() {
   try {
@@ -33362,7 +33380,8 @@ function useTailoredView(slug, actor) {
       setStatus("loading");
       try {
         const backendView = (actor == null ? void 0 : actor.getTailoredView) ? await actor.getTailoredView(slug) : null;
-        const nextView = backendView ?? getLocalView(slug);
+        const localView = getLocalView(slug);
+        const nextView = (localView == null ? void 0 : localView.archived) ? localView : backendView ?? localView;
         const publicView = (nextView == null ? void 0 : nextView.archived) ? null : nextView;
         if (!cancelled) {
           setView(publicView);
@@ -33657,6 +33676,7 @@ function TailoredPortfolioStudio() {
   reactExports.useEffect(() => {
     setSavedProfilesState(getSavedProfiles());
     setBrainDrafts(getStudioBrainSources());
+    setLinks(getGeneratedLinks());
   }, []);
   reactExports.useEffect(() => {
     setSelectedLanes(analysis.lanes);
@@ -33721,6 +33741,41 @@ function TailoredPortfolioStudio() {
     setSelectedLanes(targetProfile.lanes);
     setSelectedProjectIds(targetProfile.projectIds);
     setSelectedProofIds(targetProfile.proofIds);
+  };
+  const updateSavedProfilesForLink = (link) => {
+    if (!company.trim() && savedProfiles.length === 0) return;
+    const targetName = company.trim() || `${activeLanes[0]} target`;
+    const matchingProfile = savedProfiles.find(
+      (profileItem) => profileItem.company === company.trim() || profileItem.name === targetName
+    );
+    const profileToSave = matchingProfile ? {
+      ...matchingProfile,
+      linkSlugs: [
+        link.slug,
+        ...matchingProfile.linkSlugs.filter((slug) => slug !== link.slug)
+      ].slice(0, 8),
+      lanes: activeLanes,
+      projectIds: activeProjectIds,
+      proofIds: activeProofIds,
+      skillIds: recommendedSkills
+    } : {
+      id: makeSlug(activeLanes[0]),
+      name: targetName,
+      createdAt: (/* @__PURE__ */ new Date()).toISOString(),
+      company: company.trim(),
+      jd,
+      lanes: activeLanes,
+      projectIds: activeProjectIds,
+      proofIds: activeProofIds,
+      skillIds: recommendedSkills,
+      linkSlugs: [link.slug]
+    };
+    const nextProfiles = [
+      profileToSave,
+      ...savedProfiles.filter((item) => item.id !== profileToSave.id)
+    ].slice(0, 12);
+    setSavedProfiles(nextProfiles);
+    setSavedProfilesState(nextProfiles);
   };
   const addBrainSource = () => {
     if (!sourceTitle.trim() && !sourceText.trim()) return;
@@ -33835,18 +33890,30 @@ function TailoredPortfolioStudio() {
     }
     saveLocalView(input);
     const url = buildShareUrl(slug);
-    setLinks((current) => [
-      {
-        url,
-        slug,
-        label: input.viewLabel,
-        lanes: activeLanes,
-        state: "active",
-        source
-      },
-      ...current
-    ]);
+    const link = {
+      url,
+      slug,
+      label: input.viewLabel,
+      lanes: activeLanes,
+      state: "active",
+      source
+    };
+    const nextLinks = [
+      link,
+      ...links.filter((currentLink) => currentLink.slug !== link.slug)
+    ].slice(0, 20);
+    setLinks(nextLinks);
+    setGeneratedLinks(nextLinks);
+    updateSavedProfilesForLink(link);
     setSaving(false);
+  };
+  const setLinkArchived = (slug, archived) => {
+    archiveLocalView(slug, archived);
+    const nextLinks = links.map(
+      (link) => link.slug === slug ? { ...link, state: archived ? "archived" : "active" } : link
+    );
+    setLinks(nextLinks);
+    setGeneratedLinks(nextLinks);
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "min-h-screen bg-background text-foreground", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "border-b border-border bg-[radial-gradient(circle_at_top_left,_rgba(229,190,105,0.16),_transparent_34%),linear-gradient(135deg,_rgba(17,24,39,0.95),_rgba(10,10,10,1))]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-7xl gap-8 px-5 py-10 lg:grid-cols-[0.9fr_1.1fr]", children: [
@@ -33956,7 +34023,14 @@ function TailoredPortfolioStudio() {
                     " projects -",
                     " ",
                     targetProfile.proofIds.length,
-                    " metrics"
+                    " metrics -",
+                    " ",
+                    targetProfile.linkSlugs.length,
+                    " links"
+                  ] }),
+                  targetProfile.linkSlugs.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-2 text-xs text-primary", children: [
+                    "Latest link: #/work/",
+                    targetProfile.linkSlugs[0]
                   ] })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -34347,7 +34421,16 @@ function TailoredPortfolioStudio() {
                         ]
                       }
                     ),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: "Active until archived" })
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "button",
+                      {
+                        type: "button",
+                        className: "inline-flex items-center gap-2 text-primary",
+                        onClick: () => setLinkArchived(link.slug, link.state === "active"),
+                        children: link.state === "active" ? "Archive" : "Reactivate"
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-muted-foreground", children: link.state === "active" ? "Active until archived" : "Routes to the general portfolio" })
                   ] })
                 ]
               },

@@ -134,6 +134,7 @@ const sampleJd =
 const localStorageKey = "terry-portfolio-tailored-views";
 const savedProfilesKey = "terry-portfolio-target-profiles";
 const studioBrainKey = "terry-portfolio-brain-sources";
+const generatedLinksKey = "terry-portfolio-generated-links";
 
 function isLane(value: string): value is Lane {
   return laneProfiles.some((profileItem) => profileItem.lane === value);
@@ -351,6 +352,26 @@ function saveLocalView(view: TailoredView) {
 
 function getLocalView(slug: string) {
   return getLocalViews()[slug] ?? null;
+}
+
+function archiveLocalView(slug: string, archived: boolean) {
+  const current = getLocalViews();
+  const existing = current[slug];
+  if (!existing) return;
+  current[slug] = { ...existing, archived };
+  localStorage.setItem(localStorageKey, JSON.stringify(current));
+}
+
+function getGeneratedLinks(): GeneratedLink[] {
+  try {
+    return JSON.parse(localStorage.getItem(generatedLinksKey) ?? "[]");
+  } catch {
+    return [];
+  }
+}
+
+function setGeneratedLinks(links: GeneratedLink[]) {
+  localStorage.setItem(generatedLinksKey, JSON.stringify(links));
 }
 
 function getSavedProfiles(): SavedTargetProfile[] {
@@ -602,7 +623,10 @@ function useTailoredView(slug: string | null, actor: TailoredBackend | null) {
         const backendView = actor?.getTailoredView
           ? await actor.getTailoredView(slug)
           : null;
-        const nextView = backendView ?? getLocalView(slug);
+        const localView = getLocalView(slug);
+        const nextView = localView?.archived
+          ? localView
+          : (backendView ?? localView);
         const publicView = nextView?.archived ? null : nextView;
         if (!cancelled) {
           setView(publicView);
@@ -1026,6 +1050,7 @@ export function TailoredPortfolioStudio() {
   useEffect(() => {
     setSavedProfilesState(getSavedProfiles());
     setBrainDrafts(getStudioBrainSources());
+    setLinks(getGeneratedLinks());
   }, []);
 
   useEffect(() => {
@@ -1104,6 +1129,46 @@ export function TailoredPortfolioStudio() {
     setSelectedLanes(targetProfile.lanes);
     setSelectedProjectIds(targetProfile.projectIds);
     setSelectedProofIds(targetProfile.proofIds);
+  };
+
+  const updateSavedProfilesForLink = (link: GeneratedLink) => {
+    if (!company.trim() && savedProfiles.length === 0) return;
+    const targetName = company.trim() || `${activeLanes[0]} target`;
+    const matchingProfile = savedProfiles.find(
+      (profileItem) =>
+        profileItem.company === company.trim() ||
+        profileItem.name === targetName,
+    );
+    const profileToSave: SavedTargetProfile = matchingProfile
+      ? {
+          ...matchingProfile,
+          linkSlugs: [
+            link.slug,
+            ...matchingProfile.linkSlugs.filter((slug) => slug !== link.slug),
+          ].slice(0, 8),
+          lanes: activeLanes,
+          projectIds: activeProjectIds,
+          proofIds: activeProofIds,
+          skillIds: recommendedSkills,
+        }
+      : {
+          id: makeSlug(activeLanes[0]),
+          name: targetName,
+          createdAt: new Date().toISOString(),
+          company: company.trim(),
+          jd,
+          lanes: activeLanes,
+          projectIds: activeProjectIds,
+          proofIds: activeProofIds,
+          skillIds: recommendedSkills,
+          linkSlugs: [link.slug],
+        };
+    const nextProfiles = [
+      profileToSave,
+      ...savedProfiles.filter((item) => item.id !== profileToSave.id),
+    ].slice(0, 12);
+    setSavedProfiles(nextProfiles);
+    setSavedProfilesState(nextProfiles);
   };
 
   const addBrainSource = () => {
@@ -1249,18 +1314,33 @@ export function TailoredPortfolioStudio() {
 
     saveLocalView(input);
     const url = buildShareUrl(slug);
-    setLinks((current) => [
-      {
-        url,
-        slug,
-        label: input.viewLabel,
-        lanes: activeLanes,
-        state: "active",
-        source,
-      },
-      ...current,
-    ]);
+    const link: GeneratedLink = {
+      url,
+      slug,
+      label: input.viewLabel,
+      lanes: activeLanes,
+      state: "active",
+      source,
+    };
+    const nextLinks = [
+      link,
+      ...links.filter((currentLink) => currentLink.slug !== link.slug),
+    ].slice(0, 20);
+    setLinks(nextLinks);
+    setGeneratedLinks(nextLinks);
+    updateSavedProfilesForLink(link);
     setSaving(false);
+  };
+
+  const setLinkArchived = (slug: string, archived: boolean) => {
+    archiveLocalView(slug, archived);
+    const nextLinks: GeneratedLink[] = links.map((link) =>
+      link.slug === slug
+        ? { ...link, state: archived ? "archived" : "active" }
+        : link,
+    );
+    setLinks(nextLinks);
+    setGeneratedLinks(nextLinks);
   };
 
   return (
@@ -1391,8 +1471,14 @@ export function TailoredPortfolioStudio() {
                         <p className="mt-1 text-xs text-muted-foreground">
                           {targetProfile.lanes.join(", ")} -{" "}
                           {targetProfile.projectIds.length} projects -{" "}
-                          {targetProfile.proofIds.length} metrics
+                          {targetProfile.proofIds.length} metrics -{" "}
+                          {targetProfile.linkSlugs.length} links
                         </p>
+                        {targetProfile.linkSlugs.length > 0 && (
+                          <p className="mt-2 text-xs text-primary">
+                            Latest link: #/work/{targetProfile.linkSlugs[0]}
+                          </p>
+                        )}
                       </div>
                       <Button
                         type="button"
@@ -1881,8 +1967,19 @@ export function TailoredPortfolioStudio() {
                           Open
                           <ExternalLink className="h-4 w-4" />
                         </a>
+                        <button
+                          type="button"
+                          className="inline-flex items-center gap-2 text-primary"
+                          onClick={() =>
+                            setLinkArchived(link.slug, link.state === "active")
+                          }
+                        >
+                          {link.state === "active" ? "Archive" : "Reactivate"}
+                        </button>
                         <span className="text-muted-foreground">
-                          Active until archived
+                          {link.state === "active"
+                            ? "Active until archived"
+                            : "Routes to the general portfolio"}
                         </span>
                       </div>
                     </div>
