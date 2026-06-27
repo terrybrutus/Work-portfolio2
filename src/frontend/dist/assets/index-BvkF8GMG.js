@@ -32590,7 +32590,8 @@ const brainSources = [
     type: "Old website artifact",
     status: "needs redaction",
     linkedProjectIds: ["phishing-red-flags", "addie-qa-job-aid-suite"],
-    note: "Good source for older ISD proof; media needs cleaner crops and current framing."
+    note: "Good source for older ISD proof; media needs cleaner crops and current framing.",
+    sourceUrl: "https://www.instructionaldesignbyterry.com"
   },
   {
     id: "terrylxd-site",
@@ -32598,7 +32599,8 @@ const brainSources = [
     type: "Old website artifact",
     status: "needs redaction",
     linkedProjectIds: ["phishing-red-flags", "crypto-decentralization-module"],
-    note: "Helpful as discovery evidence, but public cards need direct project media."
+    note: "Helpful as discovery evidence, but public cards need direct project media.",
+    sourceUrl: "https://terrylxd.com"
   },
   {
     id: "github-repos",
@@ -32606,7 +32608,8 @@ const brainSources = [
     type: "GitHub repo",
     status: "public-safe",
     linkedProjectIds: ["career-city", "workflow-management-platform"],
-    note: "Useful for shipped-work evidence and technical credibility."
+    note: "Useful for shipped-work evidence and technical credibility.",
+    sourceUrl: "https://github.com/terrybrutus"
   }
 ];
 const resumeHighlights = [
@@ -33518,6 +33521,7 @@ function ReviewerPortfolio({
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "w-fit", variant: "outline", children: reviewerBadge }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold uppercase text-primary", children: profile.name }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display text-4xl font-semibold leading-tight sm:text-5xl", children: model.angle }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "max-w-3xl text-base leading-7 text-muted-foreground", children: profile.shortSummary })
         ] }),
@@ -33656,6 +33660,7 @@ function TailoredPortfolioStudio() {
   const [sourceTitle, setSourceTitle] = reactExports.useState("");
   const [sourceType, setSourceType] = reactExports.useState(evidenceBrain.sourceTypes[0]);
   const [sourceStatus, setSourceStatus] = reactExports.useState(evidenceBrain.statuses[4]);
+  const [sourceUrl, setSourceUrl] = reactExports.useState("");
   const [sourceText, setSourceText] = reactExports.useState("");
   const [importingSources, setImportingSources] = reactExports.useState(false);
   const [backupMessage, setBackupMessage] = reactExports.useState("");
@@ -33867,19 +33872,20 @@ function TailoredPortfolioStudio() {
     setSavedProfilesState(nextProfiles);
   };
   const addBrainSource = () => {
-    if (!sourceTitle.trim() && !sourceText.trim()) return;
+    if (!sourceTitle.trim() && !sourceText.trim() && !sourceUrl.trim()) return;
     const match = getLinkedProjectIdsFromSource(
-      `${sourceTitle} ${sourceText}`,
+      `${sourceTitle} ${sourceUrl} ${sourceText}`,
       activeProjectIds
     );
     const source = {
       id: makeSlug(activeLanes[0]),
-      title: sourceTitle.trim() || "Untitled source note",
+      title: sourceTitle.trim() || sourceUrl.trim().replace(/^https?:\/\//, "") || "Untitled source note",
       type: sourceType,
       status: sourceStatus,
       linkedProjectIds: match.ids,
-      note: "Review before public use; raw content stays in the owner workspace.",
+      note: sourceUrl.trim() ? "Source link recorded. Review access, redaction, and project match before public use." : "Review before public use; raw content stays in the owner workspace.",
       rawText: sourceText.slice(0, 4e3),
+      sourceUrl: sourceUrl.trim() || void 0,
       createdAt: (/* @__PURE__ */ new Date()).toISOString(),
       extractionStatus: sourceText.trim() ? "text captured" : "record only",
       matchedTerms: match.terms
@@ -33888,6 +33894,7 @@ function TailoredPortfolioStudio() {
     setStudioBrainSources(nextSources);
     setBrainDrafts(nextSources);
     setSourceTitle("");
+    setSourceUrl("");
     setSourceText("");
   };
   const updateBrainSource = (sourceId, updater) => {
@@ -34338,6 +34345,27 @@ function TailoredPortfolioStudio() {
                   }
                 )
               ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "label",
+                {
+                  className: "block space-y-2 sm:col-span-2",
+                  htmlFor: "source-url",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium", children: "Source link or artifact URL" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "input",
+                      {
+                        id: "source-url",
+                        className: "w-full rounded-md border border-input bg-background px-3 py-2 text-sm",
+                        value: sourceUrl,
+                        onChange: (event) => setSourceUrl(event.target.value),
+                        placeholder: "GitHub repo, old site page, demo, Drive file, or live artifact"
+                      }
+                    ),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "block text-xs leading-5 text-muted-foreground", children: "Links stay in Studio until the source is reviewed and approved." })
+                  ]
+                }
+              ),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "block space-y-2", htmlFor: "source-status", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm font-medium", children: "Safety status" }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -34411,7 +34439,43 @@ function TailoredPortfolioStudio() {
                         (_a2 = source.matchedTerms) == null ? void 0 : _a2.slice(0, 4).map((term) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: term }, term))
                       ] }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs leading-5 text-muted-foreground", children: source.note }),
+                      source.sourceUrl && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        "a",
+                        {
+                          href: source.sourceUrl,
+                          target: "_blank",
+                          rel: "noreferrer",
+                          className: "mt-2 inline-flex max-w-full items-center gap-1 break-all text-xs text-primary",
+                          children: [
+                            "Source link",
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "h-3.5 w-3.5 shrink-0" })
+                          ]
+                        }
+                      ),
                       isEditable ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 space-y-3 rounded-md border border-border bg-background/70 p-3", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                          "label",
+                          {
+                            className: "block space-y-2",
+                            htmlFor: `source-url-${source.id}`,
+                            children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Source link" }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                "input",
+                                {
+                                  id: `source-url-${source.id}`,
+                                  className: "w-full rounded-md border border-input bg-background px-3 py-2 text-sm",
+                                  value: source.sourceUrl ?? "",
+                                  onChange: (event) => updateBrainSource(source.id, (current) => ({
+                                    ...current,
+                                    sourceUrl: event.target.value.trim() || void 0
+                                  })),
+                                  placeholder: "GitHub, old website, Drive, demo, or artifact URL"
+                                }
+                              )
+                            ]
+                          }
+                        ),
                         /* @__PURE__ */ jsxRuntimeExports.jsxs(
                           "label",
                           {

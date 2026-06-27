@@ -76,6 +76,7 @@ export type BrainSource = {
   status: EvidenceSourceStatus;
   linkedProjectIds: string[];
   note: string;
+  sourceUrl?: string;
 };
 
 export const profile = {
@@ -673,6 +674,7 @@ export const brainSources: BrainSource[] = [
     status: "needs redaction",
     linkedProjectIds: ["phishing-red-flags", "addie-qa-job-aid-suite"],
     note: "Good source for older ISD proof; media needs cleaner crops and current framing.",
+    sourceUrl: "https://www.instructionaldesignbyterry.com",
   },
   {
     id: "terrylxd-site",
@@ -681,6 +683,7 @@ export const brainSources: BrainSource[] = [
     status: "needs redaction",
     linkedProjectIds: ["phishing-red-flags", "crypto-decentralization-module"],
     note: "Helpful as discovery evidence, but public cards need direct project media.",
+    sourceUrl: "https://terrylxd.com",
   },
   {
     id: "github-repos",
@@ -689,6 +692,7 @@ export const brainSources: BrainSource[] = [
     status: "public-safe",
     linkedProjectIds: ["career-city", "workflow-management-platform"],
     note: "Useful for shipped-work evidence and technical credibility.",
+    sourceUrl: "https://github.com/terrybrutus",
   },
 ];
 

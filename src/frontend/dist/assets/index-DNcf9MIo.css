@@ -929,6 +929,9 @@ video {
 .h-2\.5 {
   height: 0.625rem;
 }
+.h-3\.5 {
+  height: 0.875rem;
+}
 .h-4 {
   height: 1rem;
 }
@@ -1022,6 +1025,9 @@ video {
 .w-3 {
   width: 0.75rem;
 }
+.w-3\.5 {
+  width: 0.875rem;
+}
 .w-3\/4 {
   width: 75%;
 }
@@ -1104,6 +1110,9 @@ video {
 }
 .max-w-\[calc\(100\%-2rem\)\] {
   max-width: calc(100% - 2rem);
+}
+.max-w-full {
+  max-width: 100%;
 }
 .max-w-max {
   max-width: -moz-max-content;

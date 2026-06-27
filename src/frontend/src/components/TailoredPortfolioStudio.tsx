@@ -122,6 +122,7 @@ type StudioBrainSource = {
   linkedProjectIds: string[];
   note: string;
   rawText: string;
+  sourceUrl?: string;
   createdAt?: string;
   fileName?: string;
   fileSize?: number;
@@ -795,6 +796,9 @@ function ReviewerPortfolio({
               {reviewerBadge}
             </Badge>
             <div className="space-y-4">
+              <p className="text-sm font-semibold uppercase text-primary">
+                {profile.name}
+              </p>
               <h1 className="font-display text-4xl font-semibold leading-tight sm:text-5xl">
                 {model.angle}
               </h1>
@@ -1012,6 +1016,7 @@ export function TailoredPortfolioStudio() {
   const [sourceTitle, setSourceTitle] = useState("");
   const [sourceType, setSourceType] = useState(evidenceBrain.sourceTypes[0]);
   const [sourceStatus, setSourceStatus] = useState(evidenceBrain.statuses[4]);
+  const [sourceUrl, setSourceUrl] = useState("");
   const [sourceText, setSourceText] = useState("");
   const [importingSources, setImportingSources] = useState(false);
   const [backupMessage, setBackupMessage] = useState("");
@@ -1267,19 +1272,25 @@ export function TailoredPortfolioStudio() {
   };
 
   const addBrainSource = () => {
-    if (!sourceTitle.trim() && !sourceText.trim()) return;
+    if (!sourceTitle.trim() && !sourceText.trim() && !sourceUrl.trim()) return;
     const match = getLinkedProjectIdsFromSource(
-      `${sourceTitle} ${sourceText}`,
+      `${sourceTitle} ${sourceUrl} ${sourceText}`,
       activeProjectIds,
     );
     const source: StudioBrainSource = {
       id: makeSlug(activeLanes[0]),
-      title: sourceTitle.trim() || "Untitled source note",
+      title:
+        sourceTitle.trim() ||
+        sourceUrl.trim().replace(/^https?:\/\//, "") ||
+        "Untitled source note",
       type: sourceType,
       status: sourceStatus,
       linkedProjectIds: match.ids,
-      note: "Review before public use; raw content stays in the owner workspace.",
+      note: sourceUrl.trim()
+        ? "Source link recorded. Review access, redaction, and project match before public use."
+        : "Review before public use; raw content stays in the owner workspace.",
       rawText: sourceText.slice(0, 4000),
+      sourceUrl: sourceUrl.trim() || undefined,
       createdAt: new Date().toISOString(),
       extractionStatus: sourceText.trim() ? "text captured" : "record only",
       matchedTerms: match.terms,
@@ -1288,6 +1299,7 @@ export function TailoredPortfolioStudio() {
     setStudioBrainSources(nextSources);
     setBrainDrafts(nextSources);
     setSourceTitle("");
+    setSourceUrl("");
     setSourceText("");
   };
 
@@ -1823,6 +1835,25 @@ export function TailoredPortfolioStudio() {
                     ))}
                   </select>
                 </label>
+                <label
+                  className="block space-y-2 sm:col-span-2"
+                  htmlFor="source-url"
+                >
+                  <span className="text-sm font-medium">
+                    Source link or artifact URL
+                  </span>
+                  <input
+                    id="source-url"
+                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                    value={sourceUrl}
+                    onChange={(event) => setSourceUrl(event.target.value)}
+                    placeholder="GitHub repo, old site page, demo, Drive file, or live artifact"
+                  />
+                  <span className="block text-xs leading-5 text-muted-foreground">
+                    Links stay in Studio until the source is reviewed and
+                    approved.
+                  </span>
+                </label>
                 <label className="block space-y-2" htmlFor="source-status">
                   <span className="text-sm font-medium">Safety status</span>
                   <select
@@ -1923,8 +1954,40 @@ export function TailoredPortfolioStudio() {
                         <p className="mt-2 text-xs leading-5 text-muted-foreground">
                           {source.note}
                         </p>
+                        {source.sourceUrl && (
+                          <a
+                            href={source.sourceUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="mt-2 inline-flex max-w-full items-center gap-1 break-all text-xs text-primary"
+                          >
+                            Source link
+                            <ArrowUpRight className="h-3.5 w-3.5 shrink-0" />
+                          </a>
+                        )}
                         {isEditable ? (
                           <div className="mt-3 space-y-3 rounded-md border border-border bg-background/70 p-3">
+                            <label
+                              className="block space-y-2"
+                              htmlFor={`source-url-${source.id}`}
+                            >
+                              <span className="text-xs font-semibold uppercase text-muted-foreground">
+                                Source link
+                              </span>
+                              <input
+                                id={`source-url-${source.id}`}
+                                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                                value={source.sourceUrl ?? ""}
+                                onChange={(event) =>
+                                  updateBrainSource(source.id, (current) => ({
+                                    ...current,
+                                    sourceUrl:
+                                      event.target.value.trim() || undefined,
+                                  }))
+                                }
+                                placeholder="GitHub, old website, Drive, demo, or artifact URL"
+                              />
+                            </label>
                             <label
                               className="block space-y-2"
                               htmlFor={`status-${source.id}`}
