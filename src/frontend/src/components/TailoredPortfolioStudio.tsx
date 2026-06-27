@@ -28,6 +28,7 @@ import {
   Check,
   Clipboard,
   Database,
+  Download,
   ExternalLink,
   FileSearch,
   FileText,
@@ -39,6 +40,7 @@ import {
   Save,
   SearchCheck,
   Sparkles,
+  Upload,
   UserRound,
   Wand2,
 } from "lucide-react";
@@ -126,6 +128,15 @@ type StudioBrainSource = {
   fileType?: string;
   extractionStatus?: "text captured" | "media recorded" | "record only";
   matchedTerms?: string[];
+};
+
+type PortfolioBackup = {
+  exportedAt: string;
+  version: 1;
+  views: Record<string, TailoredView>;
+  generatedLinks: GeneratedLink[];
+  savedProfiles: SavedTargetProfile[];
+  brainSources: StudioBrainSource[];
 };
 
 const sampleJd =
@@ -396,6 +407,38 @@ function getStudioBrainSources(): StudioBrainSource[] {
 
 function setStudioBrainSources(sources: StudioBrainSource[]) {
   localStorage.setItem(studioBrainKey, JSON.stringify(sources));
+}
+
+function buildPortfolioBackup(): PortfolioBackup {
+  return {
+    exportedAt: new Date().toISOString(),
+    version: 1,
+    views: getLocalViews(),
+    generatedLinks: getGeneratedLinks(),
+    savedProfiles: getSavedProfiles(),
+    brainSources: getStudioBrainSources(),
+  };
+}
+
+function isPortfolioBackup(value: unknown): value is PortfolioBackup {
+  if (!value || typeof value !== "object") return false;
+  const backup = value as Partial<PortfolioBackup>;
+  return (
+    backup.version === 1 &&
+    typeof backup.exportedAt === "string" &&
+    Boolean(backup.views) &&
+    typeof backup.views === "object" &&
+    Array.isArray(backup.generatedLinks) &&
+    Array.isArray(backup.savedProfiles) &&
+    Array.isArray(backup.brainSources)
+  );
+}
+
+function writePortfolioBackup(backup: PortfolioBackup) {
+  localStorage.setItem(localStorageKey, JSON.stringify(backup.views));
+  setGeneratedLinks(backup.generatedLinks);
+  setSavedProfiles(backup.savedProfiles);
+  setStudioBrainSources(backup.brainSources);
 }
 
 function formatBytes(bytes = 0) {
@@ -971,6 +1014,7 @@ export function TailoredPortfolioStudio() {
   const [sourceStatus, setSourceStatus] = useState(evidenceBrain.statuses[4]);
   const [sourceText, setSourceText] = useState("");
   const [importingSources, setImportingSources] = useState(false);
+  const [backupMessage, setBackupMessage] = useState("");
 
   const analysis = useMemo(
     () => analyzeTarget(`${company} ${jd}`),
@@ -1129,6 +1173,52 @@ export function TailoredPortfolioStudio() {
     setSelectedLanes(targetProfile.lanes);
     setSelectedProjectIds(targetProfile.projectIds);
     setSelectedProofIds(targetProfile.proofIds);
+  };
+
+  const refreshLocalWorkspace = () => {
+    setSavedProfilesState(getSavedProfiles());
+    setBrainDrafts(getStudioBrainSources());
+    setLinks(getGeneratedLinks());
+  };
+
+  const exportWorkspaceBackup = () => {
+    const backup = buildPortfolioBackup();
+    const blob = new Blob([JSON.stringify(backup, null, 2)], {
+      type: "application/json",
+    });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = `terry-portfolio-backup-${new Date()
+      .toISOString()
+      .slice(0, 10)}.json`;
+    anchor.click();
+    URL.revokeObjectURL(url);
+    setBackupMessage("Workspace backup exported.");
+  };
+
+  const importWorkspaceBackup = async (files: FileList | null) => {
+    const file = files?.[0];
+    if (!file) return;
+    try {
+      const text = await readFileText(file);
+      const parsed = JSON.parse(text) as unknown;
+      if (!isPortfolioBackup(parsed)) {
+        setBackupMessage(
+          "Backup was not imported. The file shape did not match this portfolio workspace.",
+        );
+        return;
+      }
+      writePortfolioBackup(parsed);
+      refreshLocalWorkspace();
+      setBackupMessage(
+        `Workspace restored from ${new Date(parsed.exportedAt).toLocaleDateString()}.`,
+      );
+    } catch {
+      setBackupMessage(
+        "Backup was not imported. Use a JSON export from this Studio.",
+      );
+    }
   };
 
   const updateSavedProfilesForLink = (link: GeneratedLink) => {
@@ -1491,6 +1581,54 @@ export function TailoredPortfolioStudio() {
                     </div>
                   </div>
                 ))
+              )}
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Download className="h-5 w-5 text-primary" />
+                Workspace Backup
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-sm leading-6 text-muted-foreground">
+                Export or restore the private Studio workspace for this browser:
+                source records, saved profiles, review links, and local view
+                definitions.
+              </p>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={exportWorkspaceBackup}
+                >
+                  <Download className="mr-2 h-4 w-4" />
+                  Export workspace
+                </Button>
+                <label
+                  className="inline-flex cursor-pointer items-center justify-center rounded-md border border-border px-4 py-2 text-sm font-medium transition-smooth hover:bg-muted"
+                  htmlFor="workspace-backup"
+                >
+                  <Upload className="mr-2 h-4 w-4" />
+                  Restore workspace
+                  <input
+                    id="workspace-backup"
+                    type="file"
+                    accept=".json,application/json"
+                    className="sr-only"
+                    onChange={(event) => {
+                      void importWorkspaceBackup(event.target.files);
+                      event.target.value = "";
+                    }}
+                  />
+                </label>
+              </div>
+              {backupMessage && (
+                <p className="rounded-md border border-border bg-muted/20 p-3 text-sm text-muted-foreground">
+                  {backupMessage}
+                </p>
               )}
             </CardContent>
           </Card>
