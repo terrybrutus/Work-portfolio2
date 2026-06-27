@@ -33354,6 +33354,17 @@ function getSourceCoverage(project, sources) {
     (source) => isReviewerSafeSource(source) && source.linkedProjectIds.includes(project.id)
   );
 }
+function buildVisualSnapshots(selectedProjects, sources) {
+  return selectedProjects.map((project) => ({
+    projectId: project.id,
+    projectTitle: project.shortTitle,
+    visualSrc: project.visual.src,
+    visualQuality: project.visual.quality,
+    readiness: project.readiness,
+    approvedSourceCount: getSourceCoverage(project, sources).length,
+    missing: (project.visual.missing ?? project.evidenceNeeds).slice(0, 3)
+  }));
+}
 function buildViewModel(view) {
   var _a2, _b2;
   const lanes = ((view == null ? void 0 : view.lanes) ?? []).filter(isLane).slice(0, 3);
@@ -33769,6 +33780,10 @@ function TailoredPortfolioStudio() {
   };
   const saveTargetProfile = () => {
     const id = makeSlug(activeLanes[0]);
+    const visualSnapshots = buildVisualSnapshots(
+      activeProjects,
+      allBrainSources
+    );
     const profileToSave = {
       id,
       name: company.trim() || `${activeLanes[0]} target`,
@@ -33779,6 +33794,7 @@ function TailoredPortfolioStudio() {
       projectIds: activeProjectIds,
       proofIds: activeProofIds,
       skillIds: recommendedSkills,
+      visualSnapshots,
       linkSlugs: links.slice(0, 4).map((link) => link.slug)
     };
     const nextProfiles = [
@@ -33839,6 +33855,10 @@ function TailoredPortfolioStudio() {
   const updateSavedProfilesForLink = (link) => {
     if (!company.trim() && savedProfiles.length === 0) return;
     const targetName = company.trim() || `${activeLanes[0]} target`;
+    const visualSnapshots = buildVisualSnapshots(
+      activeProjects,
+      allBrainSources
+    );
     const matchingProfile = savedProfiles.find(
       (profileItem) => profileItem.company === company.trim() || profileItem.name === targetName
     );
@@ -33851,7 +33871,8 @@ function TailoredPortfolioStudio() {
       lanes: activeLanes,
       projectIds: activeProjectIds,
       proofIds: activeProofIds,
-      skillIds: recommendedSkills
+      skillIds: recommendedSkills,
+      visualSnapshots
     } : {
       id: makeSlug(activeLanes[0]),
       name: targetName,
@@ -33862,6 +33883,7 @@ function TailoredPortfolioStudio() {
       projectIds: activeProjectIds,
       proofIds: activeProofIds,
       skillIds: recommendedSkills,
+      visualSnapshots,
       linkSlugs: [link.slug]
     };
     const nextProfiles = [
@@ -34165,7 +34187,35 @@ function TailoredPortfolioStudio() {
                   targetProfile.linkSlugs.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-2 text-xs text-primary", children: [
                     "Latest link: #/work/",
                     targetProfile.linkSlugs[0]
-                  ] })
+                  ] }),
+                  targetProfile.visualSnapshots && targetProfile.visualSnapshots.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 grid gap-2 sm:grid-cols-2", children: targetProfile.visualSnapshots.slice(0, 4).map((snapshot) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                    "div",
+                    {
+                      className: "rounded-md border border-border bg-background/70 p-2",
+                      children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-2", children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "truncate text-xs font-medium", children: snapshot.projectTitle }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            Badge,
+                            {
+                              variant: snapshot.visualQuality === "approved" ? "default" : "outline",
+                              children: snapshot.visualQuality
+                            }
+                          )
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-1 text-xs text-muted-foreground", children: [
+                          snapshot.approvedSourceCount,
+                          " approved sources"
+                        ] }),
+                        snapshot.readiness.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-xs text-muted-foreground", children: snapshot.readiness.join(", ") }),
+                        snapshot.approvedSourceCount === 0 && snapshot.missing.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-1 text-xs leading-5 text-primary", children: [
+                          "Needs: ",
+                          snapshot.missing[0]
+                        ] })
+                      ]
+                    },
+                    snapshot.projectId
+                  )) })
                 ] }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx(
                   Button,

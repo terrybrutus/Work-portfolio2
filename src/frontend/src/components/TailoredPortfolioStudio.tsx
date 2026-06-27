@@ -111,7 +111,18 @@ type SavedTargetProfile = {
   projectIds: string[];
   proofIds: string[];
   skillIds: string[];
+  visualSnapshots?: SavedVisualSnapshot[];
   linkSlugs: string[];
+};
+
+type SavedVisualSnapshot = {
+  projectId: string;
+  projectTitle: string;
+  visualSrc: string;
+  visualQuality: PortfolioProject["visual"]["quality"];
+  readiness: PortfolioProject["readiness"];
+  approvedSourceCount: number;
+  missing: string[];
 };
 
 type StudioBrainSource = {
@@ -541,6 +552,21 @@ function getSourceCoverage(
       isReviewerSafeSource(source) &&
       source.linkedProjectIds.includes(project.id),
   );
+}
+
+function buildVisualSnapshots(
+  selectedProjects: PortfolioProject[],
+  sources: StudioBrainSource[],
+): SavedVisualSnapshot[] {
+  return selectedProjects.map((project) => ({
+    projectId: project.id,
+    projectTitle: project.shortTitle,
+    visualSrc: project.visual.src,
+    visualQuality: project.visual.quality,
+    readiness: project.readiness,
+    approvedSourceCount: getSourceCoverage(project, sources).length,
+    missing: (project.visual.missing ?? project.evidenceNeeds).slice(0, 3),
+  }));
 }
 
 function buildViewModel(view: TailoredView | null) {
@@ -1157,6 +1183,10 @@ export function TailoredPortfolioStudio() {
 
   const saveTargetProfile = () => {
     const id = makeSlug(activeLanes[0]);
+    const visualSnapshots = buildVisualSnapshots(
+      activeProjects,
+      allBrainSources,
+    );
     const profileToSave: SavedTargetProfile = {
       id,
       name: company.trim() || `${activeLanes[0]} target`,
@@ -1167,6 +1197,7 @@ export function TailoredPortfolioStudio() {
       projectIds: activeProjectIds,
       proofIds: activeProofIds,
       skillIds: recommendedSkills,
+      visualSnapshots,
       linkSlugs: links.slice(0, 4).map((link) => link.slug),
     };
     const nextProfiles = [
@@ -1234,6 +1265,10 @@ export function TailoredPortfolioStudio() {
   const updateSavedProfilesForLink = (link: GeneratedLink) => {
     if (!company.trim() && savedProfiles.length === 0) return;
     const targetName = company.trim() || `${activeLanes[0]} target`;
+    const visualSnapshots = buildVisualSnapshots(
+      activeProjects,
+      allBrainSources,
+    );
     const matchingProfile = savedProfiles.find(
       (profileItem) =>
         profileItem.company === company.trim() ||
@@ -1250,6 +1285,7 @@ export function TailoredPortfolioStudio() {
           projectIds: activeProjectIds,
           proofIds: activeProofIds,
           skillIds: recommendedSkills,
+          visualSnapshots,
         }
       : {
           id: makeSlug(activeLanes[0]),
@@ -1261,6 +1297,7 @@ export function TailoredPortfolioStudio() {
           projectIds: activeProjectIds,
           proofIds: activeProofIds,
           skillIds: recommendedSkills,
+          visualSnapshots,
           linkSlugs: [link.slug],
         };
     const nextProfiles = [
@@ -1626,6 +1663,49 @@ export function TailoredPortfolioStudio() {
                             Latest link: #/work/{targetProfile.linkSlugs[0]}
                           </p>
                         )}
+                        {targetProfile.visualSnapshots &&
+                          targetProfile.visualSnapshots.length > 0 && (
+                            <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                              {targetProfile.visualSnapshots
+                                .slice(0, 4)
+                                .map((snapshot) => (
+                                  <div
+                                    key={snapshot.projectId}
+                                    className="rounded-md border border-border bg-background/70 p-2"
+                                  >
+                                    <div className="flex items-center justify-between gap-2">
+                                      <p className="truncate text-xs font-medium">
+                                        {snapshot.projectTitle}
+                                      </p>
+                                      <Badge
+                                        variant={
+                                          snapshot.visualQuality === "approved"
+                                            ? "default"
+                                            : "outline"
+                                        }
+                                      >
+                                        {snapshot.visualQuality}
+                                      </Badge>
+                                    </div>
+                                    <p className="mt-1 text-xs text-muted-foreground">
+                                      {snapshot.approvedSourceCount} approved
+                                      sources
+                                    </p>
+                                    {snapshot.readiness.length > 0 && (
+                                      <p className="mt-1 text-xs text-muted-foreground">
+                                        {snapshot.readiness.join(", ")}
+                                      </p>
+                                    )}
+                                    {snapshot.approvedSourceCount === 0 &&
+                                      snapshot.missing.length > 0 && (
+                                        <p className="mt-1 text-xs leading-5 text-primary">
+                                          Needs: {snapshot.missing[0]}
+                                        </p>
+                                      )}
+                                  </div>
+                                ))}
+                            </div>
+                          )}
                       </div>
                       <Button
                         type="button"
