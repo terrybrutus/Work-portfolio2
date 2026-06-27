@@ -116,7 +116,7 @@ type StudioBrainSource = {
   id: string;
   title: string;
   type: string;
-  status: string;
+  status: EvidenceSourceStatus;
   linkedProjectIds: string[];
   note: string;
   rawText: string;
@@ -993,6 +993,20 @@ export function TailoredPortfolioStudio() {
     .filter(
       (item) => item.status !== "approved" || item.approvedSources.length === 0,
     );
+  const evidenceCoverage = activeProjects.map((project) => {
+    const approvedSources = getSourceCoverage(project, allBrainSources);
+    const linkedSources = allBrainSources.filter((source) =>
+      source.linkedProjectIds.includes(project.id),
+    );
+    return {
+      project,
+      approvedSources,
+      linkedSources,
+      needsReview: linkedSources.filter(
+        (source) => !isReviewerSafeSource(source),
+      ),
+    };
+  });
   const studioOutputs = buildStudioOutputs(
     activeLanes,
     activeProjects,
@@ -1115,6 +1129,49 @@ export function TailoredPortfolioStudio() {
     setBrainDrafts(nextSources);
     setSourceTitle("");
     setSourceText("");
+  };
+
+  const updateBrainSource = (
+    sourceId: string,
+    updater: (source: StudioBrainSource) => StudioBrainSource,
+  ) => {
+    const nextSources = brainDrafts.map((source) =>
+      source.id === sourceId ? updater(source) : source,
+    );
+    setStudioBrainSources(nextSources);
+    setBrainDrafts(nextSources);
+  };
+
+  const updateBrainSourceStatus = (
+    sourceId: string,
+    status: EvidenceSourceStatus,
+  ) => {
+    updateBrainSource(sourceId, (source) => ({
+      ...source,
+      status,
+      note:
+        status === "approved" || status === "public-safe"
+          ? "Approved for use after review. Keep checking project match and redaction before sharing."
+          : source.note,
+    }));
+  };
+
+  const toggleBrainSourceProject = (sourceId: string, projectId: string) => {
+    updateBrainSource(sourceId, (source) => {
+      const linkedProjectIds = source.linkedProjectIds.includes(projectId)
+        ? source.linkedProjectIds.filter((id) => id !== projectId)
+        : [...source.linkedProjectIds, projectId].slice(0, 6);
+      return {
+        ...source,
+        linkedProjectIds,
+      };
+    });
+  };
+
+  const removeBrainSource = (sourceId: string) => {
+    const nextSources = brainDrafts.filter((source) => source.id !== sourceId);
+    setStudioBrainSources(nextSources);
+    setBrainDrafts(nextSources);
   };
 
   const importSourceFiles = async (files: FileList | null) => {
@@ -1558,45 +1615,163 @@ export function TailoredPortfolioStudio() {
                   Review queue
                 </p>
                 <div className="space-y-2">
-                  {allBrainSources.slice(0, 8).map((source) => (
-                    <div
-                      key={source.id}
-                      className="rounded-md border border-border bg-muted/20 p-3"
-                    >
-                      <div className="flex flex-wrap items-center justify-between gap-2">
-                        <p className="text-sm font-medium">{source.title}</p>
-                        <Badge variant="outline">{source.status}</Badge>
-                      </div>
-                      <p className="mt-1 text-xs text-muted-foreground">
-                        {source.type} -{" "}
-                        {source.linkedProjectIds.length > 0
-                          ? `${source.linkedProjectIds.length} linked projects`
-                          : "not linked yet"}
-                      </p>
-                      <div className="mt-2 flex flex-wrap gap-2">
-                        {source.extractionStatus && (
-                          <Badge variant="outline">
-                            {source.extractionStatus}
-                          </Badge>
+                  {allBrainSources.slice(0, 8).map((source) => {
+                    const isEditable = brainDrafts.some(
+                      (draft) => draft.id === source.id,
+                    );
+                    return (
+                      <div
+                        key={source.id}
+                        className="rounded-md border border-border bg-muted/20 p-3"
+                      >
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <p className="text-sm font-medium">{source.title}</p>
+                          <Badge variant="outline">{source.status}</Badge>
+                        </div>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          {source.type} -{" "}
+                          {source.linkedProjectIds.length > 0
+                            ? `${source.linkedProjectIds.length} linked projects`
+                            : "not linked yet"}
+                        </p>
+                        <div className="mt-2 flex flex-wrap gap-2">
+                          {source.extractionStatus && (
+                            <Badge variant="outline">
+                              {source.extractionStatus}
+                            </Badge>
+                          )}
+                          {source.fileSize ? (
+                            <Badge variant="outline">
+                              {formatBytes(source.fileSize)}
+                            </Badge>
+                          ) : null}
+                          {source.matchedTerms?.slice(0, 4).map((term) => (
+                            <Badge key={term} variant="outline">
+                              {term}
+                            </Badge>
+                          ))}
+                        </div>
+                        <p className="mt-2 text-xs leading-5 text-muted-foreground">
+                          {source.note}
+                        </p>
+                        {isEditable ? (
+                          <div className="mt-3 space-y-3 rounded-md border border-border bg-background/70 p-3">
+                            <label
+                              className="block space-y-2"
+                              htmlFor={`status-${source.id}`}
+                            >
+                              <span className="text-xs font-semibold uppercase text-muted-foreground">
+                                Review status
+                              </span>
+                              <select
+                                id={`status-${source.id}`}
+                                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                                value={source.status}
+                                onChange={(event) =>
+                                  updateBrainSourceStatus(
+                                    source.id,
+                                    event.target.value as EvidenceSourceStatus,
+                                  )
+                                }
+                              >
+                                {evidenceBrain.statuses.map((status) => (
+                                  <option key={status} value={status}>
+                                    {status}
+                                  </option>
+                                ))}
+                              </select>
+                            </label>
+                            <div>
+                              <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
+                                Linked projects
+                              </p>
+                              <div className="flex flex-wrap gap-2">
+                                {projects.map((project) => (
+                                  <ToggleChip
+                                    key={project.id}
+                                    active={source.linkedProjectIds.includes(
+                                      project.id,
+                                    )}
+                                    onClick={() =>
+                                      toggleBrainSourceProject(
+                                        source.id,
+                                        project.id,
+                                      )
+                                    }
+                                  >
+                                    {project.shortTitle}
+                                  </ToggleChip>
+                                ))}
+                              </div>
+                            </div>
+                            <Button
+                              type="button"
+                              variant="outline"
+                              onClick={() => removeBrainSource(source.id)}
+                            >
+                              Remove source record
+                            </Button>
+                          </div>
+                        ) : (
+                          <p className="mt-3 text-xs leading-5 text-muted-foreground">
+                            Seed record. Import or paste your own source to edit
+                            status and project links.
+                          </p>
                         )}
-                        {source.fileSize ? (
-                          <Badge variant="outline">
-                            {formatBytes(source.fileSize)}
-                          </Badge>
-                        ) : null}
-                        {source.matchedTerms?.slice(0, 4).map((term) => (
-                          <Badge key={term} variant="outline">
-                            {term}
-                          </Badge>
-                        ))}
                       </div>
-                      <p className="mt-2 text-xs leading-5 text-muted-foreground">
-                        {source.note}
-                      </p>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <SearchCheck className="h-5 w-5 text-primary" />
+                Evidence Coverage
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              {evidenceCoverage.map(
+                ({ project, approvedSources, linkedSources, needsReview }) => (
+                  <div
+                    key={project.id}
+                    className="rounded-md border border-border bg-muted/20 p-3"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <p className="text-sm font-medium">
+                        {project.shortTitle}
+                      </p>
+                      <Badge
+                        variant={
+                          approvedSources.length > 0 ? "default" : "outline"
+                        }
+                      >
+                        {approvedSources.length > 0
+                          ? "source-backed"
+                          : "needs approved source"}
+                      </Badge>
+                    </div>
+                    <div className="mt-2 grid gap-2 text-xs leading-5 text-muted-foreground sm:grid-cols-3">
+                      <p>{linkedSources.length} linked records</p>
+                      <p>{approvedSources.length} approved records</p>
+                      <p>{needsReview.length} awaiting review</p>
+                    </div>
+                    {approvedSources.length > 0 ? (
+                      <p className="mt-2 text-xs leading-5 text-primary">
+                        Strongest source: {approvedSources[0].title}
+                      </p>
+                    ) : (
+                      <p className="mt-2 text-xs leading-5 text-muted-foreground">
+                        Add or approve one artifact before this project becomes
+                        a stronger share candidate.
+                      </p>
+                    )}
+                  </div>
+                ),
+              )}
             </CardContent>
           </Card>
 
@@ -1692,7 +1867,7 @@ export function TailoredPortfolioStudio() {
                       <div className="flex flex-wrap items-center justify-between gap-3">
                         <span className="font-medium">{link.label}</span>
                         <Badge variant="outline">
-                          {link.state} · {link.source}
+                          {link.state} - {link.source}
                         </Badge>
                       </div>
                       <p className="mt-2 break-all text-muted-foreground">

@@ -33626,6 +33626,20 @@ function TailoredPortfolioStudio() {
   })).filter(
     (item) => item.status !== "approved" || item.approvedSources.length === 0
   );
+  const evidenceCoverage = activeProjects.map((project) => {
+    const approvedSources = getSourceCoverage(project, allBrainSources);
+    const linkedSources = allBrainSources.filter(
+      (source) => source.linkedProjectIds.includes(project.id)
+    );
+    return {
+      project,
+      approvedSources,
+      linkedSources,
+      needsReview: linkedSources.filter(
+        (source) => !isReviewerSafeSource(source)
+      )
+    };
+  });
   const studioOutputs = buildStudioOutputs(
     activeLanes,
     activeProjects,
@@ -33731,6 +33745,34 @@ function TailoredPortfolioStudio() {
     setBrainDrafts(nextSources);
     setSourceTitle("");
     setSourceText("");
+  };
+  const updateBrainSource = (sourceId, updater) => {
+    const nextSources = brainDrafts.map(
+      (source) => source.id === sourceId ? updater(source) : source
+    );
+    setStudioBrainSources(nextSources);
+    setBrainDrafts(nextSources);
+  };
+  const updateBrainSourceStatus = (sourceId, status2) => {
+    updateBrainSource(sourceId, (source) => ({
+      ...source,
+      status: status2,
+      note: status2 === "approved" || status2 === "public-safe" ? "Approved for use after review. Keep checking project match and redaction before sharing." : source.note
+    }));
+  };
+  const toggleBrainSourceProject = (sourceId, projectId) => {
+    updateBrainSource(sourceId, (source) => {
+      const linkedProjectIds = source.linkedProjectIds.includes(projectId) ? source.linkedProjectIds.filter((id) => id !== projectId) : [...source.linkedProjectIds, projectId].slice(0, 6);
+      return {
+        ...source,
+        linkedProjectIds
+      };
+    });
+  };
+  const removeBrainSource = (sourceId) => {
+    const nextSources = brainDrafts.filter((source) => source.id !== sourceId);
+    setStudioBrainSources(nextSources);
+    setBrainDrafts(nextSources);
   };
   const importSourceFiles = async (files) => {
     if (!files || files.length === 0) return;
@@ -34096,6 +34138,9 @@ function TailoredPortfolioStudio() {
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-2 text-xs font-semibold uppercase text-muted-foreground", children: "Review queue" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-2", children: allBrainSources.slice(0, 8).map((source) => {
                 var _a2;
+                const isEditable = brainDrafts.some(
+                  (draft) => draft.id === source.id
+                );
                 return /* @__PURE__ */ jsxRuntimeExports.jsxs(
                   "div",
                   {
@@ -34116,7 +34161,58 @@ function TailoredPortfolioStudio() {
                         source.fileSize ? /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: formatBytes(source.fileSize) }) : null,
                         (_a2 = source.matchedTerms) == null ? void 0 : _a2.slice(0, 4).map((term) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: term }, term))
                       ] }),
-                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs leading-5 text-muted-foreground", children: source.note })
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs leading-5 text-muted-foreground", children: source.note }),
+                      isEditable ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 space-y-3 rounded-md border border-border bg-background/70 p-3", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                          "label",
+                          {
+                            className: "block space-y-2",
+                            htmlFor: `status-${source.id}`,
+                            children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Review status" }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                "select",
+                                {
+                                  id: `status-${source.id}`,
+                                  className: "w-full rounded-md border border-input bg-background px-3 py-2 text-sm",
+                                  value: source.status,
+                                  onChange: (event) => updateBrainSourceStatus(
+                                    source.id,
+                                    event.target.value
+                                  ),
+                                  children: evidenceBrain.statuses.map((status2) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: status2, children: status2 }, status2))
+                                }
+                              )
+                            ]
+                          }
+                        ),
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-2 text-xs font-semibold uppercase text-muted-foreground", children: "Linked projects" }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: projects.map((project) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            ToggleChip,
+                            {
+                              active: source.linkedProjectIds.includes(
+                                project.id
+                              ),
+                              onClick: () => toggleBrainSourceProject(
+                                source.id,
+                                project.id
+                              ),
+                              children: project.shortTitle
+                            },
+                            project.id
+                          )) })
+                        ] }),
+                        /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          Button,
+                          {
+                            type: "button",
+                            variant: "outline",
+                            onClick: () => removeBrainSource(source.id),
+                            children: "Remove source record"
+                          }
+                        )
+                      ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-xs leading-5 text-muted-foreground", children: "Seed record. Import or paste your own source to edit status and project links." })
                     ]
                   },
                   source.id
@@ -34124,6 +34220,51 @@ function TailoredPortfolioStudio() {
               }) })
             ] })
           ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(SearchCheck, { className: "h-5 w-5 text-primary" }),
+            "Evidence Coverage"
+          ] }) }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "space-y-3", children: evidenceCoverage.map(
+            ({ project, approvedSources, linkedSources, needsReview }) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "div",
+              {
+                className: "rounded-md border border-border bg-muted/20 p-3",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-2", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: project.shortTitle }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      Badge,
+                      {
+                        variant: approvedSources.length > 0 ? "default" : "outline",
+                        children: approvedSources.length > 0 ? "source-backed" : "needs approved source"
+                      }
+                    )
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 grid gap-2 text-xs leading-5 text-muted-foreground sm:grid-cols-3", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                      linkedSources.length,
+                      " linked records"
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                      approvedSources.length,
+                      " approved records"
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { children: [
+                      needsReview.length,
+                      " awaiting review"
+                    ] })
+                  ] }),
+                  approvedSources.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-2 text-xs leading-5 text-primary", children: [
+                    "Strongest source: ",
+                    approvedSources[0].title
+                  ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs leading-5 text-muted-foreground", children: "Add or approve one artifact before this project becomes a stronger share candidate." })
+                ]
+              },
+              project.id
+            )
+          ) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
@@ -34189,7 +34330,7 @@ function TailoredPortfolioStudio() {
                     /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium", children: link.label }),
                     /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { variant: "outline", children: [
                       link.state,
-                      " · ",
+                      " - ",
                       link.source
                     ] })
                   ] }),
