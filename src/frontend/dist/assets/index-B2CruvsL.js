@@ -33659,6 +33659,8 @@ function TailoredPortfolioStudio() {
   const [sourceText, setSourceText] = reactExports.useState("");
   const [importingSources, setImportingSources] = reactExports.useState(false);
   const [backupMessage, setBackupMessage] = reactExports.useState("");
+  const [copyMessage, setCopyMessage] = reactExports.useState("");
+  const [manualCopy, setManualCopy] = reactExports.useState(null);
   const analysis = reactExports.useMemo(
     () => analyzeTarget(`${company} ${jd}`),
     [company, jd]
@@ -34001,6 +34003,44 @@ function TailoredPortfolioStudio() {
     );
     setLinks(nextLinks);
     setGeneratedLinks(nextLinks);
+  };
+  const copyStudioOutput = async (label, value) => {
+    var _a2;
+    const text = value.trim();
+    if (!text) {
+      setCopyMessage(`Nothing to copy for ${label}.`);
+      return;
+    }
+    try {
+      if ((_a2 = navigator.clipboard) == null ? void 0 : _a2.writeText) {
+        try {
+          await navigator.clipboard.writeText(text);
+          setCopyMessage(`${label} copied.`);
+          return;
+        } catch {
+        }
+      }
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.setAttribute("readonly", "true");
+      textarea.style.position = "fixed";
+      textarea.style.left = "0";
+      textarea.style.opacity = "0";
+      textarea.style.top = "0";
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      const copied = document.execCommand("copy");
+      document.body.removeChild(textarea);
+      if (!copied) {
+        throw new Error("copy failed");
+      }
+      setCopyMessage(`${label} copied.`);
+      setManualCopy(null);
+    } catch {
+      setManualCopy({ label, text });
+      setCopyMessage(`Copy blocked for ${label}. Text is ready below.`);
+    }
   };
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "min-h-screen bg-background text-foreground", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "border-b border-border bg-[radial-gradient(circle_at_top_left,_rgba(229,190,105,0.16),_transparent_34%),linear-gradient(135deg,_rgba(17,24,39,0.95),_rgba(10,10,10,1))]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-7xl gap-8 px-5 py-10 lg:grid-cols-[0.9fr_1.1fr]", children: [
@@ -34718,26 +34758,121 @@ function TailoredPortfolioStudio() {
           ] })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx(Sparkles, { className: "h-5 w-5 text-primary" }),
-            "Copy-Ready Outputs"
+          /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Sparkles, { className: "h-5 w-5 text-primary" }),
+              "Copy-Ready Outputs"
+            ] }),
+            copyMessage && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm text-muted-foreground", children: copyMessage })
           ] }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-4", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-muted/20 p-3", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Recruiter summary" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-3", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Recruiter summary" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  Button,
+                  {
+                    type: "button",
+                    "aria-label": "Copy recruiter summary",
+                    variant: "outline",
+                    size: "sm",
+                    onClick: () => copyStudioOutput(
+                      "Recruiter summary",
+                      studioOutputs.recruiter
+                    ),
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(Clipboard, { className: "mr-2 h-4 w-4" }),
+                      "Copy"
+                    ]
+                  }
+                )
+              ] }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm leading-6", children: studioOutputs.recruiter })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-muted/20 p-3", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Resume emphasis bullets" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-3", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Resume emphasis bullets" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  Button,
+                  {
+                    type: "button",
+                    "aria-label": "Copy resume emphasis bullets",
+                    variant: "outline",
+                    size: "sm",
+                    onClick: () => copyStudioOutput(
+                      "Resume bullets",
+                      studioOutputs.resume.map((bullet) => `- ${bullet}`).join("\n")
+                    ),
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(Clipboard, { className: "mr-2 h-4 w-4" }),
+                      "Copy"
+                    ]
+                  }
+                )
+              ] }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-2 text-sm leading-6", children: studioOutputs.resume.map((bullet) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: bullet }, bullet)) })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-muted/20 p-3", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "LinkedIn summary" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-3", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "LinkedIn summary" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  Button,
+                  {
+                    type: "button",
+                    "aria-label": "Copy LinkedIn summary",
+                    variant: "outline",
+                    size: "sm",
+                    onClick: () => copyStudioOutput(
+                      "LinkedIn summary",
+                      studioOutputs.linkedin
+                    ),
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(Clipboard, { className: "mr-2 h-4 w-4" }),
+                      "Copy"
+                    ]
+                  }
+                )
+              ] }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm leading-6", children: studioOutputs.linkedin })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-muted/20 p-3", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Interview talking points" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-3", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Interview talking points" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  Button,
+                  {
+                    type: "button",
+                    "aria-label": "Copy interview talking points",
+                    variant: "outline",
+                    size: "sm",
+                    onClick: () => copyStudioOutput(
+                      "Interview talking points",
+                      studioOutputs.interview.map((prompt) => `- ${prompt}`).join("\n")
+                    ),
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx(Clipboard, { className: "mr-2 h-4 w-4" }),
+                      "Copy"
+                    ]
+                  }
+                )
+              ] }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-2 text-sm leading-6", children: studioOutputs.interview.map((prompt) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: prompt }, prompt)) })
+            ] }),
+            manualCopy && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-primary/40 bg-primary/10 p-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Manual copy fallback" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-1 text-sm text-muted-foreground", children: [
+                manualCopy.label,
+                " is selected here for browsers that block clipboard access."
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                Textarea,
+                {
+                  className: "mt-3 min-h-32",
+                  readOnly: true,
+                  value: manualCopy.text,
+                  onFocus: (event) => event.currentTarget.select()
+                }
+              )
             ] })
           ] })
         ] })

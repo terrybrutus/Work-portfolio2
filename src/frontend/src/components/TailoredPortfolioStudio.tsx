@@ -1015,6 +1015,11 @@ export function TailoredPortfolioStudio() {
   const [sourceText, setSourceText] = useState("");
   const [importingSources, setImportingSources] = useState(false);
   const [backupMessage, setBackupMessage] = useState("");
+  const [copyMessage, setCopyMessage] = useState("");
+  const [manualCopy, setManualCopy] = useState<{
+    label: string;
+    text: string;
+  } | null>(null);
 
   const analysis = useMemo(
     () => analyzeTarget(`${company} ${jd}`),
@@ -1431,6 +1436,46 @@ export function TailoredPortfolioStudio() {
     );
     setLinks(nextLinks);
     setGeneratedLinks(nextLinks);
+  };
+
+  const copyStudioOutput = async (label: string, value: string) => {
+    const text = value.trim();
+    if (!text) {
+      setCopyMessage(`Nothing to copy for ${label}.`);
+      return;
+    }
+
+    try {
+      if (navigator.clipboard?.writeText) {
+        try {
+          await navigator.clipboard.writeText(text);
+          setCopyMessage(`${label} copied.`);
+          return;
+        } catch {
+          // Fall through to the selection-based copy path for stricter browsers.
+        }
+      }
+      const textarea = document.createElement("textarea");
+      textarea.value = text;
+      textarea.setAttribute("readonly", "true");
+      textarea.style.position = "fixed";
+      textarea.style.left = "0";
+      textarea.style.opacity = "0";
+      textarea.style.top = "0";
+      document.body.appendChild(textarea);
+      textarea.focus();
+      textarea.select();
+      const copied = document.execCommand("copy");
+      document.body.removeChild(textarea);
+      if (!copied) {
+        throw new Error("copy failed");
+      }
+      setCopyMessage(`${label} copied.`);
+      setManualCopy(null);
+    } catch {
+      setManualCopy({ label, text });
+      setCopyMessage(`Copy blocked for ${label}. Text is ready below.`);
+    }
   };
 
   return (
@@ -2300,24 +2345,67 @@ export function TailoredPortfolioStudio() {
 
           <Card>
             <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Sparkles className="h-5 w-5 text-primary" />
-                Copy-Ready Outputs
-              </CardTitle>
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <CardTitle className="flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-primary" />
+                  Copy-Ready Outputs
+                </CardTitle>
+                {copyMessage && (
+                  <span className="text-sm text-muted-foreground">
+                    {copyMessage}
+                  </span>
+                )}
+              </div>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="rounded-md border border-border bg-muted/20 p-3">
-                <p className="text-xs font-semibold uppercase text-muted-foreground">
-                  Recruiter summary
-                </p>
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-xs font-semibold uppercase text-muted-foreground">
+                    Recruiter summary
+                  </p>
+                  <Button
+                    type="button"
+                    aria-label="Copy recruiter summary"
+                    variant="outline"
+                    size="sm"
+                    onClick={() =>
+                      copyStudioOutput(
+                        "Recruiter summary",
+                        studioOutputs.recruiter,
+                      )
+                    }
+                  >
+                    <Clipboard className="mr-2 h-4 w-4" />
+                    Copy
+                  </Button>
+                </div>
                 <p className="mt-2 text-sm leading-6">
                   {studioOutputs.recruiter}
                 </p>
               </div>
               <div className="rounded-md border border-border bg-muted/20 p-3">
-                <p className="text-xs font-semibold uppercase text-muted-foreground">
-                  Resume emphasis bullets
-                </p>
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-xs font-semibold uppercase text-muted-foreground">
+                    Resume emphasis bullets
+                  </p>
+                  <Button
+                    type="button"
+                    aria-label="Copy resume emphasis bullets"
+                    variant="outline"
+                    size="sm"
+                    onClick={() =>
+                      copyStudioOutput(
+                        "Resume bullets",
+                        studioOutputs.resume
+                          .map((bullet) => `- ${bullet}`)
+                          .join("\n"),
+                      )
+                    }
+                  >
+                    <Clipboard className="mr-2 h-4 w-4" />
+                    Copy
+                  </Button>
+                </div>
                 <ul className="mt-2 space-y-2 text-sm leading-6">
                   {studioOutputs.resume.map((bullet) => (
                     <li key={bullet}>{bullet}</li>
@@ -2325,23 +2413,76 @@ export function TailoredPortfolioStudio() {
                 </ul>
               </div>
               <div className="rounded-md border border-border bg-muted/20 p-3">
-                <p className="text-xs font-semibold uppercase text-muted-foreground">
-                  LinkedIn summary
-                </p>
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-xs font-semibold uppercase text-muted-foreground">
+                    LinkedIn summary
+                  </p>
+                  <Button
+                    type="button"
+                    aria-label="Copy LinkedIn summary"
+                    variant="outline"
+                    size="sm"
+                    onClick={() =>
+                      copyStudioOutput(
+                        "LinkedIn summary",
+                        studioOutputs.linkedin,
+                      )
+                    }
+                  >
+                    <Clipboard className="mr-2 h-4 w-4" />
+                    Copy
+                  </Button>
+                </div>
                 <p className="mt-2 text-sm leading-6">
                   {studioOutputs.linkedin}
                 </p>
               </div>
               <div className="rounded-md border border-border bg-muted/20 p-3">
-                <p className="text-xs font-semibold uppercase text-muted-foreground">
-                  Interview talking points
-                </p>
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-xs font-semibold uppercase text-muted-foreground">
+                    Interview talking points
+                  </p>
+                  <Button
+                    type="button"
+                    aria-label="Copy interview talking points"
+                    variant="outline"
+                    size="sm"
+                    onClick={() =>
+                      copyStudioOutput(
+                        "Interview talking points",
+                        studioOutputs.interview
+                          .map((prompt) => `- ${prompt}`)
+                          .join("\n"),
+                      )
+                    }
+                  >
+                    <Clipboard className="mr-2 h-4 w-4" />
+                    Copy
+                  </Button>
+                </div>
                 <ul className="mt-2 space-y-2 text-sm leading-6">
                   {studioOutputs.interview.map((prompt) => (
                     <li key={prompt}>{prompt}</li>
                   ))}
                 </ul>
               </div>
+              {manualCopy && (
+                <div className="rounded-md border border-primary/40 bg-primary/10 p-3">
+                  <p className="text-xs font-semibold uppercase text-muted-foreground">
+                    Manual copy fallback
+                  </p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    {manualCopy.label} is selected here for browsers that block
+                    clipboard access.
+                  </p>
+                  <Textarea
+                    className="mt-3 min-h-32"
+                    readOnly
+                    value={manualCopy.text}
+                    onFocus={(event) => event.currentTarget.select()}
+                  />
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>

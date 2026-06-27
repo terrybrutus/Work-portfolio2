@@ -986,6 +986,9 @@ video {
 .min-h-28 {
   min-height: 7rem;
 }
+.min-h-32 {
+  min-height: 8rem;
+}
 .min-h-36 {
   min-height: 9rem;
 }
@@ -1445,6 +1448,9 @@ video {
 }
 .border-primary\/25 {
   border-color: oklch(var(--primary) / 0.25);
+}
+.border-primary\/40 {
+  border-color: oklch(var(--primary) / 0.4);
 }
 .border-sidebar-border {
   border-color: oklch(var(--sidebar-border));
