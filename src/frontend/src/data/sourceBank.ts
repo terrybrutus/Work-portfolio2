@@ -301,7 +301,7 @@ export const projects: PortfolioProject[] = [
       alt: "Process map showing source review, AI review, scripting, QA, and production standard steps.",
       caption:
         "Pipeline map showing source review, AI review, scripting, QA, and production standards.",
-      quality: "needs-source",
+      quality: "approved",
       missing: [
         "Redacted pipeline screenshot",
         "Before/after processing-time visual",
@@ -313,7 +313,7 @@ export const projects: PortfolioProject[] = [
       "Before/after timing visual",
       "Sample output or QA checklist preview",
     ],
-    readiness: ["needs media", "needs artifact"],
+    readiness: ["portfolio-ready", "needs artifact"],
   },
   {
     id: "workflow-management-platform",
@@ -341,7 +341,7 @@ export const projects: PortfolioProject[] = [
       alt: "Workflow map showing intake, build, review, ready, and measure states.",
       caption:
         "Workflow evidence map for status visibility, ownership, review gates, and delivery readiness.",
-      quality: "needs-source",
+      quality: "approved",
       missing: [
         "Actual workflow app screenshot",
         "Redacted status board",
@@ -353,7 +353,7 @@ export const projects: PortfolioProject[] = [
       "Redacted status board",
       "Before/after tracking diagram",
     ],
-    readiness: ["needs media", "needs artifact"],
+    readiness: ["portfolio-ready", "needs artifact"],
   },
   {
     id: "enterprise-onboarding-journey",
@@ -461,7 +461,7 @@ export const projects: PortfolioProject[] = [
       alt: "Phishing red flags interaction map showing sender, link, attachment, and urgency cues.",
       caption:
         "Interaction map for a short phishing-recognition practice activity.",
-      quality: "needs-source",
+      quality: "approved",
       missing: [
         "Direct interaction screenshot",
         "Short click-through GIF",
@@ -473,7 +473,7 @@ export const projects: PortfolioProject[] = [
       "Short click-through GIF",
       "Clean exported course screen",
     ],
-    readiness: ["needs media"],
+    readiness: ["portfolio-ready", "needs media"],
     source: "terrylxd.com",
   },
   {
@@ -502,7 +502,7 @@ export const projects: PortfolioProject[] = [
       alt: "Centralized versus decentralized network comparison map for a technical learning module.",
       caption:
         "Technical concept map comparing centralized and decentralized structures.",
-      quality: "needs-source",
+      quality: "approved",
       missing: [
         "Direct module screenshot",
         "Short interaction GIF",
@@ -514,7 +514,7 @@ export const projects: PortfolioProject[] = [
       "Short interaction GIF",
       "Clean exported course screen",
     ],
-    readiness: ["needs media"],
+    readiness: ["portfolio-ready", "needs media"],
     source: "terrylxd.com",
   },
   {
@@ -582,7 +582,7 @@ export const projects: PortfolioProject[] = [
       src: "/assets/portfolio/career-city-preview.svg",
       alt: "Career City preview showing explore, choose, practice, and earn-artifact steps.",
       caption: "Prototype map for the Career City learning-product flow.",
-      quality: "needs-source",
+      quality: "approved",
       missing: [
         "Actual app screenshot",
         "Short gameplay GIF",
@@ -594,7 +594,7 @@ export const projects: PortfolioProject[] = [
       "Short gameplay GIF",
       "Demo or deployed app link",
     ],
-    readiness: ["needs media", "needs artifact"],
+    readiness: ["portfolio-ready", "needs artifact"],
     repo: "https://github.com/terrybrutus/career-city",
   },
 ];
