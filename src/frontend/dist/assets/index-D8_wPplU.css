@@ -1463,6 +1463,9 @@ video {
 .border-primary\/25 {
   border-color: oklch(var(--primary) / 0.25);
 }
+.border-primary\/30 {
+  border-color: oklch(var(--primary) / 0.3);
+}
 .border-primary\/40 {
   border-color: oklch(var(--primary) / 0.4);
 }

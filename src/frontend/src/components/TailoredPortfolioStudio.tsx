@@ -151,6 +151,40 @@ type PortfolioBackup = {
   brainSources: StudioBrainSource[];
 };
 
+type ArtifactBrief = {
+  title: string;
+  artifactType:
+    | "dashboard"
+    | "simulation"
+    | "job aid"
+    | "scorecard"
+    | "workflow map"
+    | "case study";
+  problemSolved: string;
+  buildTime: "2 hr" | "4 hr" | "6 hr" | "1 day";
+  requiredInputs: string[];
+  recommendedTools: string[];
+  portfolioPlacement: string;
+  successMetric: string;
+};
+
+type StrategyReport = {
+  likelyProblems: string[];
+  portfolioMatches: Array<{
+    project: PortfolioProject;
+    strength: "strong" | "moderate" | "supporting";
+    reason: string;
+  }>;
+  evidenceGaps: string[];
+  skillMatrix: Array<{
+    skill: string;
+    evidence: string;
+    strength: "Strong" | "Moderate" | "Gap";
+  }>;
+  fitScore: number;
+  artifactBrief: ArtifactBrief;
+};
+
 const sampleJd =
   "Senior enablement role partnering with product, sales, and operations teams to build AI-assisted onboarding, technical training, stakeholder-ready assets, and measurable adoption programs.";
 
@@ -267,6 +301,296 @@ function getRecommendedSkills(selectedLanes: Lane[]) {
   });
 
   return (rankedSkills.length > 0 ? rankedSkills : skills).slice(0, 10);
+}
+
+function getLikelyProblems(selectedLanes: Lane[], targetText: string) {
+  const normalized = normalizeText(targetText);
+  const laneProblems: Record<Lane, string[]> = {
+    Enablement: [
+      "People need clearer role expectations, repeatable support, and faster path-to-performance.",
+      "Stakeholders likely need consistent assets, manager support, and measurable adoption signals.",
+    ],
+    "AI Operations": [
+      "Teams are expected to use AI, but the workflow, QA gates, and operating standards are not mature yet.",
+      "Manual content or analysis work is likely slowing delivery and creating quality variation.",
+    ],
+    "Learning Experience": [
+      "Complex information needs to become practice, feedback, and usable performance support.",
+      "Existing training may be too passive, too dense, or disconnected from real workplace decisions.",
+    ],
+    "Technical Product": [
+      "The role likely needs someone who can translate messy operations into clear tools, flows, and prototypes.",
+      "The company may need better visibility into status, evidence, handoffs, or user behavior.",
+    ],
+    "Sales Enablement": [
+      "Sales teams likely need faster ramp, clearer messaging, and more consistent field execution.",
+      "Managers may lack a clean way to see readiness, coaching needs, or adoption patterns.",
+    ],
+    Compliance: [
+      "Required learning or documentation needs to be easier to complete, track, and defend.",
+      "The organization likely needs better evidence, governance, accessibility, or audit readiness.",
+    ],
+  };
+
+  const signalProblems = [
+    [
+      "lms",
+      "LMS content, reporting, or governance may need cleaner operational ownership.",
+    ],
+    [
+      "dashboard",
+      "Decision-makers likely need a simple dashboard instead of scattered activity data.",
+    ],
+    [
+      "analytics",
+      "The role likely needs stronger measurement of adoption, readiness, or performance.",
+    ],
+    [
+      "crm",
+      "Field or CRM behavior may need clearer coaching, visibility, and adoption support.",
+    ],
+    [
+      "change",
+      "The company likely needs change support, not just content production.",
+    ],
+    [
+      "onboarding",
+      "Ramp time or onboarding consistency is likely a business pain point.",
+    ],
+  ]
+    .filter(([term]) => normalized.includes(term))
+    .map(([, problem]) => problem);
+
+  return [
+    ...signalProblems,
+    ...selectedLanes.flatMap((lane) => laneProblems[lane]),
+  ]
+    .filter((problem, index, list) => list.indexOf(problem) === index)
+    .slice(0, 5);
+}
+
+function getArtifactBrief(
+  selectedLanes: Lane[],
+  gaps: string[],
+  selectedProjects: PortfolioProject[],
+): ArtifactBrief {
+  const firstGap =
+    gaps[0] ?? "clearer evidence of adoption and performance impact";
+  const firstProject = selectedProjects[0]?.shortTitle ?? "current portfolio";
+
+  if (selectedLanes.includes("Sales Enablement")) {
+    return {
+      title: "Sales onboarding readiness scorecard",
+      artifactType: "scorecard",
+      problemSolved:
+        "Shows how ramp progress, manager coaching, messaging practice, and adoption signals could be tracked in one place.",
+      buildTime: "4 hr",
+      requiredInputs: [
+        "Sample seller cohorts",
+        "Readiness milestones",
+        "Manager coaching prompts",
+        "Adoption or ramp metric",
+      ],
+      recommendedTools: ["React", "CSV sample data", "AI coaching prompts"],
+      portfolioPlacement: `Pair with ${firstProject} as a field-readiness proof artifact.`,
+      successMetric: "Ramp-progress visibility or coaching action completion.",
+    };
+  }
+
+  if (selectedLanes.includes("AI Operations")) {
+    return {
+      title: "AI workflow QA dashboard",
+      artifactType: "dashboard",
+      problemSolved:
+        "Demonstrates how AI-assisted production can stay fast while tracking quality, review status, and human approval.",
+      buildTime: "6 hr",
+      requiredInputs: [
+        "Sample intake records",
+        "AI review categories",
+        "QA decision states",
+        "Before/after cycle-time metric",
+      ],
+      recommendedTools: [
+        "React",
+        "JSON sample data",
+        "NotebookLM-style workflow notes",
+      ],
+      portfolioPlacement: `Use as a companion proof layer for ${firstProject}.`,
+      successMetric: "Cycle-time reduction with visible QA gates.",
+    };
+  }
+
+  if (selectedLanes.includes("Learning Experience")) {
+    return {
+      title: "Scenario-based decision practice prototype",
+      artifactType: "simulation",
+      problemSolved:
+        "Turns passive training requirements into a short practice experience with decisions, feedback, and evidence of judgment.",
+      buildTime: "6 hr",
+      requiredInputs: [
+        "One realistic learner scenario",
+        "Decision points",
+        "Feedback rules",
+        "Completion artifact",
+      ],
+      recommendedTools: ["React", "Scenario map", "Feedback rubric"],
+      portfolioPlacement: `Connect to ${firstProject} as an interactive learning proof.`,
+      successMetric: "Learner decision accuracy or completion confidence.",
+    };
+  }
+
+  if (selectedLanes.includes("Compliance")) {
+    return {
+      title: "Audit-ready completion evidence map",
+      artifactType: "workflow map",
+      problemSolved:
+        "Shows how required learning, accessibility checks, completion evidence, and audit artifacts stay connected.",
+      buildTime: "4 hr",
+      requiredInputs: [
+        "Required learning steps",
+        "Evidence fields",
+        "Review checkpoints",
+        "Accessibility requirements",
+      ],
+      recommendedTools: [
+        "Process map",
+        "Redacted sample records",
+        "Checklist UI",
+      ],
+      portfolioPlacement: `Use to strengthen the evidence gap around ${firstGap}.`,
+      successMetric: "Coverage visibility or audit-prep time reduction.",
+    };
+  }
+
+  if (selectedLanes.includes("Technical Product")) {
+    return {
+      title: "Role-fit workflow prototype brief",
+      artifactType: "case study",
+      problemSolved:
+        "Shows how ambiguous role needs become a practical product workflow, artifact plan, and measurable outcome.",
+      buildTime: "2 hr",
+      requiredInputs: [
+        "JD problem signals",
+        "Target user",
+        "Workflow states",
+        "Success metric",
+      ],
+      recommendedTools: [
+        "Case-study page",
+        "Workflow diagram",
+        "Sample UI state",
+      ],
+      portfolioPlacement: `Add as a strategy layer above ${firstProject}.`,
+      successMetric:
+        "Reviewer can see the problem-to-solution logic in under two minutes.",
+    };
+  }
+
+  return {
+    title: "Enablement performance support one-pager",
+    artifactType: "job aid",
+    problemSolved:
+      "Converts role expectations, workflow steps, and success signals into a compact support artifact.",
+    buildTime: "2 hr",
+    requiredInputs: [
+      "Target role",
+      "Key task",
+      "Common blocker",
+      "Success signal",
+    ],
+    recommendedTools: ["One-page PDF", "Workflow checklist", "Manager note"],
+    portfolioPlacement: `Use to close the evidence gap around ${firstGap}.`,
+    successMetric: "Reduced ambiguity for one critical role task.",
+  };
+}
+
+function buildStrategyReport(
+  selectedLanes: Lane[],
+  selectedProjects: PortfolioProject[],
+  selectedProofPoints: ProofPoint[],
+  selectedSkills: string[],
+  sources: StudioBrainSource[],
+  targetText: string,
+): StrategyReport {
+  const likelyProblems = getLikelyProblems(selectedLanes, targetText);
+  const portfolioMatches = selectedProjects
+    .slice(0, 3)
+    .map((project, index) => {
+      const approvedSources = getSourceCoverage(project, sources).length;
+      const strength: "strong" | "moderate" | "supporting" =
+        index === 0 || approvedSources > 0
+          ? "strong"
+          : project.readiness.includes("portfolio-ready")
+            ? "moderate"
+            : "supporting";
+      const matchedLanes = project.lanes
+        .filter((lane) => selectedLanes.includes(lane))
+        .join(", ");
+      return {
+        project,
+        strength,
+        reason:
+          matchedLanes.length > 0
+            ? `Matches ${matchedLanes} and supports ${project.proofIds.length} proof points.`
+            : `Supports adjacent proof through ${project.role.toLowerCase()}.`,
+      };
+    });
+  const missingFromProjects = selectedProjects.flatMap(
+    (project) => project.visual.missing ?? project.evidenceNeeds,
+  );
+  const lowEvidenceProjects = selectedProjects
+    .filter((project) => getSourceCoverage(project, sources).length === 0)
+    .map((project) => `Approved source for ${project.shortTitle}`);
+  const evidenceGaps = [...lowEvidenceProjects, ...missingFromProjects]
+    .filter((gap, index, list) => list.indexOf(gap) === index)
+    .slice(0, 5);
+  const skillMatrix = selectedSkills.slice(0, 6).map((skill) => {
+    const normalizedSkill = normalizeText(skill);
+    const evidenceProjects = projects.filter((project) =>
+      [...project.tools, ...project.lanes, project.role, project.title].some(
+        (term) =>
+          normalizeText(term).includes(normalizedSkill.split(" ")[0] ?? ""),
+      ),
+    );
+    const strength: "Strong" | "Moderate" | "Gap" =
+      evidenceProjects.length >= 3
+        ? "Strong"
+        : evidenceProjects.length > 0
+          ? "Moderate"
+          : "Gap";
+    return {
+      skill,
+      evidence:
+        evidenceProjects.length > 0
+          ? `${Math.min(evidenceProjects.length, 9)} portfolio signals`
+          : "No explicit project signal",
+      strength,
+    };
+  });
+  const fitScore = Math.min(
+    96,
+    58 +
+      selectedLanes.length * 6 +
+      selectedProjects.filter((project) =>
+        project.readiness.includes("portfolio-ready"),
+      ).length *
+        5 +
+      selectedProofPoints.length * 3 -
+      evidenceGaps.length * 2,
+  );
+
+  return {
+    likelyProblems,
+    portfolioMatches,
+    evidenceGaps,
+    skillMatrix,
+    fitScore,
+    artifactBrief: getArtifactBrief(
+      selectedLanes,
+      evidenceGaps,
+      selectedProjects,
+    ),
+  };
 }
 
 function getReviewerBadge(primaryLane: Lane) {
@@ -1116,6 +1440,14 @@ export function TailoredPortfolioStudio() {
     activeProjects,
     activeProofPoints,
   );
+  const strategyReport = buildStrategyReport(
+    activeLanes,
+    activeProjects,
+    activeProofPoints,
+    recommendedSkills,
+    allBrainSources,
+    `${company} ${jd}`,
+  );
 
   useEffect(() => {
     const syncRoute = () => setRoute(getRouteState());
@@ -1812,6 +2144,166 @@ export function TailoredPortfolioStudio() {
                     {laneProfile.lane}
                   </ToggleChip>
                 ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Wand2 className="h-5 w-5 text-primary" />
+                JD Strategy Report
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-5">
+              <div className="grid gap-3 sm:grid-cols-3">
+                <div className="rounded-md border border-border bg-muted/20 p-3">
+                  <p className="text-xs font-semibold uppercase text-muted-foreground">
+                    Estimated role fit
+                  </p>
+                  <p className="mt-1 font-display text-3xl font-semibold">
+                    {strategyReport.fitScore}%
+                  </p>
+                </div>
+                <div className="rounded-md border border-border bg-muted/20 p-3 sm:col-span-2">
+                  <p className="text-xs font-semibold uppercase text-muted-foreground">
+                    Best next artifact
+                  </p>
+                  <p className="mt-1 text-sm font-medium">
+                    {strategyReport.artifactBrief.title}
+                  </p>
+                  <p className="mt-1 text-xs leading-5 text-muted-foreground">
+                    {strategyReport.artifactBrief.buildTime} build -{" "}
+                    {strategyReport.artifactBrief.artifactType}
+                  </p>
+                </div>
+              </div>
+
+              <div>
+                <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
+                  Likely company problems
+                </p>
+                <div className="grid gap-2">
+                  {strategyReport.likelyProblems.map((problem) => (
+                    <div
+                      key={problem}
+                      className="rounded-md border border-border bg-muted/20 p-3 text-sm leading-6"
+                    >
+                      {problem}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
+                  Portfolio matches
+                </p>
+                <div className="grid gap-2">
+                  {strategyReport.portfolioMatches.map((match) => (
+                    <div
+                      key={match.project.id}
+                      className="rounded-md border border-border bg-muted/20 p-3"
+                    >
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <p className="text-sm font-medium">
+                          {match.project.shortTitle}
+                        </p>
+                        <Badge
+                          variant={
+                            match.strength === "strong" ? "default" : "outline"
+                          }
+                        >
+                          {match.strength}
+                        </Badge>
+                      </div>
+                      <p className="mt-1 text-xs leading-5 text-muted-foreground">
+                        {match.reason}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
+                  Evidence gaps
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {strategyReport.evidenceGaps.map((gap) => (
+                    <Badge key={gap} variant="outline">
+                      {gap}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-md border border-primary/30 bg-primary/10 p-4">
+                <p className="text-xs font-semibold uppercase text-muted-foreground">
+                  Artifact brief
+                </p>
+                <h3 className="mt-2 font-display text-xl font-semibold">
+                  {strategyReport.artifactBrief.title}
+                </h3>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  {strategyReport.artifactBrief.problemSolved}
+                </p>
+                <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                  <div>
+                    <p className="text-xs font-semibold uppercase text-muted-foreground">
+                      Required inputs
+                    </p>
+                    <ul className="mt-2 space-y-1 text-sm">
+                      {strategyReport.artifactBrief.requiredInputs.map(
+                        (input) => (
+                          <li key={input}>{input}</li>
+                        ),
+                      )}
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase text-muted-foreground">
+                      Tools and placement
+                    </p>
+                    <p className="mt-2 text-sm leading-6">
+                      {strategyReport.artifactBrief.recommendedTools.join(", ")}
+                    </p>
+                    <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                      {strategyReport.artifactBrief.portfolioPlacement}
+                    </p>
+                  </div>
+                </div>
+                <p className="mt-3 text-sm font-medium text-primary">
+                  Success metric: {strategyReport.artifactBrief.successMetric}
+                </p>
+              </div>
+
+              <div>
+                <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
+                  Skill matrix
+                </p>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {strategyReport.skillMatrix.map((item) => (
+                    <div
+                      key={item.skill}
+                      className="rounded-md border border-border bg-muted/20 p-3"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <p className="text-sm font-medium">{item.skill}</p>
+                        <Badge
+                          variant={
+                            item.strength === "Strong" ? "default" : "outline"
+                          }
+                        >
+                          {item.strength}
+                        </Badge>
+                      </div>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {item.evidence}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </CardContent>
           </Card>
