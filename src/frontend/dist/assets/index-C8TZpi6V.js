@@ -1,4 +1,4 @@
-﻿var __defProp = Object.defineProperty;
+var __defProp = Object.defineProperty;
 var __typeError = (msg) => {
   throw TypeError(msg);
 };
@@ -3547,7 +3547,7 @@ const _RecClass = class _RecClass extends ConstructType {
     if (!this._type) {
       throw Error("Recursive type uninitialized.");
     }
-    return `Î¼${this.name}.${this._type.name}`;
+    return `μ${this.name}.${this._type.name}`;
   }
   valueToString(x2) {
     if (!this._type) {
@@ -3678,7 +3678,7 @@ class FuncClass extends ConstructType {
     const args = this.argTypes.map((arg) => arg.display()).join(", ");
     const rets = this.retTypes.map((arg) => arg.display()).join(", ");
     const annon = ` ${this.annotations.join(" ")}`;
-    return `(${args}) â†’ (${rets})${annon}`;
+    return `(${args}) → (${rets})${annon}`;
   }
   encodeAnnotation(ann) {
     if (ann === "query") {
@@ -5427,9 +5427,9 @@ class wNAF {
    * Creates a wNAF precomputation window. Used for caching.
    * Default window size is set by `utils.precompute()` and is equal to 8.
    * Number of precomputed points depends on the curve size:
-   * 2^(ð‘Šâˆ’1) * (Math.ceil(ð‘› / ð‘Š) + 1), where:
-   * - ð‘Š is the window size
-   * - ð‘› is the bitlength of the curve order.
+   * 2^(𝑊−1) * (Math.ceil(𝑛 / 𝑊) + 1), where:
+   * - 𝑊 is the window size
+   * - 𝑛 is the bitlength of the curve order.
    * For a 256-bit curve and window size 8, the number of precomputed points is 128 * 33 = 4224.
    * @param point Point instance
    * @param W window size
@@ -6985,9 +6985,9 @@ class _Field2 {
     const b22 = Fp22.sqr(b2);
     return {
       first: Fp22.add(Fp22.mulByNonresidue(b22), a22),
-      // bÂ² * Nonresidue + aÂ²
+      // b² * Nonresidue + a²
       second: Fp22.sub(Fp22.sub(Fp22.sqr(Fp22.add(a2, b2)), a22), b22)
-      // (a + b)Â² - aÂ² - bÂ²
+      // (a + b)² - a² - b²
     };
   }
   // multiply by u + 1
@@ -7066,7 +7066,7 @@ class _Field6 {
       // T3 * (u + 1) + T0
       c1: Fp22.add(Fp22.mulByNonresidue(t4), t1),
       // T4 * (u + 1) + T1
-      // T1 + (c0 - c1 + c2)Â² + T3 - T0 - T4
+      // T1 + (c0 - c1 + c2)² + T3 - T0 - T4
       c2: Fp22.sub(Fp22.sub(Fp22.add(Fp22.add(t1, Fp22.sqr(Fp22.add(Fp22.sub(c0, c1), c2))), t3), t0), t4)
     };
   }
@@ -7403,7 +7403,7 @@ class _Field12 {
     };
   }
   // A cyclotomic group is a subgroup of Fp^n defined by
-  //   GÎ¦â‚™(p) = {Î± âˆˆ Fpâ¿ : Î±^Î¦â‚™(p) = 1}
+  //   GΦₙ(p) = {α ∈ Fpⁿ : α^Φₙ(p) = 1}
   // The result of any pairing is in a cyclotomic subgroup
   // https://eprint.iacr.org/2009/565.pdf
   // https://eprint.iacr.org/2010/354.pdf
@@ -7473,7 +7473,7 @@ const { Fp: Fp$1, Fp2, Fp6, Fp12 } = tower12({
   ORDER: bls12_381_CURVE_G1.p,
   X_LEN: BLS_X_LEN,
   // Finite extension field over irreducible polynominal.
-  // Fp(u) / (uÂ² - Î²) where Î² = -1
+  // Fp(u) / (u² - β) where β = -1
   FP2_NONRESIDUE: [_1n$2, _1n$2],
   Fp2mulByB: ({ c0, c1 }) => {
     const t0 = Fp$1.mul(c0, _4n);
@@ -7726,7 +7726,7 @@ const bls12_381 = bls({
     Fp12,
     Fr: bls12_381_Fr
   },
-  // G1: yÂ² = xÂ³ + 4
+  // G1: y² = x³ + 4
   G1: {
     ...bls12_381_CURVE_G1,
     Fp: Fp$1,
@@ -7832,7 +7832,7 @@ const bls12_381 = bls({
     ateLoopSize: BLS_X,
     // The BLS parameter x for BLS12-381
     r: bls12_381_CURVE_G1.n,
-    // order; zâ´ âˆ’ zÂ² + 1; CURVE.n from other curves
+    // order; z⁴ − z² + 1; CURVE.n from other curves
     xNegative: true,
     twistType: "multiplicative"
   },
@@ -9354,7 +9354,7 @@ const ed25519Defaults = /* @__PURE__ */ (() => ({
   adjustScalarBytes,
   // dom2
   // Ratio of u to v. Allows us to combine inversion and square root. Uses algo from RFC8032 5.1.3.
-  // Constant-time, u/âˆšv
+  // Constant-time, u/√v
   uvRatio
 }))();
 const ed25519 = /* @__PURE__ */ (() => twistedEdwards(ed25519Defaults))();
@@ -16778,7 +16778,7 @@ resolveNonce_fn = async function(nonce) {
     __privateGet(this, _signer2).autoCloseTransportChannel = previousAutoClose;
   }
 };
-// Memoized â€” only runs #hydrate once, returns the same promise on repeat calls.
+// Memoized — only runs #hydrate once, returns the same promise on repeat calls.
 init_fn = function() {
   if (!__privateGet(this, _initPromise)) {
     __privateSet(this, _initPromise, __privateMethod(this, _AuthClient_instances, hydrate_fn).call(this));
@@ -21133,12 +21133,12 @@ var ContextOnlyDispatcher = {
       var JSCompiler_inline_result = treeContextOverflow;
       var idWithLeadingBit = treeContextId;
       JSCompiler_inline_result = (idWithLeadingBit & ~(1 << 32 - clz32(idWithLeadingBit) - 1)).toString(32) + JSCompiler_inline_result;
-      identifierPrefix = "Â«" + identifierPrefix + "R" + JSCompiler_inline_result;
+      identifierPrefix = "«" + identifierPrefix + "R" + JSCompiler_inline_result;
       JSCompiler_inline_result = localIdCounter++;
       0 < JSCompiler_inline_result && (identifierPrefix += "H" + JSCompiler_inline_result.toString(32));
-      identifierPrefix += "Â»";
+      identifierPrefix += "»";
     } else
-      JSCompiler_inline_result = globalClientIdCounter++, identifierPrefix = "Â«" + identifierPrefix + "r" + JSCompiler_inline_result.toString(32) + "Â»";
+      JSCompiler_inline_result = globalClientIdCounter++, identifierPrefix = "«" + identifierPrefix + "r" + JSCompiler_inline_result.toString(32) + "»";
     return hook.memoizedState = identifierPrefix;
   },
   useHostTransitionStatus,
@@ -33784,57 +33784,64 @@ function useTailoredView(slug, actor) {
 }
 function VisualProjectCard({ project }) {
   const palette = "bg-[#bfe9f8]";
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("article", { className: `border border-black/15 ${palette} p-4 text-black`, children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative overflow-hidden border border-black/15 bg-white/50", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx(
-        "img",
-        {
-          src: project.visual.src,
-          alt: project.visual.alt,
-          className: "aspect-[16/10] w-full object-cover"
-        }
-      ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-3 top-3 bg-black px-3 py-1 font-mono text-xs uppercase tracking-[0.18em] text-white", children: project.shortTitle })
-    ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4 pt-5", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-xs uppercase tracking-[0.18em] text-black/55", children: project.role }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 font-display text-3xl font-semibold leading-none", children: project.title })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-black/68", children: project.summary }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-px overflow-hidden border border-black/15 bg-black/15 md:grid-cols-3", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "bg-white/65 p-3 font-mono text-xs uppercase tracking-[0.16em] text-black/45", children: "Before" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "bg-white/65 px-3 pb-3 text-sm leading-5 text-black/65", children: project.problem })
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+    "article",
+    {
+      className: `border border-black/15 ${palette} p-3 text-black sm:p-4`,
+      children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative overflow-hidden border border-black/15 bg-white/50", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "img",
+            {
+              src: project.visual.src,
+              alt: project.visual.alt,
+              className: "aspect-[4/3] w-full object-cover sm:aspect-[16/10]"
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-2 top-2 bg-black px-2.5 py-1 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-white sm:left-3 sm:top-3 sm:px-3 sm:text-xs", children: project.shortTitle })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "bg-white/65 p-3 font-mono text-xs uppercase tracking-[0.16em] text-black/45", children: "What changed" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-1 bg-white/65 px-3 pb-3 text-sm leading-5 text-black/65", children: project.actions.slice(0, 2).map((action) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: action }, action)) })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "bg-white/65 p-3 font-mono text-xs uppercase tracking-[0.16em] text-black/45", children: "Result" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-1 bg-white/65 px-3 pb-3 text-sm leading-5 text-black/65", children: project.outcomes.slice(0, 2).map((outcome) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: outcome }, outcome)) })
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3 pt-4 sm:space-y-4 sm:pt-5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.16em] text-black/55 sm:text-xs", children: project.role }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 font-display text-2xl font-semibold leading-[1.02] sm:text-3xl", children: project.title })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-black/68", children: project.summary }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "hidden gap-px overflow-hidden border border-black/15 bg-black/15 md:grid md:grid-cols-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "bg-white/65 p-3 font-mono text-xs uppercase tracking-[0.16em] text-black/45", children: "Before" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "bg-white/65 px-3 pb-3 text-sm leading-5 text-black/65", children: project.problem })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "bg-white/65 p-3 font-mono text-xs uppercase tracking-[0.16em] text-black/45", children: "What changed" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-1 bg-white/65 px-3 pb-3 text-sm leading-5 text-black/65", children: project.actions.slice(0, 2).map((action) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: action }, action)) })
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "bg-white/65 p-3 font-mono text-xs uppercase tracking-[0.16em] text-black/45", children: "Result" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-1 bg-white/65 px-3 pb-3 text-sm leading-5 text-black/65", children: project.outcomes.slice(0, 2).map((outcome) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: outcome }, outcome)) })
+            ] })
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-l-2 border-black/25 pl-3 text-sm leading-6 text-black/65 md:hidden", children: project.outcomes[0] ?? project.problem }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-2", children: [
+            project.tools.slice(0, 5).map((tool) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", children: tool }, tool)),
+            project.repo && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "a",
+              {
+                href: project.repo,
+                target: "_blank",
+                rel: "noreferrer",
+                className: "ml-auto inline-flex items-center gap-1 text-sm font-semibold text-black",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(Github, { className: "h-4 w-4" }),
+                  "Repo",
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "h-4 w-4" })
+                ]
+              }
+            )
+          ] })
         ] })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-2", children: [
-        project.tools.slice(0, 5).map((tool) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", children: tool }, tool)),
-        project.repo && /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          "a",
-          {
-            href: project.repo,
-            target: "_blank",
-            rel: "noreferrer",
-            className: "ml-auto inline-flex items-center gap-1 text-sm font-semibold text-black",
-            children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Github, { className: "h-4 w-4" }),
-              "Repo",
-              /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "h-4 w-4" })
-            ]
-          }
-        )
-      ] })
-    ] })
-  ] });
+      ]
+    }
+  );
 }
 function ReviewerPortfolio({
   view,
@@ -33856,23 +33863,23 @@ function ReviewerPortfolio({
   const firstName = nameParts[0] ?? displayProfile.name;
   const remainingName = nameParts.slice(1).join(" ") || "Portfolio";
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "min-h-screen bg-[#f8f5ef] text-black", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "border-b border-black/15", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-7xl gap-8 px-5 py-10 lg:grid-cols-[1.08fr_0.92fr] lg:py-14", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex min-h-[560px] flex-col justify-between bg-[#f4f1ea] p-6 lg:p-10", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-6", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-xs uppercase tracking-[0.22em] text-black/55", children: reviewerBadge }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-xs uppercase tracking-[0.22em] text-black/55", children: displayProfile.location })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "border-b border-black/15", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-7xl gap-4 px-4 py-5 sm:gap-6 sm:px-5 sm:py-8 lg:grid-cols-[1.08fr_0.92fr] lg:gap-8 lg:py-14", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col justify-between bg-[#f4f1ea] p-5 sm:p-6 lg:min-h-[560px] lg:p-10", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-6", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.18em] text-black/55 sm:text-xs sm:tracking-[0.22em]", children: reviewerBadge }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.18em] text-black/55 sm:text-xs sm:tracking-[0.22em]", children: displayProfile.location })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-5 max-w-xl text-sm font-semibold uppercase tracking-[0.18em] text-black/50", children: displayProfile.title }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "font-display max-w-5xl text-[clamp(3.3rem,11vw,8.75rem)] font-semibold leading-[0.9] text-black", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-8 sm:mt-12 lg:mt-0", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-4 max-w-xl text-xs font-semibold uppercase tracking-[0.16em] text-black/50 sm:mb-5 sm:text-sm sm:tracking-[0.18em]", children: displayProfile.title }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "font-display max-w-5xl text-[clamp(3rem,17vw,8.75rem)] font-semibold leading-[0.9] text-black sm:text-[clamp(4.5rem,11vw,8.75rem)]", children: [
             firstName,
             /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
             remainingName
           ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-8 max-w-2xl text-lg leading-relaxed text-black/70", children: model.angle }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 max-w-2xl text-base leading-7 text-black/58", children: displayProfile.shortSummary })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-7 max-w-2xl text-base leading-relaxed text-black/70 sm:mt-8 sm:text-lg", children: model.angle }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 max-w-2xl text-sm leading-7 text-black/58 sm:text-base", children: displayProfile.shortSummary })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3 sm:grid-cols-2", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-6 grid grid-cols-2 gap-2 sm:mt-8 sm:gap-3 lg:mt-0", children: [
           ["Best fit", recruiterSummary.bestFit],
           ["Strongest proof", recruiterSummary.proof],
           ["Review first", recruiterSummary.firstReview],
@@ -33883,52 +33890,52 @@ function ReviewerPortfolio({
         ].map(([label, value]) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
           "div",
           {
-            className: "border border-black/15 bg-white/45 p-3",
+            className: "border border-black/15 bg-white/45 p-3 sm:p-3",
             children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-xs uppercase tracking-[0.16em] text-black/45", children: label }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm font-medium text-black/75", children: value })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.14em] text-black/45 sm:text-xs sm:tracking-[0.16em]", children: label }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-xs font-medium leading-5 text-black/75 sm:text-sm", children: value })
             ]
           },
           label
         )) })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-4", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-[#bfe9f8] p-5", children: displayProfile.profileImage ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-[#bfe9f8] p-3 sm:p-5", children: displayProfile.profileImage ? /* @__PURE__ */ jsxRuntimeExports.jsx(
           "img",
           {
             src: displayProfile.profileImage,
             alt: displayProfile.name,
-            className: "h-full min-h-[360px] w-full object-cover"
+            className: "aspect-[16/10] w-full object-cover sm:min-h-[360px]"
           }
-        ) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex min-h-[360px] flex-col justify-between border border-black/15 bg-white/45 p-6", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-mono text-xs uppercase tracking-[0.2em] text-black/50", children: displayProfile.name }),
+        ) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex aspect-[16/10] flex-col justify-between border border-black/15 bg-white/45 p-5 sm:min-h-[360px] sm:p-6", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-mono text-[0.65rem] uppercase tracking-[0.18em] text-black/50 sm:text-xs sm:tracking-[0.2em]", children: displayProfile.name }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-7xl font-semibold leading-none", children: "TB" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-6xl font-semibold leading-none sm:text-7xl", children: "TB" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-xs text-sm leading-relaxed text-black/60", children: "Enablement systems, AI workflow, and learning experience builder." })
           ] })
         ] }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3 sm:grid-cols-3", children: model.selectedLanes.map((lane) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-black p-4 text-white", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-xs uppercase tracking-[0.18em] text-white/55", children: "Lane" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm font-semibold", children: lane })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-3 gap-2 sm:gap-3", children: model.selectedLanes.map((lane) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-black p-3 text-white sm:p-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.6rem] uppercase tracking-[0.12em] text-white/55 sm:text-xs sm:tracking-[0.18em]", children: "Lane" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs font-semibold sm:text-sm", children: lane })
         ] }, lane)) })
       ] })
     ] }) }),
     status === "loading" && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "sr-only", children: "Loading portfolio" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto grid max-w-7xl gap-px overflow-hidden border-x border-b border-black/15 bg-black/15 px-5 py-8 sm:grid-cols-2 lg:grid-cols-4", children: model.selectedProofPoints.map((metric) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-[#f8f5ef] p-5", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto max-w-7xl px-4 py-5 sm:px-5 sm:py-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-px overflow-hidden border border-black/15 bg-black/15 sm:grid-cols-2 lg:grid-cols-4", children: model.selectedProofPoints.map((metric) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-[#f8f5ef] p-4 sm:p-5", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-3xl font-semibold text-black", children: metric.value }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm font-medium text-black", children: metric.label }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs font-medium text-black/50", children: getMetricSourceNote(metric, displayProjects) }),
       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-xs leading-5 text-black/58", children: metric.detail })
-    ] }, metric.id)) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto max-w-7xl px-5 py-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-5 border-y border-black/15 py-6 lg:grid-cols-[0.32fr_0.68fr]", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-xs uppercase tracking-[0.22em] text-black/50", children: "Why this work is relevant" }) }),
+    ] }, metric.id)) }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto max-w-7xl px-4 py-5 sm:px-5 sm:py-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-4 border-y border-black/15 py-5 sm:gap-5 sm:py-6 lg:grid-cols-[0.32fr_0.68fr]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.18em] text-black/50 sm:text-xs sm:tracking-[0.22em]", children: "Why this work is relevant" }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl font-semibold leading-none sm:text-5xl", children: "Proof that connects strategy, systems, and adoption." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-3xl font-semibold leading-[1.02] sm:text-5xl sm:leading-none", children: "Proof that connects strategy, systems, and adoption." }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 max-w-3xl text-sm leading-7 text-black/62", children: getRelevanceCopy(model.selectedLanes) })
       ] })
     ] }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto grid max-w-7xl gap-6 px-5 pb-12 lg:grid-cols-[0.72fr_1.28fr]", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "space-y-5", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto grid max-w-7xl gap-5 px-4 pb-10 sm:px-5 sm:pb-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-6", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "space-y-4 sm:space-y-5", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "rounded-none border-black/15 bg-white/60 text-black", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(BriefcaseBusiness, { className: "h-5 w-5 text-primary" }),

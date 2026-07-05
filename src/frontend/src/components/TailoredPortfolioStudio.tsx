@@ -1179,28 +1179,30 @@ function VisualProjectCard({ project }: { project: PortfolioProject }) {
   const palette = "bg-[#bfe9f8]";
 
   return (
-    <article className={`border border-black/15 ${palette} p-4 text-black`}>
+    <article
+      className={`border border-black/15 ${palette} p-3 text-black sm:p-4`}
+    >
       <div className="relative overflow-hidden border border-black/15 bg-white/50">
         <img
           src={project.visual.src}
           alt={project.visual.alt}
-          className="aspect-[16/10] w-full object-cover"
+          className="aspect-[4/3] w-full object-cover sm:aspect-[16/10]"
         />
-        <div className="absolute left-3 top-3 bg-black px-3 py-1 font-mono text-xs uppercase tracking-[0.18em] text-white">
+        <div className="absolute left-2 top-2 bg-black px-2.5 py-1 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-white sm:left-3 sm:top-3 sm:px-3 sm:text-xs">
           {project.shortTitle}
         </div>
       </div>
-      <div className="space-y-4 pt-5">
+      <div className="space-y-3 pt-4 sm:space-y-4 sm:pt-5">
         <div>
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-black/55">
+          <p className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-black/55 sm:text-xs">
             {project.role}
           </p>
-          <h3 className="mt-2 font-display text-3xl font-semibold leading-none">
+          <h3 className="mt-2 font-display text-2xl font-semibold leading-[1.02] sm:text-3xl">
             {project.title}
           </h3>
         </div>
         <p className="text-sm leading-6 text-black/68">{project.summary}</p>
-        <div className="grid gap-px overflow-hidden border border-black/15 bg-black/15 md:grid-cols-3">
+        <div className="hidden gap-px overflow-hidden border border-black/15 bg-black/15 md:grid md:grid-cols-3">
           <div>
             <p className="bg-white/65 p-3 font-mono text-xs uppercase tracking-[0.16em] text-black/45">
               Before
@@ -1229,6 +1231,9 @@ function VisualProjectCard({ project }: { project: PortfolioProject }) {
               ))}
             </ul>
           </div>
+        </div>
+        <div className="border-l-2 border-black/25 pl-3 text-sm leading-6 text-black/65 md:hidden">
+          {project.outcomes[0] ?? project.problem}
         </div>
         <div className="flex flex-wrap items-center gap-2">
           {project.tools.slice(0, 5).map((tool) => (
@@ -1280,35 +1285,35 @@ function ReviewerPortfolio({
   return (
     <main className="min-h-screen bg-[#f8f5ef] text-black">
       <section className="border-b border-black/15">
-        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 lg:grid-cols-[1.08fr_0.92fr] lg:py-14">
-          <div className="flex min-h-[560px] flex-col justify-between bg-[#f4f1ea] p-6 lg:p-10">
-            <div className="flex items-start justify-between gap-6">
-              <p className="font-mono text-xs uppercase tracking-[0.22em] text-black/55">
+        <div className="mx-auto grid max-w-7xl gap-4 px-4 py-5 sm:gap-6 sm:px-5 sm:py-8 lg:grid-cols-[1.08fr_0.92fr] lg:gap-8 lg:py-14">
+          <div className="flex flex-col justify-between bg-[#f4f1ea] p-5 sm:p-6 lg:min-h-[560px] lg:p-10">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
+              <p className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-black/55 sm:text-xs sm:tracking-[0.22em]">
                 {reviewerBadge}
               </p>
-              <p className="font-mono text-xs uppercase tracking-[0.22em] text-black/55">
+              <p className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-black/55 sm:text-xs sm:tracking-[0.22em]">
                 {displayProfile.location}
               </p>
             </div>
 
-            <div>
-              <p className="mb-5 max-w-xl text-sm font-semibold uppercase tracking-[0.18em] text-black/50">
+            <div className="mt-8 sm:mt-12 lg:mt-0">
+              <p className="mb-4 max-w-xl text-xs font-semibold uppercase tracking-[0.16em] text-black/50 sm:mb-5 sm:text-sm sm:tracking-[0.18em]">
                 {displayProfile.title}
               </p>
-              <h1 className="font-display max-w-5xl text-[clamp(3.3rem,11vw,8.75rem)] font-semibold leading-[0.9] text-black">
+              <h1 className="font-display max-w-5xl text-[clamp(3rem,17vw,8.75rem)] font-semibold leading-[0.9] text-black sm:text-[clamp(4.5rem,11vw,8.75rem)]">
                 {firstName}
                 <br />
                 {remainingName}
               </h1>
-              <p className="mt-8 max-w-2xl text-lg leading-relaxed text-black/70">
+              <p className="mt-7 max-w-2xl text-base leading-relaxed text-black/70 sm:mt-8 sm:text-lg">
                 {model.angle}
               </p>
-              <p className="mt-4 max-w-2xl text-base leading-7 text-black/58">
+              <p className="mt-4 max-w-2xl text-sm leading-7 text-black/58 sm:text-base">
                 {displayProfile.shortSummary}
               </p>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-2">
+            <div className="mt-6 grid grid-cols-2 gap-2 sm:mt-8 sm:gap-3 lg:mt-0">
               {[
                 ["Best fit", recruiterSummary.bestFit],
                 ["Strongest proof", recruiterSummary.proof],
@@ -1320,12 +1325,12 @@ function ReviewerPortfolio({
               ].map(([label, value]) => (
                 <div
                   key={label}
-                  className="border border-black/15 bg-white/45 p-3"
+                  className="border border-black/15 bg-white/45 p-3 sm:p-3"
                 >
-                  <p className="font-mono text-xs uppercase tracking-[0.16em] text-black/45">
+                  <p className="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-black/45 sm:text-xs sm:tracking-[0.16em]">
                     {label}
                   </p>
-                  <p className="mt-1 text-sm font-medium text-black/75">
+                  <p className="mt-1 text-xs font-medium leading-5 text-black/75 sm:text-sm">
                     {value}
                   </p>
                 </div>
@@ -1334,20 +1339,20 @@ function ReviewerPortfolio({
           </div>
 
           <div className="grid gap-4">
-            <div className="bg-[#bfe9f8] p-5">
+            <div className="bg-[#bfe9f8] p-3 sm:p-5">
               {displayProfile.profileImage ? (
                 <img
                   src={displayProfile.profileImage}
                   alt={displayProfile.name}
-                  className="h-full min-h-[360px] w-full object-cover"
+                  className="aspect-[16/10] w-full object-cover sm:min-h-[360px]"
                 />
               ) : (
-                <div className="flex min-h-[360px] flex-col justify-between border border-black/15 bg-white/45 p-6">
-                  <span className="font-mono text-xs uppercase tracking-[0.2em] text-black/50">
+                <div className="flex aspect-[16/10] flex-col justify-between border border-black/15 bg-white/45 p-5 sm:min-h-[360px] sm:p-6">
+                  <span className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-black/50 sm:text-xs sm:tracking-[0.2em]">
                     {displayProfile.name}
                   </span>
                   <div>
-                    <p className="font-display text-7xl font-semibold leading-none">
+                    <p className="font-display text-6xl font-semibold leading-none sm:text-7xl">
                       TB
                     </p>
                     <p className="mt-3 max-w-xs text-sm leading-relaxed text-black/60">
@@ -1358,13 +1363,15 @@ function ReviewerPortfolio({
                 </div>
               )}
             </div>
-            <div className="grid gap-3 sm:grid-cols-3">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3">
               {model.selectedLanes.map((lane) => (
-                <div key={lane} className="bg-black p-4 text-white">
-                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-white/55">
+                <div key={lane} className="bg-black p-3 text-white sm:p-4">
+                  <p className="font-mono text-[0.6rem] uppercase tracking-[0.12em] text-white/55 sm:text-xs sm:tracking-[0.18em]">
                     Lane
                   </p>
-                  <p className="mt-2 text-sm font-semibold">{lane}</p>
+                  <p className="mt-2 text-xs font-semibold sm:text-sm">
+                    {lane}
+                  </p>
                 </div>
               ))}
             </div>
@@ -1376,34 +1383,36 @@ function ReviewerPortfolio({
         <span className="sr-only">Loading portfolio</span>
       )}
 
-      <section className="mx-auto grid max-w-7xl gap-px overflow-hidden border-x border-b border-black/15 bg-black/15 px-5 py-8 sm:grid-cols-2 lg:grid-cols-4">
-        {model.selectedProofPoints.map((metric) => (
-          <div key={metric.id} className="bg-[#f8f5ef] p-5">
-            <p className="font-display text-3xl font-semibold text-black">
-              {metric.value}
-            </p>
-            <p className="mt-1 text-sm font-medium text-black">
-              {metric.label}
-            </p>
-            <p className="mt-2 text-xs font-medium text-black/50">
-              {getMetricSourceNote(metric, displayProjects)}
-            </p>
-            <p className="mt-3 text-xs leading-5 text-black/58">
-              {metric.detail}
-            </p>
-          </div>
-        ))}
+      <section className="mx-auto max-w-7xl px-4 py-5 sm:px-5 sm:py-8">
+        <div className="grid gap-px overflow-hidden border border-black/15 bg-black/15 sm:grid-cols-2 lg:grid-cols-4">
+          {model.selectedProofPoints.map((metric) => (
+            <div key={metric.id} className="bg-[#f8f5ef] p-4 sm:p-5">
+              <p className="font-display text-3xl font-semibold text-black">
+                {metric.value}
+              </p>
+              <p className="mt-1 text-sm font-medium text-black">
+                {metric.label}
+              </p>
+              <p className="mt-2 text-xs font-medium text-black/50">
+                {getMetricSourceNote(metric, displayProjects)}
+              </p>
+              <p className="mt-3 text-xs leading-5 text-black/58">
+                {metric.detail}
+              </p>
+            </div>
+          ))}
+        </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-8">
-        <div className="grid gap-5 border-y border-black/15 py-6 lg:grid-cols-[0.32fr_0.68fr]">
+      <section className="mx-auto max-w-7xl px-4 py-5 sm:px-5 sm:py-8">
+        <div className="grid gap-4 border-y border-black/15 py-5 sm:gap-5 sm:py-6 lg:grid-cols-[0.32fr_0.68fr]">
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.22em] text-black/50">
+            <p className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-black/50 sm:text-xs sm:tracking-[0.22em]">
               Why this work is relevant
             </p>
           </div>
           <div>
-            <h2 className="font-display text-4xl font-semibold leading-none sm:text-5xl">
+            <h2 className="font-display text-3xl font-semibold leading-[1.02] sm:text-5xl sm:leading-none">
               Proof that connects strategy, systems, and adoption.
             </h2>
             <p className="mt-4 max-w-3xl text-sm leading-7 text-black/62">
@@ -1413,8 +1422,8 @@ function ReviewerPortfolio({
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-6 px-5 pb-12 lg:grid-cols-[0.72fr_1.28fr]">
-        <aside className="space-y-5">
+      <section className="mx-auto grid max-w-7xl gap-5 px-4 pb-10 sm:px-5 sm:pb-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-6">
+        <aside className="space-y-4 sm:space-y-5">
           <Card className="rounded-none border-black/15 bg-white/60 text-black">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
