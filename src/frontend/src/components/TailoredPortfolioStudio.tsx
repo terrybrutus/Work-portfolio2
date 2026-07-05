@@ -725,7 +725,7 @@ function buildStrategyReport(
 
 function getReviewerBadge(primaryLane: Lane) {
   const labels: Record<Lane, string> = {
-    Enablement: "Enablement Systems",
+    Enablement: "Role-Aligned Proof",
     "AI Operations": "AI Workflow Evidence",
     "Learning Experience": "Learning Experience Proof",
     "Technical Product": "Workflow and Product Evidence",
@@ -742,18 +742,6 @@ function getProjectMediaStatus(projectsToCheck: PortfolioProject[]) {
     status: project.visual.quality,
     needs: project.visual.missing ?? project.evidenceNeeds,
   }));
-}
-
-function getMetricSourceNote(
-  metric: ProofPoint,
-  selectedProjects: PortfolioProject[],
-) {
-  const linkedProject = selectedProjects.find((project) =>
-    project.proofIds.includes(metric.id),
-  );
-  return linkedProject
-    ? `Used by ${linkedProject.shortTitle}`
-    : "Background evidence";
 }
 
 function getRouteState(): RouteState {
@@ -907,12 +895,6 @@ function writePortfolioBackup(backup: PortfolioBackup) {
   setStudioBrainSources(backup.brainSources);
 }
 
-function formatBytes(bytes = 0) {
-  if (bytes < 1024) return `${bytes} B`;
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
-  return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
-}
-
 function inferSourceType(file: File) {
   const extension = file.name.split(".").pop()?.toLowerCase() ?? "";
   if (["png", "jpg", "jpeg", "webp"].includes(extension)) {
@@ -1060,8 +1042,8 @@ function buildViewModel(view: TailoredView | null) {
 }
 
 function getRelevanceCopy(selectedLanes: Lane[]) {
-  const laneText = selectedLanes.slice(0, 2).join(" and ");
-  return `This selection emphasizes ${laneText.toLowerCase()} work where the proof is tied to clearer execution, practical adoption, and measurable support for people doing complex work.`;
+  const laneText = selectedLanes.slice(0, 2).join(" + ");
+  return `A quick view of ${laneText} evidence: workflow, learning architecture, measurable delivery, and practical adoption.`;
 }
 
 function getRecruiterSummary(
@@ -1259,6 +1241,60 @@ function VisualProjectCard({ project }: { project: PortfolioProject }) {
   );
 }
 
+function SnapshotProjectTile({
+  project,
+  featured = false,
+}: {
+  project: PortfolioProject;
+  featured?: boolean;
+}) {
+  return (
+    <article
+      className={`group flex min-h-0 flex-col border border-black/15 ${
+        featured ? "bg-[#bfe9f8]" : "bg-[#f4f1ea]"
+      } p-2 text-black`}
+    >
+      <div className="relative min-h-0 flex-1 overflow-hidden border border-black/15 bg-white/55">
+        <img
+          src={project.visual.src}
+          alt={project.visual.alt}
+          className="h-full min-h-[150px] w-full object-cover transition duration-300 group-hover:scale-[1.02] lg:min-h-0"
+        />
+        <div className="absolute left-2 top-2 bg-black px-2 py-1 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-white">
+          {project.shortTitle}
+        </div>
+      </div>
+      <div className="space-y-2 pt-3">
+        <p className="font-mono text-[0.62rem] uppercase tracking-[0.14em] text-black/55">
+          {project.role}
+        </p>
+        <h3 className="font-display text-xl font-semibold leading-[1.02] lg:text-[clamp(1.15rem,1.6vw,2rem)]">
+          {project.title}
+        </h3>
+        <p className="line-clamp-2 text-xs leading-5 text-black/68 lg:text-sm">
+          {project.summary}
+        </p>
+        <p className="border-l-2 border-black/25 pl-3 text-xs font-medium leading-5 text-black/75">
+          {project.outcomes[0] ?? project.problem}
+        </p>
+      </div>
+    </article>
+  );
+}
+
+function SnapshotMetricTile({ metric }: { metric: ProofPoint }) {
+  return (
+    <div className="border border-black/15 bg-white/55 p-3">
+      <p className="font-display text-2xl font-semibold leading-none text-black lg:text-3xl">
+        {metric.value}
+      </p>
+      <p className="mt-1 text-xs font-semibold leading-5 text-black/72">
+        {metric.label}
+      </p>
+    </div>
+  );
+}
+
 function ReviewerPortfolio({
   view,
   status,
@@ -1273,225 +1309,166 @@ function ReviewerPortfolio({
     getDisplayProject(project, displayCustomization),
   );
   const reviewerBadge = getReviewerBadge(model.primaryLane);
-  const recruiterSummary = getRecruiterSummary(
-    model.selectedLanes,
-    displayProjects,
-    model.selectedProofPoints,
-  );
   const nameParts = displayProfile.name.trim().split(/\s+/);
   const firstName = nameParts[0] ?? displayProfile.name;
   const remainingName = nameParts.slice(1).join(" ") || "Portfolio";
+  const compactSkills = model.selectedSkills.slice(0, 6);
 
   return (
     <main className="min-h-screen bg-[#f8f5ef] text-black">
-      <section className="border-b border-black/15">
-        <div className="mx-auto grid max-w-7xl gap-4 px-4 py-5 sm:gap-6 sm:px-5 sm:py-8 lg:grid-cols-[1.08fr_0.92fr] lg:gap-8 lg:py-14">
-          <div className="flex flex-col justify-between bg-[#f4f1ea] p-5 sm:p-6 lg:min-h-[560px] lg:p-10">
-            <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
-              <p className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-black/55 sm:text-xs sm:tracking-[0.22em]">
+      <section className="mx-auto flex max-w-[1800px] flex-col gap-3 px-3 py-3 sm:px-4 lg:h-screen lg:max-h-[980px] lg:min-h-[760px] lg:overflow-hidden">
+        <header className="grid gap-3 lg:h-[34vh] lg:max-h-[330px] lg:min-h-[265px] lg:grid-cols-[0.7fr_1.3fr] lg:overflow-hidden">
+          <div className="border border-black/15 bg-[#f4f1ea] p-4 lg:p-5">
+            <div className="flex items-start justify-between gap-4">
+              <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55">
                 {reviewerBadge}
               </p>
-              <p className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-black/55 sm:text-xs sm:tracking-[0.22em]">
+              <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55">
                 {displayProfile.location}
               </p>
             </div>
+            <h1 className="mt-5 font-display text-[clamp(3.2rem,10vw,8.5rem)] font-semibold leading-[0.86] lg:mt-6 lg:text-[clamp(3.8rem,5vw,6.4rem)]">
+              {firstName}
+              <br />
+              {remainingName}
+            </h1>
+          </div>
 
-            <div className="mt-8 sm:mt-12 lg:mt-0">
-              <p className="mb-4 max-w-xl text-xs font-semibold uppercase tracking-[0.16em] text-black/50 sm:mb-5 sm:text-sm sm:tracking-[0.18em]">
+          <div className="grid gap-3 lg:grid-cols-[1fr_0.78fr]">
+            <div className="border border-black/15 bg-[#bfe9f8] p-4 lg:p-5">
+              <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55">
                 {displayProfile.title}
               </p>
-              <h1 className="font-display max-w-5xl text-[clamp(3rem,17vw,8.75rem)] font-semibold leading-[0.9] text-black sm:text-[clamp(4.5rem,11vw,8.75rem)]">
-                {firstName}
-                <br />
-                {remainingName}
-              </h1>
-              <p className="mt-7 max-w-2xl text-base leading-relaxed text-black/70 sm:mt-8 sm:text-lg">
-                {model.angle}
+              <p className="mt-4 max-w-4xl font-display text-3xl font-semibold leading-[0.98] lg:text-[clamp(1.8rem,2.4vw,3.1rem)]">
+                {displayProfile.headline}
               </p>
-              <p className="mt-4 max-w-2xl text-sm leading-7 text-black/58 sm:text-base">
+              <p className="mt-3 max-w-3xl text-sm leading-6 text-black/68">
                 {displayProfile.shortSummary}
               </p>
             </div>
 
-            <div className="mt-6 grid grid-cols-2 gap-2 sm:mt-8 sm:gap-3 lg:mt-0">
-              {[
-                ["Best fit", recruiterSummary.bestFit],
-                ["Strongest proof", recruiterSummary.proof],
-                ["Review first", recruiterSummary.firstReview],
-                [
-                  "Work style",
-                  "Systems thinker, maker, and practical AI adopter",
-                ],
-              ].map(([label, value]) => (
-                <div
-                  key={label}
-                  className="border border-black/15 bg-white/45 p-3 sm:p-3"
-                >
-                  <p className="font-mono text-[0.65rem] uppercase tracking-[0.14em] text-black/45 sm:text-xs sm:tracking-[0.16em]">
-                    {label}
-                  </p>
-                  <p className="mt-1 text-xs font-medium leading-5 text-black/75 sm:text-sm">
-                    {value}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          <div className="grid gap-4">
-            <div className="bg-[#bfe9f8] p-3 sm:p-5">
+            <div className="border border-black/15 bg-black p-3 text-white">
               {displayProfile.profileImage ? (
                 <img
                   src={displayProfile.profileImage}
                   alt={displayProfile.name}
-                  className="aspect-[16/10] w-full object-cover sm:min-h-[360px]"
+                  className="aspect-[16/10] h-full w-full object-cover lg:aspect-auto"
                 />
               ) : (
-                <div className="flex aspect-[16/10] flex-col justify-between border border-black/15 bg-white/45 p-5 sm:min-h-[360px] sm:p-6">
-                  <span className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-black/50 sm:text-xs sm:tracking-[0.2em]">
+                <div className="flex h-full min-h-[190px] flex-col justify-between border border-white/20 p-4">
+                  <span className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-white/55">
                     {displayProfile.name}
                   </span>
                   <div>
-                    <p className="font-display text-6xl font-semibold leading-none sm:text-7xl">
+                    <p className="font-display text-6xl font-semibold leading-none">
                       TB
                     </p>
-                    <p className="mt-3 max-w-xs text-sm leading-relaxed text-black/60">
-                      Enablement systems, AI workflow, and learning experience
-                      builder.
+                    <p className="mt-3 max-w-xs text-sm leading-6 text-white/65">
+                      Practical systems, thoughtful learning, cleaner execution.
                     </p>
                   </div>
                 </div>
               )}
             </div>
-            <div className="grid grid-cols-3 gap-2 sm:gap-3">
-              {model.selectedLanes.map((lane) => (
-                <div key={lane} className="bg-black p-3 text-white sm:p-4">
-                  <p className="font-mono text-[0.6rem] uppercase tracking-[0.12em] text-white/55 sm:text-xs sm:tracking-[0.18em]">
-                    Lane
-                  </p>
-                  <p className="mt-2 text-xs font-semibold sm:text-sm">
-                    {lane}
-                  </p>
-                </div>
-              ))}
-            </div>
           </div>
-        </div>
-      </section>
+        </header>
 
-      {status === "loading" && (
-        <span className="sr-only">Loading portfolio</span>
-      )}
+        {status === "loading" && (
+          <span className="sr-only">Loading portfolio</span>
+        )}
 
-      <section className="mx-auto max-w-7xl px-4 py-5 sm:px-5 sm:py-8">
-        <div className="grid gap-px overflow-hidden border border-black/15 bg-black/15 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {model.selectedProofPoints.map((metric) => (
-            <div key={metric.id} className="bg-[#f8f5ef] p-4 sm:p-5">
-              <p className="font-display text-3xl font-semibold text-black">
-                {metric.value}
-              </p>
-              <p className="mt-1 text-sm font-medium text-black">
-                {metric.label}
-              </p>
-              <p className="mt-2 text-xs font-medium text-black/50">
-                {getMetricSourceNote(metric, displayProjects)}
-              </p>
-              <p className="mt-3 text-xs leading-5 text-black/58">
-                {metric.detail}
-              </p>
-            </div>
+            <SnapshotMetricTile key={metric.id} metric={metric} />
           ))}
         </div>
-      </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-5 sm:px-5 sm:py-8">
-        <div className="grid gap-4 border-y border-black/15 py-5 sm:gap-5 sm:py-6 lg:grid-cols-[0.32fr_0.68fr]">
-          <div>
-            <p className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-black/50 sm:text-xs sm:tracking-[0.22em]">
-              Why this work is relevant
-            </p>
+        <section className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[1.4fr_0.6fr]">
+          <div className="grid min-h-0 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {displayProjects.slice(0, 3).map((project, index) => (
+              <SnapshotProjectTile
+                key={project.id}
+                project={project}
+                featured={index === 0}
+              />
+            ))}
           </div>
-          <div>
-            <h2 className="font-display text-3xl font-semibold leading-[1.02] sm:text-5xl sm:leading-none">
-              Proof that connects strategy, systems, and adoption.
-            </h2>
-            <p className="mt-4 max-w-3xl text-sm leading-7 text-black/62">
-              {getRelevanceCopy(model.selectedLanes)}
-            </p>
-          </div>
+
+          <aside className="grid min-h-0 gap-3 lg:grid-rows-[auto_auto_1fr] lg:overflow-hidden">
+            <div className="border border-black/15 bg-white/55 p-4">
+              <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55">
+                Selected For
+              </p>
+              <p className="mt-3 text-sm leading-6 text-black/72">
+                {getRelevanceCopy(model.selectedLanes)}
+              </p>
+            </div>
+            <div className="border border-black/15 bg-white/55 p-4">
+              <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55">
+                Skills In View
+              </p>
+              <div className="mt-3 flex flex-wrap gap-2">
+                {compactSkills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="border border-black/20 bg-[#f8f5ef] px-2.5 py-1 text-xs font-medium text-black/75"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="border border-black/15 bg-white/55 p-4">
+              <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55">
+                Human Context
+              </p>
+              <div className="mt-3 space-y-3">
+                {humanHighlights.slice(0, 2).map((item) => (
+                  <div key={item.label}>
+                    <p className="text-sm font-semibold">{item.label}</p>
+                    <p className="mt-1 line-clamp-2 text-xs leading-5 text-black/65">
+                      {item.detail}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <div className="flex flex-wrap items-center justify-between gap-3 border border-black/15 bg-[#f4f1ea] px-4 py-3 lg:hidden">
+          <p className="text-sm leading-6 text-black/68">
+            Want more depth? Each selected item is ready for a focused case
+            study, artifact preview, or repo link as media is approved.
+          </p>
+          <a
+            href={profile.github}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-black"
+          >
+            GitHub
+            <ArrowUpRight className="h-4 w-4" />
+          </a>
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-5 px-4 pb-10 sm:px-5 sm:pb-12 lg:grid-cols-[0.72fr_1.28fr] lg:gap-6">
-        <aside className="space-y-4 sm:space-y-5">
-          <Card className="rounded-none border-black/15 bg-white/60 text-black">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <BriefcaseBusiness className="h-5 w-5 text-primary" />
-                Background
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {resumeHighlights.map((item) => (
-                <p
-                  key={item}
-                  className="text-sm leading-6 text-muted-foreground"
-                >
-                  {item}
-                </p>
-              ))}
-            </CardContent>
-          </Card>
-          <Card className="rounded-none border-black/15 bg-white/60 text-black">
-            <CardHeader>
-              <CardTitle>Relevant Skills</CardTitle>
-            </CardHeader>
-            <CardContent className="flex flex-wrap gap-2">
-              {model.selectedSkills.map((skill) => (
-                <Badge key={skill} variant="outline">
-                  {skill}
-                </Badge>
-              ))}
-            </CardContent>
-          </Card>
-          <Card className="rounded-none border-black/15 bg-white/60 text-black">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <UserRound className="h-5 w-5 text-primary" />
-                Human Context
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {humanHighlights.map((item) => (
-                <div key={item.label}>
-                  <p className="text-sm font-medium">{item.label}</p>
-                  <p className="mt-1 text-sm leading-6 text-muted-foreground">
-                    {item.detail}
-                  </p>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-        </aside>
-
+      <section className="mx-auto max-w-7xl px-4 pb-10 sm:px-5 lg:hidden">
         <div className="space-y-5">
-          <div className="flex items-center justify-between gap-4">
-            <h2 className="font-display text-2xl font-semibold">
-              Featured Evidence
-            </h2>
-            <a
-              href={profile.github}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 text-sm text-primary"
-            >
-              GitHub
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
-          </div>
+          <h2 className="font-display text-3xl font-semibold">Case Notes</h2>
           {displayProjects.map((project) => (
             <VisualProjectCard key={project.id} project={project} />
           ))}
+          <div className="rounded-none border border-black/15 bg-white/60 p-4 text-black">
+            <h3 className="font-display text-2xl font-semibold">Background</h3>
+            <div className="mt-4 space-y-4">
+              {resumeHighlights.map((item) => (
+                <p key={item} className="text-sm leading-6 text-black/70">
+                  {item}
+                </p>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
     </main>
@@ -1604,20 +1581,6 @@ export function TailoredPortfolioStudio() {
     .filter(
       (item) => item.status !== "approved" || item.approvedSources.length === 0,
     );
-  const evidenceCoverage = activeProjects.map((project) => {
-    const approvedSources = getSourceCoverage(project, allBrainSources);
-    const linkedSources = allBrainSources.filter((source) =>
-      source.linkedProjectIds.includes(project.id),
-    );
-    return {
-      project,
-      approvedSources,
-      linkedSources,
-      needsReview: linkedSources.filter(
-        (source) => !isReviewerSafeSource(source),
-      ),
-    };
-  });
   const studioOutputs = buildStudioOutputs(
     activeLanes,
     activeProjects,
@@ -1639,6 +1602,9 @@ export function TailoredPortfolioStudio() {
     displayProjects.find(
       (project) => project.id === selectedDisplayProjectId,
     ) ?? displayProjects[0];
+  const activeDisplayProjects = activeProjects.map((project) =>
+    getDisplayProject(project, displayCustomization),
+  );
 
   const commitDisplayCustomization = (
     next: DisplayCustomization,
@@ -1920,7 +1886,7 @@ export function TailoredPortfolioStudio() {
     setBrainDrafts(nextSources);
   };
 
-  const updateBrainSourceStatus = (
+  const _updateBrainSourceStatus = (
     sourceId: string,
     status: EvidenceSourceStatus,
   ) => {
@@ -1934,7 +1900,7 @@ export function TailoredPortfolioStudio() {
     }));
   };
 
-  const toggleBrainSourceProject = (sourceId: string, projectId: string) => {
+  const _toggleBrainSourceProject = (sourceId: string, projectId: string) => {
     updateBrainSource(sourceId, (source) => {
       const linkedProjectIds = source.linkedProjectIds.includes(projectId)
         ? source.linkedProjectIds.filter((id) => id !== projectId)
@@ -1946,7 +1912,7 @@ export function TailoredPortfolioStudio() {
     });
   };
 
-  const removeBrainSource = (sourceId: string) => {
+  const _removeBrainSource = (sourceId: string) => {
     const nextSources = brainDrafts.filter((source) => source.id !== sourceId);
     setStudioBrainSources(nextSources);
     setBrainDrafts(nextSources);
@@ -2098,59 +2064,58 @@ export function TailoredPortfolioStudio() {
 
   return (
     <main className="min-h-screen bg-background text-foreground">
-      <section className="border-b border-border bg-[radial-gradient(circle_at_top_left,_rgba(229,190,105,0.16),_transparent_34%),linear-gradient(135deg,_rgba(17,24,39,0.95),_rgba(10,10,10,1))]">
-        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="space-y-6">
-            <Badge className="w-fit" variant="outline">
-              Owner Studio
-            </Badge>
-            <div className="space-y-4">
-              <h1 className="font-display text-4xl font-semibold leading-tight sm:text-5xl">
-                Build a quiet, tailored reviewer view.
-              </h1>
-              <p className="max-w-3xl text-base leading-7 text-muted-foreground">
-                Paste a JD, let the app recommend the lane, projects, visuals,
-                and evidence, then override anything before generating a short
-                opaque link.
-              </p>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {[
-                ["Short links", "Stored by slug"],
-                ["AI assist", aiMode === "suggest" ? "Suggest only" : "Off"],
-                ["Public view", "No studio language"],
-              ].map(([label, value]) => (
-                <div
-                  key={label}
-                  className="rounded-md border border-border bg-card/80 p-4"
-                >
-                  <p className="text-xs uppercase text-muted-foreground">
-                    {label}
-                  </p>
-                  <p className="mt-1 font-medium">{value}</p>
-                </div>
-              ))}
-            </div>
+      <section className="border-b border-border bg-card">
+        <div className="mx-auto grid max-w-7xl gap-5 px-5 py-6 lg:grid-cols-[0.75fr_1.25fr]">
+          <div>
+            <Badge variant="outline">Owner Studio</Badge>
+            <h1 className="mt-4 font-display text-4xl font-semibold leading-tight sm:text-5xl">
+              Build the reviewer snapshot.
+            </h1>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">
+              Work left to right: paste the role signal, choose the evidence,
+              edit the visible profile and media, run the QA check, then create
+              the private link.
+            </p>
           </div>
+          <div className="grid gap-3 sm:grid-cols-4">
+            {[
+              ["1", "Target", activeLanes[0]],
+              ["2", "Work", `${activeProjectIds.length} items`],
+              ["3", "Media", `${mediaNeeds.length} needs`],
+              ["4", "Link", links[0]?.state ?? "not made"],
+            ].map(([step, label, value]) => (
+              <div
+                key={label}
+                className="rounded-md border border-border bg-background p-3"
+              >
+                <p className="font-mono text-xs uppercase text-muted-foreground">
+                  {step}. {label}
+                </p>
+                <p className="mt-2 text-sm font-semibold">{value}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-          <Card className="border-border/80 bg-card/90">
+      <section className="mx-auto grid max-w-7xl gap-5 px-5 py-6 lg:grid-cols-[0.72fr_1.28fr]">
+        <div className="space-y-5">
+          <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Clipboard className="h-5 w-5 text-primary" />
-                Step 1. Target Signal
+                1. Target Signal
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <label className="block space-y-2" htmlFor="target-company">
-                <span className="text-sm font-medium">
-                  Private company / role label
-                </span>
+                <span className="text-sm font-medium">Private role label</span>
                 <input
                   id="target-company"
                   className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                   value={company}
                   onChange={(event) => setCompany(event.target.value)}
-                  placeholder="Used only inside the studio"
+                  placeholder="Example: Senior Enablement Architect"
                 />
               </label>
               <label className="block space-y-2" htmlFor="target-jd">
@@ -2161,64 +2126,250 @@ export function TailoredPortfolioStudio() {
                   id="target-jd"
                   value={jd}
                   onChange={(event) => setJd(event.target.value)}
-                  className="min-h-36"
+                  className="min-h-40"
                   maxLength={2200}
                 />
               </label>
-              <div className="flex flex-wrap items-center gap-3">
-                <Button
-                  type="button"
-                  variant={aiMode === "suggest" ? "default" : "outline"}
-                  onClick={() =>
-                    setAiMode(aiMode === "suggest" ? "off" : "suggest")
+              <div className="rounded-md border border-border bg-muted/20 p-3 text-sm leading-6 text-muted-foreground">
+                AI assist means: use a short, capped prompt to classify the JD,
+                suggest the lane, and recommend projects/metrics. It does not
+                run on reviewer page views.
+              </div>
+              <Button
+                type="button"
+                variant={aiMode === "suggest" ? "default" : "outline"}
+                onClick={() =>
+                  setAiMode(aiMode === "suggest" ? "off" : "suggest")
+                }
+              >
+                <Bot className="mr-2 h-4 w-4" />
+                AI assist {aiMode === "suggest" ? "on" : "off"}
+              </Button>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <SearchCheck className="h-5 w-5 text-primary" />
+                2. Evidence Selection
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-5">
+              <div className="rounded-md border border-primary/25 bg-primary/10 p-4">
+                <p className="text-sm font-semibold">
+                  Recommended focus: {analysis.primaryLane}
+                </p>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  {analysis.reviewerTakeaway}
+                </p>
+              </div>
+              <div>
+                <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
+                  Focus lanes
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {laneProfiles.map((laneProfile) => (
+                    <ToggleChip
+                      key={laneProfile.lane}
+                      active={activeLanes.includes(laneProfile.lane)}
+                      onClick={() => toggleLane(laneProfile.lane)}
+                    >
+                      {laneProfile.lane}
+                    </ToggleChip>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div className="mb-2 flex items-center justify-between gap-3">
+                  <p className="text-xs font-semibold uppercase text-muted-foreground">
+                    Portfolio items
+                  </p>
+                  <Button
+                    type="button"
+                    size="sm"
+                    variant="outline"
+                    onClick={resetRecommendations}
+                  >
+                    <RotateCcw className="mr-2 h-4 w-4" />
+                    Reset
+                  </Button>
+                </div>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {projects.map((project) => (
+                    <button
+                      key={project.id}
+                      type="button"
+                      onClick={() => toggleProject(project.id)}
+                      className={`rounded-md border p-3 text-left transition-smooth ${
+                        activeProjectIds.includes(project.id)
+                          ? "border-primary bg-primary/10"
+                          : "border-border bg-muted/20 hover:border-muted-foreground"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2">
+                        {activeProjectIds.includes(project.id) && (
+                          <Check className="h-4 w-4 text-primary" />
+                        )}
+                        <p className="text-sm font-medium">
+                          {project.shortTitle}
+                        </p>
+                      </div>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {project.role}
+                      </p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
+                  Proof points
+                </p>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {proofPoints.map((proofPoint) => (
+                    <button
+                      key={proofPoint.id}
+                      type="button"
+                      onClick={() => toggleProof(proofPoint.id)}
+                      className={`rounded-md border p-3 text-left transition-smooth ${
+                        activeProofIds.includes(proofPoint.id)
+                          ? "border-primary bg-primary/10"
+                          : "border-border bg-muted/20 hover:border-muted-foreground"
+                      }`}
+                    >
+                      <p className="font-display text-2xl font-semibold">
+                        {proofPoint.value}
+                      </p>
+                      <p className="text-sm font-medium">{proofPoint.label}</p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Database className="h-5 w-5 text-primary" />
+                3. Brain and Media
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <p className="text-sm leading-6 text-muted-foreground">
+                Add resumes, notes, screenshots, links, transcripts, or project
+                records here. Studio keeps them private until you mark a source
+                approved or public-safe.
+              </p>
+              <label className="inline-flex cursor-pointer items-center justify-center rounded-md border border-border px-4 py-2 text-sm font-medium transition-smooth hover:bg-muted">
+                <Upload className="mr-2 h-4 w-4" />
+                Import files or media records
+                <input
+                  type="file"
+                  multiple
+                  className="sr-only"
+                  accept={evidenceBrain.acceptedFiles.join(",")}
+                  onChange={(event) => {
+                    void importSourceFiles(event.target.files);
+                    event.target.value = "";
+                  }}
+                />
+              </label>
+              <div className="grid gap-3 sm:grid-cols-2">
+                <input
+                  className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  value={sourceTitle}
+                  onChange={(event) => setSourceTitle(event.target.value)}
+                  placeholder="Source title"
+                />
+                <input
+                  className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  value={sourceUrl}
+                  onChange={(event) => setSourceUrl(event.target.value)}
+                  placeholder="Source URL or artifact link"
+                />
+              </div>
+              <Textarea
+                value={sourceText}
+                onChange={(event) => setSourceText(event.target.value)}
+                className="min-h-24"
+                placeholder="Paste notes, transcript, OCR text, or context"
+                maxLength={4000}
+              />
+              <div className="flex flex-wrap gap-2">
+                <select
+                  className="rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  value={sourceType}
+                  onChange={(event) => setSourceType(event.target.value)}
+                >
+                  {evidenceBrain.sourceTypes.map((type) => (
+                    <option key={type} value={type}>
+                      {type}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  className="rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  value={sourceStatus}
+                  onChange={(event) =>
+                    setSourceStatus(event.target.value as EvidenceSourceStatus)
                   }
                 >
-                  <Bot className="mr-2 h-4 w-4" />
-                  AI assist {aiMode === "suggest" ? "on" : "off"}
+                  {evidenceBrain.statuses.map((status) => (
+                    <option key={status} value={status}>
+                      {status}
+                    </option>
+                  ))}
+                </select>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={addBrainSource}
+                >
+                  <FileText className="mr-2 h-4 w-4" />
+                  Add source
                 </Button>
-                <p className="text-xs leading-5 text-muted-foreground">
-                  Gemini-ready, capped prompt. The deterministic scorer still
-                  works when AI is off.
+              </div>
+              {importingSources && (
+                <p className="text-sm text-muted-foreground">
+                  Importing source records...
                 </p>
+              )}
+              <div className="space-y-2">
+                {allBrainSources.slice(0, 5).map((source) => (
+                  <div
+                    key={source.id}
+                    className="rounded-md border border-border bg-muted/20 p-3"
+                  >
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <p className="text-sm font-medium">{source.title}</p>
+                      <Badge variant="outline">{source.status}</Badge>
+                    </div>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {source.type} - {source.linkedProjectIds.length || 0}{" "}
+                      linked projects
+                    </p>
+                    <p className="mt-2 text-xs leading-5 text-muted-foreground">
+                      {source.note}
+                    </p>
+                  </div>
+                ))}
               </div>
             </CardContent>
           </Card>
         </div>
-      </section>
 
-      <section className="mx-auto max-w-7xl px-5 py-8">
-        <Card>
-          <CardHeader>
-            <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-start">
-              <div>
-                <Badge variant="secondary" className="mb-3">
-                  Display editor
-                </Badge>
-                <CardTitle className="flex items-center gap-2">
-                  <ImageIcon className="h-5 w-5 text-primary" />
-                  Profile and showcase controls
-                </CardTitle>
-                <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">
-                  Edit the visible profile copy, profile image, project copy,
-                  and portfolio visuals for this draft. These changes save in
-                  this browser; backend persistence can be wired after the
-                  visual system is approved.
-                </p>
-              </div>
-              <Button
-                type="button"
-                variant="outline"
-                onClick={handleResetDisplayDraft}
-              >
-                <RotateCcw className="mr-2 h-4 w-4" />
-                Reset display draft
-              </Button>
-            </div>
-          </CardHeader>
-          <CardContent className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
-            <div className="rounded-md border border-border p-4">
-              <p className="text-sm font-medium">Profile front door</p>
-              <div className="mt-4 grid gap-3">
+        <div className="space-y-5 lg:sticky lg:top-4 lg:self-start">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <ImageIcon className="h-5 w-5 text-primary" />
+                4. Public Snapshot Editor
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-5">
+              <div className="grid gap-3 sm:grid-cols-2">
                 <input
                   value={displayProfile.name}
                   onChange={(event) =>
@@ -2243,34 +2394,36 @@ export function TailoredPortfolioStudio() {
                     )
                   }
                   className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                  placeholder="Title"
+                  placeholder="Public title"
                 />
-                <Textarea
-                  value={displayProfile.headline}
-                  onChange={(event) =>
-                    commitDisplayCustomization(
-                      updateDisplayProfile(displayCustomization, {
-                        headline: event.target.value,
-                      }),
-                      "Profile headline saved.",
-                    )
-                  }
-                  rows={3}
-                  placeholder="Headline"
-                />
-                <Textarea
-                  value={displayProfile.shortSummary}
-                  onChange={(event) =>
-                    commitDisplayCustomization(
-                      updateDisplayProfile(displayCustomization, {
-                        shortSummary: event.target.value,
-                      }),
-                      "Profile summary saved.",
-                    )
-                  }
-                  rows={4}
-                  placeholder="Short summary"
-                />
+              </div>
+              <Textarea
+                value={displayProfile.headline}
+                onChange={(event) =>
+                  commitDisplayCustomization(
+                    updateDisplayProfile(displayCustomization, {
+                      headline: event.target.value,
+                    }),
+                    "Profile headline saved.",
+                  )
+                }
+                rows={3}
+                placeholder="One clear positioning sentence"
+              />
+              <Textarea
+                value={displayProfile.shortSummary}
+                onChange={(event) =>
+                  commitDisplayCustomization(
+                    updateDisplayProfile(displayCustomization, {
+                      shortSummary: event.target.value,
+                    }),
+                    "Profile summary saved.",
+                  )
+                }
+                rows={4}
+                placeholder="Brief supporting summary"
+              />
+              <div className="flex flex-wrap gap-2">
                 <label className="inline-flex cursor-pointer items-center justify-center rounded-md border border-border px-4 py-2 text-sm font-medium transition-smooth hover:bg-muted">
                   <Upload className="mr-2 h-4 w-4" />
                   Upload profile image
@@ -2286,41 +2439,37 @@ export function TailoredPortfolioStudio() {
                     }}
                   />
                 </label>
-                {displayProfile.profileImage ? (
-                  <img
-                    src={displayProfile.profileImage}
-                    alt={displayProfile.name}
-                    className="aspect-[4/3] w-full rounded-md border border-border object-cover"
-                  />
-                ) : (
-                  <div className="flex aspect-[4/3] items-center justify-center rounded-md border border-dashed border-border bg-muted/30 text-sm text-muted-foreground">
-                    Profile image placeholder
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className="rounded-md border border-border p-4">
-              <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
-                <p className="text-sm font-medium">Showcase item editor</p>
                 <Button
                   type="button"
-                  size="sm"
                   variant="outline"
-                  onClick={handleResetDisplayProject}
+                  onClick={handleResetDisplayDraft}
                 >
                   <RotateCcw className="mr-2 h-4 w-4" />
-                  Reset item
+                  Reset display
                 </Button>
               </div>
-              {selectedDisplayProject ? (
-                <div className="mt-4 grid gap-3">
+
+              {selectedDisplayProject && (
+                <div className="rounded-md border border-border bg-muted/20 p-3">
+                  <div className="flex flex-wrap items-center justify-between gap-3">
+                    <p className="text-sm font-medium">
+                      Project thumbnail and copy
+                    </p>
+                    <Button
+                      type="button"
+                      size="sm"
+                      variant="outline"
+                      onClick={handleResetDisplayProject}
+                    >
+                      Reset item
+                    </Button>
+                  </div>
                   <select
                     value={selectedDisplayProjectId}
                     onChange={(event) =>
                       setSelectedDisplayProjectId(event.target.value)
                     }
-                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                    className="mt-3 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
                   >
                     {displayProjects.map((project) => (
                       <option key={project.id} value={project.id}>
@@ -2328,7 +2477,7 @@ export function TailoredPortfolioStudio() {
                       </option>
                     ))}
                   </select>
-                  <div className="grid gap-3 md:grid-cols-2">
+                  <div className="mt-3 grid gap-3 sm:grid-cols-2">
                     <input
                       value={selectedDisplayProject.title}
                       onChange={(event) =>
@@ -2372,27 +2521,13 @@ export function TailoredPortfolioStudio() {
                         "Project summary saved.",
                       )
                     }
-                    rows={4}
+                    className="mt-3"
+                    rows={3}
                     placeholder="Project summary"
                   />
-                  <Textarea
-                    value={selectedDisplayProject.visual.caption}
-                    onChange={(event) =>
-                      commitDisplayCustomization(
-                        updateDisplayProject(
-                          displayCustomization,
-                          selectedDisplayProject.id,
-                          { visualCaption: event.target.value },
-                        ),
-                        "Visual caption saved.",
-                      )
-                    }
-                    rows={3}
-                    placeholder="Visual caption"
-                  />
-                  <label className="inline-flex cursor-pointer items-center justify-center rounded-md border border-border px-4 py-2 text-sm font-medium transition-smooth hover:bg-muted">
+                  <label className="mt-3 inline-flex cursor-pointer items-center justify-center rounded-md border border-border px-4 py-2 text-sm font-medium transition-smooth hover:bg-muted">
                     <Upload className="mr-2 h-4 w-4" />
-                    Upload project visual
+                    Upload project thumbnail
                     <input
                       type="file"
                       accept="image/*"
@@ -2408,125 +2543,14 @@ export function TailoredPortfolioStudio() {
                   <img
                     src={selectedDisplayProject.visual.src}
                     alt={selectedDisplayProject.visual.alt}
-                    className="aspect-[16/9] w-full rounded-md border border-border object-cover"
+                    className="mt-3 aspect-[16/9] w-full rounded-md border border-border object-cover"
                   />
                 </div>
-              ) : (
-                <p className="mt-4 text-sm text-muted-foreground">
-                  Add projects to the source bank before editing showcase items.
-                </p>
               )}
-            </div>
-            {displayMessage && (
-              <p className="lg:col-span-2 rounded-md border border-border bg-muted/20 p-3 text-sm text-muted-foreground">
-                {displayMessage}
-              </p>
-            )}
-          </CardContent>
-        </Card>
-      </section>
-
-      <section className="mx-auto grid max-w-7xl gap-6 px-5 py-8 lg:grid-cols-[0.9fr_1.1fr]">
-        <div className="space-y-6">
-          <Card>
-            <CardHeader>
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <CardTitle className="flex items-center gap-2">
-                  <Save className="h-5 w-5 text-primary" />
-                  Saved Target Profiles
-                </CardTitle>
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={saveTargetProfile}
-                >
-                  Save current setup
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {savedProfiles.length === 0 ? (
-                <p className="text-sm leading-6 text-muted-foreground">
-                  Save a role setup after the lane, projects, metrics, and link
-                  feel right. Profiles stay private to this browser for now.
+              {displayMessage && (
+                <p className="text-sm text-muted-foreground">
+                  {displayMessage}
                 </p>
-              ) : (
-                savedProfiles.map((targetProfile) => (
-                  <div
-                    key={targetProfile.id}
-                    className="rounded-md border border-border bg-muted/20 p-3"
-                  >
-                    <div className="flex flex-wrap items-center justify-between gap-3">
-                      <div>
-                        <p className="text-sm font-medium">
-                          {targetProfile.name}
-                        </p>
-                        <p className="mt-1 text-xs text-muted-foreground">
-                          {targetProfile.lanes.join(", ")} -{" "}
-                          {targetProfile.projectIds.length} projects -{" "}
-                          {targetProfile.proofIds.length} metrics -{" "}
-                          {targetProfile.linkSlugs.length} links
-                        </p>
-                        {targetProfile.linkSlugs.length > 0 && (
-                          <p className="mt-2 text-xs text-primary">
-                            Latest link: #/work/{targetProfile.linkSlugs[0]}
-                          </p>
-                        )}
-                        {targetProfile.visualSnapshots &&
-                          targetProfile.visualSnapshots.length > 0 && (
-                            <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                              {targetProfile.visualSnapshots
-                                .slice(0, 4)
-                                .map((snapshot) => (
-                                  <div
-                                    key={snapshot.projectId}
-                                    className="rounded-md border border-border bg-background/70 p-2"
-                                  >
-                                    <div className="flex items-center justify-between gap-2">
-                                      <p className="truncate text-xs font-medium">
-                                        {snapshot.projectTitle}
-                                      </p>
-                                      <Badge
-                                        variant={
-                                          snapshot.visualQuality === "approved"
-                                            ? "default"
-                                            : "outline"
-                                        }
-                                      >
-                                        {snapshot.visualQuality}
-                                      </Badge>
-                                    </div>
-                                    <p className="mt-1 text-xs text-muted-foreground">
-                                      {snapshot.approvedSourceCount} approved
-                                      sources
-                                    </p>
-                                    {snapshot.readiness.length > 0 && (
-                                      <p className="mt-1 text-xs text-muted-foreground">
-                                        {snapshot.readiness.join(", ")}
-                                      </p>
-                                    )}
-                                    {snapshot.approvedSourceCount === 0 &&
-                                      snapshot.missing.length > 0 && (
-                                        <p className="mt-1 text-xs leading-5 text-primary">
-                                          Needs: {snapshot.missing[0]}
-                                        </p>
-                                      )}
-                                  </div>
-                                ))}
-                            </div>
-                          )}
-                      </div>
-                      <Button
-                        type="button"
-                        size="sm"
-                        variant="outline"
-                        onClick={() => applyTargetProfile(targetProfile)}
-                      >
-                        Apply
-                      </Button>
-                    </div>
-                  </div>
-                ))
               )}
             </CardContent>
           </Card>
@@ -2534,17 +2558,77 @@ export function TailoredPortfolioStudio() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <Download className="h-5 w-5 text-primary" />
-                Workspace Backup
+                <AlertTriangle className="h-5 w-5 text-primary" />
+                5. QA Before Sharing
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-sm leading-6 text-muted-foreground">
-                Export or restore the private Studio workspace for this browser:
-                source records, saved profiles, review links, and local view
-                definitions.
-              </p>
-              <div className="grid gap-3 sm:grid-cols-2">
+            <CardContent className="space-y-3">
+              <div className="grid gap-2 sm:grid-cols-2">
+                <div className="rounded-md border border-border bg-muted/20 p-3">
+                  <p className="text-xs font-semibold uppercase text-muted-foreground">
+                    Role fit
+                  </p>
+                  <p className="mt-1 font-display text-3xl font-semibold">
+                    {strategyReport.fitScore}%
+                  </p>
+                </div>
+                <div className="rounded-md border border-border bg-muted/20 p-3">
+                  <p className="text-xs font-semibold uppercase text-muted-foreground">
+                    Next artifact
+                  </p>
+                  <p className="mt-1 text-sm font-medium">
+                    {strategyReport.artifactBrief.title}
+                  </p>
+                </div>
+              </div>
+              <div className="rounded-md border border-border bg-muted/20 p-3">
+                <p className="text-sm font-medium">Public snapshot preview</p>
+                <p className="mt-2 text-sm leading-6 text-muted-foreground">
+                  {displayProfile.headline}
+                </p>
+                <div className="mt-3 grid gap-2 sm:grid-cols-3">
+                  {activeDisplayProjects.slice(0, 3).map((project) => (
+                    <div
+                      key={project.id}
+                      className="rounded-md border border-border bg-background p-2"
+                    >
+                      <img
+                        src={project.visual.src}
+                        alt={project.visual.alt}
+                        className="aspect-[16/9] w-full rounded object-cover"
+                      />
+                      <p className="mt-2 text-xs font-medium">
+                        {project.shortTitle}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              {mediaNeeds.length > 0 ? (
+                <div className="rounded-md border border-primary/35 bg-primary/10 p-3">
+                  <p className="text-sm font-medium">Media to improve</p>
+                  <ul className="mt-2 space-y-1 text-sm leading-6 text-muted-foreground">
+                    {mediaNeeds.slice(0, 4).map(({ project, needs }) => (
+                      <li key={project.id}>
+                        {project.shortTitle}: {needs[0]}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <p className="rounded-md border border-border bg-muted/20 p-3 text-sm text-muted-foreground">
+                  Current selected media is approved for reviewer use.
+                </p>
+              )}
+              <div className="flex flex-wrap gap-2">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={saveTargetProfile}
+                >
+                  <Save className="mr-2 h-4 w-4" />
+                  Save profile
+                </Button>
                 <Button
                   type="button"
                   variant="outline"
@@ -2553,14 +2637,10 @@ export function TailoredPortfolioStudio() {
                   <Download className="mr-2 h-4 w-4" />
                   Export workspace
                 </Button>
-                <label
-                  className="inline-flex cursor-pointer items-center justify-center rounded-md border border-border px-4 py-2 text-sm font-medium transition-smooth hover:bg-muted"
-                  htmlFor="workspace-backup"
-                >
+                <label className="inline-flex cursor-pointer items-center justify-center rounded-md border border-border px-4 py-2 text-sm font-medium transition-smooth hover:bg-muted">
                   <Upload className="mr-2 h-4 w-4" />
-                  Restore workspace
+                  Restore
                   <input
-                    id="workspace-backup"
                     type="file"
                     accept=".json,application/json"
                     className="sr-only"
@@ -2572,645 +2652,27 @@ export function TailoredPortfolioStudio() {
                 </label>
               </div>
               {backupMessage && (
-                <p className="rounded-md border border-border bg-muted/20 p-3 text-sm text-muted-foreground">
-                  {backupMessage}
-                </p>
+                <p className="text-sm text-muted-foreground">{backupMessage}</p>
               )}
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <SearchCheck className="h-5 w-5 text-primary" />
-                Step 2. Recommended Lane
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="rounded-md border border-primary/25 bg-primary/10 p-4">
-                <p className="text-sm font-medium">{analysis.primaryLane}</p>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  {analysis.reviewerTakeaway}
-                </p>
-              </div>
-              <div className="grid gap-3">
-                {analysis.matches.slice(0, 6).map((match) => (
-                  <div
-                    key={match.lane}
-                    className="rounded-md border border-border bg-muted/25 p-3"
-                  >
-                    <div className="flex items-center justify-between gap-3">
-                      <p className="text-sm font-medium">{match.lane}</p>
-                      <span className="text-xs text-muted-foreground">
-                        {Math.round(match.confidence * 100)}%
-                      </span>
-                    </div>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      Matched: {match.terms.join(", ")}
-                    </p>
-                  </div>
-                ))}
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {laneProfiles.map((laneProfile) => (
-                  <ToggleChip
-                    key={laneProfile.lane}
-                    active={activeLanes.includes(laneProfile.lane)}
-                    onClick={() => toggleLane(laneProfile.lane)}
-                  >
-                    {laneProfile.lane}
-                  </ToggleChip>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Wand2 className="h-5 w-5 text-primary" />
-                JD Strategy Report
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-5">
-              <div className="grid gap-3 sm:grid-cols-3">
-                <div className="rounded-md border border-border bg-muted/20 p-3">
-                  <p className="text-xs font-semibold uppercase text-muted-foreground">
-                    Estimated role fit
-                  </p>
-                  <p className="mt-1 font-display text-3xl font-semibold">
-                    {strategyReport.fitScore}%
-                  </p>
-                </div>
-                <div className="rounded-md border border-border bg-muted/20 p-3 sm:col-span-2">
-                  <p className="text-xs font-semibold uppercase text-muted-foreground">
-                    Best next artifact
-                  </p>
-                  <p className="mt-1 text-sm font-medium">
-                    {strategyReport.artifactBrief.title}
-                  </p>
-                  <p className="mt-1 text-xs leading-5 text-muted-foreground">
-                    {strategyReport.artifactBrief.buildTime} build -{" "}
-                    {strategyReport.artifactBrief.artifactType}
-                  </p>
-                </div>
-              </div>
-
-              <div>
-                <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
-                  Likely company problems
-                </p>
-                <div className="grid gap-2">
-                  {strategyReport.likelyProblems.map((problem) => (
-                    <div
-                      key={problem}
-                      className="rounded-md border border-border bg-muted/20 p-3 text-sm leading-6"
-                    >
-                      {problem}
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
-                  Portfolio matches
-                </p>
-                <div className="grid gap-2">
-                  {strategyReport.portfolioMatches.map((match) => (
-                    <div
-                      key={match.project.id}
-                      className="rounded-md border border-border bg-muted/20 p-3"
-                    >
-                      <div className="flex flex-wrap items-center justify-between gap-2">
-                        <p className="text-sm font-medium">
-                          {match.project.shortTitle}
-                        </p>
-                        <Badge
-                          variant={
-                            match.strength === "strong" ? "default" : "outline"
-                          }
-                        >
-                          {match.strength}
-                        </Badge>
-                      </div>
-                      <p className="mt-1 text-xs leading-5 text-muted-foreground">
-                        {match.reason}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
-                  Evidence gaps
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {strategyReport.evidenceGaps.map((gap) => (
-                    <Badge key={gap} variant="outline">
-                      {gap}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-
-              <div className="rounded-md border border-primary/30 bg-primary/10 p-4">
-                <p className="text-xs font-semibold uppercase text-muted-foreground">
-                  Artifact brief
-                </p>
-                <h3 className="mt-2 font-display text-xl font-semibold">
-                  {strategyReport.artifactBrief.title}
-                </h3>
-                <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                  {strategyReport.artifactBrief.problemSolved}
-                </p>
-                <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                  <div>
-                    <p className="text-xs font-semibold uppercase text-muted-foreground">
-                      Required inputs
-                    </p>
-                    <ul className="mt-2 space-y-1 text-sm">
-                      {strategyReport.artifactBrief.requiredInputs.map(
-                        (input) => (
-                          <li key={input}>{input}</li>
-                        ),
-                      )}
-                    </ul>
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold uppercase text-muted-foreground">
-                      Tools and placement
-                    </p>
-                    <p className="mt-2 text-sm leading-6">
-                      {strategyReport.artifactBrief.recommendedTools.join(", ")}
-                    </p>
-                    <p className="mt-2 text-sm leading-6 text-muted-foreground">
-                      {strategyReport.artifactBrief.portfolioPlacement}
-                    </p>
-                  </div>
-                </div>
-                <p className="mt-3 text-sm font-medium text-primary">
-                  Success metric: {strategyReport.artifactBrief.successMetric}
-                </p>
-              </div>
-
-              <div>
-                <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
-                  Skill matrix
-                </p>
-                <div className="grid gap-2 sm:grid-cols-2">
-                  {strategyReport.skillMatrix.map((item) => (
-                    <div
-                      key={item.skill}
-                      className="rounded-md border border-border bg-muted/20 p-3"
-                    >
-                      <div className="flex items-center justify-between gap-2">
-                        <p className="text-sm font-medium">{item.skill}</p>
-                        <Badge
-                          variant={
-                            item.strength === "Strong" ? "default" : "outline"
-                          }
-                        >
-                          {item.strength}
-                        </Badge>
-                      </div>
-                      <p className="mt-1 text-xs text-muted-foreground">
-                        {item.evidence}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Wand2 className="h-5 w-5 text-primary" />
-                AI Cost Guardrails
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3 text-sm text-muted-foreground">
-              <p>
-                Gemini should only receive the trimmed JD, lane names, project
-                IDs, and proof IDs. No full portfolio dump, no reviewer traffic,
-                and no automatic calls when a link is opened.
-              </p>
-              <div className="rounded-md border border-border bg-muted/25 p-3 font-mono text-xs">
-                {analysis.aiPromptPreview}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Database className="h-5 w-5 text-primary" />
-                Evidence Brain
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <p className="text-sm leading-6 text-muted-foreground">
-                Add raw notes, screenshots, transcripts, repos, documents, and
-                old-site artifacts here over time. The reviewer page should only
-                use approved evidence that matches the selected project.
-              </p>
-              <div>
-                <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
-                  Accepted source files
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {evidenceBrain.acceptedFiles.map((fileType) => (
-                    <Badge key={fileType} variant="outline">
-                      {fileType}
-                    </Badge>
-                  ))}
-                </div>
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                <label
-                  className="block space-y-2 rounded-md border border-dashed border-border bg-muted/20 p-3 sm:col-span-2"
-                  htmlFor="source-files"
-                >
-                  <span className="text-sm font-medium">
-                    Import files or media records
-                  </span>
-                  <input
-                    id="source-files"
-                    type="file"
-                    multiple
-                    accept={evidenceBrain.acceptedFiles.join(",")}
-                    className="block w-full text-sm text-muted-foreground file:mr-3 file:rounded-md file:border-0 file:bg-primary file:px-3 file:py-2 file:text-sm file:font-medium file:text-primary-foreground"
-                    onChange={(event) => {
-                      void importSourceFiles(event.target.files);
-                      event.target.value = "";
-                    }}
-                  />
-                  <span className="block text-xs leading-5 text-muted-foreground">
-                    Text files are read locally. Images, PDFs, DOCX, PPTX, GIF,
-                    and video are recorded with the cleanup needed before
-                    approval.
-                  </span>
-                  {importingSources && (
-                    <span className="block text-xs font-medium text-primary">
-                      Reading source records...
-                    </span>
-                  )}
-                </label>
-                <label className="block space-y-2" htmlFor="source-title">
-                  <span className="text-sm font-medium">Source title</span>
-                  <input
-                    id="source-title"
-                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                    value={sourceTitle}
-                    onChange={(event) => setSourceTitle(event.target.value)}
-                    placeholder="Resume, transcript, screenshot note..."
-                  />
-                </label>
-                <label className="block space-y-2" htmlFor="source-type">
-                  <span className="text-sm font-medium">Source type</span>
-                  <select
-                    id="source-type"
-                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                    value={sourceType}
-                    onChange={(event) => setSourceType(event.target.value)}
-                  >
-                    {evidenceBrain.sourceTypes.map((type) => (
-                      <option key={type} value={type}>
-                        {type}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <label
-                  className="block space-y-2 sm:col-span-2"
-                  htmlFor="source-url"
-                >
-                  <span className="text-sm font-medium">
-                    Source link or artifact URL
-                  </span>
-                  <input
-                    id="source-url"
-                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                    value={sourceUrl}
-                    onChange={(event) => setSourceUrl(event.target.value)}
-                    placeholder="GitHub repo, old site page, demo, Drive file, or live artifact"
-                  />
-                  <span className="block text-xs leading-5 text-muted-foreground">
-                    Links stay in Studio until the source is reviewed and
-                    approved.
-                  </span>
-                </label>
-                <label className="block space-y-2" htmlFor="source-status">
-                  <span className="text-sm font-medium">Safety status</span>
-                  <select
-                    id="source-status"
-                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                    value={sourceStatus}
-                    onChange={(event) =>
-                      setSourceStatus(
-                        event.target.value as EvidenceSourceStatus,
-                      )
-                    }
-                  >
-                    {evidenceBrain.statuses.map((status) => (
-                      <option key={status} value={status}>
-                        {status}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-                <div className="rounded-md border border-border bg-muted/20 p-3 text-sm leading-6 text-muted-foreground">
-                  Attachments are represented as records in this pass. Use the
-                  title and notes to point at the file, then mark it approved
-                  only after crop, redaction, and project match are checked.
-                </div>
-              </div>
-              <label className="block space-y-2" htmlFor="source-text">
-                <span className="text-sm font-medium">
-                  Paste notes, transcript, or extraction
-                </span>
-                <Textarea
-                  id="source-text"
-                  value={sourceText}
-                  onChange={(event) => setSourceText(event.target.value)}
-                  className="min-h-28"
-                  maxLength={4000}
-                />
-              </label>
-              <Button type="button" variant="outline" onClick={addBrainSource}>
-                <FileText className="mr-2 h-4 w-4" />
-                Add source record
-              </Button>
-              <div>
-                <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
-                  Brain checks before public use
-                </p>
-                <div className="grid gap-2 sm:grid-cols-2">
-                  {evidenceBrain.qualityChecks.map((check) => (
-                    <div
-                      key={check}
-                      className="rounded-md border border-border bg-muted/20 p-3 text-sm"
-                    >
-                      {check}
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
-                  Review queue
-                </p>
+              {savedProfiles.length > 0 && (
                 <div className="space-y-2">
-                  {allBrainSources.slice(0, 8).map((source) => {
-                    const isEditable = brainDrafts.some(
-                      (draft) => draft.id === source.id,
-                    );
-                    return (
-                      <div
-                        key={source.id}
-                        className="rounded-md border border-border bg-muted/20 p-3"
-                      >
-                        <div className="flex flex-wrap items-center justify-between gap-2">
-                          <p className="text-sm font-medium">{source.title}</p>
-                          <Badge variant="outline">{source.status}</Badge>
-                        </div>
-                        <p className="mt-1 text-xs text-muted-foreground">
-                          {source.type} -{" "}
-                          {source.linkedProjectIds.length > 0
-                            ? `${source.linkedProjectIds.length} linked projects`
-                            : "not linked yet"}
-                        </p>
-                        <div className="mt-2 flex flex-wrap gap-2">
-                          {source.extractionStatus && (
-                            <Badge variant="outline">
-                              {source.extractionStatus}
-                            </Badge>
-                          )}
-                          {source.fileSize ? (
-                            <Badge variant="outline">
-                              {formatBytes(source.fileSize)}
-                            </Badge>
-                          ) : null}
-                          {source.matchedTerms?.slice(0, 4).map((term) => (
-                            <Badge key={term} variant="outline">
-                              {term}
-                            </Badge>
-                          ))}
-                        </div>
-                        <p className="mt-2 text-xs leading-5 text-muted-foreground">
-                          {source.note}
-                        </p>
-                        {source.sourceUrl && (
-                          <a
-                            href={source.sourceUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                            className="mt-2 inline-flex max-w-full items-center gap-1 break-all text-xs text-primary"
-                          >
-                            Source link
-                            <ArrowUpRight className="h-3.5 w-3.5 shrink-0" />
-                          </a>
-                        )}
-                        {isEditable ? (
-                          <div className="mt-3 space-y-3 rounded-md border border-border bg-background/70 p-3">
-                            <label
-                              className="block space-y-2"
-                              htmlFor={`source-url-${source.id}`}
-                            >
-                              <span className="text-xs font-semibold uppercase text-muted-foreground">
-                                Source link
-                              </span>
-                              <input
-                                id={`source-url-${source.id}`}
-                                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                                value={source.sourceUrl ?? ""}
-                                onChange={(event) =>
-                                  updateBrainSource(source.id, (current) => ({
-                                    ...current,
-                                    sourceUrl:
-                                      event.target.value.trim() || undefined,
-                                  }))
-                                }
-                                placeholder="GitHub, old website, Drive, demo, or artifact URL"
-                              />
-                            </label>
-                            <label
-                              className="block space-y-2"
-                              htmlFor={`status-${source.id}`}
-                            >
-                              <span className="text-xs font-semibold uppercase text-muted-foreground">
-                                Review status
-                              </span>
-                              <select
-                                id={`status-${source.id}`}
-                                className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
-                                value={source.status}
-                                onChange={(event) =>
-                                  updateBrainSourceStatus(
-                                    source.id,
-                                    event.target.value as EvidenceSourceStatus,
-                                  )
-                                }
-                              >
-                                {evidenceBrain.statuses.map((status) => (
-                                  <option key={status} value={status}>
-                                    {status}
-                                  </option>
-                                ))}
-                              </select>
-                            </label>
-                            <div>
-                              <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
-                                Linked projects
-                              </p>
-                              <div className="flex flex-wrap gap-2">
-                                {projects.map((project) => (
-                                  <ToggleChip
-                                    key={project.id}
-                                    active={source.linkedProjectIds.includes(
-                                      project.id,
-                                    )}
-                                    onClick={() =>
-                                      toggleBrainSourceProject(
-                                        source.id,
-                                        project.id,
-                                      )
-                                    }
-                                  >
-                                    {project.shortTitle}
-                                  </ToggleChip>
-                                ))}
-                              </div>
-                            </div>
-                            <Button
-                              type="button"
-                              variant="outline"
-                              onClick={() => removeBrainSource(source.id)}
-                            >
-                              Remove source record
-                            </Button>
-                          </div>
-                        ) : (
-                          <p className="mt-3 text-xs leading-5 text-muted-foreground">
-                            Seed record. Import or paste your own source to edit
-                            status and project links.
-                          </p>
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <SearchCheck className="h-5 w-5 text-primary" />
-                Evidence Coverage
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {evidenceCoverage.map(
-                ({ project, approvedSources, linkedSources, needsReview }) => (
-                  <div
-                    key={project.id}
-                    className="rounded-md border border-border bg-muted/20 p-3"
-                  >
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <p className="text-sm font-medium">
-                        {project.shortTitle}
-                      </p>
-                      <Badge
-                        variant={
-                          approvedSources.length > 0 ? "default" : "outline"
-                        }
-                      >
-                        {approvedSources.length > 0
-                          ? "source-backed"
-                          : "needs approved source"}
-                      </Badge>
-                    </div>
-                    <div className="mt-2 grid gap-2 text-xs leading-5 text-muted-foreground sm:grid-cols-3">
-                      <p>{linkedSources.length} linked records</p>
-                      <p>{approvedSources.length} approved records</p>
-                      <p>{needsReview.length} awaiting review</p>
-                    </div>
-                    {approvedSources.length > 0 ? (
-                      <p className="mt-2 text-xs leading-5 text-primary">
-                        Strongest source: {approvedSources[0].title}
-                      </p>
-                    ) : (
-                      <p className="mt-2 text-xs leading-5 text-muted-foreground">
-                        Add or approve one artifact before this project becomes
-                        a stronger share candidate.
-                      </p>
-                    )}
-                  </div>
-                ),
-              )}
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <AlertTriangle className="h-5 w-5 text-primary" />
-                Missing Media for This View
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              {mediaNeeds.length === 0 ? (
-                <p className="text-sm text-muted-foreground">
-                  Current project media is approved for reviewer use.
-                </p>
-              ) : (
-                mediaNeeds.map(
-                  ({ project, status, needs, approvedSources }) => (
-                    <div
-                      key={project.id}
-                      className="rounded-md border border-border bg-muted/20 p-3"
+                  <p className="text-xs font-semibold uppercase text-muted-foreground">
+                    Saved profiles
+                  </p>
+                  {savedProfiles.slice(0, 3).map((targetProfile) => (
+                    <button
+                      key={targetProfile.id}
+                      type="button"
+                      onClick={() => applyTargetProfile(targetProfile)}
+                      className="w-full rounded-md border border-border bg-muted/20 p-3 text-left text-sm hover:border-muted-foreground"
                     >
-                      <div className="flex flex-wrap items-center justify-between gap-2">
-                        <p className="text-sm font-medium">
-                          {project.shortTitle}
-                        </p>
-                        <Badge variant="outline">{status}</Badge>
-                      </div>
-                      <p className="mt-2 text-xs leading-5 text-muted-foreground">
-                        Add or approve one of these before this becomes a
-                        stronger reviewer case:
-                      </p>
-                      <ul className="mt-2 space-y-1 text-sm">
-                        {needs.slice(0, 3).map((need) => (
-                          <li key={need} className="flex gap-2">
-                            <FileSearch className="mt-0.5 h-4 w-4 text-primary" />
-                            <span>{need}</span>
-                          </li>
-                        ))}
-                      </ul>
-                      {approvedSources.length > 0 ? (
-                        <p className="mt-3 text-xs leading-5 text-primary">
-                          Approved source coverage:{" "}
-                          {approvedSources
-                            .map((source) => source.title)
-                            .slice(0, 2)
-                            .join(", ")}
-                        </p>
-                      ) : (
-                        <p className="mt-3 text-xs leading-5 text-muted-foreground">
-                          No approved source is linked to this project yet.
-                          Import a screenshot, artifact, metric note, or repo
-                          record and mark it approved after review.
-                        </p>
-                      )}
-                    </div>
-                  ),
-                )
+                      <span className="font-medium">{targetProfile.name}</span>
+                      <span className="ml-2 text-xs text-muted-foreground">
+                        {targetProfile.lanes.join(", ")}
+                      </span>
+                    </button>
+                  ))}
+                </div>
               )}
             </CardContent>
           </Card>
@@ -3219,15 +2681,14 @@ export function TailoredPortfolioStudio() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <LockKeyhole className="h-5 w-5 text-primary" />
-                Step 5. Short Links
+                6. Private Reviewer Links
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              <p className="text-sm text-muted-foreground">
-                Reviewer links use private, natural slugs such as{" "}
-                <span className="font-mono">#/work/workflow-a7k9</span> or{" "}
-                <span className="font-mono">#/work/aiops-m6t1</span>. Company
-                and JD details stay in Studio records.
+              <p className="text-sm leading-6 text-muted-foreground">
+                Links use opaque slugs and keep the company/JD details inside
+                Studio. Archived links route back to the general portfolio
+                instead of showing an expired page.
               </p>
               <Button
                 type="button"
@@ -3236,370 +2697,72 @@ export function TailoredPortfolioStudio() {
                 disabled={saving}
               >
                 <Link2 className="mr-2 h-4 w-4" />
-                {saving ? "Generating..." : "Generate short reviewer link"}
+                {saving ? "Generating..." : "Generate reviewer link"}
               </Button>
-              {links.length === 0 ? (
-                <p className="text-sm text-muted-foreground">
-                  Links will look like{" "}
-                  <span className="font-mono">#/work/workflow-a7k9</span>. The
-                  company/JD stays private in the studio data.
-                </p>
-              ) : (
-                <div className="space-y-3">
-                  {links.map((link) => (
-                    <div
-                      key={link.slug}
-                      className="rounded-md border border-border p-3 text-sm"
+              {links.slice(0, 4).map((link) => (
+                <div
+                  key={link.slug}
+                  className="rounded-md border border-border p-3 text-sm"
+                >
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <span className="font-medium">{link.label}</span>
+                    <Badge variant="outline">{link.state}</Badge>
+                  </div>
+                  <p className="mt-2 break-all text-muted-foreground">
+                    {link.url}
+                  </p>
+                  <div className="mt-3 flex flex-wrap gap-3">
+                    <a
+                      href={link.url}
+                      className="inline-flex items-center gap-1 text-primary"
                     >
-                      <div className="flex flex-wrap items-center justify-between gap-3">
-                        <span className="font-medium">{link.label}</span>
-                        <Badge variant="outline">
-                          {link.state} - {link.source}
-                        </Badge>
-                      </div>
-                      <p className="mt-2 break-all text-muted-foreground">
-                        {link.url}
-                      </p>
-                      <div className="mt-3 flex flex-wrap gap-2">
-                        <a
-                          className="inline-flex items-center gap-2 text-primary"
-                          href={link.url}
-                        >
-                          Open
-                          <ExternalLink className="h-4 w-4" />
-                        </a>
-                        <button
-                          type="button"
-                          className="inline-flex items-center gap-2 text-primary"
-                          onClick={() =>
-                            setLinkArchived(link.slug, link.state === "active")
-                          }
-                        >
-                          {link.state === "active" ? "Archive" : "Reactivate"}
-                        </button>
-                        <span className="text-muted-foreground">
-                          {link.state === "active"
-                            ? "Active until archived"
-                            : "Routes to the general portfolio"}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
+                      Open <ExternalLink className="h-4 w-4" />
+                    </a>
+                    <button
+                      type="button"
+                      className="text-primary"
+                      onClick={() =>
+                        setLinkArchived(link.slug, link.state === "active")
+                      }
+                    >
+                      {link.state === "active" ? "Archive" : "Reactivate"}
+                    </button>
+                  </div>
                 </div>
-              )}
+              ))}
             </CardContent>
           </Card>
-        </div>
 
-        <div className="space-y-6">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <ImageIcon className="h-5 w-5 text-primary" />
-                Step 3. Recommended Projects and Metrics
+                <Sparkles className="h-5 w-5 text-primary" />
+                Copy Outputs
               </CardTitle>
             </CardHeader>
-            <CardContent className="space-y-5">
-              <div className="grid gap-3 md:grid-cols-3">
-                {recommendedProjects.map((project) => (
-                  <button
-                    type="button"
-                    key={project.id}
-                    onClick={() => toggleProject(project.id)}
-                    className={`overflow-hidden rounded-md border text-left transition-smooth ${
-                      activeProjectIds.includes(project.id)
-                        ? "border-primary bg-primary/10"
-                        : "border-border bg-muted/20 hover:border-muted-foreground"
-                    }`}
-                  >
-                    <img
-                      src={project.visual.src}
-                      alt={project.visual.alt}
-                      className="aspect-[16/9] w-full object-cover"
-                    />
-                    <div className="p-3">
-                      <div className="flex items-center gap-2">
-                        {activeProjectIds.includes(project.id) && (
-                          <Check className="h-4 w-4 text-primary" />
-                        )}
-                        <p className="text-sm font-medium">
-                          {project.shortTitle}
-                        </p>
-                      </div>
-                      <p className="mt-1 text-xs text-muted-foreground">
-                        {project.role}
-                      </p>
-                      <Badge
-                        className="mt-3"
-                        variant={
-                          project.visual.quality === "approved"
-                            ? "default"
-                            : "outline"
-                        }
-                      >
-                        {project.visual.quality}
-                      </Badge>
-                      <div className="mt-2 flex flex-wrap gap-1">
-                        {project.readiness.slice(0, 2).map((status) => (
-                          <span
-                            key={status}
-                            className="rounded-full bg-background px-2 py-0.5 text-[11px] text-muted-foreground"
-                          >
-                            {status}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </button>
-                ))}
-              </div>
-              <div className="grid gap-3 sm:grid-cols-2">
-                {recommendedProofPoints.map((proofPoint) => (
-                  <button
-                    type="button"
-                    key={proofPoint.id}
-                    onClick={() => toggleProof(proofPoint.id)}
-                    className={`rounded-md border p-3 text-left transition-smooth ${
-                      activeProofIds.includes(proofPoint.id)
-                        ? "border-primary bg-primary/10"
-                        : "border-border bg-muted/20 hover:border-muted-foreground"
-                    }`}
-                  >
-                    <p className="font-display text-2xl font-semibold">
-                      {proofPoint.value}
-                    </p>
-                    <p className="text-sm font-medium">{proofPoint.label}</p>
-                    <p className="mt-2 text-xs leading-5 text-muted-foreground">
-                      {proofPoint.detail}
-                    </p>
-                  </button>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <CardTitle>Step 4. Manual Override</CardTitle>
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={resetRecommendations}
-                >
-                  <RotateCcw className="mr-2 h-4 w-4" />
-                  Reset
-                </Button>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <p className="mb-2 text-sm font-medium">All project options</p>
-                <div className="grid gap-2 md:grid-cols-2">
-                  {projects.map((project) => (
-                    <ToggleChip
-                      key={project.id}
-                      active={activeProjectIds.includes(project.id)}
-                      onClick={() => toggleProject(project.id)}
-                    >
-                      {project.shortTitle}
-                    </ToggleChip>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <p className="mb-2 text-sm font-medium">All metric options</p>
-                <div className="flex flex-wrap gap-2">
-                  {proofPoints.map((proofPoint) => (
-                    <ToggleChip
-                      key={proofPoint.id}
-                      active={activeProofIds.includes(proofPoint.id)}
-                      onClick={() => toggleProof(proofPoint.id)}
-                    >
-                      {proofPoint.value} {proofPoint.label}
-                    </ToggleChip>
-                  ))}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Reviewer Preview</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="rounded-md border border-border bg-muted/20 p-4">
-                <p className="text-xs uppercase text-muted-foreground">
-                  Public headline
-                </p>
-                <p className="mt-1 font-display text-2xl font-semibold">
-                  {analysis.angle}
-                </p>
-              </div>
-              <div className="grid gap-3 md:grid-cols-3">
-                {activeProjectIds.slice(0, 3).map((id) => {
-                  const project = projects.find((item) => item.id === id);
-                  if (!project) return null;
-                  return (
-                    <div
-                      key={id}
-                      className="rounded-md border border-border p-3"
-                    >
-                      <img
-                        src={project.visual.src}
-                        alt={project.visual.alt}
-                        className="aspect-[16/9] w-full rounded object-cover"
-                      />
-                      <p className="mt-2 text-sm font-medium">
-                        {project.shortTitle}
-                      </p>
-                    </div>
-                  );
-                })}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                <CardTitle className="flex items-center gap-2">
-                  <Sparkles className="h-5 w-5 text-primary" />
-                  Copy-Ready Outputs
-                </CardTitle>
-                {copyMessage && (
-                  <span className="text-sm text-muted-foreground">
-                    {copyMessage}
-                  </span>
-                )}
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="rounded-md border border-border bg-muted/20 p-3">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="text-xs font-semibold uppercase text-muted-foreground">
-                    Recruiter summary
-                  </p>
-                  <Button
-                    type="button"
-                    aria-label="Copy recruiter summary"
-                    variant="outline"
-                    size="sm"
-                    onClick={() =>
-                      copyStudioOutput(
-                        "Recruiter summary",
-                        studioOutputs.recruiter,
-                      )
-                    }
-                  >
-                    <Clipboard className="mr-2 h-4 w-4" />
-                    Copy
-                  </Button>
-                </div>
-                <p className="mt-2 text-sm leading-6">
-                  {studioOutputs.recruiter}
-                </p>
-              </div>
-              <div className="rounded-md border border-border bg-muted/20 p-3">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="text-xs font-semibold uppercase text-muted-foreground">
-                    Resume emphasis bullets
-                  </p>
-                  <Button
-                    type="button"
-                    aria-label="Copy resume emphasis bullets"
-                    variant="outline"
-                    size="sm"
-                    onClick={() =>
-                      copyStudioOutput(
-                        "Resume bullets",
-                        studioOutputs.resume
-                          .map((bullet) => `- ${bullet}`)
-                          .join("\n"),
-                      )
-                    }
-                  >
-                    <Clipboard className="mr-2 h-4 w-4" />
-                    Copy
-                  </Button>
-                </div>
-                <ul className="mt-2 space-y-2 text-sm leading-6">
-                  {studioOutputs.resume.map((bullet) => (
-                    <li key={bullet}>{bullet}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="rounded-md border border-border bg-muted/20 p-3">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="text-xs font-semibold uppercase text-muted-foreground">
-                    LinkedIn summary
-                  </p>
-                  <Button
-                    type="button"
-                    aria-label="Copy LinkedIn summary"
-                    variant="outline"
-                    size="sm"
-                    onClick={() =>
-                      copyStudioOutput(
-                        "LinkedIn summary",
-                        studioOutputs.linkedin,
-                      )
-                    }
-                  >
-                    <Clipboard className="mr-2 h-4 w-4" />
-                    Copy
-                  </Button>
-                </div>
-                <p className="mt-2 text-sm leading-6">
-                  {studioOutputs.linkedin}
-                </p>
-              </div>
-              <div className="rounded-md border border-border bg-muted/20 p-3">
-                <div className="flex items-center justify-between gap-3">
-                  <p className="text-xs font-semibold uppercase text-muted-foreground">
-                    Interview talking points
-                  </p>
-                  <Button
-                    type="button"
-                    aria-label="Copy interview talking points"
-                    variant="outline"
-                    size="sm"
-                    onClick={() =>
-                      copyStudioOutput(
-                        "Interview talking points",
-                        studioOutputs.interview
-                          .map((prompt) => `- ${prompt}`)
-                          .join("\n"),
-                      )
-                    }
-                  >
-                    <Clipboard className="mr-2 h-4 w-4" />
-                    Copy
-                  </Button>
-                </div>
-                <ul className="mt-2 space-y-2 text-sm leading-6">
-                  {studioOutputs.interview.map((prompt) => (
-                    <li key={prompt}>{prompt}</li>
-                  ))}
-                </ul>
-              </div>
+            <CardContent className="space-y-3">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() =>
+                  copyStudioOutput("Recruiter summary", studioOutputs.recruiter)
+                }
+              >
+                <Clipboard className="mr-2 h-4 w-4" />
+                Copy recruiter summary
+              </Button>
+              <p className="text-sm leading-6 text-muted-foreground">
+                {studioOutputs.recruiter}
+              </p>
+              {copyMessage && (
+                <p className="text-sm text-muted-foreground">{copyMessage}</p>
+              )}
               {manualCopy && (
-                <div className="rounded-md border border-primary/40 bg-primary/10 p-3">
-                  <p className="text-xs font-semibold uppercase text-muted-foreground">
-                    Manual copy fallback
-                  </p>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {manualCopy.label} is selected here for browsers that block
-                    clipboard access.
-                  </p>
-                  <Textarea
-                    className="mt-3 min-h-32"
-                    readOnly
-                    value={manualCopy.text}
-                    onFocus={(event) => event.currentTarget.select()}
-                  />
-                </div>
+                <Textarea
+                  readOnly
+                  value={manualCopy.text}
+                  onFocus={(event) => event.currentTarget.select()}
+                />
               )}
             </CardContent>
           </Card>

@@ -81,7 +81,7 @@ export type BrainSource = {
 
 export const profile = {
   name: "Terry Brutus",
-  title: "Enablement Systems, AI Workflow, and Learning Experience Builder",
+  title: "Technical Learning and AI Systems Architect",
   location: "Leland, NC",
   email: "terrbrutus@gmail.com",
   phone: "(212) 603-9163",
@@ -89,9 +89,9 @@ export const profile = {
   github: "https://github.com/terrybrutus",
   profileImage: "",
   headline:
-    "I design the systems, tools, and learning experiences that help people do complex work with less friction.",
+    "I build practical learning systems, AI-assisted workflows, and tools for complex work.",
   shortSummary:
-    "Enablement systems builder with a learning architecture background, practical AI workflow experience, and proof across regulated, technical, and distributed work environments.",
+    "Learning architect with federal, SaaS, healthcare, sales, and technical training experience. Recent work includes AI-assisted QA, skills alignment, workflow tooling, and scalable operations.",
 };
 
 export const laneProfiles: LaneProfile[] = [
