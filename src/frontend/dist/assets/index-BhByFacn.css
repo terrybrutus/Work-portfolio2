@@ -817,9 +817,6 @@ video {
 .mt-4 {
   margin-top: 1rem;
 }
-.mt-5 {
-  margin-top: 1.25rem;
-}
 .mt-8 {
   margin-top: 2rem;
 }
@@ -995,8 +992,8 @@ video {
 .min-h-40 {
   min-height: 10rem;
 }
-.min-h-\[138px\] {
-  min-height: 138px;
+.min-h-\[106px\] {
+  min-height: 106px;
 }
 .min-h-\[90vh\] {
   min-height: 90vh;
@@ -1600,6 +1597,9 @@ video {
 .p-2 {
   padding: 0.5rem;
 }
+.p-2\.5 {
+  padding: 0.625rem;
+}
 .p-3 {
   padding: 0.75rem;
 }
@@ -1760,10 +1760,6 @@ video {
   font-size: 2.25rem;
   line-height: 2.5rem;
 }
-.text-5xl {
-  font-size: 3rem;
-  line-height: 1;
-}
 .text-\[0\.62rem\] {
   font-size: 0.62rem;
 }
@@ -1776,8 +1772,11 @@ video {
 .text-\[0\.8rem\] {
   font-size: 0.8rem;
 }
-.text-\[clamp\(2\.8rem\2c 12vw\2c 4\.9rem\)\] {
-  font-size: clamp(2.8rem, 12vw, 4.9rem);
+.text-\[1\.65rem\] {
+  font-size: 1.65rem;
+}
+.text-\[clamp\(2\.55rem\2c 11vw\2c 4\.9rem\)\] {
+  font-size: clamp(2.55rem, 11vw, 4.9rem);
 }
 .text-base {
   font-size: 1rem;
@@ -1817,6 +1816,9 @@ video {
 .tabular-nums {
   --tw-numeric-spacing: tabular-nums;
   font-variant-numeric: var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction);
+}
+.leading-4 {
+  line-height: 1rem;
 }
 .leading-5 {
   line-height: 1.25rem;
@@ -3697,6 +3699,15 @@ video {
     line-height: 1.75rem;
   }
 
+  .sm\:text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+  }
+
+  .sm\:leading-5 {
+    line-height: 1.25rem;
+  }
+
   .data-\[vaul-drawer-direction\=left\]\:sm\:max-w-sm[data-vaul-drawer-direction="left"] {
     max-width: 24rem;
   }
@@ -3800,6 +3811,14 @@ video {
     top: 1rem;
   }
 
+  .lg\:mt-3 {
+    margin-top: 0.75rem;
+  }
+
+  .lg\:mt-4 {
+    margin-top: 1rem;
+  }
+
   .lg\:mt-6 {
     margin-top: 1.5rem;
   }
@@ -3856,6 +3875,14 @@ video {
     align-self: flex-start;
   }
 
+  .lg\:p-3 {
+    padding: 0.75rem;
+  }
+
+  .lg\:p-4 {
+    padding: 1rem;
+  }
+
   .lg\:p-5 {
     padding: 1.25rem;
   }
@@ -3890,6 +3917,10 @@ video {
   .lg\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
+  }
+
+  .lg\:leading-6 {
+    line-height: 1.5rem;
   }
 
   .lg\:leading-\[0\.98\] {

@@ -1200,11 +1200,11 @@ function SnapshotProjectTile({
 
 function SnapshotMetricTile({ metric }: { metric: ProofPoint }) {
   return (
-    <div className="border border-black/15 bg-white/55 p-3">
-      <p className="font-display text-2xl font-semibold leading-none text-black lg:text-3xl">
+    <div className="border border-black/15 bg-white/55 p-2.5 lg:p-3">
+      <p className="font-display text-xl font-semibold leading-none text-black sm:text-2xl lg:text-3xl">
         {metric.value}
       </p>
-      <p className="mt-1 text-sm font-semibold leading-5 text-black/72">
+      <p className="mt-1 text-xs font-semibold leading-4 text-black/72 sm:text-sm sm:leading-5">
         {metric.label}
       </p>
     </div>
@@ -1234,7 +1234,7 @@ function ReviewerPortfolio({
     <main className="min-h-screen bg-[#f8f5ef] text-black">
       <section className="mx-auto flex max-w-[1800px] flex-col gap-3 px-3 py-3 sm:px-4 lg:min-h-screen">
         <header className="grid gap-3 lg:grid-cols-[0.7fr_1.3fr]">
-          <div className="border border-black/15 bg-[#f4f1ea] p-4 lg:p-5">
+          <div className="border border-black/15 bg-[#f4f1ea] p-3 lg:p-5">
             <div className="flex items-start justify-between gap-4">
               <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55">
                 {reviewerBadge}
@@ -1243,7 +1243,7 @@ function ReviewerPortfolio({
                 {displayProfile.location}
               </p>
             </div>
-            <h1 className="mt-5 font-display text-[clamp(2.8rem,12vw,4.9rem)] font-semibold leading-[0.86] lg:mt-6 lg:text-[clamp(3.8rem,5vw,6.4rem)]">
+            <h1 className="mt-4 font-display text-[clamp(2.55rem,11vw,4.9rem)] font-semibold leading-[0.86] lg:mt-6 lg:text-[clamp(3.8rem,5vw,6.4rem)]">
               {firstName}
               <br />
               {remainingName}
@@ -1251,19 +1251,19 @@ function ReviewerPortfolio({
           </div>
 
           <div className="grid gap-3 lg:grid-cols-[1fr_0.78fr]">
-            <div className="border border-black/15 bg-[#bfe9f8] p-4 lg:p-5">
+            <div className="border border-black/15 bg-[#bfe9f8] p-3 lg:p-5">
               <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55">
                 {displayProfile.title}
               </p>
-              <p className="mt-4 max-w-4xl font-display text-2xl font-semibold leading-[1.02] sm:text-3xl lg:text-[clamp(1.8rem,2.2vw,2.8rem)] lg:leading-[0.98]">
+              <p className="mt-3 max-w-4xl font-display text-[1.65rem] font-semibold leading-[1.02] sm:text-3xl lg:mt-4 lg:text-[clamp(1.8rem,2.2vw,2.8rem)] lg:leading-[0.98]">
                 {displayProfile.headline}
               </p>
-              <p className="mt-3 max-w-3xl text-sm leading-6 text-black/68">
+              <p className="mt-2 max-w-3xl text-sm leading-6 text-black/68 lg:mt-3">
                 {displayProfile.shortSummary}
               </p>
             </div>
 
-            <div className="border border-black/15 bg-black p-3 text-white">
+            <div className="border border-black/15 bg-black p-2.5 text-white lg:p-3">
               {displayProfile.profileImage ? (
                 <img
                   src={displayProfile.profileImage}
@@ -1271,15 +1271,15 @@ function ReviewerPortfolio({
                   className="aspect-[4/3] w-full object-cover sm:aspect-[16/10] lg:aspect-auto lg:h-full"
                 />
               ) : (
-                <div className="flex min-h-[138px] flex-col justify-between border border-white/20 p-4 lg:min-h-[220px]">
+                <div className="flex min-h-[106px] flex-col justify-between border border-white/20 p-3 lg:min-h-[220px] lg:p-4">
                   <span className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-white/55">
                     {displayProfile.name}
                   </span>
                   <div>
-                    <p className="font-display text-5xl font-semibold leading-none lg:text-6xl">
+                    <p className="font-display text-4xl font-semibold leading-none lg:text-6xl">
                       TB
                     </p>
-                    <p className="mt-3 max-w-xs text-sm leading-6 text-white/65">
+                    <p className="mt-2 max-w-xs text-xs leading-5 text-white/65 lg:mt-3 lg:text-sm lg:leading-6">
                       Practical systems, thoughtful learning, cleaner execution.
                     </p>
                   </div>
