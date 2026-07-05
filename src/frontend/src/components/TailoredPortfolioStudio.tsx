@@ -1187,7 +1187,7 @@ function SnapshotProjectTile({
         <h3 className="font-display text-xl font-semibold leading-[1.02] lg:text-[clamp(1.15rem,1.6vw,2rem)]">
           {project.title}
         </h3>
-        <p className="line-clamp-2 text-xs leading-5 text-black/68 lg:text-sm">
+        <p className="text-xs leading-5 text-black/68 lg:text-sm">
           {project.summary}
         </p>
         <p className="border-l-2 border-black/25 pl-3 text-xs font-medium leading-5 text-black/75">
@@ -1243,7 +1243,7 @@ function ReviewerPortfolio({
                 {displayProfile.location}
               </p>
             </div>
-            <h1 className="mt-5 font-display text-[clamp(3.2rem,10vw,8.5rem)] font-semibold leading-[0.86] lg:mt-6 lg:text-[clamp(3.8rem,5vw,6.4rem)]">
+            <h1 className="mt-5 font-display text-[clamp(2.8rem,12vw,4.9rem)] font-semibold leading-[0.86] lg:mt-6 lg:text-[clamp(3.8rem,5vw,6.4rem)]">
               {firstName}
               <br />
               {remainingName}
@@ -1255,7 +1255,7 @@ function ReviewerPortfolio({
               <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55">
                 {displayProfile.title}
               </p>
-              <p className="mt-4 max-w-4xl font-display text-3xl font-semibold leading-[0.98] lg:text-[clamp(1.8rem,2.2vw,2.8rem)]">
+              <p className="mt-4 max-w-4xl font-display text-2xl font-semibold leading-[1.02] sm:text-3xl lg:text-[clamp(1.8rem,2.2vw,2.8rem)] lg:leading-[0.98]">
                 {displayProfile.headline}
               </p>
               <p className="mt-3 max-w-3xl text-sm leading-6 text-black/68">
@@ -1268,15 +1268,15 @@ function ReviewerPortfolio({
                 <img
                   src={displayProfile.profileImage}
                   alt={displayProfile.name}
-                  className="aspect-[16/10] h-full w-full object-cover lg:aspect-auto"
+                  className="aspect-[4/3] w-full object-cover sm:aspect-[16/10] lg:aspect-auto lg:h-full"
                 />
               ) : (
-                <div className="flex min-h-[220px] flex-col justify-between border border-white/20 p-4">
+                <div className="flex min-h-[138px] flex-col justify-between border border-white/20 p-4 lg:min-h-[220px]">
                   <span className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-white/55">
                     {displayProfile.name}
                   </span>
                   <div>
-                    <p className="font-display text-6xl font-semibold leading-none">
+                    <p className="font-display text-5xl font-semibold leading-none lg:text-6xl">
                       TB
                     </p>
                     <p className="mt-3 max-w-xs text-sm leading-6 text-white/65">
@@ -1302,7 +1302,7 @@ function ReviewerPortfolio({
               Four quick signals before the case work.
             </p>
           </div>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
             {model.selectedProofPoints.map((metric) => (
               <SnapshotMetricTile key={metric.id} metric={metric} />
             ))}
@@ -1362,7 +1362,7 @@ function ReviewerPortfolio({
                 {humanHighlights.slice(0, 2).map((item) => (
                   <div key={item.label}>
                     <p className="text-sm font-semibold">{item.label}</p>
-                    <p className="mt-1 line-clamp-2 text-xs leading-5 text-black/65">
+                    <p className="mt-1 text-xs leading-5 text-black/65">
                       {item.detail}
                     </p>
                   </div>

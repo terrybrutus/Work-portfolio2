@@ -2967,7 +2967,7 @@ class VecClass extends ConstructType {
       try {
         return this._type.covariant(v2);
       } catch (e) {
-        throw new Error(`Invalid ${this.display()} argument:
+        throw new Error(`Invalid ${this.display()} argument: 
 
 index ${idx} -> ${e.message}`, { cause: e });
       }
@@ -3124,7 +3124,7 @@ class OptClass extends ConstructType {
         return true;
       }
     } catch (e) {
-      throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)}
+      throw new Error(`Invalid ${this.display()} argument: ${toReadableString(x2)} 
 
 -> ${e.message}`, { cause: e });
     }
@@ -3240,7 +3240,7 @@ class RecordClass extends ConstructType {
       try {
         return t.covariant(x2[k2]);
       } catch (e) {
-        throw new Error(`Invalid ${this.display()} argument:
+        throw new Error(`Invalid ${this.display()} argument: 
 
 field ${k2} -> ${e.message}`, {
           cause: e
@@ -3352,7 +3352,7 @@ class TupleClass extends RecordClass {
       try {
         return t.covariant(x2[i]);
       } catch (e) {
-        throw new Error(`Invalid ${this.display()} argument:
+        throw new Error(`Invalid ${this.display()} argument: 
 
 index ${i} -> ${e.message}`, {
           cause: e
@@ -3413,7 +3413,7 @@ class VariantClass extends ConstructType {
       try {
         return !x2.hasOwnProperty(k2) || v2.covariant(x2[k2]);
       } catch (e) {
-        throw new Error(`Invalid ${this.display()} argument:
+        throw new Error(`Invalid ${this.display()} argument: 
 
 variant ${k2} -> ${e.message}`, {
           cause: e
@@ -33702,7 +33702,7 @@ function SnapshotProjectTile({
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2 pt-3", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.62rem] uppercase tracking-[0.14em] text-black/55", children: project.role }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-xl font-semibold leading-[1.02] lg:text-[clamp(1.15rem,1.6vw,2rem)]", children: project.title }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "line-clamp-2 text-xs leading-5 text-black/68 lg:text-sm", children: project.summary }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs leading-5 text-black/68 lg:text-sm", children: project.summary }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "border-l-2 border-black/25 pl-3 text-xs font-medium leading-5 text-black/75", children: project.outcomes[0] ?? project.problem })
         ] })
       ]
@@ -33737,7 +33737,7 @@ function ReviewerPortfolio({
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55", children: reviewerBadge }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55", children: displayProfile.location })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "mt-5 font-display text-[clamp(3.2rem,10vw,8.5rem)] font-semibold leading-[0.86] lg:mt-6 lg:text-[clamp(3.8rem,5vw,6.4rem)]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "mt-5 font-display text-[clamp(2.8rem,12vw,4.9rem)] font-semibold leading-[0.86] lg:mt-6 lg:text-[clamp(3.8rem,5vw,6.4rem)]", children: [
           firstName,
           /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
           remainingName
@@ -33746,7 +33746,7 @@ function ReviewerPortfolio({
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-3 lg:grid-cols-[1fr_0.78fr]", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-black/15 bg-[#bfe9f8] p-4 lg:p-5", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55", children: displayProfile.title }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 max-w-4xl font-display text-3xl font-semibold leading-[0.98] lg:text-[clamp(1.8rem,2.2vw,2.8rem)]", children: displayProfile.headline }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 max-w-4xl font-display text-2xl font-semibold leading-[1.02] sm:text-3xl lg:text-[clamp(1.8rem,2.2vw,2.8rem)] lg:leading-[0.98]", children: displayProfile.headline }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-3xl text-sm leading-6 text-black/68", children: displayProfile.shortSummary })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border border-black/15 bg-black p-3 text-white", children: displayProfile.profileImage ? /* @__PURE__ */ jsxRuntimeExports.jsx(
@@ -33754,12 +33754,12 @@ function ReviewerPortfolio({
           {
             src: displayProfile.profileImage,
             alt: displayProfile.name,
-            className: "aspect-[16/10] h-full w-full object-cover lg:aspect-auto"
+            className: "aspect-[4/3] w-full object-cover sm:aspect-[16/10] lg:aspect-auto lg:h-full"
           }
-        ) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex min-h-[220px] flex-col justify-between border border-white/20 p-4", children: [
+        ) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex min-h-[138px] flex-col justify-between border border-white/20 p-4 lg:min-h-[220px]", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-white/55", children: displayProfile.name }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-6xl font-semibold leading-none", children: "TB" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-5xl font-semibold leading-none lg:text-6xl", children: "TB" }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-xs text-sm leading-6 text-white/65", children: "Practical systems, thoughtful learning, cleaner execution." })
           ] })
         ] }) })
@@ -33771,7 +33771,7 @@ function ReviewerPortfolio({
         /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-mono text-[0.7rem] uppercase tracking-[0.2em] text-black/55", children: "Proof Points" }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "hidden text-sm text-black/55 sm:block", children: "Four quick signals before the case work." })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3 sm:grid-cols-2 lg:grid-cols-4", children: model.selectedProofPoints.map((metric) => /* @__PURE__ */ jsxRuntimeExports.jsx(SnapshotMetricTile, { metric }, metric.id)) })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid grid-cols-2 gap-3 lg:grid-cols-4", children: model.selectedProofPoints.map((metric) => /* @__PURE__ */ jsxRuntimeExports.jsx(SnapshotMetricTile, { metric }, metric.id)) })
     ] }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "grid gap-3 lg:grid-cols-[1.4fr_0.6fr]", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-black/15 bg-white/35 p-3", children: [
@@ -33808,7 +33808,7 @@ function ReviewerPortfolio({
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55", children: "Human Context" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 space-y-3", children: humanHighlights.slice(0, 2).map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold", children: item.label }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 line-clamp-2 text-xs leading-5 text-black/65", children: item.detail })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-xs leading-5 text-black/65", children: item.detail })
           ] }, item.label)) })
         ] })
       ] })
