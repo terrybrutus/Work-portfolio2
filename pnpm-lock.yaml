@@ -21,6 +21,9 @@ importers:
       '@caffeineai/core-infrastructure':
         specifier: ^1.0.0
         version: 1.0.0
+      '@caffeineai/object-storage':
+        specifier: ^1.0.0
+        version: 1.0.0
       '@icp-sdk/auth':
         specifier: ^7.1.0
         version: 7.1.0(@icp-sdk/core@5.4.0)
