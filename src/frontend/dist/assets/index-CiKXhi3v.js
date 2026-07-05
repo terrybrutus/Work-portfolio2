@@ -32612,11 +32612,6 @@ const brainSources = [
     sourceUrl: "https://github.com/terrybrutus"
   }
 ];
-const resumeHighlights = [
-  "Senior Talent Development Lead and AI Enablement Architect at CTEC, supporting a 158,000-person defense acquisition workforce.",
-  "Lead Talent Enablement and Experience Architect through Legacy Learning Consulting across enterprise, municipal, sales, healthcare, and SaaS contexts.",
-  "Instructional Systems Designer background with technical simulation and Army LMS deployment experience at 1.2M+ user scale."
-];
 const humanHighlights = [
   {
     label: "Former Division I athlete",
@@ -32761,18 +32756,18 @@ const createLucideIcon = (iconName, iconNode) => {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$h = [
+const __iconNode$g = [
   ["path", { d: "M7 7h10v10", key: "1tivn9" }],
   ["path", { d: "M7 17 17 7", key: "1vkiza" }]
 ];
-const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$h);
+const ArrowUpRight = createLucideIcon("arrow-up-right", __iconNode$g);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$g = [
+const __iconNode$f = [
   ["path", { d: "M12 8V4H8", key: "hb8ula" }],
   ["rect", { width: "16", height: "12", x: "4", y: "8", rx: "2", key: "enze0r" }],
   ["path", { d: "M2 14h2", key: "vft8re" }],
@@ -32780,22 +32775,22 @@ const __iconNode$g = [
   ["path", { d: "M15 13v2", key: "1xurst" }],
   ["path", { d: "M9 13v2", key: "rq6x2g" }]
 ];
-const Bot = createLucideIcon("bot", __iconNode$g);
+const Bot = createLucideIcon("bot", __iconNode$f);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$f = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
-const Check = createLucideIcon("check", __iconNode$f);
+const __iconNode$e = [["path", { d: "M20 6 9 17l-5-5", key: "1gmf2c" }]];
+const Check = createLucideIcon("check", __iconNode$e);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$e = [
+const __iconNode$d = [
   ["rect", { width: "8", height: "4", x: "8", y: "2", rx: "1", ry: "1", key: "tgr4d6" }],
   [
     "path",
@@ -32805,19 +32800,7 @@ const __iconNode$e = [
     }
   ]
 ];
-const Clipboard = createLucideIcon("clipboard", __iconNode$e);
-/**
- * @license lucide-react v0.511.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */
-const __iconNode$d = [
-  ["ellipse", { cx: "12", cy: "5", rx: "9", ry: "3", key: "msslwz" }],
-  ["path", { d: "M3 5V19A9 3 0 0 0 21 19V5", key: "1wlel7" }],
-  ["path", { d: "M3 12A9 3 0 0 0 21 12", key: "mv7ke4" }]
-];
-const Database = createLucideIcon("database", __iconNode$d);
+const Clipboard = createLucideIcon("clipboard", __iconNode$d);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32825,11 +32808,11 @@ const Database = createLucideIcon("database", __iconNode$d);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$c = [
-  ["path", { d: "M12 15V3", key: "m9g1x1" }],
-  ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4", key: "ih7n3h" }],
-  ["path", { d: "m7 10 5 5 5-5", key: "brsn70" }]
+  ["ellipse", { cx: "12", cy: "5", rx: "9", ry: "3", key: "msslwz" }],
+  ["path", { d: "M3 5V19A9 3 0 0 0 21 19V5", key: "1wlel7" }],
+  ["path", { d: "M3 12A9 3 0 0 0 21 12", key: "mv7ke4" }]
 ];
-const Download = createLucideIcon("download", __iconNode$c);
+const Database = createLucideIcon("database", __iconNode$c);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32837,11 +32820,11 @@ const Download = createLucideIcon("download", __iconNode$c);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$b = [
-  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
-  ["path", { d: "M10 14 21 3", key: "gplh6r" }],
-  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
+  ["path", { d: "M12 15V3", key: "m9g1x1" }],
+  ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4", key: "ih7n3h" }],
+  ["path", { d: "m7 10 5 5 5-5", key: "brsn70" }]
 ];
-const ExternalLink = createLucideIcon("external-link", __iconNode$b);
+const Download = createLucideIcon("download", __iconNode$b);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32849,13 +32832,11 @@ const ExternalLink = createLucideIcon("external-link", __iconNode$b);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$a = [
-  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
-  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
-  ["path", { d: "M10 9H8", key: "b1mrlr" }],
-  ["path", { d: "M16 13H8", key: "t4e002" }],
-  ["path", { d: "M16 17H8", key: "z1uh3a" }]
+  ["path", { d: "M15 3h6v6", key: "1q9fwt" }],
+  ["path", { d: "M10 14 21 3", key: "gplh6r" }],
+  ["path", { d: "M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6", key: "a6xqqp" }]
 ];
-const FileText = createLucideIcon("file-text", __iconNode$a);
+const ExternalLink = createLucideIcon("external-link", __iconNode$a);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -32863,16 +32844,13 @@ const FileText = createLucideIcon("file-text", __iconNode$a);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$9 = [
-  [
-    "path",
-    {
-      d: "M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4",
-      key: "tonef"
-    }
-  ],
-  ["path", { d: "M9 18c-4.51 2-5-2-7-2", key: "9comsn" }]
+  ["path", { d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z", key: "1rqfz7" }],
+  ["path", { d: "M14 2v4a2 2 0 0 0 2 2h4", key: "tnqrlb" }],
+  ["path", { d: "M10 9H8", key: "b1mrlr" }],
+  ["path", { d: "M16 13H8", key: "t4e002" }],
+  ["path", { d: "M16 17H8", key: "z1uh3a" }]
 ];
-const Github = createLucideIcon("github", __iconNode$9);
+const FileText = createLucideIcon("file-text", __iconNode$9);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -33701,67 +33679,6 @@ function useTailoredView(slug, actor) {
   }, [slug, actor]);
   return { view, status };
 }
-function VisualProjectCard({ project }) {
-  const palette = "bg-[#bfe9f8]";
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs(
-    "article",
-    {
-      className: `border border-black/15 ${palette} p-3 text-black sm:p-4`,
-      children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative overflow-hidden border border-black/15 bg-white/50", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "img",
-            {
-              src: project.visual.src,
-              alt: project.visual.alt,
-              className: "aspect-[4/3] w-full object-cover sm:aspect-[16/10]"
-            }
-          ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-2 top-2 bg-black px-2.5 py-1 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-white sm:left-3 sm:top-3 sm:px-3 sm:text-xs", children: project.shortTitle })
-        ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-3 pt-4 sm:space-y-4 sm:pt-5", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.16em] text-black/55 sm:text-xs", children: project.role }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 font-display text-2xl font-semibold leading-[1.02] sm:text-3xl", children: project.title })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-black/68", children: project.summary }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "hidden gap-px overflow-hidden border border-black/15 bg-black/15 md:grid md:grid-cols-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "bg-white/65 p-3 font-mono text-xs uppercase tracking-[0.16em] text-black/45", children: "Before" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "bg-white/65 px-3 pb-3 text-sm leading-5 text-black/65", children: project.problem })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "bg-white/65 p-3 font-mono text-xs uppercase tracking-[0.16em] text-black/45", children: "What changed" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-1 bg-white/65 px-3 pb-3 text-sm leading-5 text-black/65", children: project.actions.slice(0, 2).map((action) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: action }, action)) })
-            ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "bg-white/65 p-3 font-mono text-xs uppercase tracking-[0.16em] text-black/45", children: "Result" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-1 bg-white/65 px-3 pb-3 text-sm leading-5 text-black/65", children: project.outcomes.slice(0, 2).map((outcome) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: outcome }, outcome)) })
-            ] })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border-l-2 border-black/25 pl-3 text-sm leading-6 text-black/65 md:hidden", children: project.outcomes[0] ?? project.problem }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-2", children: [
-            project.tools.slice(0, 5).map((tool) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", children: tool }, tool)),
-            project.repo && /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "a",
-              {
-                href: project.repo,
-                target: "_blank",
-                rel: "noreferrer",
-                className: "ml-auto inline-flex items-center gap-1 text-sm font-semibold text-black",
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(Github, { className: "h-4 w-4" }),
-                  "Repo",
-                  /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "h-4 w-4" })
-                ]
-              }
-            )
-          ] })
-        ] })
-      ]
-    }
-  );
-}
 function SnapshotProjectTile({
   project,
   featured = false
@@ -33769,15 +33686,15 @@ function SnapshotProjectTile({
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
     "article",
     {
-      className: `group flex min-h-0 flex-col border border-black/15 ${featured ? "bg-[#bfe9f8]" : "bg-[#f4f1ea]"} p-2 text-black`,
+      className: `group flex flex-col border border-black/15 ${featured ? "bg-[#bfe9f8]" : "bg-[#f4f1ea]"} p-2 text-black`,
       children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative min-h-0 flex-1 overflow-hidden border border-black/15 bg-white/55", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative overflow-hidden border border-black/15 bg-white/55", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "img",
             {
               src: project.visual.src,
               alt: project.visual.alt,
-              className: "h-full min-h-[150px] w-full object-cover transition duration-300 group-hover:scale-[1.02] lg:min-h-0"
+              className: "aspect-[16/10] w-full object-cover transition duration-300 group-hover:scale-[1.02]"
             }
           ),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-2 top-2 bg-black px-2 py-1 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-white", children: project.shortTitle })
@@ -33795,7 +33712,7 @@ function SnapshotProjectTile({
 function SnapshotMetricTile({ metric }) {
   return /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-black/15 bg-white/55 p-3", children: [
     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-2xl font-semibold leading-none text-black lg:text-3xl", children: metric.value }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-xs font-semibold leading-5 text-black/72", children: metric.label })
+    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm font-semibold leading-5 text-black/72", children: metric.label })
   ] });
 }
 function ReviewerPortfolio({
@@ -33813,104 +33730,106 @@ function ReviewerPortfolio({
   const firstName = nameParts[0] ?? displayProfile.name;
   const remainingName = nameParts.slice(1).join(" ") || "Portfolio";
   const compactSkills = model.selectedSkills.slice(0, 6);
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "min-h-screen bg-[#f8f5ef] text-black", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto flex max-w-[1800px] flex-col gap-3 px-3 py-3 sm:px-4 lg:h-screen lg:max-h-[980px] lg:min-h-[760px] lg:overflow-hidden", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "grid gap-3 lg:h-[34vh] lg:max-h-[330px] lg:min-h-[265px] lg:grid-cols-[0.7fr_1.3fr] lg:overflow-hidden", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-black/15 bg-[#f4f1ea] p-4 lg:p-5", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55", children: reviewerBadge }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55", children: displayProfile.location })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "mt-5 font-display text-[clamp(3.2rem,10vw,8.5rem)] font-semibold leading-[0.86] lg:mt-6 lg:text-[clamp(3.8rem,5vw,6.4rem)]", children: [
-            firstName,
-            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
-            remainingName
-          ] })
+  return /* @__PURE__ */ jsxRuntimeExports.jsx("main", { className: "min-h-screen bg-[#f8f5ef] text-black", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto flex max-w-[1800px] flex-col gap-3 px-3 py-3 sm:px-4 lg:min-h-screen", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("header", { className: "grid gap-3 lg:grid-cols-[0.7fr_1.3fr]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-black/15 bg-[#f4f1ea] p-4 lg:p-5", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55", children: reviewerBadge }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55", children: displayProfile.location })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-3 lg:grid-cols-[1fr_0.78fr]", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-black/15 bg-[#bfe9f8] p-4 lg:p-5", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55", children: displayProfile.title }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 max-w-4xl font-display text-3xl font-semibold leading-[0.98] lg:text-[clamp(1.8rem,2.4vw,3.1rem)]", children: displayProfile.headline }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-3xl text-sm leading-6 text-black/68", children: displayProfile.shortSummary })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border border-black/15 bg-black p-3 text-white", children: displayProfile.profileImage ? /* @__PURE__ */ jsxRuntimeExports.jsx(
-            "img",
-            {
-              src: displayProfile.profileImage,
-              alt: displayProfile.name,
-              className: "aspect-[16/10] h-full w-full object-cover lg:aspect-auto"
-            }
-          ) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex h-full min-h-[190px] flex-col justify-between border border-white/20 p-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-white/55", children: displayProfile.name }),
-            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-6xl font-semibold leading-none", children: "TB" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-xs text-sm leading-6 text-white/65", children: "Practical systems, thoughtful learning, cleaner execution." })
-            ] })
-          ] }) })
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "mt-5 font-display text-[clamp(3.2rem,10vw,8.5rem)] font-semibold leading-[0.86] lg:mt-6 lg:text-[clamp(3.8rem,5vw,6.4rem)]", children: [
+          firstName,
+          /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+          remainingName
         ] })
       ] }),
-      status === "loading" && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "sr-only", children: "Loading portfolio" }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3 sm:grid-cols-2 lg:grid-cols-4", children: model.selectedProofPoints.map((metric) => /* @__PURE__ */ jsxRuntimeExports.jsx(SnapshotMetricTile, { metric }, metric.id)) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "grid min-h-0 flex-1 gap-3 lg:grid-cols-[1.4fr_0.6fr]", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid min-h-0 gap-3 sm:grid-cols-2 lg:grid-cols-3", children: displayProjects.slice(0, 3).map((project, index2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-3 lg:grid-cols-[1fr_0.78fr]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-black/15 bg-[#bfe9f8] p-4 lg:p-5", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55", children: displayProfile.title }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 max-w-4xl font-display text-3xl font-semibold leading-[0.98] lg:text-[clamp(1.8rem,2.2vw,2.8rem)]", children: displayProfile.headline }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-3xl text-sm leading-6 text-black/68", children: displayProfile.shortSummary })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "border border-black/15 bg-black p-3 text-white", children: displayProfile.profileImage ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "img",
+          {
+            src: displayProfile.profileImage,
+            alt: displayProfile.name,
+            className: "aspect-[16/10] h-full w-full object-cover lg:aspect-auto"
+          }
+        ) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex min-h-[220px] flex-col justify-between border border-white/20 p-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-white/55", children: displayProfile.name }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-6xl font-semibold leading-none", children: "TB" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-xs text-sm leading-6 text-white/65", children: "Practical systems, thoughtful learning, cleaner execution." })
+          ] })
+        ] }) })
+      ] })
+    ] }),
+    status === "loading" && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "sr-only", children: "Loading portfolio" }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "border border-black/15 bg-[#f4f1ea] p-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-3 flex items-center justify-between gap-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-mono text-[0.7rem] uppercase tracking-[0.2em] text-black/55", children: "Proof Points" }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "hidden text-sm text-black/55 sm:block", children: "Four quick signals before the case work." })
+      ] }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3 sm:grid-cols-2 lg:grid-cols-4", children: model.selectedProofPoints.map((metric) => /* @__PURE__ */ jsxRuntimeExports.jsx(SnapshotMetricTile, { metric }, metric.id)) })
+    ] }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "grid gap-3 lg:grid-cols-[1.4fr_0.6fr]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-black/15 bg-white/35 p-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mb-3 flex items-center justify-between gap-3", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-mono text-[0.7rem] uppercase tracking-[0.2em] text-black/55", children: "Selected Portfolio Work" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "hidden text-sm text-black/55 sm:block", children: "The three strongest items for this view." })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3 sm:grid-cols-2 lg:grid-cols-3", children: displayProjects.slice(0, 3).map((project, index2) => /* @__PURE__ */ jsxRuntimeExports.jsx(
           SnapshotProjectTile,
           {
             project,
             featured: index2 === 0
           },
           project.id
-        )) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "grid min-h-0 gap-3 lg:grid-rows-[auto_auto_1fr] lg:overflow-hidden", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-black/15 bg-white/55 p-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55", children: "Selected For" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-sm leading-6 text-black/72", children: getRelevanceCopy(model.selectedLanes) })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-black/15 bg-white/55 p-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55", children: "Skills In View" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 flex flex-wrap gap-2", children: compactSkills.map((skill) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-              "span",
-              {
-                className: "border border-black/20 bg-[#f8f5ef] px-2.5 py-1 text-xs font-medium text-black/75",
-                children: skill
-              },
-              skill
-            )) })
-          ] }),
-          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-black/15 bg-white/55 p-4", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55", children: "Human Context" }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 space-y-3", children: humanHighlights.slice(0, 2).map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold", children: item.label }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 line-clamp-2 text-xs leading-5 text-black/65", children: item.detail })
-            ] }, item.label)) })
-          ] })
-        ] })
+        )) })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-3 border border-black/15 bg-[#f4f1ea] px-4 py-3 lg:hidden", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-black/68", children: "Want more depth? Each selected item is ready for a focused case study, artifact preview, or repo link as media is approved." }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(
-          "a",
-          {
-            href: profile.github,
-            target: "_blank",
-            rel: "noreferrer",
-            className: "inline-flex items-center gap-2 text-sm font-semibold text-black",
-            children: [
-              "GitHub",
-              /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "h-4 w-4" })
-            ]
-          }
-        )
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "grid gap-3", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-black/15 bg-white/55 p-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55", children: "Selected For" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-sm leading-6 text-black/72", children: getRelevanceCopy(model.selectedLanes) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-black/15 bg-white/55 p-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55", children: "Skills In View" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 flex flex-wrap gap-2", children: compactSkills.map((skill) => /* @__PURE__ */ jsxRuntimeExports.jsx(
+            "span",
+            {
+              className: "border border-black/20 bg-[#f8f5ef] px-2.5 py-1 text-xs font-medium text-black/75",
+              children: skill
+            },
+            skill
+          )) })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "border border-black/15 bg-white/55 p-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55", children: "Human Context" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 space-y-3", children: humanHighlights.slice(0, 2).map((item) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold", children: item.label }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 line-clamp-2 text-xs leading-5 text-black/65", children: item.detail })
+          ] }, item.label)) })
+        ] })
       ] })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto max-w-7xl px-4 pb-10 sm:px-5 lg:hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-5", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-3xl font-semibold", children: "Case Notes" }),
-      displayProjects.map((project) => /* @__PURE__ */ jsxRuntimeExports.jsx(VisualProjectCard, { project }, project.id)),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-none border border-black/15 bg-white/60 p-4 text-black", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display text-2xl font-semibold", children: "Background" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-4 space-y-4", children: resumeHighlights.map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-black/70", children: item }, item)) })
-      ] })
-    ] }) })
-  ] });
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-3 border border-black/15 bg-[#f4f1ea] px-4 py-3 lg:hidden", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-black/68", children: "Want more depth? Each selected item is ready for a focused case study, artifact preview, or repo link as media is approved." }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(
+        "a",
+        {
+          href: profile.github,
+          target: "_blank",
+          rel: "noreferrer",
+          className: "inline-flex items-center gap-2 text-sm font-semibold text-black",
+          children: [
+            "GitHub",
+            /* @__PURE__ */ jsxRuntimeExports.jsx(ArrowUpRight, { className: "h-4 w-4" })
+          ]
+        }
+      )
+    ] })
+  ] }) });
 }
 function ToggleChip({
   active,

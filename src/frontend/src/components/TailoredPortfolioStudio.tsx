@@ -1157,90 +1157,6 @@ function useTailoredView(slug: string | null, actor: TailoredBackend | null) {
   return { view, status };
 }
 
-function VisualProjectCard({ project }: { project: PortfolioProject }) {
-  const palette = "bg-[#bfe9f8]";
-
-  return (
-    <article
-      className={`border border-black/15 ${palette} p-3 text-black sm:p-4`}
-    >
-      <div className="relative overflow-hidden border border-black/15 bg-white/50">
-        <img
-          src={project.visual.src}
-          alt={project.visual.alt}
-          className="aspect-[4/3] w-full object-cover sm:aspect-[16/10]"
-        />
-        <div className="absolute left-2 top-2 bg-black px-2.5 py-1 font-mono text-[0.65rem] uppercase tracking-[0.14em] text-white sm:left-3 sm:top-3 sm:px-3 sm:text-xs">
-          {project.shortTitle}
-        </div>
-      </div>
-      <div className="space-y-3 pt-4 sm:space-y-4 sm:pt-5">
-        <div>
-          <p className="font-mono text-[0.65rem] uppercase tracking-[0.16em] text-black/55 sm:text-xs">
-            {project.role}
-          </p>
-          <h3 className="mt-2 font-display text-2xl font-semibold leading-[1.02] sm:text-3xl">
-            {project.title}
-          </h3>
-        </div>
-        <p className="text-sm leading-6 text-black/68">{project.summary}</p>
-        <div className="hidden gap-px overflow-hidden border border-black/15 bg-black/15 md:grid md:grid-cols-3">
-          <div>
-            <p className="bg-white/65 p-3 font-mono text-xs uppercase tracking-[0.16em] text-black/45">
-              Before
-            </p>
-            <p className="bg-white/65 px-3 pb-3 text-sm leading-5 text-black/65">
-              {project.problem}
-            </p>
-          </div>
-          <div>
-            <p className="bg-white/65 p-3 font-mono text-xs uppercase tracking-[0.16em] text-black/45">
-              What changed
-            </p>
-            <ul className="space-y-1 bg-white/65 px-3 pb-3 text-sm leading-5 text-black/65">
-              {project.actions.slice(0, 2).map((action) => (
-                <li key={action}>{action}</li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <p className="bg-white/65 p-3 font-mono text-xs uppercase tracking-[0.16em] text-black/45">
-              Result
-            </p>
-            <ul className="space-y-1 bg-white/65 px-3 pb-3 text-sm leading-5 text-black/65">
-              {project.outcomes.slice(0, 2).map((outcome) => (
-                <li key={outcome}>{outcome}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-        <div className="border-l-2 border-black/25 pl-3 text-sm leading-6 text-black/65 md:hidden">
-          {project.outcomes[0] ?? project.problem}
-        </div>
-        <div className="flex flex-wrap items-center gap-2">
-          {project.tools.slice(0, 5).map((tool) => (
-            <Badge key={tool} variant="secondary">
-              {tool}
-            </Badge>
-          ))}
-          {project.repo && (
-            <a
-              href={project.repo}
-              target="_blank"
-              rel="noreferrer"
-              className="ml-auto inline-flex items-center gap-1 text-sm font-semibold text-black"
-            >
-              <Github className="h-4 w-4" />
-              Repo
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
-          )}
-        </div>
-      </div>
-    </article>
-  );
-}
-
 function SnapshotProjectTile({
   project,
   featured = false,
@@ -1250,15 +1166,15 @@ function SnapshotProjectTile({
 }) {
   return (
     <article
-      className={`group flex min-h-0 flex-col border border-black/15 ${
+      className={`group flex flex-col border border-black/15 ${
         featured ? "bg-[#bfe9f8]" : "bg-[#f4f1ea]"
       } p-2 text-black`}
     >
-      <div className="relative min-h-0 flex-1 overflow-hidden border border-black/15 bg-white/55">
+      <div className="relative overflow-hidden border border-black/15 bg-white/55">
         <img
           src={project.visual.src}
           alt={project.visual.alt}
-          className="h-full min-h-[150px] w-full object-cover transition duration-300 group-hover:scale-[1.02] lg:min-h-0"
+          className="aspect-[16/10] w-full object-cover transition duration-300 group-hover:scale-[1.02]"
         />
         <div className="absolute left-2 top-2 bg-black px-2 py-1 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-white">
           {project.shortTitle}
@@ -1288,7 +1204,7 @@ function SnapshotMetricTile({ metric }: { metric: ProofPoint }) {
       <p className="font-display text-2xl font-semibold leading-none text-black lg:text-3xl">
         {metric.value}
       </p>
-      <p className="mt-1 text-xs font-semibold leading-5 text-black/72">
+      <p className="mt-1 text-sm font-semibold leading-5 text-black/72">
         {metric.label}
       </p>
     </div>
@@ -1316,8 +1232,8 @@ function ReviewerPortfolio({
 
   return (
     <main className="min-h-screen bg-[#f8f5ef] text-black">
-      <section className="mx-auto flex max-w-[1800px] flex-col gap-3 px-3 py-3 sm:px-4 lg:h-screen lg:max-h-[980px] lg:min-h-[760px] lg:overflow-hidden">
-        <header className="grid gap-3 lg:h-[34vh] lg:max-h-[330px] lg:min-h-[265px] lg:grid-cols-[0.7fr_1.3fr] lg:overflow-hidden">
+      <section className="mx-auto flex max-w-[1800px] flex-col gap-3 px-3 py-3 sm:px-4 lg:min-h-screen">
+        <header className="grid gap-3 lg:grid-cols-[0.7fr_1.3fr]">
           <div className="border border-black/15 bg-[#f4f1ea] p-4 lg:p-5">
             <div className="flex items-start justify-between gap-4">
               <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55">
@@ -1339,7 +1255,7 @@ function ReviewerPortfolio({
               <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55">
                 {displayProfile.title}
               </p>
-              <p className="mt-4 max-w-4xl font-display text-3xl font-semibold leading-[0.98] lg:text-[clamp(1.8rem,2.4vw,3.1rem)]">
+              <p className="mt-4 max-w-4xl font-display text-3xl font-semibold leading-[0.98] lg:text-[clamp(1.8rem,2.2vw,2.8rem)]">
                 {displayProfile.headline}
               </p>
               <p className="mt-3 max-w-3xl text-sm leading-6 text-black/68">
@@ -1355,7 +1271,7 @@ function ReviewerPortfolio({
                   className="aspect-[16/10] h-full w-full object-cover lg:aspect-auto"
                 />
               ) : (
-                <div className="flex h-full min-h-[190px] flex-col justify-between border border-white/20 p-4">
+                <div className="flex min-h-[220px] flex-col justify-between border border-white/20 p-4">
                   <span className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-white/55">
                     {displayProfile.name}
                   </span>
@@ -1377,24 +1293,44 @@ function ReviewerPortfolio({
           <span className="sr-only">Loading portfolio</span>
         )}
 
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {model.selectedProofPoints.map((metric) => (
-            <SnapshotMetricTile key={metric.id} metric={metric} />
-          ))}
-        </div>
-
-        <section className="grid min-h-0 flex-1 gap-3 lg:grid-cols-[1.4fr_0.6fr]">
-          <div className="grid min-h-0 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {displayProjects.slice(0, 3).map((project, index) => (
-              <SnapshotProjectTile
-                key={project.id}
-                project={project}
-                featured={index === 0}
-              />
+        <section className="border border-black/15 bg-[#f4f1ea] p-3">
+          <div className="mb-3 flex items-center justify-between gap-3">
+            <h2 className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-black/55">
+              Proof Points
+            </h2>
+            <p className="hidden text-sm text-black/55 sm:block">
+              Four quick signals before the case work.
+            </p>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {model.selectedProofPoints.map((metric) => (
+              <SnapshotMetricTile key={metric.id} metric={metric} />
             ))}
           </div>
+        </section>
 
-          <aside className="grid min-h-0 gap-3 lg:grid-rows-[auto_auto_1fr] lg:overflow-hidden">
+        <section className="grid gap-3 lg:grid-cols-[1.4fr_0.6fr]">
+          <div className="border border-black/15 bg-white/35 p-3">
+            <div className="mb-3 flex items-center justify-between gap-3">
+              <h2 className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-black/55">
+                Selected Portfolio Work
+              </h2>
+              <p className="hidden text-sm text-black/55 sm:block">
+                The three strongest items for this view.
+              </p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {displayProjects.slice(0, 3).map((project, index) => (
+                <SnapshotProjectTile
+                  key={project.id}
+                  project={project}
+                  featured={index === 0}
+                />
+              ))}
+            </div>
+          </div>
+
+          <aside className="grid gap-3">
             <div className="border border-black/15 bg-white/55 p-4">
               <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-black/55">
                 Selected For
@@ -1450,25 +1386,6 @@ function ReviewerPortfolio({
             GitHub
             <ArrowUpRight className="h-4 w-4" />
           </a>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-7xl px-4 pb-10 sm:px-5 lg:hidden">
-        <div className="space-y-5">
-          <h2 className="font-display text-3xl font-semibold">Case Notes</h2>
-          {displayProjects.map((project) => (
-            <VisualProjectCard key={project.id} project={project} />
-          ))}
-          <div className="rounded-none border border-black/15 bg-white/60 p-4 text-black">
-            <h3 className="font-display text-2xl font-semibold">Background</h3>
-            <div className="mt-4 space-y-4">
-              {resumeHighlights.map((item) => (
-                <p key={item} className="text-sm leading-6 text-black/70">
-                  {item}
-                </p>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
     </main>
