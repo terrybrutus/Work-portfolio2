@@ -192,6 +192,30 @@ const localStorageKey = "terry-portfolio-tailored-views";
 const savedProfilesKey = "terry-portfolio-target-profiles";
 const studioBrainKey = "terry-portfolio-brain-sources";
 const generatedLinksKey = "terry-portfolio-generated-links";
+const displayCustomizationKey = "terry-portfolio-display-customization";
+
+type ProfileDisplayOverrides = {
+  name?: string;
+  title?: string;
+  headline?: string;
+  shortSummary?: string;
+  profileImage?: string;
+};
+
+type ProjectDisplayOverrides = {
+  title?: string;
+  shortTitle?: string;
+  role?: string;
+  summary?: string;
+  visualSrc?: string;
+  visualAlt?: string;
+  visualCaption?: string;
+};
+
+type DisplayCustomization = {
+  profile: ProfileDisplayOverrides;
+  projects: Record<string, ProjectDisplayOverrides>;
+};
 
 function isLane(value: string): value is Lane {
   return laneProfiles.some((profileItem) => profileItem.lane === value);
@@ -199,6 +223,112 @@ function isLane(value: string): value is Lane {
 
 function normalizeText(value: string) {
   return value.toLowerCase().replace(/[^a-z0-9+#./\s-]/g, " ");
+}
+
+function getDisplayCustomization(): DisplayCustomization {
+  try {
+    const raw = localStorage.getItem(displayCustomizationKey);
+    if (!raw) {
+      return { profile: {}, projects: {} };
+    }
+    const parsed = JSON.parse(raw) as Partial<DisplayCustomization>;
+    return {
+      profile: parsed.profile ?? {},
+      projects: parsed.projects ?? {},
+    };
+  } catch {
+    return { profile: {}, projects: {} };
+  }
+}
+
+function saveDisplayCustomization(customization: DisplayCustomization) {
+  localStorage.setItem(displayCustomizationKey, JSON.stringify(customization));
+  return customization;
+}
+
+function resetDisplayCustomization() {
+  localStorage.removeItem(displayCustomizationKey);
+  return { profile: {}, projects: {} };
+}
+
+function removeEmptyValues<T extends Record<string, unknown>>(value: T) {
+  return Object.fromEntries(
+    Object.entries(value).filter(([, entry]) => {
+      if (typeof entry === "string") {
+        return entry.trim().length > 0;
+      }
+      return entry !== undefined && entry !== null;
+    }),
+  ) as Partial<T>;
+}
+
+function getDisplayProfile(customization: DisplayCustomization) {
+  return {
+    ...profile,
+    ...removeEmptyValues(customization.profile),
+  };
+}
+
+function getDisplayProject(
+  project: PortfolioProject,
+  customization: DisplayCustomization,
+): PortfolioProject {
+  const override = removeEmptyValues(
+    customization.projects[project.id] ?? {},
+  ) as ProjectDisplayOverrides;
+
+  return {
+    ...project,
+    title: override.title ?? project.title,
+    shortTitle: override.shortTitle ?? project.shortTitle,
+    role: override.role ?? project.role,
+    summary: override.summary ?? project.summary,
+    visual: {
+      ...project.visual,
+      src: override.visualSrc ?? project.visual.src,
+      alt: override.visualAlt ?? project.visual.alt,
+      caption: override.visualCaption ?? project.visual.caption,
+    },
+  };
+}
+
+function updateDisplayProfile(
+  customization: DisplayCustomization,
+  updates: ProfileDisplayOverrides,
+): DisplayCustomization {
+  return {
+    ...customization,
+    profile: {
+      ...customization.profile,
+      ...updates,
+    },
+  };
+}
+
+function updateDisplayProject(
+  customization: DisplayCustomization,
+  projectId: string,
+  updates: ProjectDisplayOverrides,
+): DisplayCustomization {
+  return {
+    ...customization,
+    projects: {
+      ...customization.projects,
+      [projectId]: {
+        ...(customization.projects[projectId] ?? {}),
+        ...updates,
+      },
+    },
+  };
+}
+
+function readImageAsDataUrl(file: File) {
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.addEventListener("load", () => resolve(String(reader.result ?? "")));
+    reader.addEventListener("error", () => reject(reader.error));
+    reader.readAsDataURL(file);
+  });
 }
 
 function analyzeTarget(text: string): Analysis {
@@ -1046,52 +1176,54 @@ function useTailoredView(slug: string | null, actor: TailoredBackend | null) {
 }
 
 function VisualProjectCard({ project }: { project: PortfolioProject }) {
+  const palette = "bg-[#bfe9f8]";
+
   return (
-    <article className="overflow-hidden rounded-lg border border-border bg-card">
-      <div className="relative aspect-[16/9] overflow-hidden bg-muted">
+    <article className={`border border-black/15 ${palette} p-4 text-black`}>
+      <div className="relative overflow-hidden border border-black/15 bg-white/50">
         <img
           src={project.visual.src}
           alt={project.visual.alt}
-          className="h-full w-full object-cover"
+          className="aspect-[16/10] w-full object-cover"
         />
-        <div className="absolute left-3 top-3 rounded-full border border-white/20 bg-black/60 px-3 py-1 text-xs text-white">
+        <div className="absolute left-3 top-3 bg-black px-3 py-1 font-mono text-xs uppercase tracking-[0.18em] text-white">
           {project.shortTitle}
         </div>
       </div>
-      <div className="space-y-4 p-5">
+      <div className="space-y-4 pt-5">
         <div>
-          <p className="text-xs font-semibold uppercase text-primary">
+          <p className="font-mono text-xs uppercase tracking-[0.18em] text-black/55">
             {project.role}
           </p>
-          <h3 className="mt-1 font-display text-xl font-semibold">
+          <h3 className="mt-2 font-display text-3xl font-semibold leading-none">
             {project.title}
           </h3>
         </div>
-        <p className="text-sm leading-6 text-muted-foreground">
-          {project.summary}
-        </p>
-        <div className="grid gap-4 md:grid-cols-3">
+        <p className="text-sm leading-6 text-black/68">{project.summary}</p>
+        <div className="grid gap-px overflow-hidden border border-black/15 bg-black/15 md:grid-cols-3">
           <div>
-            <p className="text-xs font-semibold uppercase text-muted-foreground">
+            <p className="bg-white/65 p-3 font-mono text-xs uppercase tracking-[0.16em] text-black/45">
               Before
             </p>
-            <p className="mt-2 text-sm leading-5">{project.problem}</p>
+            <p className="bg-white/65 px-3 pb-3 text-sm leading-5 text-black/65">
+              {project.problem}
+            </p>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase text-muted-foreground">
+            <p className="bg-white/65 p-3 font-mono text-xs uppercase tracking-[0.16em] text-black/45">
               What changed
             </p>
-            <ul className="mt-2 space-y-1 text-sm leading-5">
+            <ul className="space-y-1 bg-white/65 px-3 pb-3 text-sm leading-5 text-black/65">
               {project.actions.slice(0, 2).map((action) => (
                 <li key={action}>{action}</li>
               ))}
             </ul>
           </div>
           <div>
-            <p className="text-xs font-semibold uppercase text-muted-foreground">
+            <p className="bg-white/65 p-3 font-mono text-xs uppercase tracking-[0.16em] text-black/45">
               Result
             </p>
-            <ul className="mt-2 space-y-1 text-sm leading-5">
+            <ul className="space-y-1 bg-white/65 px-3 pb-3 text-sm leading-5 text-black/65">
               {project.outcomes.slice(0, 2).map((outcome) => (
                 <li key={outcome}>{outcome}</li>
               ))}
@@ -1100,7 +1232,7 @@ function VisualProjectCard({ project }: { project: PortfolioProject }) {
         </div>
         <div className="flex flex-wrap items-center gap-2">
           {project.tools.slice(0, 5).map((tool) => (
-            <Badge key={tool} variant="outline">
+            <Badge key={tool} variant="secondary">
               {tool}
             </Badge>
           ))}
@@ -1109,7 +1241,7 @@ function VisualProjectCard({ project }: { project: PortfolioProject }) {
               href={project.repo}
               target="_blank"
               rel="noreferrer"
-              className="ml-auto inline-flex items-center gap-1 text-sm text-primary"
+              className="ml-auto inline-flex items-center gap-1 text-sm font-semibold text-black"
             >
               <Github className="h-4 w-4" />
               Repo
@@ -1130,37 +1262,52 @@ function ReviewerPortfolio({
   status: "idle" | "loading" | "ready" | "missing";
 }) {
   const model = buildViewModel(view);
+  const displayCustomization = getDisplayCustomization();
+  const displayProfile = getDisplayProfile(displayCustomization);
+  const displayProjects = model.selectedProjects.map((project) =>
+    getDisplayProject(project, displayCustomization),
+  );
   const reviewerBadge = getReviewerBadge(model.primaryLane);
   const recruiterSummary = getRecruiterSummary(
     model.selectedLanes,
-    model.selectedProjects,
+    displayProjects,
     model.selectedProofPoints,
   );
+  const nameParts = displayProfile.name.trim().split(/\s+/);
+  const firstName = nameParts[0] ?? displayProfile.name;
+  const remainingName = nameParts.slice(1).join(" ") || "Portfolio";
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
-      <section className="border-b border-border bg-[linear-gradient(135deg,_rgba(17,24,39,0.96),_rgba(10,10,10,1))]">
-        <div className="mx-auto grid max-w-6xl gap-8 px-5 py-12 lg:grid-cols-[1.05fr_0.95fr] lg:py-16">
-          <div className="space-y-6">
-            <Badge className="w-fit" variant="outline">
-              {reviewerBadge}
-            </Badge>
-            <div className="space-y-4">
-              <p className="text-sm font-semibold uppercase text-primary">
-                {profile.name}
+    <main className="min-h-screen bg-[#f8f5ef] text-black">
+      <section className="border-b border-black/15">
+        <div className="mx-auto grid max-w-7xl gap-8 px-5 py-10 lg:grid-cols-[1.08fr_0.92fr] lg:py-14">
+          <div className="flex min-h-[560px] flex-col justify-between bg-[#f4f1ea] p-6 lg:p-10">
+            <div className="flex items-start justify-between gap-6">
+              <p className="font-mono text-xs uppercase tracking-[0.22em] text-black/55">
+                {reviewerBadge}
               </p>
-              <h1 className="font-display text-4xl font-semibold leading-tight sm:text-5xl">
-                {model.angle}
+              <p className="font-mono text-xs uppercase tracking-[0.22em] text-black/55">
+                {displayProfile.location}
+              </p>
+            </div>
+
+            <div>
+              <p className="mb-5 max-w-xl text-sm font-semibold uppercase tracking-[0.18em] text-black/50">
+                {displayProfile.title}
+              </p>
+              <h1 className="font-display max-w-5xl text-[clamp(3.3rem,11vw,8.75rem)] font-semibold leading-[0.9] text-black">
+                {firstName}
+                <br />
+                {remainingName}
               </h1>
-              <p className="max-w-3xl text-base leading-7 text-muted-foreground">
-                {profile.shortSummary}
+              <p className="mt-8 max-w-2xl text-lg leading-relaxed text-black/70">
+                {model.angle}
+              </p>
+              <p className="mt-4 max-w-2xl text-base leading-7 text-black/58">
+                {displayProfile.shortSummary}
               </p>
             </div>
-            <div className="flex flex-wrap gap-2">
-              {model.selectedLanes.map((lane) => (
-                <Badge key={lane}>{lane}</Badge>
-              ))}
-            </div>
+
             <div className="grid gap-3 sm:grid-cols-2">
               {[
                 ["Best fit", recruiterSummary.bestFit],
@@ -1173,32 +1320,53 @@ function ReviewerPortfolio({
               ].map(([label, value]) => (
                 <div
                   key={label}
-                  className="rounded-md border border-white/10 bg-white/[0.04] p-3"
+                  className="border border-black/15 bg-white/45 p-3"
                 >
-                  <p className="text-xs uppercase text-muted-foreground">
+                  <p className="font-mono text-xs uppercase tracking-[0.16em] text-black/45">
                     {label}
                   </p>
-                  <p className="mt-1 text-sm font-medium">{value}</p>
+                  <p className="mt-1 text-sm font-medium text-black/75">
+                    {value}
+                  </p>
                 </div>
               ))}
             </div>
           </div>
-          <div className="overflow-hidden rounded-lg border border-border bg-card">
-            <img
-              src={
-                model.selectedProjects[0]?.visual.src ??
-                "/assets/portfolio/workflow-platform-map.svg"
-              }
-              alt={
-                model.selectedProjects[0]?.visual.alt ??
-                "Portfolio project visual."
-              }
-              className="aspect-[16/10] w-full object-cover"
-            />
-            <div className="p-4">
-              <p className="text-sm text-muted-foreground">
-                {model.selectedProjects[0]?.visual.caption}
-              </p>
+
+          <div className="grid gap-4">
+            <div className="bg-[#bfe9f8] p-5">
+              {displayProfile.profileImage ? (
+                <img
+                  src={displayProfile.profileImage}
+                  alt={displayProfile.name}
+                  className="h-full min-h-[360px] w-full object-cover"
+                />
+              ) : (
+                <div className="flex min-h-[360px] flex-col justify-between border border-black/15 bg-white/45 p-6">
+                  <span className="font-mono text-xs uppercase tracking-[0.2em] text-black/50">
+                    {displayProfile.name}
+                  </span>
+                  <div>
+                    <p className="font-display text-7xl font-semibold leading-none">
+                      TB
+                    </p>
+                    <p className="mt-3 max-w-xs text-sm leading-relaxed text-black/60">
+                      Enablement systems, AI workflow, and learning experience
+                      builder.
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {model.selectedLanes.map((lane) => (
+                <div key={lane} className="bg-black p-4 text-white">
+                  <p className="font-mono text-xs uppercase tracking-[0.18em] text-white/55">
+                    Lane
+                  </p>
+                  <p className="mt-2 text-sm font-semibold">{lane}</p>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -1208,46 +1376,46 @@ function ReviewerPortfolio({
         <span className="sr-only">Loading portfolio</span>
       )}
 
-      <section className="mx-auto grid max-w-6xl gap-4 px-5 py-8 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="mx-auto grid max-w-7xl gap-px overflow-hidden border-x border-b border-black/15 bg-black/15 px-5 py-8 sm:grid-cols-2 lg:grid-cols-4">
         {model.selectedProofPoints.map((metric) => (
-          <Card key={metric.id}>
-            <CardContent className="p-5">
-              <p className="font-display text-3xl font-semibold">
-                {metric.value}
-              </p>
-              <p className="mt-1 text-sm font-medium">{metric.label}</p>
-              <p className="mt-2 text-xs font-medium text-primary">
-                {getMetricSourceNote(metric, model.selectedProjects)}
-              </p>
-              <p className="mt-3 text-xs leading-5 text-muted-foreground">
-                {metric.detail}
-              </p>
-            </CardContent>
-          </Card>
+          <div key={metric.id} className="bg-[#f8f5ef] p-5">
+            <p className="font-display text-3xl font-semibold text-black">
+              {metric.value}
+            </p>
+            <p className="mt-1 text-sm font-medium text-black">
+              {metric.label}
+            </p>
+            <p className="mt-2 text-xs font-medium text-black/50">
+              {getMetricSourceNote(metric, displayProjects)}
+            </p>
+            <p className="mt-3 text-xs leading-5 text-black/58">
+              {metric.detail}
+            </p>
+          </div>
         ))}
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 pb-8">
-        <Card>
-          <CardContent className="grid gap-5 p-5 lg:grid-cols-[0.8fr_1.2fr]">
-            <div>
-              <p className="text-xs font-semibold uppercase text-primary">
-                Why this work is relevant
-              </p>
-              <h2 className="mt-2 font-display text-2xl font-semibold">
-                Proof that connects strategy, systems, and adoption.
-              </h2>
-            </div>
-            <p className="text-sm leading-7 text-muted-foreground">
+      <section className="mx-auto max-w-7xl px-5 py-8">
+        <div className="grid gap-5 border-y border-black/15 py-6 lg:grid-cols-[0.32fr_0.68fr]">
+          <div>
+            <p className="font-mono text-xs uppercase tracking-[0.22em] text-black/50">
+              Why this work is relevant
+            </p>
+          </div>
+          <div>
+            <h2 className="font-display text-4xl font-semibold leading-none sm:text-5xl">
+              Proof that connects strategy, systems, and adoption.
+            </h2>
+            <p className="mt-4 max-w-3xl text-sm leading-7 text-black/62">
               {getRelevanceCopy(model.selectedLanes)}
             </p>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </section>
 
-      <section className="mx-auto grid max-w-6xl gap-6 px-5 pb-12 lg:grid-cols-[0.72fr_1.28fr]">
+      <section className="mx-auto grid max-w-7xl gap-6 px-5 pb-12 lg:grid-cols-[0.72fr_1.28fr]">
         <aside className="space-y-5">
-          <Card>
+          <Card className="rounded-none border-black/15 bg-white/60 text-black">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <BriefcaseBusiness className="h-5 w-5 text-primary" />
@@ -1265,7 +1433,7 @@ function ReviewerPortfolio({
               ))}
             </CardContent>
           </Card>
-          <Card>
+          <Card className="rounded-none border-black/15 bg-white/60 text-black">
             <CardHeader>
               <CardTitle>Relevant Skills</CardTitle>
             </CardHeader>
@@ -1277,7 +1445,7 @@ function ReviewerPortfolio({
               ))}
             </CardContent>
           </Card>
-          <Card>
+          <Card className="rounded-none border-black/15 bg-white/60 text-black">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <UserRound className="h-5 w-5 text-primary" />
@@ -1312,7 +1480,7 @@ function ReviewerPortfolio({
               <ArrowUpRight className="h-4 w-4" />
             </a>
           </div>
-          {model.selectedProjects.map((project) => (
+          {displayProjects.map((project) => (
             <VisualProjectCard key={project.id} project={project} />
           ))}
         </div>
@@ -1375,6 +1543,12 @@ export function TailoredPortfolioStudio() {
     label: string;
     text: string;
   } | null>(null);
+  const [displayCustomization, setDisplayCustomization] =
+    useState<DisplayCustomization>(() => getDisplayCustomization());
+  const [selectedDisplayProjectId, setSelectedDisplayProjectId] = useState(
+    projects[0]?.id ?? "",
+  );
+  const [displayMessage, setDisplayMessage] = useState("");
 
   const analysis = useMemo(
     () => analyzeTarget(`${company} ${jd}`),
@@ -1448,6 +1622,22 @@ export function TailoredPortfolioStudio() {
     allBrainSources,
     `${company} ${jd}`,
   );
+  const displayProfile = getDisplayProfile(displayCustomization);
+  const displayProjects = projects.map((project) =>
+    getDisplayProject(project, displayCustomization),
+  );
+  const selectedDisplayProject =
+    displayProjects.find(
+      (project) => project.id === selectedDisplayProjectId,
+    ) ?? displayProjects[0];
+
+  const commitDisplayCustomization = (
+    next: DisplayCustomization,
+    message: string,
+  ) => {
+    setDisplayCustomization(saveDisplayCustomization(next));
+    setDisplayMessage(message);
+  };
 
   useEffect(() => {
     const syncRoute = () => setRoute(getRouteState());
@@ -1510,6 +1700,44 @@ export function TailoredPortfolioStudio() {
     setSelectedProjectIds(recommendedProjects.map((project) => project.id));
     setSelectedProofIds(
       recommendedProofPoints.map((proofPoint) => proofPoint.id),
+    );
+  };
+
+  const handleProfileImageUpload = async (file: File | null) => {
+    if (!file) return;
+    const profileImage = await readImageAsDataUrl(file);
+    commitDisplayCustomization(
+      updateDisplayProfile(displayCustomization, { profileImage }),
+      "Profile image saved for this draft.",
+    );
+  };
+
+  const handleProjectVisualUpload = async (file: File | null) => {
+    if (!file || !selectedDisplayProject) return;
+    const visualSrc = await readImageAsDataUrl(file);
+    commitDisplayCustomization(
+      updateDisplayProject(displayCustomization, selectedDisplayProject.id, {
+        visualSrc,
+      }),
+      `${selectedDisplayProject.shortTitle} visual saved for this draft.`,
+    );
+  };
+
+  const handleResetDisplayDraft = () => {
+    setDisplayCustomization(resetDisplayCustomization());
+    setDisplayMessage("Display draft reset to source defaults.");
+  };
+
+  const handleResetDisplayProject = () => {
+    if (!selectedDisplayProject) return;
+    const next = {
+      ...displayCustomization,
+      projects: { ...displayCustomization.projects },
+    };
+    delete next.projects[selectedDisplayProject.id];
+    commitDisplayCustomization(
+      next,
+      `${selectedDisplayProject.shortTitle} reset to source defaults.`,
     );
   };
 
@@ -1947,6 +2175,246 @@ export function TailoredPortfolioStudio() {
             </CardContent>
           </Card>
         </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-5 py-8">
+        <Card>
+          <CardHeader>
+            <div className="flex flex-col justify-between gap-4 lg:flex-row lg:items-start">
+              <div>
+                <Badge variant="secondary" className="mb-3">
+                  Display editor
+                </Badge>
+                <CardTitle className="flex items-center gap-2">
+                  <ImageIcon className="h-5 w-5 text-primary" />
+                  Profile and showcase controls
+                </CardTitle>
+                <p className="mt-2 max-w-3xl text-sm leading-6 text-muted-foreground">
+                  Edit the visible profile copy, profile image, project copy,
+                  and portfolio visuals for this draft. These changes save in
+                  this browser; backend persistence can be wired after the
+                  visual system is approved.
+                </p>
+              </div>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={handleResetDisplayDraft}
+              >
+                <RotateCcw className="mr-2 h-4 w-4" />
+                Reset display draft
+              </Button>
+            </div>
+          </CardHeader>
+          <CardContent className="grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+            <div className="rounded-md border border-border p-4">
+              <p className="text-sm font-medium">Profile front door</p>
+              <div className="mt-4 grid gap-3">
+                <input
+                  value={displayProfile.name}
+                  onChange={(event) =>
+                    commitDisplayCustomization(
+                      updateDisplayProfile(displayCustomization, {
+                        name: event.target.value,
+                      }),
+                      "Profile name saved.",
+                    )
+                  }
+                  className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  placeholder="Name"
+                />
+                <input
+                  value={displayProfile.title}
+                  onChange={(event) =>
+                    commitDisplayCustomization(
+                      updateDisplayProfile(displayCustomization, {
+                        title: event.target.value,
+                      }),
+                      "Profile title saved.",
+                    )
+                  }
+                  className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  placeholder="Title"
+                />
+                <Textarea
+                  value={displayProfile.headline}
+                  onChange={(event) =>
+                    commitDisplayCustomization(
+                      updateDisplayProfile(displayCustomization, {
+                        headline: event.target.value,
+                      }),
+                      "Profile headline saved.",
+                    )
+                  }
+                  rows={3}
+                  placeholder="Headline"
+                />
+                <Textarea
+                  value={displayProfile.shortSummary}
+                  onChange={(event) =>
+                    commitDisplayCustomization(
+                      updateDisplayProfile(displayCustomization, {
+                        shortSummary: event.target.value,
+                      }),
+                      "Profile summary saved.",
+                    )
+                  }
+                  rows={4}
+                  placeholder="Short summary"
+                />
+                <label className="inline-flex cursor-pointer items-center justify-center rounded-md border border-border px-4 py-2 text-sm font-medium transition-smooth hover:bg-muted">
+                  <Upload className="mr-2 h-4 w-4" />
+                  Upload profile image
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="sr-only"
+                    onChange={(event) => {
+                      void handleProfileImageUpload(
+                        event.target.files?.[0] ?? null,
+                      );
+                      event.target.value = "";
+                    }}
+                  />
+                </label>
+                {displayProfile.profileImage ? (
+                  <img
+                    src={displayProfile.profileImage}
+                    alt={displayProfile.name}
+                    className="aspect-[4/3] w-full rounded-md border border-border object-cover"
+                  />
+                ) : (
+                  <div className="flex aspect-[4/3] items-center justify-center rounded-md border border-dashed border-border bg-muted/30 text-sm text-muted-foreground">
+                    Profile image placeholder
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="rounded-md border border-border p-4">
+              <div className="flex flex-col justify-between gap-3 sm:flex-row sm:items-center">
+                <p className="text-sm font-medium">Showcase item editor</p>
+                <Button
+                  type="button"
+                  size="sm"
+                  variant="outline"
+                  onClick={handleResetDisplayProject}
+                >
+                  <RotateCcw className="mr-2 h-4 w-4" />
+                  Reset item
+                </Button>
+              </div>
+              {selectedDisplayProject ? (
+                <div className="mt-4 grid gap-3">
+                  <select
+                    value={selectedDisplayProjectId}
+                    onChange={(event) =>
+                      setSelectedDisplayProjectId(event.target.value)
+                    }
+                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                  >
+                    {displayProjects.map((project) => (
+                      <option key={project.id} value={project.id}>
+                        {project.shortTitle}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="grid gap-3 md:grid-cols-2">
+                    <input
+                      value={selectedDisplayProject.title}
+                      onChange={(event) =>
+                        commitDisplayCustomization(
+                          updateDisplayProject(
+                            displayCustomization,
+                            selectedDisplayProject.id,
+                            { title: event.target.value },
+                          ),
+                          "Project title saved.",
+                        )
+                      }
+                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                      placeholder="Project title"
+                    />
+                    <input
+                      value={selectedDisplayProject.role}
+                      onChange={(event) =>
+                        commitDisplayCustomization(
+                          updateDisplayProject(
+                            displayCustomization,
+                            selectedDisplayProject.id,
+                            { role: event.target.value },
+                          ),
+                          "Project role saved.",
+                        )
+                      }
+                      className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                      placeholder="Role/category"
+                    />
+                  </div>
+                  <Textarea
+                    value={selectedDisplayProject.summary}
+                    onChange={(event) =>
+                      commitDisplayCustomization(
+                        updateDisplayProject(
+                          displayCustomization,
+                          selectedDisplayProject.id,
+                          { summary: event.target.value },
+                        ),
+                        "Project summary saved.",
+                      )
+                    }
+                    rows={4}
+                    placeholder="Project summary"
+                  />
+                  <Textarea
+                    value={selectedDisplayProject.visual.caption}
+                    onChange={(event) =>
+                      commitDisplayCustomization(
+                        updateDisplayProject(
+                          displayCustomization,
+                          selectedDisplayProject.id,
+                          { visualCaption: event.target.value },
+                        ),
+                        "Visual caption saved.",
+                      )
+                    }
+                    rows={3}
+                    placeholder="Visual caption"
+                  />
+                  <label className="inline-flex cursor-pointer items-center justify-center rounded-md border border-border px-4 py-2 text-sm font-medium transition-smooth hover:bg-muted">
+                    <Upload className="mr-2 h-4 w-4" />
+                    Upload project visual
+                    <input
+                      type="file"
+                      accept="image/*"
+                      className="sr-only"
+                      onChange={(event) => {
+                        void handleProjectVisualUpload(
+                          event.target.files?.[0] ?? null,
+                        );
+                        event.target.value = "";
+                      }}
+                    />
+                  </label>
+                  <img
+                    src={selectedDisplayProject.visual.src}
+                    alt={selectedDisplayProject.visual.alt}
+                    className="aspect-[16/9] w-full rounded-md border border-border object-cover"
+                  />
+                </div>
+              ) : (
+                <p className="mt-4 text-sm text-muted-foreground">
+                  Add projects to the source bank before editing showcase items.
+                </p>
+              )}
+            </div>
+            {displayMessage && (
+              <p className="lg:col-span-2 rounded-md border border-border bg-muted/20 p-3 text-sm text-muted-foreground">
+                {displayMessage}
+              </p>
+            )}
+          </CardContent>
+        </Card>
       </section>
 
       <section className="mx-auto grid max-w-7xl gap-6 px-5 py-8 lg:grid-cols-[0.9fr_1.1fr]">

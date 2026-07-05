@@ -1,4 +1,4 @@
-var __defProp = Object.defineProperty;
+﻿var __defProp = Object.defineProperty;
 var __typeError = (msg) => {
   throw TypeError(msg);
 };
@@ -3547,7 +3547,7 @@ const _RecClass = class _RecClass extends ConstructType {
     if (!this._type) {
       throw Error("Recursive type uninitialized.");
     }
-    return `μ${this.name}.${this._type.name}`;
+    return `Î¼${this.name}.${this._type.name}`;
   }
   valueToString(x2) {
     if (!this._type) {
@@ -3678,7 +3678,7 @@ class FuncClass extends ConstructType {
     const args = this.argTypes.map((arg) => arg.display()).join(", ");
     const rets = this.retTypes.map((arg) => arg.display()).join(", ");
     const annon = ` ${this.annotations.join(" ")}`;
-    return `(${args}) → (${rets})${annon}`;
+    return `(${args}) â†’ (${rets})${annon}`;
   }
   encodeAnnotation(ann) {
     if (ann === "query") {
@@ -5427,9 +5427,9 @@ class wNAF {
    * Creates a wNAF precomputation window. Used for caching.
    * Default window size is set by `utils.precompute()` and is equal to 8.
    * Number of precomputed points depends on the curve size:
-   * 2^(𝑊−1) * (Math.ceil(𝑛 / 𝑊) + 1), where:
-   * - 𝑊 is the window size
-   * - 𝑛 is the bitlength of the curve order.
+   * 2^(ð‘Šâˆ’1) * (Math.ceil(ð‘› / ð‘Š) + 1), where:
+   * - ð‘Š is the window size
+   * - ð‘› is the bitlength of the curve order.
    * For a 256-bit curve and window size 8, the number of precomputed points is 128 * 33 = 4224.
    * @param point Point instance
    * @param W window size
@@ -6985,9 +6985,9 @@ class _Field2 {
     const b22 = Fp22.sqr(b2);
     return {
       first: Fp22.add(Fp22.mulByNonresidue(b22), a22),
-      // b² * Nonresidue + a²
+      // bÂ² * Nonresidue + aÂ²
       second: Fp22.sub(Fp22.sub(Fp22.sqr(Fp22.add(a2, b2)), a22), b22)
-      // (a + b)² - a² - b²
+      // (a + b)Â² - aÂ² - bÂ²
     };
   }
   // multiply by u + 1
@@ -7066,7 +7066,7 @@ class _Field6 {
       // T3 * (u + 1) + T0
       c1: Fp22.add(Fp22.mulByNonresidue(t4), t1),
       // T4 * (u + 1) + T1
-      // T1 + (c0 - c1 + c2)² + T3 - T0 - T4
+      // T1 + (c0 - c1 + c2)Â² + T3 - T0 - T4
       c2: Fp22.sub(Fp22.sub(Fp22.add(Fp22.add(t1, Fp22.sqr(Fp22.add(Fp22.sub(c0, c1), c2))), t3), t0), t4)
     };
   }
@@ -7403,7 +7403,7 @@ class _Field12 {
     };
   }
   // A cyclotomic group is a subgroup of Fp^n defined by
-  //   GΦₙ(p) = {α ∈ Fpⁿ : α^Φₙ(p) = 1}
+  //   GÎ¦â‚™(p) = {Î± âˆˆ Fpâ¿ : Î±^Î¦â‚™(p) = 1}
   // The result of any pairing is in a cyclotomic subgroup
   // https://eprint.iacr.org/2009/565.pdf
   // https://eprint.iacr.org/2010/354.pdf
@@ -7473,7 +7473,7 @@ const { Fp: Fp$1, Fp2, Fp6, Fp12 } = tower12({
   ORDER: bls12_381_CURVE_G1.p,
   X_LEN: BLS_X_LEN,
   // Finite extension field over irreducible polynominal.
-  // Fp(u) / (u² - β) where β = -1
+  // Fp(u) / (uÂ² - Î²) where Î² = -1
   FP2_NONRESIDUE: [_1n$2, _1n$2],
   Fp2mulByB: ({ c0, c1 }) => {
     const t0 = Fp$1.mul(c0, _4n);
@@ -7726,7 +7726,7 @@ const bls12_381 = bls({
     Fp12,
     Fr: bls12_381_Fr
   },
-  // G1: y² = x³ + 4
+  // G1: yÂ² = xÂ³ + 4
   G1: {
     ...bls12_381_CURVE_G1,
     Fp: Fp$1,
@@ -7832,7 +7832,7 @@ const bls12_381 = bls({
     ateLoopSize: BLS_X,
     // The BLS parameter x for BLS12-381
     r: bls12_381_CURVE_G1.n,
-    // order; z⁴ − z² + 1; CURVE.n from other curves
+    // order; zâ´ âˆ’ zÂ² + 1; CURVE.n from other curves
     xNegative: true,
     twistType: "multiplicative"
   },
@@ -9354,7 +9354,7 @@ const ed25519Defaults = /* @__PURE__ */ (() => ({
   adjustScalarBytes,
   // dom2
   // Ratio of u to v. Allows us to combine inversion and square root. Uses algo from RFC8032 5.1.3.
-  // Constant-time, u/√v
+  // Constant-time, u/âˆšv
   uvRatio
 }))();
 const ed25519 = /* @__PURE__ */ (() => twistedEdwards(ed25519Defaults))();
@@ -16778,7 +16778,7 @@ resolveNonce_fn = async function(nonce) {
     __privateGet(this, _signer2).autoCloseTransportChannel = previousAutoClose;
   }
 };
-// Memoized — only runs #hydrate once, returns the same promise on repeat calls.
+// Memoized â€” only runs #hydrate once, returns the same promise on repeat calls.
 init_fn = function() {
   if (!__privateGet(this, _initPromise)) {
     __privateSet(this, _initPromise, __privateMethod(this, _AuthClient_instances, hydrate_fn).call(this));
@@ -21133,12 +21133,12 @@ var ContextOnlyDispatcher = {
       var JSCompiler_inline_result = treeContextOverflow;
       var idWithLeadingBit = treeContextId;
       JSCompiler_inline_result = (idWithLeadingBit & ~(1 << 32 - clz32(idWithLeadingBit) - 1)).toString(32) + JSCompiler_inline_result;
-      identifierPrefix = "«" + identifierPrefix + "R" + JSCompiler_inline_result;
+      identifierPrefix = "Â«" + identifierPrefix + "R" + JSCompiler_inline_result;
       JSCompiler_inline_result = localIdCounter++;
       0 < JSCompiler_inline_result && (identifierPrefix += "H" + JSCompiler_inline_result.toString(32));
-      identifierPrefix += "»";
+      identifierPrefix += "Â»";
     } else
-      JSCompiler_inline_result = globalClientIdCounter++, identifierPrefix = "«" + identifierPrefix + "r" + JSCompiler_inline_result.toString(32) + "»";
+      JSCompiler_inline_result = globalClientIdCounter++, identifierPrefix = "Â«" + identifierPrefix + "r" + JSCompiler_inline_result.toString(32) + "Â»";
     return hook.memoizedState = identifierPrefix;
   },
   useHostTransitionStatus,
@@ -32049,7 +32049,14 @@ function Textarea({ className, ...props }) {
 }
 const profile = {
   name: "Terry Brutus",
+  title: "Enablement Systems, AI Workflow, and Learning Experience Builder",
+  location: "Leland, NC",
+  email: "terrbrutus@gmail.com",
+  phone: "(212) 603-9163",
+  linkedIn: "https://www.linkedin.com/in/terrybrutus",
   github: "https://github.com/terrybrutus",
+  profileImage: "",
+  headline: "I design the systems, tools, and learning experiences that help people do complex work with less friction.",
   shortSummary: "Enablement systems builder with a learning architecture background, practical AI workflow experience, and proof across regulated, technical, and distributed work environments."
 };
 const laneProfiles = [
@@ -33068,11 +33075,98 @@ const localStorageKey = "terry-portfolio-tailored-views";
 const savedProfilesKey = "terry-portfolio-target-profiles";
 const studioBrainKey = "terry-portfolio-brain-sources";
 const generatedLinksKey = "terry-portfolio-generated-links";
+const displayCustomizationKey = "terry-portfolio-display-customization";
 function isLane(value) {
   return laneProfiles.some((profileItem) => profileItem.lane === value);
 }
 function normalizeText(value) {
   return value.toLowerCase().replace(/[^a-z0-9+#./\s-]/g, " ");
+}
+function getDisplayCustomization() {
+  try {
+    const raw = localStorage.getItem(displayCustomizationKey);
+    if (!raw) {
+      return { profile: {}, projects: {} };
+    }
+    const parsed = JSON.parse(raw);
+    return {
+      profile: parsed.profile ?? {},
+      projects: parsed.projects ?? {}
+    };
+  } catch {
+    return { profile: {}, projects: {} };
+  }
+}
+function saveDisplayCustomization(customization) {
+  localStorage.setItem(displayCustomizationKey, JSON.stringify(customization));
+  return customization;
+}
+function resetDisplayCustomization() {
+  localStorage.removeItem(displayCustomizationKey);
+  return { profile: {}, projects: {} };
+}
+function removeEmptyValues(value) {
+  return Object.fromEntries(
+    Object.entries(value).filter(([, entry]) => {
+      if (typeof entry === "string") {
+        return entry.trim().length > 0;
+      }
+      return entry !== void 0 && entry !== null;
+    })
+  );
+}
+function getDisplayProfile(customization) {
+  return {
+    ...profile,
+    ...removeEmptyValues(customization.profile)
+  };
+}
+function getDisplayProject(project, customization) {
+  const override = removeEmptyValues(
+    customization.projects[project.id] ?? {}
+  );
+  return {
+    ...project,
+    title: override.title ?? project.title,
+    shortTitle: override.shortTitle ?? project.shortTitle,
+    role: override.role ?? project.role,
+    summary: override.summary ?? project.summary,
+    visual: {
+      ...project.visual,
+      src: override.visualSrc ?? project.visual.src,
+      alt: override.visualAlt ?? project.visual.alt,
+      caption: override.visualCaption ?? project.visual.caption
+    }
+  };
+}
+function updateDisplayProfile(customization, updates) {
+  return {
+    ...customization,
+    profile: {
+      ...customization.profile,
+      ...updates
+    }
+  };
+}
+function updateDisplayProject(customization, projectId, updates) {
+  return {
+    ...customization,
+    projects: {
+      ...customization.projects,
+      [projectId]: {
+        ...customization.projects[projectId] ?? {},
+        ...updates
+      }
+    }
+  };
+}
+function readImageAsDataUrl(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.addEventListener("load", () => resolve(String(reader.result ?? "")));
+    reader.addEventListener("error", () => reject(reader.error));
+    reader.readAsDataURL(file);
+  });
 }
 function analyzeTarget(text) {
   const normalized = normalizeText(text);
@@ -33689,47 +33783,48 @@ function useTailoredView(slug, actor) {
   return { view, status };
 }
 function VisualProjectCard({ project }) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("article", { className: "overflow-hidden rounded-lg border border-border bg-card", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative aspect-[16/9] overflow-hidden bg-muted", children: [
+  const palette = "bg-[#bfe9f8]";
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("article", { className: `border border-black/15 ${palette} p-4 text-black`, children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative overflow-hidden border border-black/15 bg-white/50", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsx(
         "img",
         {
           src: project.visual.src,
           alt: project.visual.alt,
-          className: "h-full w-full object-cover"
+          className: "aspect-[16/10] w-full object-cover"
         }
       ),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-3 top-3 rounded-full border border-white/20 bg-black/60 px-3 py-1 text-xs text-white", children: project.shortTitle })
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-3 top-3 bg-black px-3 py-1 font-mono text-xs uppercase tracking-[0.18em] text-white", children: project.shortTitle })
     ] }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4 p-5", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4 pt-5", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-primary", children: project.role }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-1 font-display text-xl font-semibold", children: project.title })
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-xs uppercase tracking-[0.18em] text-black/55", children: project.role }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "mt-2 font-display text-3xl font-semibold leading-none", children: project.title })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-muted-foreground", children: project.summary }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-4 md:grid-cols-3", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-black/68", children: project.summary }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-px overflow-hidden border border-black/15 bg-black/15 md:grid-cols-3", children: [
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Before" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm leading-5", children: project.problem })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "bg-white/65 p-3 font-mono text-xs uppercase tracking-[0.16em] text-black/45", children: "Before" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "bg-white/65 px-3 pb-3 text-sm leading-5 text-black/65", children: project.problem })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "What changed" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm leading-5", children: project.actions.slice(0, 2).map((action) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: action }, action)) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "bg-white/65 p-3 font-mono text-xs uppercase tracking-[0.16em] text-black/45", children: "What changed" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-1 bg-white/65 px-3 pb-3 text-sm leading-5 text-black/65", children: project.actions.slice(0, 2).map((action) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: action }, action)) })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Result" }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm leading-5", children: project.outcomes.slice(0, 2).map((outcome) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: outcome }, outcome)) })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "bg-white/65 p-3 font-mono text-xs uppercase tracking-[0.16em] text-black/45", children: "Result" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-1 bg-white/65 px-3 pb-3 text-sm leading-5 text-black/65", children: project.outcomes.slice(0, 2).map((outcome) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: outcome }, outcome)) })
         ] })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center gap-2", children: [
-        project.tools.slice(0, 5).map((tool) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: tool }, tool)),
+        project.tools.slice(0, 5).map((tool) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", children: tool }, tool)),
         project.repo && /* @__PURE__ */ jsxRuntimeExports.jsxs(
           "a",
           {
             href: project.repo,
             target: "_blank",
             rel: "noreferrer",
-            className: "ml-auto inline-flex items-center gap-1 text-sm text-primary",
+            className: "ml-auto inline-flex items-center gap-1 text-sm font-semibold text-black",
             children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx(Github, { className: "h-4 w-4" }),
               "Repo",
@@ -33745,24 +33840,38 @@ function ReviewerPortfolio({
   view,
   status
 }) {
-  var _a2, _b2, _c2;
   const model = buildViewModel(view);
+  const displayCustomization = getDisplayCustomization();
+  const displayProfile = getDisplayProfile(displayCustomization);
+  const displayProjects = model.selectedProjects.map(
+    (project) => getDisplayProject(project, displayCustomization)
+  );
   const reviewerBadge = getReviewerBadge(model.primaryLane);
   const recruiterSummary = getRecruiterSummary(
     model.selectedLanes,
-    model.selectedProjects,
+    displayProjects,
     model.selectedProofPoints
   );
-  return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "min-h-screen bg-background text-foreground", children: [
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "border-b border-border bg-[linear-gradient(135deg,_rgba(17,24,39,0.96),_rgba(10,10,10,1))]", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-6xl gap-8 px-5 py-12 lg:grid-cols-[1.05fr_0.95fr] lg:py-16", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-6", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { className: "w-fit", variant: "outline", children: reviewerBadge }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-4", children: [
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold uppercase text-primary", children: profile.name }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "font-display text-4xl font-semibold leading-tight sm:text-5xl", children: model.angle }),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "max-w-3xl text-base leading-7 text-muted-foreground", children: profile.shortSummary })
+  const nameParts = displayProfile.name.trim().split(/\s+/);
+  const firstName = nameParts[0] ?? displayProfile.name;
+  const remainingName = nameParts.slice(1).join(" ") || "Portfolio";
+  return /* @__PURE__ */ jsxRuntimeExports.jsxs("main", { className: "min-h-screen bg-[#f8f5ef] text-black", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "border-b border-black/15", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mx-auto grid max-w-7xl gap-8 px-5 py-10 lg:grid-cols-[1.08fr_0.92fr] lg:py-14", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex min-h-[560px] flex-col justify-between bg-[#f4f1ea] p-6 lg:p-10", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-start justify-between gap-6", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-xs uppercase tracking-[0.22em] text-black/55", children: reviewerBadge }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-xs uppercase tracking-[0.22em] text-black/55", children: displayProfile.location })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: model.selectedLanes.map((lane) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { children: lane }, lane)) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-5 max-w-xl text-sm font-semibold uppercase tracking-[0.18em] text-black/50", children: displayProfile.title }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("h1", { className: "font-display max-w-5xl text-[clamp(3.3rem,11vw,8.75rem)] font-semibold leading-[0.9] text-black", children: [
+            firstName,
+            /* @__PURE__ */ jsxRuntimeExports.jsx("br", {}),
+            remainingName
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-8 max-w-2xl text-lg leading-relaxed text-black/70", children: model.angle }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 max-w-2xl text-base leading-7 text-black/58", children: displayProfile.shortSummary })
+        ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3 sm:grid-cols-2", children: [
           ["Best fit", recruiterSummary.bestFit],
           ["Strongest proof", recruiterSummary.proof],
@@ -33774,44 +33883,53 @@ function ReviewerPortfolio({
         ].map(([label, value]) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
           "div",
           {
-            className: "rounded-md border border-white/10 bg-white/[0.04] p-3",
+            className: "border border-black/15 bg-white/45 p-3",
             children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs uppercase text-muted-foreground", children: label }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm font-medium", children: value })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-xs uppercase tracking-[0.16em] text-black/45", children: label }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm font-medium text-black/75", children: value })
             ]
           },
           label
         )) })
       ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "overflow-hidden rounded-lg border border-border bg-card", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
+      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-4", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "bg-[#bfe9f8] p-5", children: displayProfile.profileImage ? /* @__PURE__ */ jsxRuntimeExports.jsx(
           "img",
           {
-            src: ((_a2 = model.selectedProjects[0]) == null ? void 0 : _a2.visual.src) ?? "/assets/portfolio/workflow-platform-map.svg",
-            alt: ((_b2 = model.selectedProjects[0]) == null ? void 0 : _b2.visual.alt) ?? "Portfolio project visual.",
-            className: "aspect-[16/10] w-full object-cover"
+            src: displayProfile.profileImage,
+            alt: displayProfile.name,
+            className: "h-full min-h-[360px] w-full object-cover"
           }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "p-4", children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: (_c2 = model.selectedProjects[0]) == null ? void 0 : _c2.visual.caption }) })
+        ) : /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex min-h-[360px] flex-col justify-between border border-black/15 bg-white/45 p-6", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-mono text-xs uppercase tracking-[0.2em] text-black/50", children: displayProfile.name }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-7xl font-semibold leading-none", children: "TB" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 max-w-xs text-sm leading-relaxed text-black/60", children: "Enablement systems, AI workflow, and learning experience builder." })
+          ] })
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "grid gap-3 sm:grid-cols-3", children: model.selectedLanes.map((lane) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-black p-4 text-white", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-xs uppercase tracking-[0.18em] text-white/55", children: "Lane" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm font-semibold", children: lane })
+        ] }, lane)) })
       ] })
     ] }) }),
     status === "loading" && /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "sr-only", children: "Loading portfolio" }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto grid max-w-6xl gap-4 px-5 py-8 sm:grid-cols-2 lg:grid-cols-4", children: model.selectedProofPoints.map((metric) => /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "p-5", children: [
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-3xl font-semibold", children: metric.value }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm font-medium", children: metric.label }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs font-medium text-primary", children: getMetricSourceNote(metric, model.selectedProjects) }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-xs leading-5 text-muted-foreground", children: metric.detail })
-    ] }) }, metric.id)) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto max-w-6xl px-5 pb-8", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Card, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "grid gap-5 p-5 lg:grid-cols-[0.8fr_1.2fr]", children: [
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto grid max-w-7xl gap-px overflow-hidden border-x border-b border-black/15 bg-black/15 px-5 py-8 sm:grid-cols-2 lg:grid-cols-4", children: model.selectedProofPoints.map((metric) => /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "bg-[#f8f5ef] p-5", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-3xl font-semibold text-black", children: metric.value }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm font-medium text-black", children: metric.label }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs font-medium text-black/50", children: getMetricSourceNote(metric, displayProjects) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-xs leading-5 text-black/58", children: metric.detail })
+    ] }, metric.id)) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto max-w-7xl px-5 py-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-5 border-y border-black/15 py-6 lg:grid-cols-[0.32fr_0.68fr]", children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { children: /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-xs uppercase tracking-[0.22em] text-black/50", children: "Why this work is relevant" }) }),
       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-primary", children: "Why this work is relevant" }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "mt-2 font-display text-2xl font-semibold", children: "Proof that connects strategy, systems, and adoption." })
-      ] }),
-      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-7 text-muted-foreground", children: getRelevanceCopy(model.selectedLanes) })
-    ] }) }) }),
-    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto grid max-w-6xl gap-6 px-5 pb-12 lg:grid-cols-[0.72fr_1.28fr]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("h2", { className: "font-display text-4xl font-semibold leading-none sm:text-5xl", children: "Proof that connects strategy, systems, and adoption." }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 max-w-3xl text-sm leading-7 text-black/62", children: getRelevanceCopy(model.selectedLanes) })
+      ] })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto grid max-w-7xl gap-6 px-5 pb-12 lg:grid-cols-[0.72fr_1.28fr]", children: [
       /* @__PURE__ */ jsxRuntimeExports.jsxs("aside", { className: "space-y-5", children: [
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "rounded-none border-black/15 bg-white/60 text-black", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(BriefcaseBusiness, { className: "h-5 w-5 text-primary" }),
             "Background"
@@ -33825,11 +33943,11 @@ function ReviewerPortfolio({
             item
           )) })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "rounded-none border-black/15 bg-white/60 text-black", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(CardTitle, { children: "Relevant Skills" }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(CardContent, { className: "flex flex-wrap gap-2", children: model.selectedSkills.map((skill) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: skill }, skill)) })
         ] }),
-        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { className: "rounded-none border-black/15 bg-white/60 text-black", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsx(UserRound, { className: "h-5 w-5 text-primary" }),
             "Human Context"
@@ -33857,7 +33975,7 @@ function ReviewerPortfolio({
             }
           )
         ] }),
-        model.selectedProjects.map((project) => /* @__PURE__ */ jsxRuntimeExports.jsx(VisualProjectCard, { project }, project.id))
+        displayProjects.map((project) => /* @__PURE__ */ jsxRuntimeExports.jsx(VisualProjectCard, { project }, project.id))
       ] })
     ] })
   ] });
@@ -33878,6 +33996,7 @@ function ToggleChip({
   );
 }
 function TailoredPortfolioStudio() {
+  var _a2;
   const actorResult = useActor(createActor);
   const actor = actorResult.actor ?? null;
   const [route, setRoute] = reactExports.useState(getRouteState);
@@ -33903,6 +34022,11 @@ function TailoredPortfolioStudio() {
   const [backupMessage, setBackupMessage] = reactExports.useState("");
   const [copyMessage, setCopyMessage] = reactExports.useState("");
   const [manualCopy, setManualCopy] = reactExports.useState(null);
+  const [displayCustomization, setDisplayCustomization] = reactExports.useState(() => getDisplayCustomization());
+  const [selectedDisplayProjectId, setSelectedDisplayProjectId] = reactExports.useState(
+    ((_a2 = projects[0]) == null ? void 0 : _a2.id) ?? ""
+  );
+  const [displayMessage, setDisplayMessage] = reactExports.useState("");
   const analysis = reactExports.useMemo(
     () => analyzeTarget(`${company} ${jd}`),
     [company, jd]
@@ -33962,6 +34086,17 @@ function TailoredPortfolioStudio() {
     allBrainSources,
     `${company} ${jd}`
   );
+  const displayProfile = getDisplayProfile(displayCustomization);
+  const displayProjects = projects.map(
+    (project) => getDisplayProject(project, displayCustomization)
+  );
+  const selectedDisplayProject = displayProjects.find(
+    (project) => project.id === selectedDisplayProjectId
+  ) ?? displayProjects[0];
+  const commitDisplayCustomization = (next, message) => {
+    setDisplayCustomization(saveDisplayCustomization(next));
+    setDisplayMessage(message);
+  };
   reactExports.useEffect(() => {
     const syncRoute = () => setRoute(getRouteState());
     window.addEventListener("hashchange", syncRoute);
@@ -34010,6 +34145,40 @@ function TailoredPortfolioStudio() {
     setSelectedProjectIds(recommendedProjects.map((project) => project.id));
     setSelectedProofIds(
       recommendedProofPoints.map((proofPoint) => proofPoint.id)
+    );
+  };
+  const handleProfileImageUpload = async (file) => {
+    if (!file) return;
+    const profileImage = await readImageAsDataUrl(file);
+    commitDisplayCustomization(
+      updateDisplayProfile(displayCustomization, { profileImage }),
+      "Profile image saved for this draft."
+    );
+  };
+  const handleProjectVisualUpload = async (file) => {
+    if (!file || !selectedDisplayProject) return;
+    const visualSrc = await readImageAsDataUrl(file);
+    commitDisplayCustomization(
+      updateDisplayProject(displayCustomization, selectedDisplayProject.id, {
+        visualSrc
+      }),
+      `${selectedDisplayProject.shortTitle} visual saved for this draft.`
+    );
+  };
+  const handleResetDisplayDraft = () => {
+    setDisplayCustomization(resetDisplayCustomization());
+    setDisplayMessage("Display draft reset to source defaults.");
+  };
+  const handleResetDisplayProject = () => {
+    if (!selectedDisplayProject) return;
+    const next = {
+      ...displayCustomization,
+      projects: { ...displayCustomization.projects }
+    };
+    delete next.projects[selectedDisplayProject.id];
+    commitDisplayCustomization(
+      next,
+      `${selectedDisplayProject.shortTitle} reset to source defaults.`
     );
   };
   const saveTargetProfile = () => {
@@ -34268,14 +34437,14 @@ function TailoredPortfolioStudio() {
     setGeneratedLinks(nextLinks);
   };
   const copyStudioOutput = async (label, value) => {
-    var _a2;
+    var _a3;
     const text = value.trim();
     if (!text) {
       setCopyMessage(`Nothing to copy for ${label}.`);
       return;
     }
     try {
-      if ((_a2 = navigator.clipboard) == null ? void 0 : _a2.writeText) {
+      if ((_a3 = navigator.clipboard) == null ? void 0 : _a3.writeText) {
         try {
           await navigator.clipboard.writeText(text);
           setCopyMessage(`${label} copied.`);
@@ -34378,6 +34547,243 @@ function TailoredPortfolioStudio() {
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs leading-5 text-muted-foreground", children: "Gemini-ready, capped prompt. The deterministic scorer still works when AI is off." })
           ] })
         ] })
+      ] })
+    ] }) }),
+    /* @__PURE__ */ jsxRuntimeExports.jsx("section", { className: "mx-auto max-w-7xl px-5 py-8", children: /* @__PURE__ */ jsxRuntimeExports.jsxs(Card, { children: [
+      /* @__PURE__ */ jsxRuntimeExports.jsx(CardHeader, { children: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col justify-between gap-4 lg:flex-row lg:items-start", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", className: "mb-3", children: "Display editor" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs(CardTitle, { className: "flex items-center gap-2", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(Image, { className: "h-5 w-5 text-primary" }),
+            "Profile and showcase controls"
+          ] }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 max-w-3xl text-sm leading-6 text-muted-foreground", children: "Edit the visible profile copy, profile image, project copy, and portfolio visuals for this draft. These changes save in this browser; backend persistence can be wired after the visual system is approved." })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs(
+          Button,
+          {
+            type: "button",
+            variant: "outline",
+            onClick: handleResetDisplayDraft,
+            children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(RotateCcw, { className: "mr-2 h-4 w-4" }),
+              "Reset display draft"
+            ]
+          }
+        )
+      ] }) }),
+      /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "grid gap-6 lg:grid-cols-[0.85fr_1.15fr]", children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border p-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: "Profile front door" }),
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 grid gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                value: displayProfile.name,
+                onChange: (event) => commitDisplayCustomization(
+                  updateDisplayProfile(displayCustomization, {
+                    name: event.target.value
+                  }),
+                  "Profile name saved."
+                ),
+                className: "w-full rounded-md border border-input bg-background px-3 py-2 text-sm",
+                placeholder: "Name"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "input",
+              {
+                value: displayProfile.title,
+                onChange: (event) => commitDisplayCustomization(
+                  updateDisplayProfile(displayCustomization, {
+                    title: event.target.value
+                  }),
+                  "Profile title saved."
+                ),
+                className: "w-full rounded-md border border-input bg-background px-3 py-2 text-sm",
+                placeholder: "Title"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              Textarea,
+              {
+                value: displayProfile.headline,
+                onChange: (event) => commitDisplayCustomization(
+                  updateDisplayProfile(displayCustomization, {
+                    headline: event.target.value
+                  }),
+                  "Profile headline saved."
+                ),
+                rows: 3,
+                placeholder: "Headline"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              Textarea,
+              {
+                value: displayProfile.shortSummary,
+                onChange: (event) => commitDisplayCustomization(
+                  updateDisplayProfile(displayCustomization, {
+                    shortSummary: event.target.value
+                  }),
+                  "Profile summary saved."
+                ),
+                rows: 4,
+                placeholder: "Short summary"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "inline-flex cursor-pointer items-center justify-center rounded-md border border-border px-4 py-2 text-sm font-medium transition-smooth hover:bg-muted", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Upload, { className: "mr-2 h-4 w-4" }),
+              "Upload profile image",
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "input",
+                {
+                  type: "file",
+                  accept: "image/*",
+                  className: "sr-only",
+                  onChange: (event) => {
+                    var _a3;
+                    void handleProfileImageUpload(
+                      ((_a3 = event.target.files) == null ? void 0 : _a3[0]) ?? null
+                    );
+                    event.target.value = "";
+                  }
+                }
+              )
+            ] }),
+            displayProfile.profileImage ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "img",
+              {
+                src: displayProfile.profileImage,
+                alt: displayProfile.name,
+                className: "aspect-[4/3] w-full rounded-md border border-border object-cover"
+              }
+            ) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex aspect-[4/3] items-center justify-center rounded-md border border-dashed border-border bg-muted/30 text-sm text-muted-foreground", children: "Profile image placeholder" })
+          ] })
+        ] }),
+        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border p-4", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-col justify-between gap-3 sm:flex-row sm:items-center", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: "Showcase item editor" }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              Button,
+              {
+                type: "button",
+                size: "sm",
+                variant: "outline",
+                onClick: handleResetDisplayProject,
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(RotateCcw, { className: "mr-2 h-4 w-4" }),
+                  "Reset item"
+                ]
+              }
+            )
+          ] }),
+          selectedDisplayProject ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-4 grid gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "select",
+              {
+                value: selectedDisplayProjectId,
+                onChange: (event) => setSelectedDisplayProjectId(event.target.value),
+                className: "w-full rounded-md border border-input bg-background px-3 py-2 text-sm",
+                children: displayProjects.map((project) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: project.id, children: project.shortTitle }, project.id))
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid gap-3 md:grid-cols-2", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "input",
+                {
+                  value: selectedDisplayProject.title,
+                  onChange: (event) => commitDisplayCustomization(
+                    updateDisplayProject(
+                      displayCustomization,
+                      selectedDisplayProject.id,
+                      { title: event.target.value }
+                    ),
+                    "Project title saved."
+                  ),
+                  className: "w-full rounded-md border border-input bg-background px-3 py-2 text-sm",
+                  placeholder: "Project title"
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "input",
+                {
+                  value: selectedDisplayProject.role,
+                  onChange: (event) => commitDisplayCustomization(
+                    updateDisplayProject(
+                      displayCustomization,
+                      selectedDisplayProject.id,
+                      { role: event.target.value }
+                    ),
+                    "Project role saved."
+                  ),
+                  className: "w-full rounded-md border border-input bg-background px-3 py-2 text-sm",
+                  placeholder: "Role/category"
+                }
+              )
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              Textarea,
+              {
+                value: selectedDisplayProject.summary,
+                onChange: (event) => commitDisplayCustomization(
+                  updateDisplayProject(
+                    displayCustomization,
+                    selectedDisplayProject.id,
+                    { summary: event.target.value }
+                  ),
+                  "Project summary saved."
+                ),
+                rows: 4,
+                placeholder: "Project summary"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              Textarea,
+              {
+                value: selectedDisplayProject.visual.caption,
+                onChange: (event) => commitDisplayCustomization(
+                  updateDisplayProject(
+                    displayCustomization,
+                    selectedDisplayProject.id,
+                    { visualCaption: event.target.value }
+                  ),
+                  "Visual caption saved."
+                ),
+                rows: 3,
+                placeholder: "Visual caption"
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("label", { className: "inline-flex cursor-pointer items-center justify-center rounded-md border border-border px-4 py-2 text-sm font-medium transition-smooth hover:bg-muted", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx(Upload, { className: "mr-2 h-4 w-4" }),
+              "Upload project visual",
+              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "input",
+                {
+                  type: "file",
+                  accept: "image/*",
+                  className: "sr-only",
+                  onChange: (event) => {
+                    var _a3;
+                    void handleProjectVisualUpload(
+                      ((_a3 = event.target.files) == null ? void 0 : _a3[0]) ?? null
+                    );
+                    event.target.value = "";
+                  }
+                }
+              )
+            ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "img",
+              {
+                src: selectedDisplayProject.visual.src,
+                alt: selectedDisplayProject.visual.alt,
+                className: "aspect-[16/9] w-full rounded-md border border-border object-cover"
+              }
+            )
+          ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-4 text-sm text-muted-foreground", children: "Add projects to the source bank before editing showcase items." })
+        ] }),
+        displayMessage && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "lg:col-span-2 rounded-md border border-border bg-muted/20 p-3 text-sm text-muted-foreground", children: displayMessage })
       ] })
     ] }) }),
     /* @__PURE__ */ jsxRuntimeExports.jsxs("section", { className: "mx-auto grid max-w-7xl gap-6 px-5 py-8 lg:grid-cols-[0.9fr_1.1fr]", children: [
@@ -34808,7 +35214,7 @@ function TailoredPortfolioStudio() {
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-2 text-xs font-semibold uppercase text-muted-foreground", children: "Review queue" }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-2", children: allBrainSources.slice(0, 8).map((source) => {
-                var _a2;
+                var _a3;
                 const isEditable = brainDrafts.some(
                   (draft) => draft.id === source.id
                 );
@@ -34830,7 +35236,7 @@ function TailoredPortfolioStudio() {
                       /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex flex-wrap gap-2", children: [
                         source.extractionStatus && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: source.extractionStatus }),
                         source.fileSize ? /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: formatBytes(source.fileSize) }) : null,
-                        (_a2 = source.matchedTerms) == null ? void 0 : _a2.slice(0, 4).map((term) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: term }, term))
+                        (_a3 = source.matchedTerms) == null ? void 0 : _a3.slice(0, 4).map((term) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: term }, term))
                       ] }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs leading-5 text-muted-foreground", children: source.note }),
                       source.sourceUrl && /* @__PURE__ */ jsxRuntimeExports.jsxs(

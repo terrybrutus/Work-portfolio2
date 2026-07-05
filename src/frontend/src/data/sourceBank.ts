@@ -87,6 +87,7 @@ export const profile = {
   phone: "(212) 603-9163",
   linkedIn: "https://www.linkedin.com/in/terrybrutus",
   github: "https://github.com/terrybrutus",
+  profileImage: "",
   headline:
     "I design the systems, tools, and learning experiences that help people do complex work with less friction.",
   shortSummary:
