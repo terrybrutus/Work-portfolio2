@@ -53,10 +53,17 @@ type AnalysisMatch = {
   confidence: number;
 };
 
+type TargetSignal = {
+  label: string;
+  evidence: string;
+  confidence: number;
+};
+
 type Analysis = {
   primaryLane: Lane;
   lanes: Lane[];
   matches: AnalysisMatch[];
+  targetSignals: TargetSignal[];
   angle: string;
   reviewerTakeaway: string;
   aiPromptPreview: string;
@@ -377,11 +384,31 @@ function analyzeTarget(text: string): Analysis {
   const primaryLane = lanes[0];
   const laneProfile =
     laneProfiles.find((item) => item.lane === primaryLane) ?? laneProfiles[0];
+  const likelyProblems = getLikelyProblems(lanes, text);
+  const targetSignals = [
+    ...ranked.slice(0, 3).map((match) => ({
+      label: match.lane,
+      evidence:
+        match.terms.length > 0 && match.terms[0] !== "default"
+          ? match.terms.slice(0, 4).join(", ")
+          : (laneProfiles
+              .find((item) => item.lane === match.lane)
+              ?.keywords.slice(0, 3)
+              .join(", ") ?? "general fit"),
+      confidence: match.confidence,
+    })),
+    ...likelyProblems.slice(0, 2).map((problem) => ({
+      label: "Likely problem",
+      evidence: problem,
+      confidence: 0.7,
+    })),
+  ].slice(0, 5);
 
   return {
     primaryLane,
     lanes,
     matches: ranked,
+    targetSignals,
     angle: laneProfile.headline,
     reviewerTakeaway: laneProfile.reviewerTakeaway,
     aiPromptPreview: `Classify JD into ${laneProfiles
@@ -1179,6 +1206,11 @@ function SnapshotProjectTile({
         <div className="absolute left-2 top-2 bg-black px-2 py-1 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-white">
           {project.shortTitle}
         </div>
+        {featured && (
+          <div className="absolute right-2 top-2 border border-black/20 bg-[#f8f5ef] px-2 py-1 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-black">
+            Start here
+          </div>
+        )}
       </div>
       <div className="space-y-2 pt-3">
         <p className="font-mono text-[0.62rem] uppercase tracking-[0.14em] text-black/55">
@@ -1470,6 +1502,14 @@ export function TailoredPortfolioStudio() {
     () => getRecommendedSkills(activeLanes),
     [activeLanes],
   );
+  const recommendedProjectIds = useMemo(
+    () => new Set(recommendedProjects.map((project) => project.id)),
+    [recommendedProjects],
+  );
+  const recommendedProofIds = useMemo(
+    () => new Set(recommendedProofPoints.map((proofPoint) => proofPoint.id)),
+    [recommendedProofPoints],
+  );
 
   const activeProjectIds =
     selectedProjectIds.length > 0
@@ -1548,6 +1588,7 @@ export function TailoredPortfolioStudio() {
   }, []);
 
   useEffect(() => {
+    if (aiMode !== "suggest") return;
     setSelectedLanes(analysis.lanes);
     setSelectedProjectIds(
       getRecommendedProjects(analysis.lanes).map((project) => project.id),
@@ -1557,7 +1598,7 @@ export function TailoredPortfolioStudio() {
         (proofPoint) => proofPoint.id,
       ),
     );
-  }, [analysis]);
+  }, [aiMode, analysis]);
 
   if (!route.isStudio) {
     return <ReviewerPortfolio view={view} status={status} />;
@@ -2047,10 +2088,49 @@ export function TailoredPortfolioStudio() {
                   maxLength={2200}
                 />
               </label>
-              <div className="rounded-md border border-border bg-muted/20 p-3 text-sm leading-6 text-muted-foreground">
-                AI assist means: use a short, capped prompt to classify the JD,
-                suggest the lane, and recommend projects/metrics. It does not
-                run on reviewer page views.
+              <div className="rounded-md border border-border bg-muted/20 p-3">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <p className="text-sm font-semibold">
+                      Target signal readout
+                    </p>
+                    <p className="mt-1 text-xs leading-5 text-muted-foreground">
+                      Local recommender today; Gemini-ready later for a tiny JD
+                      classification call. Reviewer pages never call AI.
+                    </p>
+                  </div>
+                  <Badge variant="outline">
+                    {Math.round(
+                      (analysis.matches[0]?.confidence ?? 0.48) * 100,
+                    )}
+                    % confidence
+                  </Badge>
+                </div>
+                <div className="mt-3 grid gap-2">
+                  {analysis.targetSignals.map((signal) => (
+                    <div
+                      key={`${signal.label}-${signal.evidence}`}
+                      className="rounded-md border border-border bg-background p-2"
+                    >
+                      <div className="flex flex-wrap items-center justify-between gap-2">
+                        <p className="text-xs font-semibold uppercase text-muted-foreground">
+                          {signal.label}
+                        </p>
+                        <span className="text-xs text-muted-foreground">
+                          {Math.round(signal.confidence * 100)}%
+                        </span>
+                      </div>
+                      <p className="mt-1 text-sm leading-5">
+                        {signal.evidence}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-3 text-xs leading-5 text-muted-foreground">
+                  Assist uses these signals to rank lanes, projects, metrics,
+                  and missing evidence. Turn it off when you want manual edits
+                  to stay untouched.
+                </p>
               </div>
               <Button
                 type="button"
@@ -2060,7 +2140,7 @@ export function TailoredPortfolioStudio() {
                 }
               >
                 <Bot className="mr-2 h-4 w-4" />
-                AI assist {aiMode === "suggest" ? "on" : "off"}
+                Target helper {aiMode === "suggest" ? "on" : "off"}
               </Button>
             </CardContent>
           </Card>
@@ -2080,6 +2160,26 @@ export function TailoredPortfolioStudio() {
                 <p className="mt-2 text-sm leading-6 text-muted-foreground">
                   {analysis.reviewerTakeaway}
                 </p>
+                <div className="mt-3 grid gap-2 sm:grid-cols-3">
+                  {analysis.matches.slice(0, 3).map((match) => (
+                    <div
+                      key={match.lane}
+                      className="rounded-md border border-primary/20 bg-background/80 p-2"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <p className="text-xs font-semibold">{match.lane}</p>
+                        <span className="text-xs text-muted-foreground">
+                          {Math.round(match.confidence * 100)}%
+                        </span>
+                      </div>
+                      <p className="mt-1 text-xs leading-5 text-muted-foreground">
+                        {match.terms[0] === "default"
+                          ? "Default fallback when the JD is thin."
+                          : match.terms.slice(0, 4).join(", ")}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
               <div>
                 <p className="mb-2 text-xs font-semibold uppercase text-muted-foreground">
@@ -2135,6 +2235,16 @@ export function TailoredPortfolioStudio() {
                       <p className="mt-1 text-xs text-muted-foreground">
                         {project.role}
                       </p>
+                      <div className="mt-2 flex flex-wrap gap-1">
+                        {recommendedProjectIds.has(project.id) && (
+                          <Badge variant="outline">recommended</Badge>
+                        )}
+                        {project.readiness.slice(0, 2).map((item) => (
+                          <Badge key={item} variant="secondary">
+                            {item}
+                          </Badge>
+                        ))}
+                      </div>
                     </button>
                   ))}
                 </div>
@@ -2159,6 +2269,16 @@ export function TailoredPortfolioStudio() {
                         {proofPoint.value}
                       </p>
                       <p className="text-sm font-medium">{proofPoint.label}</p>
+                      <div className="mt-2 flex flex-wrap gap-1">
+                        {recommendedProofIds.has(proofPoint.id) && (
+                          <Badge variant="outline">recommended</Badge>
+                        )}
+                        {proofPoint.lanes.slice(0, 2).map((lane) => (
+                          <Badge key={lane} variant="secondary">
+                            {lane}
+                          </Badge>
+                        ))}
+                      </div>
                     </button>
                   ))}
                 </div>
@@ -2254,24 +2374,100 @@ export function TailoredPortfolioStudio() {
                 </p>
               )}
               <div className="space-y-2">
-                {allBrainSources.slice(0, 5).map((source) => (
-                  <div
-                    key={source.id}
-                    className="rounded-md border border-border bg-muted/20 p-3"
-                  >
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <p className="text-sm font-medium">{source.title}</p>
-                      <Badge variant="outline">{source.status}</Badge>
-                    </div>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      {source.type} - {source.linkedProjectIds.length || 0}{" "}
-                      linked projects
-                    </p>
-                    <p className="mt-2 text-xs leading-5 text-muted-foreground">
-                      {source.note}
-                    </p>
-                  </div>
-                ))}
+                {allBrainSources.slice(0, 5).map((source) =>
+                  (() => {
+                    const customSource = brainDrafts.some(
+                      (item) => item.id === source.id,
+                    );
+                    return (
+                      <div
+                        key={source.id}
+                        className="rounded-md border border-border bg-muted/20 p-3"
+                      >
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <div>
+                            <p className="text-sm font-medium">
+                              {source.title}
+                            </p>
+                            <p className="mt-1 text-xs text-muted-foreground">
+                              {source.type} -{" "}
+                              {source.extractionStatus ?? "record only"}
+                            </p>
+                          </div>
+                          {customSource ? (
+                            <select
+                              className="rounded-md border border-input bg-background px-2 py-1 text-xs"
+                              value={source.status}
+                              onChange={(event) =>
+                                _updateBrainSourceStatus(
+                                  source.id,
+                                  event.target.value as EvidenceSourceStatus,
+                                )
+                              }
+                            >
+                              {evidenceBrain.statuses.map((status) => (
+                                <option key={status} value={status}>
+                                  {status}
+                                </option>
+                              ))}
+                            </select>
+                          ) : (
+                            <Badge variant="outline">{source.status}</Badge>
+                          )}
+                        </div>
+                        <p className="mt-2 text-xs leading-5 text-muted-foreground">
+                          {source.note}
+                        </p>
+                        {source.matchedTerms &&
+                          source.matchedTerms.length > 0 && (
+                            <p className="mt-2 text-xs text-muted-foreground">
+                              Matched: {source.matchedTerms.join(", ")}
+                            </p>
+                          )}
+                        <div className="mt-3 flex flex-wrap gap-1">
+                          {projects.slice(0, 8).map((project) => {
+                            const linked = source.linkedProjectIds.includes(
+                              project.id,
+                            );
+                            return (
+                              <button
+                                key={project.id}
+                                type="button"
+                                disabled={!customSource}
+                                onClick={() =>
+                                  _toggleBrainSourceProject(
+                                    source.id,
+                                    project.id,
+                                  )
+                                }
+                                className={`rounded-md border px-2 py-1 text-xs ${
+                                  linked
+                                    ? "border-primary bg-primary/10 text-primary"
+                                    : "border-border bg-background text-muted-foreground"
+                                } ${
+                                  customSource
+                                    ? "hover:border-muted-foreground"
+                                    : "cursor-default opacity-70"
+                                }`}
+                              >
+                                {project.shortTitle}
+                              </button>
+                            );
+                          })}
+                        </div>
+                        {customSource && (
+                          <button
+                            type="button"
+                            className="mt-3 text-xs font-medium text-destructive"
+                            onClick={() => _removeBrainSource(source.id)}
+                          >
+                            Remove source
+                          </button>
+                        )}
+                      </div>
+                    );
+                  })(),
+                )}
               </div>
             </CardContent>
           </Card>
@@ -2496,6 +2692,9 @@ export function TailoredPortfolioStudio() {
                   <p className="mt-1 text-sm font-medium">
                     {strategyReport.artifactBrief.title}
                   </p>
+                  <p className="mt-2 text-xs leading-5 text-muted-foreground">
+                    {strategyReport.artifactBrief.problemSolved}
+                  </p>
                 </div>
               </div>
               <div className="rounded-md border border-border bg-muted/20 p-3">
@@ -2521,21 +2720,72 @@ export function TailoredPortfolioStudio() {
                   ))}
                 </div>
               </div>
+              <div className="rounded-md border border-border bg-muted/20 p-3">
+                <p className="text-sm font-medium">Strategy report</p>
+                <div className="mt-3 grid gap-3 lg:grid-cols-2">
+                  <div>
+                    <p className="text-xs font-semibold uppercase text-muted-foreground">
+                      Likely company problems
+                    </p>
+                    <ul className="mt-2 space-y-1 text-sm leading-6 text-muted-foreground">
+                      {strategyReport.likelyProblems
+                        .slice(0, 3)
+                        .map((problem) => (
+                          <li key={problem}>{problem}</li>
+                        ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase text-muted-foreground">
+                      Why these projects
+                    </p>
+                    <ul className="mt-2 space-y-1 text-sm leading-6 text-muted-foreground">
+                      {strategyReport.portfolioMatches.map((match) => (
+                        <li key={match.project.id}>
+                          <span className="font-medium text-foreground">
+                            {match.project.shortTitle}
+                          </span>
+                          : {match.reason}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
               {mediaNeeds.length > 0 ? (
                 <div className="rounded-md border border-primary/35 bg-primary/10 p-3">
-                  <p className="text-sm font-medium">Media to improve</p>
-                  <ul className="mt-2 space-y-1 text-sm leading-6 text-muted-foreground">
-                    {mediaNeeds.slice(0, 4).map(({ project, needs }) => (
-                      <li key={project.id}>
-                        {project.shortTitle}: {needs[0]}
-                      </li>
-                    ))}
+                  <p className="text-sm font-medium">
+                    Missing media or evidence
+                  </p>
+                  <ul className="mt-2 space-y-2 text-sm leading-6 text-muted-foreground">
+                    {mediaNeeds
+                      .slice(0, 4)
+                      .map(({ project, needs, approvedSources }) => (
+                        <li key={project.id}>
+                          <span className="font-medium text-foreground">
+                            {project.shortTitle}
+                          </span>
+                          : {approvedSources.length} approved source
+                          {approvedSources.length === 1 ? "" : "s"} linked. Add{" "}
+                          {needs.slice(0, 2).join(" or ")}.
+                        </li>
+                      ))}
                   </ul>
                 </div>
               ) : (
                 <p className="rounded-md border border-border bg-muted/20 p-3 text-sm text-muted-foreground">
                   Current selected media is approved for reviewer use.
                 </p>
+              )}
+              {strategyReport.evidenceGaps.length > 0 && (
+                <div className="rounded-md border border-border bg-muted/20 p-3">
+                  <p className="text-sm font-medium">Evidence gaps to close</p>
+                  <ul className="mt-2 space-y-1 text-sm leading-6 text-muted-foreground">
+                    {strategyReport.evidenceGaps.slice(0, 4).map((gap) => (
+                      <li key={gap}>{gap}</li>
+                    ))}
+                  </ul>
+                </div>
               )}
               <div className="flex flex-wrap gap-2">
                 <Button
@@ -2658,19 +2908,32 @@ export function TailoredPortfolioStudio() {
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              <Button
-                type="button"
-                variant="outline"
-                onClick={() =>
-                  copyStudioOutput("Recruiter summary", studioOutputs.recruiter)
-                }
-              >
-                <Clipboard className="mr-2 h-4 w-4" />
-                Copy recruiter summary
-              </Button>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  ["Recruiter summary", studioOutputs.recruiter],
+                  ["Resume bullets", studioOutputs.resume.join("\n")],
+                  ["LinkedIn blurb", studioOutputs.linkedin],
+                  ["Interview prompts", studioOutputs.interview.join("\n")],
+                ].map(([label, value]) => (
+                  <Button
+                    key={label}
+                    type="button"
+                    variant="outline"
+                    onClick={() => copyStudioOutput(label, value)}
+                  >
+                    <Clipboard className="mr-2 h-4 w-4" />
+                    Copy {label.toLowerCase()}
+                  </Button>
+                ))}
+              </div>
               <p className="text-sm leading-6 text-muted-foreground">
                 {studioOutputs.recruiter}
               </p>
+              <ul className="space-y-1 text-sm leading-6 text-muted-foreground">
+                {studioOutputs.resume.map((bullet) => (
+                  <li key={bullet}>{bullet}</li>
+                ))}
+              </ul>
               {copyMessage && (
                 <p className="text-sm text-muted-foreground">{copyMessage}</p>
               )}

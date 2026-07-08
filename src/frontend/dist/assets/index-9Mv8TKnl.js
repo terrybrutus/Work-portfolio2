@@ -33113,10 +33113,27 @@ function analyzeTarget(text) {
   const lanes = ranked.slice(0, 3).map((item) => item.lane);
   const primaryLane = lanes[0];
   const laneProfile = laneProfiles.find((item) => item.lane === primaryLane) ?? laneProfiles[0];
+  const likelyProblems = getLikelyProblems(lanes, text);
+  const targetSignals = [
+    ...ranked.slice(0, 3).map((match) => {
+      var _a2;
+      return {
+        label: match.lane,
+        evidence: match.terms.length > 0 && match.terms[0] !== "default" ? match.terms.slice(0, 4).join(", ") : ((_a2 = laneProfiles.find((item) => item.lane === match.lane)) == null ? void 0 : _a2.keywords.slice(0, 3).join(", ")) ?? "general fit",
+        confidence: match.confidence
+      };
+    }),
+    ...likelyProblems.slice(0, 2).map((problem) => ({
+      label: "Likely problem",
+      evidence: problem,
+      confidence: 0.7
+    }))
+  ].slice(0, 5);
   return {
     primaryLane,
     lanes,
     matches: ranked,
+    targetSignals,
     angle: laneProfile.headline,
     reviewerTakeaway: laneProfile.reviewerTakeaway,
     aiPromptPreview: `Classify JD into ${laneProfiles.map((item) => item.lane).join(", ")}. Return JSON: lane, confidence, projectIds, proofIds.`
@@ -33697,7 +33714,8 @@ function SnapshotProjectTile({
               className: "aspect-[16/10] w-full object-cover transition duration-300 group-hover:scale-[1.02]"
             }
           ),
-          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-2 top-2 bg-black px-2 py-1 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-white", children: project.shortTitle })
+          /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute left-2 top-2 bg-black px-2 py-1 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-white", children: project.shortTitle }),
+          featured && /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute right-2 top-2 border border-black/20 bg-[#f8f5ef] px-2 py-1 font-mono text-[0.62rem] uppercase tracking-[0.14em] text-black", children: "Start here" })
         ] }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-2 pt-3", children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-mono text-[0.62rem] uppercase tracking-[0.14em] text-black/55", children: project.role }),
@@ -33847,7 +33865,7 @@ function ToggleChip({
   );
 }
 function TailoredPortfolioStudio() {
-  var _a2, _b2;
+  var _a2, _b2, _c2;
   const actorResult = useActor(createActor);
   const actor = actorResult.actor ?? null;
   const [route, setRoute] = reactExports.useState(getRouteState);
@@ -33894,6 +33912,14 @@ function TailoredPortfolioStudio() {
   const recommendedSkills = reactExports.useMemo(
     () => getRecommendedSkills(activeLanes),
     [activeLanes]
+  );
+  const recommendedProjectIds = reactExports.useMemo(
+    () => new Set(recommendedProjects.map((project) => project.id)),
+    [recommendedProjects]
+  );
+  const recommendedProofIds = reactExports.useMemo(
+    () => new Set(recommendedProofPoints.map((proofPoint) => proofPoint.id)),
+    [recommendedProofPoints]
   );
   const activeProjectIds = selectedProjectIds.length > 0 ? selectedProjectIds : recommendedProjects.map((project) => project.id);
   const activeProofIds = selectedProofIds.length > 0 ? selectedProofIds : recommendedProofPoints.map((proofPoint) => proofPoint.id);
@@ -33952,6 +33978,7 @@ function TailoredPortfolioStudio() {
     setLinks(getGeneratedLinks());
   }, []);
   reactExports.useEffect(() => {
+    if (aiMode !== "suggest") return;
     setSelectedLanes(analysis.lanes);
     setSelectedProjectIds(
       getRecommendedProjects(analysis.lanes).map((project) => project.id)
@@ -33961,7 +33988,7 @@ function TailoredPortfolioStudio() {
         (proofPoint) => proofPoint.id
       )
     );
-  }, [analysis]);
+  }, [aiMode, analysis]);
   if (!route.isStudio) {
     return /* @__PURE__ */ jsxRuntimeExports.jsx(ReviewerPortfolio, { view, status });
   }
@@ -34162,6 +34189,34 @@ function TailoredPortfolioStudio() {
     setSourceUrl("");
     setSourceText("");
   };
+  const updateBrainSource = (sourceId, updater) => {
+    const nextSources = brainDrafts.map(
+      (source) => source.id === sourceId ? updater(source) : source
+    );
+    setStudioBrainSources(nextSources);
+    setBrainDrafts(nextSources);
+  };
+  const _updateBrainSourceStatus = (sourceId, status2) => {
+    updateBrainSource(sourceId, (source) => ({
+      ...source,
+      status: status2,
+      note: status2 === "approved" || status2 === "public-safe" ? "Approved for use after review. Keep checking project match and redaction before sharing." : source.note
+    }));
+  };
+  const _toggleBrainSourceProject = (sourceId, projectId) => {
+    updateBrainSource(sourceId, (source) => {
+      const linkedProjectIds = source.linkedProjectIds.includes(projectId) ? source.linkedProjectIds.filter((id) => id !== projectId) : [...source.linkedProjectIds, projectId].slice(0, 6);
+      return {
+        ...source,
+        linkedProjectIds
+      };
+    });
+  };
+  const _removeBrainSource = (sourceId) => {
+    const nextSources = brainDrafts.filter((source) => source.id !== sourceId);
+    setStudioBrainSources(nextSources);
+    setBrainDrafts(nextSources);
+  };
   const importSourceFiles = async (files) => {
     if (!files || files.length === 0) return;
     setImportingSources(true);
@@ -34348,7 +34403,38 @@ function TailoredPortfolioStudio() {
                 }
               )
             ] }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "rounded-md border border-border bg-muted/20 p-3 text-sm leading-6 text-muted-foreground", children: "AI assist means: use a short, capped prompt to classify the JD, suggest the lane, and recommend projects/metrics. It does not run on reviewer page views." }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-muted/20 p-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-2", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-semibold", children: "Target signal readout" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-xs leading-5 text-muted-foreground", children: "Local recommender today; Gemini-ready later for a tiny JD classification call. Reviewer pages never call AI." })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs(Badge, { variant: "outline", children: [
+                  Math.round(
+                    (((_c2 = analysis.matches[0]) == null ? void 0 : _c2.confidence) ?? 0.48) * 100
+                  ),
+                  "% confidence"
+                ] })
+              ] }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 grid gap-2", children: analysis.targetSignals.map((signal) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "div",
+                {
+                  className: "rounded-md border border-border bg-background p-2",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-2", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: signal.label }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-xs text-muted-foreground", children: [
+                        Math.round(signal.confidence * 100),
+                        "%"
+                      ] })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm leading-5", children: signal.evidence })
+                  ]
+                },
+                `${signal.label}-${signal.evidence}`
+              )) }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-3 text-xs leading-5 text-muted-foreground", children: "Assist uses these signals to rank lanes, projects, metrics, and missing evidence. Turn it off when you want manual edits to stay untouched." })
+            ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs(
               Button,
               {
@@ -34357,7 +34443,7 @@ function TailoredPortfolioStudio() {
                 onClick: () => setAiMode(aiMode === "suggest" ? "off" : "suggest"),
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(Bot, { className: "mr-2 h-4 w-4" }),
-                  "AI assist ",
+                  "Target helper ",
                   aiMode === "suggest" ? "on" : "off"
                 ]
               }
@@ -34375,7 +34461,24 @@ function TailoredPortfolioStudio() {
                 "Recommended focus: ",
                 analysis.primaryLane
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm leading-6 text-muted-foreground", children: analysis.reviewerTakeaway })
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-sm leading-6 text-muted-foreground", children: analysis.reviewerTakeaway }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 grid gap-2 sm:grid-cols-3", children: analysis.matches.slice(0, 3).map((match) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "div",
+                {
+                  className: "rounded-md border border-primary/20 bg-background/80 p-2",
+                  children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center justify-between gap-2", children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold", children: match.lane }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("span", { className: "text-xs text-muted-foreground", children: [
+                        Math.round(match.confidence * 100),
+                        "%"
+                      ] })
+                    ] }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-xs leading-5 text-muted-foreground", children: match.terms[0] === "default" ? "Default fallback when the JD is thin." : match.terms.slice(0, 4).join(", ") })
+                  ]
+                },
+                match.lane
+              )) })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
               /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mb-2 text-xs font-semibold uppercase text-muted-foreground", children: "Focus lanes" }),
@@ -34417,7 +34520,11 @@ function TailoredPortfolioStudio() {
                       activeProjectIds.includes(project.id) && /* @__PURE__ */ jsxRuntimeExports.jsx(Check, { className: "h-4 w-4 text-primary" }),
                       /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: project.shortTitle })
                     ] }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-xs text-muted-foreground", children: project.role })
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-xs text-muted-foreground", children: project.role }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex flex-wrap gap-1", children: [
+                      recommendedProjectIds.has(project.id) && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: "recommended" }),
+                      project.readiness.slice(0, 2).map((item) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", children: item }, item))
+                    ] })
                   ]
                 },
                 project.id
@@ -34433,7 +34540,11 @@ function TailoredPortfolioStudio() {
                   className: `rounded-md border p-3 text-left transition-smooth ${activeProofIds.includes(proofPoint.id) ? "border-primary bg-primary/10" : "border-border bg-muted/20 hover:border-muted-foreground"}`,
                   children: [
                     /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-display text-2xl font-semibold", children: proofPoint.value }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: proofPoint.label })
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: proofPoint.label }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-2 flex flex-wrap gap-1", children: [
+                      recommendedProofIds.has(proofPoint.id) && /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: "recommended" }),
+                      proofPoint.lanes.slice(0, 2).map((lane) => /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "secondary", children: lane }, lane))
+                    ] })
                   ]
                 },
                 proofPoint.id
@@ -34528,27 +34639,78 @@ function TailoredPortfolioStudio() {
               )
             ] }),
             importingSources && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: "Importing source records..." }),
-            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-2", children: allBrainSources.slice(0, 5).map((source) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
-              "div",
-              {
-                className: "rounded-md border border-border bg-muted/20 p-3",
-                children: [
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-2", children: [
-                    /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: source.title }),
-                    /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: source.status })
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-1 text-xs text-muted-foreground", children: [
-                    source.type,
-                    " - ",
-                    source.linkedProjectIds.length || 0,
-                    " ",
-                    "linked projects"
-                  ] }),
-                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs leading-5 text-muted-foreground", children: source.note })
-                ]
-              },
-              source.id
-            )) })
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "space-y-2", children: allBrainSources.slice(0, 5).map(
+              (source) => (() => {
+                const customSource = brainDrafts.some(
+                  (item) => item.id === source.id
+                );
+                return /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                  "div",
+                  {
+                    className: "rounded-md border border-border bg-muted/20 p-3",
+                    children: [
+                      /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap items-center justify-between gap-2", children: [
+                        /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: source.title }),
+                          /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-1 text-xs text-muted-foreground", children: [
+                            source.type,
+                            " -",
+                            " ",
+                            source.extractionStatus ?? "record only"
+                          ] })
+                        ] }),
+                        customSource ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "select",
+                          {
+                            className: "rounded-md border border-input bg-background px-2 py-1 text-xs",
+                            value: source.status,
+                            onChange: (event) => _updateBrainSourceStatus(
+                              source.id,
+                              event.target.value
+                            ),
+                            children: evidenceBrain.statuses.map((status2) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: status2, children: status2 }, status2))
+                          }
+                        ) : /* @__PURE__ */ jsxRuntimeExports.jsx(Badge, { variant: "outline", children: source.status })
+                      ] }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs leading-5 text-muted-foreground", children: source.note }),
+                      source.matchedTerms && source.matchedTerms.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "mt-2 text-xs text-muted-foreground", children: [
+                        "Matched: ",
+                        source.matchedTerms.join(", ")
+                      ] }),
+                      /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "mt-3 flex flex-wrap gap-1", children: projects.slice(0, 8).map((project) => {
+                        const linked = source.linkedProjectIds.includes(
+                          project.id
+                        );
+                        return /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "button",
+                          {
+                            type: "button",
+                            disabled: !customSource,
+                            onClick: () => _toggleBrainSourceProject(
+                              source.id,
+                              project.id
+                            ),
+                            className: `rounded-md border px-2 py-1 text-xs ${linked ? "border-primary bg-primary/10 text-primary" : "border-border bg-background text-muted-foreground"} ${customSource ? "hover:border-muted-foreground" : "cursor-default opacity-70"}`,
+                            children: project.shortTitle
+                          },
+                          project.id
+                        );
+                      }) }),
+                      customSource && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                        "button",
+                        {
+                          type: "button",
+                          className: "mt-3 text-xs font-medium text-destructive",
+                          onClick: () => _removeBrainSource(source.id),
+                          children: "Remove source"
+                        }
+                      )
+                    ]
+                  },
+                  source.id
+                );
+              })()
+            ) })
           ] })
         ] })
       ] }),
@@ -34771,7 +34933,8 @@ function TailoredPortfolioStudio() {
               ] }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-muted/20 p-3", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Next artifact" }),
-                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm font-medium", children: strategyReport.artifactBrief.title })
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-1 text-sm font-medium", children: strategyReport.artifactBrief.title }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "mt-2 text-xs leading-5 text-muted-foreground", children: strategyReport.artifactBrief.problemSolved })
               ] })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-muted/20 p-3", children: [
@@ -34796,14 +34959,41 @@ function TailoredPortfolioStudio() {
                 project.id
               )) })
             ] }),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-muted/20 p-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: "Strategy report" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "mt-3 grid gap-3 lg:grid-cols-2", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Likely company problems" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm leading-6 text-muted-foreground", children: strategyReport.likelyProblems.slice(0, 3).map((problem) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: problem }, problem)) })
+                ] }),
+                /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-xs font-semibold uppercase text-muted-foreground", children: "Why these projects" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm leading-6 text-muted-foreground", children: strategyReport.portfolioMatches.map((match) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-foreground", children: match.project.shortTitle }),
+                    ": ",
+                    match.reason
+                  ] }, match.project.id)) })
+                ] })
+              ] })
+            ] }),
             mediaNeeds.length > 0 ? /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-primary/35 bg-primary/10 p-3", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: "Media to improve" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm leading-6 text-muted-foreground", children: mediaNeeds.slice(0, 4).map(({ project, needs }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
-                project.shortTitle,
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: "Missing media or evidence" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-2 text-sm leading-6 text-muted-foreground", children: mediaNeeds.slice(0, 4).map(({ project, needs, approvedSources }) => /* @__PURE__ */ jsxRuntimeExports.jsxs("li", { children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "font-medium text-foreground", children: project.shortTitle }),
                 ": ",
-                needs[0]
+                approvedSources.length,
+                " approved source",
+                approvedSources.length === 1 ? "" : "s",
+                " linked. Add",
+                " ",
+                needs.slice(0, 2).join(" or "),
+                "."
               ] }, project.id)) })
             ] }) : /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "rounded-md border border-border bg-muted/20 p-3 text-sm text-muted-foreground", children: "Current selected media is approved for reviewer use." }),
+            strategyReport.evidenceGaps.length > 0 && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "rounded-md border border-border bg-muted/20 p-3", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm font-medium", children: "Evidence gaps to close" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "mt-2 space-y-1 text-sm leading-6 text-muted-foreground", children: strategyReport.evidenceGaps.slice(0, 4).map((gap) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: gap }, gap)) })
+            ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex flex-wrap gap-2", children: [
               /* @__PURE__ */ jsxRuntimeExports.jsxs(
                 Button,
@@ -34929,19 +35119,27 @@ function TailoredPortfolioStudio() {
             "Copy Outputs"
           ] }) }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs(CardContent, { className: "space-y-3", children: [
-            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+            /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex flex-wrap gap-2", children: [
+              ["Recruiter summary", studioOutputs.recruiter],
+              ["Resume bullets", studioOutputs.resume.join("\n")],
+              ["LinkedIn blurb", studioOutputs.linkedin],
+              ["Interview prompts", studioOutputs.interview.join("\n")]
+            ].map(([label, value]) => /* @__PURE__ */ jsxRuntimeExports.jsxs(
               Button,
               {
                 type: "button",
                 variant: "outline",
-                onClick: () => copyStudioOutput("Recruiter summary", studioOutputs.recruiter),
+                onClick: () => copyStudioOutput(label, value),
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(Clipboard, { className: "mr-2 h-4 w-4" }),
-                  "Copy recruiter summary"
+                  "Copy ",
+                  label.toLowerCase()
                 ]
-              }
-            ),
+              },
+              label
+            )) }),
             /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm leading-6 text-muted-foreground", children: studioOutputs.recruiter }),
+            /* @__PURE__ */ jsxRuntimeExports.jsx("ul", { className: "space-y-1 text-sm leading-6 text-muted-foreground", children: studioOutputs.resume.map((bullet) => /* @__PURE__ */ jsxRuntimeExports.jsx("li", { children: bullet }, bullet)) }),
             copyMessage && /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-sm text-muted-foreground", children: copyMessage }),
             manualCopy && /* @__PURE__ */ jsxRuntimeExports.jsx(
               Textarea,

@@ -1464,6 +1464,9 @@ video {
   --tw-border-opacity: 1;
   border-color: oklch(var(--primary) / var(--tw-border-opacity, 1));
 }
+.border-primary\/20 {
+  border-color: oklch(var(--primary) / 0.2);
+}
 .border-primary\/25 {
   border-color: oklch(var(--primary) / 0.25);
 }
@@ -3841,6 +3844,10 @@ video {
 
   .lg\:min-h-screen {
     min-height: 100vh;
+  }
+
+  .lg\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .lg\:grid-cols-3 {
